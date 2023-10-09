@@ -33,11 +33,11 @@ public class Campamento extends Actividad {
     }
 
     // Métodos get/set
-    public int getId() {
+    public int getIdCampamento() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setIdCampamento(int id) {
         this.id = id;
     }
 

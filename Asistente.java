@@ -5,11 +5,12 @@ import java.util.Date;
 public class Asistente {
 
     //Atributos
-    private int id;
-    private String nombre;
-    private String apellidos;
-    private Date fechaNacimiento;
+    private int idAsistente;
+    private String nombreAsistente;
+    private String apellidosAsistente;
+    private Date fechaNacimientoAsistente;
     private Boolean atencionEspecial;
+	
     
     //Constructor vacío
     public Asistente() {
@@ -17,62 +18,94 @@ public class Asistente {
     }
 
     //Cosntructor parametrizado
-    public Asistente(int id, String nombre, String apellidos, Date fechaNacimiento, Boolean requiereAtencionEspecial){
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
+    public Asistente(int idAsistente, String nombreAsistente, String apellidosAsistente, Date fechaNacimientoAsistente, Boolean requiereAtencionEspecial){
+        this.idAsistente = idAsistente;
+        this.nombreAsistente = nombreAsistente;
+        this.apellidosAsistente = apellidosAsistente;
+        this.fechaNacimientoAsistente = fechaNacimientoAsistente;
         this.atencionEspecial = atencionEspecial;
     }
 
     //Métodos get/set
-    public void setid(int id){
-        this.id = id;
-    }
+    /**
+	 * @return the idAsistente
+	 */
+	public int getIdAsistente() {
+		return idAsistente;
+	}
 
-    public void setnombre(String nombre){
-        this.nombre = nombre;
-    }
+	/**
+	 * @param idAsistente the idAsistente to set
+	 */
+	public void setIdAsistente(int idAsistente) {
+		this.idAsistente = idAsistente;
+	}
 
-    public void setapellidos(String apellidos){
-        this.apellidos = apellidos;
-    }
+	/**
+	 * @return the nombreAsistente
+	 */
+	public String getNombreAsistente() {
+		return nombreAsistente;
+	}
 
-    public void setFechaNacimiento(Date fechaNacimiento){
-        this.fechaNacimiento = fechaNacimiento;
-    }
+	/**
+	 * @param nombreAsistente the nombreAsistente to set
+	 */
+	public void setNombreAsistente(String nombreAsistente) {
+		this.nombreAsistente = nombreAsistente;
+	}
 
-    public void setatencionEspecial(boolean atencionEspecial){
-        this.atencionEspecial = atencionEspecial;
-    }
+	/**
+	 * @return the apellidosAsistente
+	 */
+	public String getApellidosAsistente() {
+		return apellidosAsistente;
+	}
 
-    public int getid(){
-        return id;
-    }
+	/**
+	 * @param apellidosAsistente the apellidosAsistente to set
+	 */
+	public void setApellidosAsistente(String apellidosAsistente) {
+		this.apellidosAsistente = apellidosAsistente;
+	}
 
-    public String getnombre(){
-        return nombre; 
-    }
+	/**
+	 * @return the fechaNacimientoAsistente
+	 */
+	public Date getFechaNacimientoAsistente() {
+		return fechaNacimientoAsistente;
+	}
 
-    public String setapellidos(){
-        return apellidos;
-    }
+	/**
+	 * @param fechaNacimientoAsistente the fechaNacimientoAsistente to set
+	 */
+	public void setFechaNacimientoAsistente(Date fechaNacimientoAsistente) {
+		this.fechaNacimientoAsistente = fechaNacimientoAsistente;
+	}
 
-    public Date setfechaNacimiento(){
-        return fechaNacimiento;
-    }
+	/**
+	 * @return the atencionEspecial
+	 */
+	public Boolean getAtencionEspecial() {
+		return atencionEspecial;
+	}
 
-    public boolean setatencionEspecial(){
-        return atencionEspecial;
-    }
+	/**
+	 * @param atencionEspecial the atencionEspecial to set
+	 */
+	public void setAtencionEspecial(Boolean atencionEspecial) {
+		this.atencionEspecial = atencionEspecial;
+	}
 
     //Metodo toString
     @Override
     public String toString(){
          SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaNacimientoStr = dateFormat.format(fechaNacimiento);
+        String fechaNacimientoStr = dateFormat.format(fechaNacimientoAsistente);
 
         return "Asistente{" +
-                "id=" + id +", nombre='" + nombre + '\'' +", apellidos='" + apellidos + '\'' +", fechaNacimiento=" + fechaNacimientoStr +", atencionEspecial=" + atencionEspecial +'}';
+                "id=" + idAsistente +", nombre='" + nombreAsistente + '\'' +", apellidos='" + apellidosAsistente + '\'' +", fechaNacimiento=" + fechaNacimientoStr +", atencionEspecial=" + atencionEspecial +'}';
     }
+
+	
 }

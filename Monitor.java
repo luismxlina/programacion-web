@@ -1,56 +1,82 @@
 package Practica1;
 
-public class Monitor {
+public class Monitor extends Asistente {
 	 // Atributos
-    private int id;
-    private String nombre;
-    private String apellidos;
+    private int idMonitor;
+    private String nombreMonitor;
+    private String apellidosMonitor;
     private boolean esEducadorEspecial;
 
-    // Constructor vacío
+   
+
+	// Constructor vacío
     public Monitor() {
     }
 
     // Constructor parametrizado
-    public Monitor(int id, String nombre, String apellidos, boolean esEducadorEspecial) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+    public Monitor(int idMonitor, String nombreMonitor, String apellidosMonitor, boolean esEducadorEspecial) {
+        this.idMonitor = idMonitor;
+        this.nombreMonitor = nombreMonitor;
+        this.apellidosMonitor = apellidosMonitor;
         this.esEducadorEspecial = esEducadorEspecial;
     }
 
     // Métodos get/set
-    public int getId() {
-        return id;
-    }
+    /**
+   	 * @return the idMonitor
+   	 */
+   	public int getIdMonitor() {
+   		return idMonitor;
+   	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   	/**
+   	 * @param idMonitor the idMonitor to set
+   	 */
+   	public void setIdMonitor(int idMonitor) {
+   		this.idMonitor = idMonitor;
+   	}
 
-    public String getNombre() {
-        return nombre;
-    }
+   	/**
+   	 * @return the nombreMonitor
+   	 */
+   	public String getNombreMonitor() {
+   		return nombreMonitor;
+   	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+   	/**
+   	 * @param nombreMonitor the nombreMonitor to set
+   	 */
+   	public void setNombreMonitor(String nombreMonitor) {
+   		this.nombreMonitor = nombreMonitor;
+   	}
 
-    public String getApellidos() {
-        return apellidos;
-    }
+   	/**
+   	 * @return the apellidosMonitor
+   	 */
+   	public String getApellidosMonitor() {
+   		return apellidosMonitor;
+   	}
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+   	/**
+   	 * @param apellidosMonitor the apellidosMonitor to set
+   	 */
+   	public void setApellidosMonitor(String apellidosMonitor) {
+   		this.apellidosMonitor = apellidosMonitor;
+   	}
 
-    public boolean isEsEducadorEspecial() {
-        return esEducadorEspecial;
-    }
+   	/**
+   	 * @return the esEducadorEspecial
+   	 */
+   	public boolean isEsEducadorEspecial() {
+   		return esEducadorEspecial;
+   	}
 
-    public void setEsEducadorEspecial(boolean esEducadorEspecial) {
-        this.esEducadorEspecial = esEducadorEspecial;
-    }
+   	/**
+   	 * @param esEducadorEspecial the esEducadorEspecial to set
+   	 */
+   	public void setEsEducadorEspecial(boolean esEducadorEspecial) {
+   		this.esEducadorEspecial = esEducadorEspecial;
+   	}
 
     // Método toString
     @Override

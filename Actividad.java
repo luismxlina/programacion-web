@@ -94,7 +94,7 @@ public class Actividad extends Monitor{
 
         if(monitoresAsignados.size() < numMonitoresNecesarios){
             monitoresAsignados.add(monitor);
-            System.out.printf("El monitor " + monitor.getNombre() + " ha sido asignado a la actividad " + nombreActividad + ".");
+            System.out.printf("El monitor " + monitor.getNombreMonitor() + " ha sido asignado a la actividad " + nombreActividad + ".");
 
         }
         else
