@@ -10,10 +10,15 @@ import java.util.Date;
  */
 public abstract class Inscripcion extends Campamento {
 	
+	public enum Registro{
+		Temparano, Tardio
+	}
+	//Atributos
 	private int idParticipante;
 	private int idCampamento;
 	private Date fechaInscripcion;
 	private float precioInscripcion;
+	private Registro registro;
 	/**
 	 * 
 	 */
@@ -66,6 +71,20 @@ public abstract class Inscripcion extends Campamento {
 
 	public void setIdCampamento(int idCampamento) {
 		this.idCampamento = getIdCampamento();
+	}
+
+	/**
+	 * @return the registro
+	 */
+	public Registro getRegistro() {
+		return registro;
+	}
+
+	/**
+	 * @param registro the registro to set
+	 */
+	public void setRegistro(Registro registro) {
+		this.registro = registro;
 	}
 
 	@Override

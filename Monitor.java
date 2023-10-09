@@ -82,9 +82,9 @@ public class Monitor extends Asistente {
     @Override
     public String toString() {
         return "Monitor{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
+                "id=" + idMonitor +
+                ", nombre='" + nombreMonitor + '\'' +
+                ", apellidos='" + apellidosMonitor + '\'' +
                 ", esEducadorEspecial=" + esEducadorEspecial +
                 '}';
     }
