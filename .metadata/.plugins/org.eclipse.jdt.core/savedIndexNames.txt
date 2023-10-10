@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/.metadata/.plugins/org.eclipse.jdt.core
+1865797976.index
+3947477163.index
+657819041.index
