@@ -11,6 +11,10 @@ public class Monitor extends Asistente {
 
 	// Constructor vacío
     public Monitor() {
+		this.idMonitor = 0;
+        this.nombreMonitor = "";
+        this.apellidosMonitor = "";
+        this.esEducadorEspecial = false;
     }
 
     // Constructor parametrizado
