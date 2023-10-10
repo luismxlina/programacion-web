@@ -14,7 +14,11 @@ public class Asistente {
     
     //Constructor vacío
     public Asistente() {
-    
+		this.idAsistente = 0;
+        this.nombreAsistente = "";
+        this.apellidosAsistente = "";
+        this.fechaNacimientoAsistente = new Date();
+        this.atencionEspecial = false;
     }
 
     //Cosntructor parametrizado
