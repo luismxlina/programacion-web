@@ -17,7 +17,7 @@ public class MainPrincipal {
 		
 		//Crear los gestores
 		ArrayList<Asistente> arrayAsistentesFichero = GestorAsistentes.cargarFichero("asistentes.txt");
-		GestorAsistentes gestor_asistentes = GestorAsistentes.getIntance(arrayAsistentesFichero);
+		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance(arrayAsistentesFichero);
 		
 		do {
 			
