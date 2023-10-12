@@ -42,6 +42,14 @@ public class GestorCampamentos {
         return false;
     }
 
+    // TODO
+    public boolean crearActividad(int idCampamento, Actividad nuevaActividad) {
+        if(buscarCampamento(idCampamento)){
+            
+        }
+        return false;
+    }
+
     public ArrayList<Campamento> obtenerCampamentos() {
         return campamentos;
     }
@@ -58,30 +66,8 @@ public class GestorCampamentos {
         }
     }
 
-    /**
-     * Asocia una actividad a un campamento existente en el gestor de campamentos.
-     * 
-     * @param idCampamento   el identificador del campamento al que se desea asociar
-     *                       la actividad
-     * @param nuevaActividad la actividad que se desea asociar al campamento
-     * @return true si la actividad se asoció correctamente al campamento, false en
-     *         caso contrario
-     * @throws NullPointerException si la actividad es null
-     */
     public boolean asociarActividad(int idCampamento, Actividad nuevaActividad) {
-        if (buscarCampamento(idCampamento) == false) {
-            // Error puesto que no existe el campamento
-            return false;
-        } else {
-            for (Campamento campamento : campamentos) {
-                if (campamento.getIdentificador() == idCampamento) {
-                    if (nuevaActividad.getNivel() == campamento.getNivel()) {
-                        campamento.getActividades().add(nuevaActividad);
-                        return true;
-                    }
-                }
-            }
-        }
+        
         return false;
     }
 }

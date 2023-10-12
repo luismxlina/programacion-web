@@ -108,7 +108,7 @@ public class Campamento {
 		return false;
 	}
 
-	public Boolean buscarActivadad(String nombreActividad) {
+	public Boolean buscarActividad(String nombreActividad) {
 		if (actividades.size() == 0)
 			return false;
 
