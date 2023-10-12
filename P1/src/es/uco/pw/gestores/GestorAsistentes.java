@@ -21,7 +21,7 @@ public class GestorAsistentes {
 		this.asistentes = arrayNuevo;
 	}
 	
-	public static GestorAsistentes getIntance(ArrayList<Asistente> arrayNuevo)
+	public static GestorAsistentes getInstance(ArrayList<Asistente> arrayNuevo)
 	{
 		if(instance == null)
 		{

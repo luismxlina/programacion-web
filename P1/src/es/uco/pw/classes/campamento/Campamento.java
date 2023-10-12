@@ -8,7 +8,7 @@ import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.monitor.Monitor;
 
 public class Campamento {
-	
+
 	private int identificador;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -16,9 +16,8 @@ public class Campamento {
 	private int max_asistentes;
 	private ArrayList<Actividad> actividades;
 	private ArrayList<Monitor> monitoresResponsables;
-	
-	public Campamento()
-	{
+
+	public Campamento() {
 		this.identificador = 0;
 		this.fechaInicio = new Date();
 		this.fechaFin = new Date();
@@ -27,11 +26,10 @@ public class Campamento {
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();
 	}
-	
-	//Constructor parametrizado estaría pendiente
-	
-	public Campamento(int identificador, Date fechaInicio, Date fechaFin, NivelEducativo nivel, int max_asistentes)
-	{
+
+	// Constructor parametrizado estaría pendiente
+
+	public Campamento(int identificador, Date fechaInicio, Date fechaFin, NivelEducativo nivel, int max_asistentes) {
 		this.identificador = 0;
 		this.fechaInicio = new Date();
 		this.fechaFin = new Date();
@@ -103,29 +101,41 @@ public class Campamento {
 				+ ", nivel=" + nivel + ", max_asistentes=" + max_asistentes + ", actividades=" + actividades
 				+ ", monitoresResponsables=" + monitoresResponsables + "]";
 	}
-	
-	
-	public Boolean asociarActividad(Actividad nuevaActividad)
-	{
-		if(nuevaActividad.getNivel() == this.nivel)
-		{
+
+	public Boolean asociarActividad(Actividad nuevaActividad) {
+		if (nuevaActividad.getNivel() == this.nivel) {
 			this.actividades.add(nuevaActividad);
 			return true;
 		}
 		return false;
 	}
-	
-	public Boolean asociarMonitor(Monitor nuevoMonitor)
-	{
+
+	public Boolean buscarActivadad(String nombreActividad) {
+		if (actividades.size() == 0)
+			return false;
+
+		for (int i = 0; i < actividades.size(); i++) {
+			if (this.actividades.get(i).getNombreActividad() == nombreActividad) {
+				return true;
+			}
+		}
+
 		return false;
 	}
-	
-	public Boolean asociarMonitorEspecial(Monitor nuevoMonitorEspecial)
-	{
+
+	public Boolean asociarMonitor(Monitor nuevoMonitor) {
+		for (Actividad actividad : this.actividades) {
+			for (Monitor monitor : actividad.getMonitores()) {
+				if (monitor.getIdentificador() == nuevoMonitor.getIdentificador()) {
+					this.monitoresResponsables.add(nuevoMonitor);
+					return true;
+				}
+			}
+		}
 		return false;
 	}
-	
-	//if (cadena1 == cadena2 )  MAL
-	//if (cadena1.equals(cadena2))  BIEN
-	
+
+	public Boolean asociarMonitorEspecial(Monitor nuevoMonitorEspecial) {
+		return false;
+	}
 }
