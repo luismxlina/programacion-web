@@ -2,6 +2,7 @@ package es.uco.pw.gestores;
 
 import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.campamento.Campamento;
+import es.uco.pw.classes.monitor.Monitor;
 
 import java.util.ArrayList;
 
@@ -42,21 +43,31 @@ public class GestorCampamentos {
         return false;
     }
 
-    public boolean asociarActividad(int idCampamento, Actividad nuevaActividad) {
+    public Campamento getCampamento(int id) {
+        if (campamentos.size() == 0)
+            return null;
+
+        for (int i = 0; i < campamentos.size(); i++) {
+            if (this.campamentos.get(i).getIdentificador() == id) {
+                return this.campamentos.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public boolean asociarActividadCampamento(Actividad nuevaActividad, int idCampamento) {
         if (buscarCampamento(idCampamento)) {
             ArrayList<Campamento> campamentos = obtenerCampamentos();
             for (Campamento campamento : campamentos) {
-                if (campamento.getIdentificador() == idCampamento) {
+                if ((campamento.getIdentificador() == idCampamento)
+                        && (campamento.getNivel() == nuevaActividad.getNivel())) {
                     campamento.asociarActividad(nuevaActividad);
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    public boolean crearMonitor(int idCampamento, int idMonitor) {
-       return false; 
     }
 
     public ArrayList<Campamento> obtenerCampamentos() {
@@ -75,16 +86,19 @@ public class GestorCampamentos {
         }
     }
 
-    public boolean asociarActividadCampamento(int idCampamento, Actividad nuevaActividad) {
-
+    public boolean asociarMonitorActividad(int idCampamento, Monitor monitor, String nombreActividad) {
         return false;
     }
 
-    public boolean asociarMonitorActividad(int idCampamento, int idMonitor) {
-        return false;
-    }
-    
-    public boolean asociarMonitorCampamento(int idCampamento, int idMonitor) {
+    public boolean asociarMonitorCampamento(Campamento campamento, Monitor monitor) {
+        if (campamento == null)
+            return false;
+        for (Monitor m : campamento.getMonitoresResponsables()) {
+            if (m.getIdentificador() == monitor.getIdentificador()) {
+                campamento.asociarMonitor(monitor);
+                return true;
+            }
+        }
         return false;
     }
 
