@@ -42,12 +42,21 @@ public class GestorCampamentos {
         return false;
     }
 
-    // TODO
-    public boolean crearActividad(int idCampamento, Actividad nuevaActividad) {
-        if(buscarCampamento(idCampamento)){
-            
+    public boolean asociarActividad(int idCampamento, Actividad nuevaActividad) {
+        if (buscarCampamento(idCampamento)) {
+            ArrayList<Campamento> campamentos = obtenerCampamentos();
+            for (Campamento campamento : campamentos) {
+                if (campamento.getIdentificador() == idCampamento) {
+                    campamento.asociarActividad(nuevaActividad);
+                    return true;
+                }
+            }
         }
         return false;
+    }
+
+    public boolean crearMonitor(int idCampamento, int idMonitor) {
+       return false; 
     }
 
     public ArrayList<Campamento> obtenerCampamentos() {
@@ -66,8 +75,20 @@ public class GestorCampamentos {
         }
     }
 
-    public boolean asociarActividad(int idCampamento, Actividad nuevaActividad) {
-        
+    public boolean asociarActividadCampamento(int idCampamento, Actividad nuevaActividad) {
+
+        return false;
+    }
+
+    public boolean asociarMonitorActividad(int idCampamento, int idMonitor) {
+        return false;
+    }
+    
+    public boolean asociarMonitorCampamento(int idCampamento, int idMonitor) {
+        return false;
+    }
+
+    public boolean asociarMonitorEspecialCampamento(int idCampamento, int idMonitor) {
         return false;
     }
 }
