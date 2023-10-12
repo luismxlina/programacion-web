@@ -136,6 +136,15 @@ public class Campamento {
 	}
 
 	public Boolean asociarMonitorEspecial(Monitor nuevoMonitorEspecial) {
+		if (nuevoMonitorEspecial.getEsEducador()) {
+			for (Actividad actividad : actividades) {
+				if (actividad.getMonitores().contains(nuevoMonitorEspecial)) {
+					return false;
+				}
+			}
+			monitoresResponsables.add(nuevoMonitorEspecial);
+			return true;
+		}
 		return false;
 	}
 }
