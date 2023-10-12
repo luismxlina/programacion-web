@@ -31,6 +31,7 @@ public class MainAsistentes {
 					gestor_asistentes.mostrarAsistentes();
 					break;
 				case 2:
+					gestor_asistentes.altaAsistente(null);
 					break;
 				default:
 					System.out.println("Opción no válida");
