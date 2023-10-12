@@ -27,14 +27,12 @@ public class Campamento {
 		this.monitoresResponsables = new ArrayList<Monitor>();
 	}
 
-	// Constructor parametrizado estaría pendiente
-
 	public Campamento(int identificador, Date fechaInicio, Date fechaFin, NivelEducativo nivel, int max_asistentes) {
-		this.identificador = 0;
-		this.fechaInicio = new Date();
-		this.fechaFin = new Date();
-		this.nivel = NivelEducativo.INFANTIL;
-		this.max_asistentes = 0;
+		this.identificador = identificador;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.nivel = nivel;
+		this.max_asistentes = max_asistentes;
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();
 	}
