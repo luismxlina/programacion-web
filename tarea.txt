@@ -1,0 +1,9 @@
+Cargar datos ficheros y Backup X
+
+Almacenar campamentos en ficheros X
+
+Display X
+
+Clase Factoria de Inscripcion
+
+ArrayList<Animal> animales = new Animal();

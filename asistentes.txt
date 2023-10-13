@@ -1,0 +1,3 @@
+1;Juan Manuel;García Parras;2004-05-16;0
+2;Marta;Aguado Jimenez;1998-04-17;1
+3;Pepe;García Lopez;2000-01-01;1
