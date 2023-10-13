@@ -1,4 +1,4 @@
-package es.uco.pw.gestores;
+package es.uco.pw.data;
 
 public interface Interfaz_Repositorio<T> {
 	

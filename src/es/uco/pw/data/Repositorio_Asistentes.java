@@ -1,4 +1,4 @@
-package es.uco.pw.gestores;
+package es.uco.pw.data;
 
 import java.io.BufferedWriter;
 import java.io.File;

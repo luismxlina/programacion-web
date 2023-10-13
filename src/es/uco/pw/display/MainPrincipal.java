@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import es.uco.pw.classes.asistente.Asistente;
+import es.uco.pw.data.Repositorio_Asistentes;
 import es.uco.pw.gestores.GestorAsistentes;
-import es.uco.pw.gestores.Repositorio_Asistentes;
 
 public class MainPrincipal {
 
