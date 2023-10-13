@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import es.uco.pw.classes.actividad.Actividad;
+import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
@@ -35,68 +36,6 @@ public class GestorCampamentos {
 
         return instance;
 
-    }
-
-    // Funcion que retorna un array de monitores a partir del fichero
-    private static ArrayList<Monitor> cargarMonitoresFichero(String ficheroMonitores) {
-        ArrayList<Monitor> array = new ArrayList<Monitor>();
-        File fichero = new File(ficheroMonitores);
-        try {
-            Scanner scanner = new Scanner(fichero);
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                String[] campos = linea.split(";");
-                int id = Integer.parseInt(campos[0]);
-                String nombre = campos[1];
-                String apellidos = campos[2];
-                int atencion = Integer.parseInt(campos[3]);
-                Boolean requiereAtencion = (atencion != 0);
-                Monitor nuevoMonitor = new Monitor(id, nombre, apellidos, requiereAtencion);
-                array.add(nuevoMonitor);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return array;
-    }
-
-    // Retorno un arrayList de actividades a partir del fichero y de un array de
-    // monitores
-    private static ArrayList<Actividad> cargarActividadesFichero(String ficheroActividades,
-            ArrayList<Monitor> monitores) {
-        ArrayList<Actividad> array = new ArrayList<Actividad>();
-        File fichero = new File(ficheroActividades);
-        try {
-            Scanner scanner = new Scanner(fichero);
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                String[] campos = linea.split(";");
-                String nombre = campos[0];
-                EnumActividad nivel = EnumActividad.valueOf(campos[1]);
-                String horario = campos[2];
-                int max_participantes = Integer.parseInt(campos[3]);
-                int numero_monitores = Integer.parseInt(campos[4]);
-                String[] idsMonitores = campos[5].split(",");
-                // Creo el objeto actividad
-                Actividad activididad = new Actividad(nombre, nivel, horario, max_participantes, numero_monitores);
-
-                // Recorro idsMonitores por cada id de monitor que haya leido del fichero
-                for (int i = 0; i < idsMonitores.length; i++) {
-                    int id = Integer.parseInt(idsMonitores[i]);
-                    Monitor monitor = buscarMonitorID(id, monitores);
-                    activididad.asociarMonitor(monitor);
-                }
-
-                array.add(activididad);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return array;
     }
 
     private static Monitor buscarMonitorID(int id, ArrayList<Monitor> monitores) {

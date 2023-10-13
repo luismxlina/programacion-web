@@ -16,6 +16,10 @@ public class Monitor {
 		this.esEducador = e;
 	}
 
+	public Monitor() {
+		
+	}
+
 	public int getIdentificador() {
 		return identificador;
 	}
