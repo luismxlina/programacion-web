@@ -2,23 +2,25 @@ package es.uco.pw.classes.inscripcion;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
 
 import es.uco.pw.classes.actividad.Actividad;
 
-public abstract class Inscripcion {
-	
-	//atributos comunes
+public abstract class Inscripcion implements Serializable {
+
+	// atributos comunes
 	private int id_Participante;
 	private int id_Campamento;
 	private Date fechaInscripcion;
 	private Double precio;
-	
+
 	private Boolean cancelable;
 
-	//prototipos de los métodos de una inscripcion que son comunes sean del tipo que sean
-	
+	// prototipos de los métodos de una inscripcion que son comunes sean del tipo
+	// que sean
+
 	public abstract String toString();
-	
+
 	public int getId_Participante() {
 		return id_Participante;
 	}
@@ -46,9 +48,8 @@ public abstract class Inscripcion {
 	public Double getPrecio() {
 		return precio;
 	}
-	
-	public void setPrecio(Double precio)
-	{
+
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 
@@ -61,9 +62,5 @@ public abstract class Inscripcion {
 	public void setCancelable(Boolean cancelable) {
 		this.cancelable = cancelable;
 	}
-	
-	
-	
-	
 
 }

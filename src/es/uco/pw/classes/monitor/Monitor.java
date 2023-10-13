@@ -1,15 +1,16 @@
 package es.uco.pw.classes.monitor;
 
-public class Monitor {
+import java.io.Serializable;
+
+public class Monitor implements Serializable {
 	private int identificador;
 	private String nombre;
 	private String apellidos;
 	private Boolean esEducador;
-	
-	//constructor vacio pendiente
-	
-	public Monitor(int id, String n, String a, Boolean e)
-	{
+
+	// constructor vacio pendiente
+
+	public Monitor(int id, String n, String a, Boolean e) {
 		this.identificador = id;
 		this.nombre = n;
 		this.apellidos = a;
@@ -17,7 +18,7 @@ public class Monitor {
 	}
 
 	public Monitor() {
-		
+
 	}
 
 	public int getIdentificador() {
@@ -57,6 +58,5 @@ public class Monitor {
 		return "Monitor [identificador=" + identificador + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", esEducador=" + esEducador + "]";
 	}
-	
-	
+
 }

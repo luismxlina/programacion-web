@@ -1,32 +1,30 @@
 package es.uco.pw.classes.actividad;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 import es.uco.pw.classes.monitor.Monitor;
 
-public class Actividad {
-	
+public class Actividad implements Serializable {
+
 	private String nombreActividad;
 	private NivelEducativo nivel;
 	private String hora;
 	private int max_participantes;
 	private int num_monitores;
 	private ArrayList<Monitor> monitores;
-	
-	
-	public Actividad()
-	{
+
+	public Actividad() {
 		this.nombreActividad = "";
-		this.nivel= NivelEducativo.INFANTIL;
+		this.nivel = NivelEducativo.INFANTIL;
 		this.hora = "Mañana";
 		this.max_participantes = 200;
 		this.num_monitores = 20;
-		this.monitores=new ArrayList<Monitor>();
-		
+		this.monitores = new ArrayList<Monitor>();
+
 	}
-	
-	public Actividad(String nombre, NivelEducativo nivel, String hora, int max_participantes, int num_monitores)
-	{
+
+	public Actividad(String nombre, NivelEducativo nivel, String hora, int max_participantes, int num_monitores) {
 		this.nombreActividad = nombre;
 		this.nivel = nivel;
 		this.hora = hora;
@@ -89,27 +87,23 @@ public class Actividad {
 				+ ", max_participantes=" + max_participantes + ", num_monitores=" + num_monitores + ", monitores="
 				+ monitores + "]";
 	}
-	
-	public Boolean asociarMonitor(Monitor m)
-	{
-		if(this.monitores.size()==this.num_monitores)
-		{
+
+	public Boolean asociarMonitor(Monitor m) {
+		if (this.monitores.size() == this.num_monitores) {
 			return false;
 		}
-		
-		//Busco el monitor por si estuviese
+
+		// Busco el monitor por si estuviese
 		/*
 		 * 
-		 * this.monitores.get(i)  =      this.monitores[i]
+		 * this.monitores.get(i) = this.monitores[i]
 		 */
-		for(int i=0; i<this.monitores.size(); i++)
-		{
-			if(this.monitores.get(i).getIdentificador() == m.getIdentificador())
-			{
+		for (int i = 0; i < this.monitores.size(); i++) {
+			if (this.monitores.get(i).getIdentificador() == m.getIdentificador()) {
 				return false;
 			}
 		}
-		
+
 		this.monitores.add(m);
 		return true;
 	}

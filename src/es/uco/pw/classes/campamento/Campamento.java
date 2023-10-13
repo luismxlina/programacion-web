@@ -3,12 +3,13 @@ package es.uco.pw.classes.campamento;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+import java.io.Serializable;
 
 import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.monitor.Monitor;
 
-public class Campamento {
+public class Campamento implements Serializable {
 
 	private int identificador;
 	private Date fechaInicio;
@@ -102,25 +103,27 @@ public class Campamento {
 	}
 
 	public Boolean asociarActividad(Actividad nuevaActividad) {
-		
-		/*for(int numero : vector)
-		
-		for(Actividad actividad : this.actividades)
-		{
-			if(actividad.getNombreActividad() == nuevaActividad.getNombreActividad())
-			{
-				return false;
-			}
-		}*/
-		
-		if(this.buscarActividad(nuevaActividad.getNombreActividad())==true)
+
+		/*
+		 * for(int numero : vector)
+		 * 
+		 * for(Actividad actividad : this.actividades)
+		 * {
+		 * if(actividad.getNombreActividad() == nuevaActividad.getNombreActividad())
+		 * {
+		 * return false;
+		 * }
+		 * }
+		 */
+
+		if (this.buscarActividad(nuevaActividad.getNombreActividad()) == true)
 			return false;
-		
+
 		if (nuevaActividad.getNivel() == this.nivel) {
 			this.actividades.add(nuevaActividad);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -136,10 +139,10 @@ public class Campamento {
 
 		return false;
 	}
-	
+
 	public Actividad obtenerActividad(String nombreActividad) {
-		
-		if(this.buscarActividad(nombreActividad)==false)
+
+		if (this.buscarActividad(nombreActividad) == false)
 			return null;
 
 		for (int i = 0; i < actividades.size(); i++) {
@@ -147,7 +150,7 @@ public class Campamento {
 				return this.actividades.get(i);
 			}
 		}
-		
+
 		return null;
 	}
 
