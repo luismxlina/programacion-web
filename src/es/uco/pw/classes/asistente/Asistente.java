@@ -1,12 +1,13 @@
 package es.uco.pw.classes.asistente;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * La clase Asistente representa a una persona asistente con información básica.
  */
-public class Asistente {
-    
+public class Asistente implements Serializable {
+
     private int identificador;
     private String nombre;
     private String apellidos;
@@ -14,7 +15,8 @@ public class Asistente {
     private Boolean requiereAtencion;
 
     /**
-     * Constructor por defecto que inicializa un objeto Asistente con valores predeterminados.
+     * Constructor por defecto que inicializa un objeto Asistente con valores
+     * predeterminados.
      */
     public Asistente() {
         this.identificador = 0;
@@ -27,13 +29,19 @@ public class Asistente {
     /**
      * Constructor que permite crear un objeto Asistente con valores específicos.
      *
-     * @param identificador     El identificador del asistente.
-     * @param nombre            El nombre del asistente.
-     * @param apellidos         Los apellidos del asistente.
-     * @param fechaNacimiento   La fecha de nacimiento del asistente.
-     * @param requiereAtencion  Indica si el asistente requiere atención especial.
+     * @param identificador
+     *            El identificador del asistente.
+     * @param nombre
+     *            El nombre del asistente.
+     * @param apellidos
+     *            Los apellidos del asistente.
+     * @param fechaNacimiento
+     *            La fecha de nacimiento del asistente.
+     * @param requiereAtencion
+     *            Indica si el asistente requiere atención especial.
      */
-    public Asistente(int identificador, String nombre, String apellidos, Date fechaNacimiento, Boolean requiereAtencion) {
+    public Asistente(int identificador, String nombre, String apellidos, Date fechaNacimiento,
+            Boolean requiereAtencion) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -53,7 +61,8 @@ public class Asistente {
     /**
      * Establece el identificador del asistente.
      *
-     * @param identificador El identificador a establecer.
+     * @param identificador
+     *            El identificador a establecer.
      */
     public void setIdentificador(int identificador) {
         this.identificador = identificador;
@@ -71,7 +80,8 @@ public class Asistente {
     /**
      * Establece el nombre del asistente.
      *
-     * @param nombre El nombre a establecer.
+     * @param nombre
+     *            El nombre a establecer.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -89,7 +99,8 @@ public class Asistente {
     /**
      * Establece los apellidos del asistente.
      *
-     * @param apellidos Los apellidos a establecer.
+     * @param apellidos
+     *            Los apellidos a establecer.
      */
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
@@ -107,7 +118,8 @@ public class Asistente {
     /**
      * Establece la fecha de nacimiento del asistente.
      *
-     * @param fechaNacimiento La fecha de nacimiento a establecer.
+     * @param fechaNacimiento
+     *            La fecha de nacimiento a establecer.
      */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
@@ -116,7 +128,8 @@ public class Asistente {
     /**
      * Indica si el asistente requiere atención especial.
      *
-     * @return true si el asistente requiere atención especial, false en caso contrario.
+     * @return true si el asistente requiere atención especial, false en caso
+     *         contrario.
      */
     public Boolean getRequiereAtencion() {
         return requiereAtencion;
@@ -125,7 +138,9 @@ public class Asistente {
     /**
      * Establece si el asistente requiere atención especial.
      *
-     * @param requiereAtencion true si el asistente requiere atención especial, false en caso contrario.
+     * @param requiereAtencion
+     *            true si el asistente requiere atención especial, false en caso
+     *            contrario.
      */
     public void setRequiereAtencion(Boolean requiereAtencion) {
         this.requiereAtencion = requiereAtencion;

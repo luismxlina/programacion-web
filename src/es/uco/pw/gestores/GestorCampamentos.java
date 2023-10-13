@@ -38,165 +38,161 @@ public class GestorCampamentos {
 
     }
 
-    private static Monitor buscarMonitorID(int id, ArrayList<Monitor> monitores) {
-        for (Monitor monitor : monitores) {
-            if (monitor.getIdMonitor() == id) {
-                return monitor;
-            }
-        }
-        return new Monitor();
-    }
+    // private static Monitor buscarMonitorID(int id, ArrayList<Monitor> monitores) {
+    //     for (Monitor monitor : monitores) {
+    //         if (monitor.getIdentificador() == id) {
+    //             return monitor;
+    //         }
+    //     }
+    //     return new Monitor();
+    // }
 
-    private static Actividad buscarActividad(String nombreActividad, ArrayList<Actividad> actividades) {
-        for (Actividad actividad : actividades) {
-            if (actividad.getNombreActividad().equals(nombreActividad)) {
-                return actividad;
-            }
-        }
-        return new Actividad();
-    }
+    // private static Actividad buscarActividad(String nombreActividad, ArrayList<Actividad> actividades) {
+    //     for (Actividad actividad : actividades) {
+    //         if (actividad.getNombreActividad().equals(nombreActividad)) {
+    //             return actividad;
+    //         }
+    //     }
+    //     return new Actividad();
+    // }
 
-    public void backup(String nombreFichero) {
+    // public Date obtenerFecha(int newIdCampamento) {
 
-    }
+    //     for (Campamento campamentosaux : campamentos) {
 
-    public Date obtenerFecha(int newIdCampamento) {
+    //         if (campamentosaux.getIdCampamento() == newIdCampamento) {
 
-        for (Campamento campamentosaux : campamentos) {
+    //             return campamentosaux.getFechaInicio();
 
-            if (campamentosaux.getIdCampamento() == newIdCampamento) {
+    //         }
 
-                return campamentosaux.getFechaInicio();
+    //     }
 
-            }
+    //     return new Date();
 
-        }
+    // }
 
-        return new Date();
+    // public double calcularPrecioExtra(int newIdCampamento) {
 
-    }
+    //     double extra = 0.0;
+    //     int cont = 0;
 
-    public double calcularPrecioExtra(int newIdCampamento) {
+    //     for (Campamento campamentosAux : campamentos) {
 
-        double extra = 0.0;
-        int cont = 0;
+    //         if (campamentosAux.getIdCampamento() == newIdCampamento)
 
-        for (Campamento campamentosAux : campamentos) {
+    //             for (Actividad actividadesAux : campamentosAux.getActividades()) {
 
-            if (campamentosAux.getIdCampamento() == newIdCampamento)
+    //                 cont++;
 
-                for (Actividad actividadesAux : campamentosAux.getActividades()) {
+    //             }
 
-                    cont++;
+    //     }
 
-                }
+    //     extra = 20.0 * cont;
 
-        }
+    //     return extra;
+    // }
 
-        extra = 20.0 * cont;
+    // public ArrayList<Campamento> campamentosDisponibles() {
 
-        return extra;
-    }
+    //     ArrayList<Campamento> array = new ArrayList<Campamento>();
+    //     Date fechaActual = new Date();
 
-    public ArrayList<Campamento> campamentosDisponibles() {
+    //     for (Campamento campamentosAux : campamentos) {
 
-        ArrayList<Campamento> array = new ArrayList<Campamento>();
-        Date fechaActual = new Date();
+    //         long tiempo1 = fechaActual.getTime();
+    //         long tiempo2 = campamentosAux.getFechaInicio().getTime();
 
-        for (Campamento campamentosAux : campamentos) {
+    //         // Calcular la diferencia en milisegundos
+    //         long diferenciaEnMilisegundos = tiempo2 - tiempo1;
 
-            long tiempo1 = fechaActual.getTime();
-            long tiempo2 = campamentosAux.getFechaInicio().getTime();
+    //         // Calcular la diferencia en días
+    //         long diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
 
-            // Calcular la diferencia en milisegundos
-            long diferenciaEnMilisegundos = tiempo2 - tiempo1;
+    //         if (diferenciaEnDias > 2) {
 
-            // Calcular la diferencia en días
-            long diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+    //             array.add(campamentosAux);
 
-            if (diferenciaEnDias > 2) {
+    //         }
 
-                array.add(campamentosAux);
+    //     }
 
-            }
+    //     return array;
+    // }
 
-        }
+    // public void mostrarCampamentos() {
 
-        return array;
-    }
+    //     Campamento aux = new Campamento();
 
-    public void mostrarCampamentos() {
+    //     for (Campamento campamentosAux : campamentos) {
 
-        Campamento aux = new Campamento();
+    //         System.out.println("ID: " + campamentosAux.getIdCampamento()
+    //                 + ", Fecha de inicio: " + campamentosAux.getFechaInicio()
+    //                 + ", Fecha de fin: " + campamentosAux.getFechaFin()
+    //                 + ", Nivel: " + campamentosAux.getNivel()
+    //                 + ", Participantes maximos: " + campamentosAux.getMax_participantes()
+    //                 + ", Lista de actividades: " + campamentosAux.getActividades()
+    //                 + ", Lista de monitores: " + campamentosAux.getMonitores());
 
-        for (Campamento campamentosAux : campamentos) {
+    //     }
 
-            System.out.println("ID: " + campamentosAux.getIdCampamento()
-                    + ", Fecha de inicio: " + campamentosAux.getFechaInicio()
-                    + ", Fecha de fin: " + campamentosAux.getFechaFin()
-                    + ", Nivel: " + campamentosAux.getNivel()
-                    + ", Participantes maximos: " + campamentosAux.getMax_participantes()
-                    + ", Lista de actividades: " + campamentosAux.getActividades()
-                    + ", Lista de monitores: " + campamentosAux.getMonitores());
+    // }
 
-        }
+    // public void mostrarCampamentoID(int idCampamento) {
 
-    }
+    //     Campamento aux = new Campamento();
 
-    public void mostrarCampamentoID(int idCampamento) {
+    //     for (Campamento campamentosAux : campamentos) {
 
-        Campamento aux = new Campamento();
+    //         if (campamentosAux.getIdCampamento() == idCampamento) {
 
-        for (Campamento campamentosAux : campamentos) {
+    //             System.out.println("ID: " + campamentosAux.getIdCampamento()
+    //                     + ", Fecha de inicio: " + campamentosAux.getFechaInicio()
+    //                     + ", Fecha de fin: " + campamentosAux.getFechaFin()
+    //                     + ", Nivel: " + campamentosAux.getNivel()
+    //                     + ", Participantes maximos: " + campamentosAux.getMax_participantes()
+    //                     + ", Lista de actividades: " + campamentosAux.getActividades()
+    //                     + ", Lista de monitores: " + campamentosAux.getMonitores());
 
-            if (campamentosAux.getIdCampamento() == idCampamento) {
+    //         }
 
-                System.out.println("ID: " + campamentosAux.getIdCampamento()
-                        + ", Fecha de inicio: " + campamentosAux.getFechaInicio()
-                        + ", Fecha de fin: " + campamentosAux.getFechaFin()
-                        + ", Nivel: " + campamentosAux.getNivel()
-                        + ", Participantes maximos: " + campamentosAux.getMax_participantes()
-                        + ", Lista de actividades: " + campamentosAux.getActividades()
-                        + ", Lista de monitores: " + campamentosAux.getMonitores());
+    //     }
 
-            }
+    // }
 
-        }
+    // // Son las mismas que asociar??
+    // public void altaActividad() {
 
-    }
+    // }
 
-    // Son las mismas que asociar??
-    public void altaActividad() {
+    // public void altaMonitor() {
 
-    }
+    // }
 
-    public void altaMonitor() {
+    // public void altaCampamento() {
 
-    }
+    // }
 
-    public void altaCampamento() {
+    // public void asociarMonitorActividad() {
 
-    }
+    // }
 
-    public void asociarMonitorActividad() {
+    // public void asociarActividadCampamento() {
 
-    }
+    //     Actividad actividadAux = new Actividad();
+    //     Scanner teclado = new Scanner(System.in);
 
-    public void asociarActividadCampamento() {
+    //     System.out.println("Introduzca el nombre de la nueva actividad: ");
 
-        Actividad actividadAux = new Actividad();
-        Scanner teclado = new Scanner(System.in);
+    // }
 
-        System.out.println("Introduzca el nombre de la nueva actividad: ");
+    // public void asociarMonitorCampameto() {
 
-    }
+    // }
 
-    public void asociarMonitorCampameto() {
+    // public void asociarMonitorEspecialCampamento() {
 
-    }
-
-    public void asociarMonitorEspecialCampamento() {
-
-    }
+    // }
 
 }
