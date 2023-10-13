@@ -18,7 +18,7 @@ public class MainPrincipal {
 		
 		//Crear los gestores
 		Repositorio_Asistentes ra = new Repositorio_Asistentes();
-		ArrayList<Asistente> arrayAsistentesFichero = ra.cargarDatosFichero("asistentes.txt");
+		ArrayList<Asistente> arrayAsistentesFichero = ra.cargarDatosFichero("db/asistentes.txt");
 		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance(arrayAsistentesFichero);
 		
 		do {
@@ -37,7 +37,7 @@ public class MainPrincipal {
 			{
 			case 0:
 				System.out.println("Saliendo del programa...");
-				ra.guardarEnFichero(gestor_asistentes.getAsistentes(), "asistentes.txt");
+				ra.guardarEnFichero(gestor_asistentes.getAsistentes(), "db/asistentes.txt");
 				break;
 			case 1:
 				MainAsistentes.mostrarMenuAsistentes(teclado,gestor_asistentes);
