@@ -189,6 +189,7 @@ public class GestorAsistentes {
 		}
 		teclado.close();
 	}
+
 	public void eliminarAsistente(Scanner teclado) {
 
 		int identificador;
@@ -198,16 +199,15 @@ public class GestorAsistentes {
 
 		if (buscarAsistente(identificador)) {
 
-			for (Asistente a : this.asistentes) {
+			for (int i = 0; i < this.asistentes.size(); i++) {
 
-				if (a.getIdentificador() == identificador) {
+				if (this.asistentes.get(i).getIdentificador() == identificador) {
 
-					this.asistentes.remove(a);
+					this.asistentes.remove(i);
 
 				}
 
 			}
-
 		}
 
 		else {
@@ -215,5 +215,5 @@ public class GestorAsistentes {
 			System.out.println("No existe ningún usuario con el ID indicado");
 
 		}
-	} 
+	}
 }

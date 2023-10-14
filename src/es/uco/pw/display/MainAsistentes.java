@@ -23,6 +23,7 @@ public class MainAsistentes {
 			System.out.println("");
 			System.out.println("(1) Mostrar asistentes");
 			System.out.println("(2) Añadir asistente");
+			System.out.println("(3) Eliminar asistente");
 			System.out.println("(0) Volver al menú principal");
 			System.out.println("");
 
@@ -42,7 +43,9 @@ public class MainAsistentes {
 					}
 					gestor_asistentes.altaAsistente(nuevoAsistente);
 					break;
-
+				case 3:
+					gestor_asistentes.eliminarAsistente(teclado);
+					break;
 				default:
 					System.out.println("Opción no válida");
 			}

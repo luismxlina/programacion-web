@@ -17,6 +17,7 @@ import es.uco.pw.classes.monitor.Monitor;
 public class GestorCampamentos {
 
     private ArrayList<Campamento> campamentos;
+    
 
     private static GestorCampamentos instance = null;
 

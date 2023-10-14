@@ -44,7 +44,7 @@ public class MainPrincipal {
 					MainAsistentes.mostrarMenuAsistentes(teclado, gestor_asistentes);
 					break;
 				case 2:
-
+					
 					break;
 				default:
 					System.out.println("Opción no valida inútil");
