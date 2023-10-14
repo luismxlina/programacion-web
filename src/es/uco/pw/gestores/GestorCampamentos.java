@@ -485,7 +485,6 @@ public class GestorCampamentos {
 
     public static Boolean crearMonitor(Scanner teclado, Monitor nuevoMonitor) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        int idMonitor;
         String nombre = "";
         String apellidos = "";
         int atencionInt;
@@ -495,7 +494,7 @@ public class GestorCampamentos {
         System.out.println("Introduzca los datos del nuevo monitor:");
         while (nombre.isEmpty()) {
             System.out.print("Nombre: ");
-            teclado.nextLine();
+            // teclado.nextLine();
             nombre = teclado.nextLine();
             nombre = validarNombre(nombre);
         }

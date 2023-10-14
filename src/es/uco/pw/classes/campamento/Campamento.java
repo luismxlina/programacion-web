@@ -29,6 +29,9 @@ public class Campamento implements Serializable {
 
 		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
 		this.actividades.add(actividadPredeterminada);
+
+		Monitor director = new Monitor(1, "Director", "Centro", false);
+		this.monitoresResponsables.add(director);
 	}
 
 	public Campamento(int identificador, Date fechaInicio, Date fechaFin, NivelEducativo nivel, int max_asistentes) {
@@ -42,6 +45,9 @@ public class Campamento implements Serializable {
 
 		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
 		this.actividades.add(actividadPredeterminada);
+
+		Monitor director = new Monitor(1, "Director", "Centro", false);
+		this.monitoresResponsables.add(director);
 	}
 
 	public Campamento(int identificador) {
@@ -55,6 +61,9 @@ public class Campamento implements Serializable {
 
 		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
 		this.actividades.add(actividadPredeterminada);
+
+		Monitor director = new Monitor(1, "Director", "Centro", false);
+		this.monitoresResponsables.add(director);
 	}
 
 	public int getIdentificador() {
