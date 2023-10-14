@@ -49,6 +49,17 @@ public class Asistente implements Serializable {
         this.requiereAtencion = requiereAtencion;
     }
 
+    public Asistente(int identificador) {
+        this.identificador = identificador;
+    }
+
+    public Asistente(String nombre, String apellidos, Date fecha, Boolean atencion) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fecha;
+        this.requiereAtencion = atencion;
+    }
+
     /**
      * Obtiene el identificador del asistente.
      *
