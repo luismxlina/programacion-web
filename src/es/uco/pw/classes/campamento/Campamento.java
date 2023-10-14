@@ -2,7 +2,6 @@ package es.uco.pw.classes.campamento;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 import java.io.Serializable;
 
 import es.uco.pw.classes.actividad.Actividad;

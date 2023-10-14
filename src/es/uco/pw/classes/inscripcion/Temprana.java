@@ -14,9 +14,14 @@ public class Temprana extends InscripcionCreator{
 		return nueva;
 	}
 	
-	public Inscripcion registrarInscripcionParcial()
+	public Inscripcion registrarInscripcionParcial(int participante, int campamento, Date fecha)
 	{
-		return null;
+		Inscripcion nueva = new InscripcionParcial();
+		nueva.setId_Participante(participante);
+		nueva.setId_Campamento(campamento);
+		nueva.setFechaInscripcion(fecha);
+		nueva.setCancelable(true);
+		return nueva;
 	}
 
 }
