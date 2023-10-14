@@ -1,13 +1,10 @@
 package es.uco.pw.gestores;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
@@ -51,6 +48,7 @@ public class GestorCampamentos {
                 return campamento;
             }
         }
+        System.out.println("El campamento solicitado no existe...");
         return null;
     }
 
@@ -102,7 +100,7 @@ public class GestorCampamentos {
         return false;
     }
 
-    private static Monitor getMonitor(int id, ArrayList<Monitor> monitores) {
+    public static Monitor getMonitor(int id, ArrayList<Monitor> monitores) {
         for (Monitor monitor : monitores) {
             if (monitor.getIdentificador() == id) {
                 return monitor;
@@ -111,7 +109,7 @@ public class GestorCampamentos {
         return new Monitor();
     }
 
-    private static Actividad getActividad(String nombreActividad, ArrayList<Actividad> actividades) {
+    public static Actividad getActividad(String nombreActividad, ArrayList<Actividad> actividades) {
         for (Actividad actividad : actividades) {
             if (actividad.getNombreActividad().equals(nombreActividad)) {
                 return actividad;
@@ -219,22 +217,29 @@ public class GestorCampamentos {
 
     }
 
-    // // Son las mismas que asociar??
-    // public void altaActividad() {
+    public Boolean asociarMonitorActividad(Monitor monitor, String nombreActividad, Campamento campamento) {
 
-    // }
-
-    // public void altaMonitor() {
-
-    // }
-
-    // public void altaCampamento() {
-
-    // }
-
-    // public void asociarMonitorActividad() {
-
-    // }
+        int idMonitor = monitor.getIdentificador();
+        int idCampamento = campamento.getIdentificador();
+        // Ver si existe la actividad en el campamento
+        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+            for (Actividad a : campamento.getActividades()) {
+                if (a.getNombreActividad().equals(nombreActividad)) {
+                    // Ver si el monitor ya está asociado a la actividad
+                    for (Monitor m : a.getMonitores()) {
+                        if (m.getIdentificador() == idMonitor) {
+                            return false; // El monitor ya está asociado a la actividad
+                        }
+                    }
+                    // Si no está asociado, se añade
+                    a.getMonitores().add(monitor);
+                    return true;
+                }
+                return false; // La actividad no existe en el campamento indicado
+            }
+        }
+        return false; // La actividad ya está asociada al campamento
+    }
 
     // public void asociarActividadCampamento() {
 
@@ -284,12 +289,13 @@ public class GestorCampamentos {
 
         Date fechaInicioDate = new Date();
         Date fechaFinDate = new Date();
+        Date fechaActual = new Date();
         try {
 
             fechaInicioDate = formatoFecha.parse(fechaInicioTexto);
             fechaFinDate = formatoFecha.parse(fechaFinTexto);
-            fechaActual = 
-            if (fechaFinDate.compareTo(fechaInicioDate) <= 0 && ) {
+            if (fechaFinDate.compareTo(fechaInicioDate) <= 0 || fechaInicioDate.before(fechaActual)
+                    || fechaFinDate.before(fechaActual)) {
                 System.out.println("La fecha de fin debe ser posterior a la fecha de inicio.");
                 return false;
             }
@@ -322,10 +328,10 @@ public class GestorCampamentos {
             }
         } while (opcion < 1 || opcion > 3);
 
+        teclado.nextInt();
+        max_asistentes = teclado.nextInt();
         while (max_asistentes <= 0) {
-            System.out.print("Maximo número de aistentes: ");
-            teclado.nextInt();
-            max_asistentes = teclado.nextInt();
+            System.out.print("Máximo número de aistentes: ");
             if (max_asistentes <= 0) {
                 System.out.print("Error al indicar el número máximo de asistentes...");
                 return false;
@@ -339,13 +345,145 @@ public class GestorCampamentos {
         return true;
     }
 
-    // public Boolean asociarActividadCampamento(String nombreActividad, int
-    // idCampamento) {
-    // if (!buscarActividadCampamento(actividad.getNombreActividad(),
-    // campamento.getIdentificador())) {
-    // campamento
-    // }
+    public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
+        Campamento campamento = getCampamento(idCampamento);
+        String nombreActividad = actividad.getNombreActividad();
+        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+            // Si no se encontró una actividad con el mismo nombre
+            for (Actividad a : campamento.getActividades()) {
+                if (a.getNombreActividad().equals(nombreActividad)) {
+                    return false;
+                }
+                campamento.getActividades().add(actividad);
+                System.out.println("Actividad asociada con éxito.");
+                return true;
+            }
+        }
+        System.out.println("La actividad ya está asociada al campamento.");
+        return false;
+    }
 
-    // return false;
-    // }
+    public Boolean buscarMonitorCampamento(int idMonitor, int idCampamento) {
+        for (Campamento campamento : campamentos) {
+            if (campamento.getIdentificador() == idCampamento) {
+                for (Monitor monitor : campamento.getMonitoresResponsables()) {
+                    if (monitor.getIdentificador() == idMonitor) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public Boolean asociarMonitorCampamento(Monitor monitor, int idCampamento) {
+        if (!buscarCampamento(idCampamento)) {
+            System.out.printf("Error, el campamento solicitado no existe...");
+            return false;
+        } else if (!buscarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
+            for (Campamento campamento : campamentos) {
+                if (campamento.getIdentificador() == idCampamento) {
+                    campamento.getMonitoresResponsables().add(monitor);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad) {
+
+        String nombreActividad;
+        String hora;
+        NivelEducativo nivel = NivelEducativo.INFANTIL;
+        int max_participantes = 0;
+        int max_monitores = 0;
+
+        System.out.println("Introduzca los datos de la nueva actividad:");
+
+        System.out.print("Nombre de la actividad");
+        teclado.nextLine();
+        nombreActividad = teclado.nextLine();
+
+        System.out.print("Introduzca el horario:(Mañana o Tarde)");
+        teclado.nextLine();
+        hora = teclado.nextLine();
+
+        // AÑADIR EL NIVEL EDUCATIVO*******************
+
+        System.out.print("Introduzca el número maximo de asistentes:");
+        teclado.nextLine();
+        max_participantes = teclado.nextInt();
+
+        System.out.print("Introduzca el número máximo de monitores:");
+        teclado.nextLine();
+        max_monitores = teclado.nextInt();
+
+        nuevaActividad.setNombreActividad(nombreActividad);
+        nuevaActividad.setHora(hora);
+        nuevaActividad.setMax_participantes(max_participantes);
+        nuevaActividad.setNum_monitores(max_monitores);
+        return true;
+    }
+
+    public Boolean borrarActividad(int idCampamento, String nombreActividad) {
+        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+            System.out.println("La actividad no existe en el campamento indicado...");
+            return false;
+        } else {
+            for (Campamento campamento : campamentos) {
+                if (campamento.getIdentificador() == idCampamento) {
+                    for (Actividad actividad : campamento.getActividades()) {
+                        if (actividad.getNombreActividad().equals(nombreActividad)) {
+                            campamento.getActividades().remove(actividad);
+                            System.out.printf("La actividad ha sido borrada con exito");
+                            return true;
+                        }
+                    }
+
+                }
+            }
+            System.out.println("La actividad no existe en el campamento indicado...");
+            return false;
+        }
+
+    }
+
+    public static Boolean crearMonitor(Scanner teclado, Monitor nuevoMonitor) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        int idMonitor;
+        String nombre = "";
+        String apellidos = "";
+        int atencionInt;
+
+        teclado.nextLine();
+
+        System.out.println("Introduzca los datos del nuevo monitor:");
+        while (nombre.isEmpty()) {
+            System.out.print("Nombre: ");
+            teclado.nextLine();
+            nombre = teclado.nextLine();
+            nombre = validarNombre(nombre);
+        }
+        while (apellidos.isEmpty()) {
+
+            System.out.print("Apellidos: ");
+            apellidos = teclado.nextLine();
+            apellidos = validarNombre(apellidos);
+        }
+
+        System.out.print("¿Es educador de atencion especial? (Si - 1 / No - 0): ");
+        atencionInt = teclado.nextInt();
+
+        Boolean esEducador = false;
+        if (atencionInt == 1) {
+            esEducador = true;
+        }
+
+        nuevoMonitor.setNombre(nombre);
+        nuevoMonitor.setApellidos(apellidos);
+        nuevoMonitor.setEsEducador(esEducador);
+        return true;
+
+    }
 }

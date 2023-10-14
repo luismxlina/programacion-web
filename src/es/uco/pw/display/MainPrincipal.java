@@ -45,7 +45,7 @@ public class MainPrincipal {
 				case 0:
 					System.out.println("Saliendo del programa...");
 					ra.guardarEnFichero(gestor_asistentes.getAsistentes(), "db/asistentes.txt");
-					rc.guardarEnFichero(gestor_campamentos.getCampamentos(), "db/asistentes.txt");
+					rc.guardarEnFichero(gestor_campamentos.getCampamentos(), "db/campamentos.txt");
 					break;
 				case 1:
 					MainAsistentes.mostrarMenuAsistentes(teclado, gestor_asistentes);

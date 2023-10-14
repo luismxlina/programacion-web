@@ -94,6 +94,24 @@ public class Campamento implements Serializable {
 		return monitoresResponsables;
 	}
 
+	public Monitor getMonitor(int id) {
+		for (Monitor monitor : this.monitoresResponsables) {
+			if (monitor.getIdentificador() == id) {
+				return monitor;
+			}
+		}
+		return null;
+	}
+
+	public Monitor getMonitor(String nombre) {
+		for (Monitor monitor : this.monitoresResponsables) {
+			if (monitor.getNombre() == nombre) {
+				return monitor;
+			}
+		}
+		return null;
+	}
+
 	public void setMonitoresResponsables(ArrayList<Monitor> monitoresResponsables) {
 		this.monitoresResponsables = monitoresResponsables;
 	}

@@ -21,6 +21,10 @@ public class Monitor implements Serializable {
 
 	}
 
+	public Monitor(int id) {
+		this.identificador = id;
+	}
+
 	public int getIdentificador() {
 		return identificador;
 	}

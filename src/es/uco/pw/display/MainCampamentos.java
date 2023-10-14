@@ -21,9 +21,10 @@ public class MainCampamentos {
 
         do {
             System.out.println("");
-            System.out.println("(1) Mostrar campamento");
-            System.out.println("(2) Añadir campamento");
-            System.out.println("(3) Editar campamento");
+            System.out.println("(1) Mostrar campamentos");
+            System.out.println("(2) Mostrar campamento");
+            System.out.println("(3) Añadir campamento");
+            System.out.println("(4) Editar campamento");
             System.out.println("(0) Volver al menú principal");
             System.out.println("");
 
@@ -34,19 +35,23 @@ public class MainCampamentos {
                     System.out.println("Volviendo al menú principal...");
                     break;
                 case 1:
+                    gestor_campamentos.mostrarCampamentos();
+                    break;
+                case 2:
                     System.out.println("Introduzca id del campamento a buscar");
                     teclado.nextLine();
                     int idCampamento = teclado.nextInt();
                     gestor_campamentos.mostrarCampamento(idCampamento);
                     break;
-                case 2:
+                case 3:
                     Campamento nuevoCampamento = new Campamento(generarIDUnico());
                     if (!GestorCampamentos.pedirDatosTeclado(teclado, nuevoCampamento)) {
                         break;
                     }
+                    gestor_campamentos.altaCampamento(nuevoCampamento);
                     break;
-                case 3:
-                    MainEditarCampamento.mostraMenuEditarCampamento(teclado, gestor_campamentos);
+                case 4:
+                    MainEditarCampamento.mostrarMenuEditarCampamento(teclado, gestor_campamentos);
                     break;
                 default:
                     System.out.println("Opción no válida");
