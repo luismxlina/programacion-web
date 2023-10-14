@@ -38,6 +38,10 @@ public class Campamento implements Serializable {
 		this.monitoresResponsables = new ArrayList<Monitor>();
 	}
 
+	public Campamento(int identificador) {
+		this.identificador = identificador;
+	}
+
 	public int getIdentificador() {
 		return identificador;
 	}
