@@ -62,16 +62,16 @@ public class GestorAsistentes {
 		}
 	}
 
-	public void modificarAsistente() {
-
+public void modificarAsistente() {
+		
 		Scanner teclado = new Scanner(System.in);
-		int identificador;
-
-		System.out.print("Escriba el identificador del asistente a modificar: ");
-		identificador = teclado.nextInt();
-
-		if (buscarAsistente(identificador)) {
-
+		int ID;
+		
+		System.out.print("Introduzca el ID del asistente a modificar: ");
+		ID = teclado.nextInt();
+		
+		if(buscarAsistente(ID)) {
+			
 			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 
 			String newNombre;
@@ -80,11 +80,9 @@ public class GestorAsistentes {
 			Date newFecha = new Date();
 			int newAtencionTexto;
 			Boolean newAtencion = false;
-
+			
 			System.out.println("Introduzca los nuevos datos del asistente: ");
-			// String saltoDeLinea = teclado.nextLine();
-
-			// Leer los nuevos datos del asistente
+			String saltoDeLinea = teclado.nextLine();
 			System.out.print("Nuevo nombre: ");
 			newNombre = teclado.nextLine();
 			System.out.print("Nuevos apellidos: ");
@@ -93,41 +91,43 @@ public class GestorAsistentes {
 			newFechaTexto = teclado.nextLine();
 			System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
 			newAtencionTexto = teclado.nextInt();
-
-			if (newAtencionTexto == 1) {
+			
+			if(newAtencionTexto == 1) {
+				
 				newAtencion = true;
+				
 			}
-
+			
 			try {
-
+				
 				newFecha = formatoFecha.parse(newFechaTexto);
-
-			} catch (ParseException e) {
-
+			
+			} catch(ParseException e) {
+				
 				System.out.println("Error al convertir la fecha");
-
+			
 			}
-
-			for (Asistente asistente : this.asistentes) {
-
-				if (asistente.getIdentificador() == identificador) {
-
+			
+			for(Asistente asistente : this.asistentes) {
+				
+				if(asistente.getIdAsistente() == ID) {
+					
 					asistente.setNombre(newNombre);
 					asistente.setApellidos(newApellidos);
-					asistente.setFechaNacimiento(newFecha);
-					asistente.setRequiereAtencion(newAtencion);
-
+					asistente.setFecha_nacimiento(newFecha);
+					asistente.setRequiere_atencion(newAtencion);
+					
 				}
-
+				
 			}
-
+			
 		}
-
+		
 		else {
-
+			
 			System.out.println("No existe ninun usuario con el ID indicado");
-
+			
 		}
-
+			
 	}
 }
