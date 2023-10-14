@@ -14,7 +14,6 @@ public class RepositorioAsistentes implements InterfazRepositorio<ArrayList<Asis
 		try (FileOutputStream fileOut = new FileOutputStream(archivo);
 				ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 			out.writeObject(obj);
-			System.out.println("Asistentes serializados y guardados en " + archivo);
 
 		} catch (IOException e) {
 
@@ -26,14 +25,13 @@ public class RepositorioAsistentes implements InterfazRepositorio<ArrayList<Asis
 	public ArrayList<Asistente> cargarDatosFichero(String archivo) {
 		ArrayList<Asistente> obj;
 		try (FileInputStream fileIn = new FileInputStream(archivo);
-			 ObjectInputStream in = new ObjectInputStream(fileIn)) {
+				ObjectInputStream in = new ObjectInputStream(fileIn)) {
 			obj = (ArrayList<Asistente>) in.readObject();
-			System.out.println("Actividades deserializadas desde " + archivo);
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			obj = new ArrayList<>();
 		}
 		return obj;
 	}
-	
+
 }
