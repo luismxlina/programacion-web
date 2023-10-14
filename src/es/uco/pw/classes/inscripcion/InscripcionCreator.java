@@ -6,6 +6,6 @@ public abstract class InscripcionCreator {
 	
 	public abstract Inscripcion registrarInscripcionCompleta(int participante, int campamento, Date fecha);
 	
-	public abstract Inscripcion registrarInscripcionParcial();
+	public abstract Inscripcion registrarInscripcionParcial(int participante, int campamento, Date fecha);
 	
 }
