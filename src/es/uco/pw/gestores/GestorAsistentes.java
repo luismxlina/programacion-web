@@ -62,10 +62,6 @@ public class GestorAsistentes {
 		}
 	}
 
-<<<<<<< HEAD
-public void modificarAsistente() {
-		
-=======
 	private static String validarNombre(String input) {
 		// Expresión regular para verificar que el nombre no contiene números
 		String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
@@ -127,15 +123,14 @@ public void modificarAsistente() {
 
 	public void modificarAsistente() {
 
->>>>>>> f70575cc029561133a8bb3fbc7f3a0ad3b26085f
 		Scanner teclado = new Scanner(System.in);
-		int ID;
-		
-		System.out.print("Introduzca el ID del asistente a modificar: ");
-		ID = teclado.nextInt();
-		
-		if(buscarAsistente(ID)) {
-			
+		int identificador;
+
+		System.out.print("Escriba el identificador del asistente a modificar: ");
+		identificador = teclado.nextInt();
+
+		if (buscarAsistente(identificador)) {
+
 			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 
 			String newNombre;
@@ -144,9 +139,11 @@ public void modificarAsistente() {
 			Date newFecha = new Date();
 			int newAtencionTexto;
 			Boolean newAtencion = false;
-			
+
 			System.out.println("Introduzca los nuevos datos del asistente: ");
-			String saltoDeLinea = teclado.nextLine();
+			// String saltoDeLinea = teclado.nextLine();
+
+			// Leer los nuevos datos del asistente
 			System.out.print("Nuevo nombre: ");
 			newNombre = teclado.nextLine();
 			System.out.print("Nuevos apellidos: ");
@@ -155,48 +152,42 @@ public void modificarAsistente() {
 			newFechaTexto = teclado.nextLine();
 			System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
 			newAtencionTexto = teclado.nextInt();
-			
-			if(newAtencionTexto == 1) {
-				
+
+			if (newAtencionTexto == 1) {
 				newAtencion = true;
-				
 			}
-			
+
 			try {
-				
+
 				newFecha = formatoFecha.parse(newFechaTexto);
-			
-			} catch(ParseException e) {
-				
+
+			} catch (ParseException e) {
+
 				System.out.println("Error al convertir la fecha");
-			
+
 			}
-			
-			for(Asistente asistente : this.asistentes) {
-				
-				if(asistente.getIdAsistente() == ID) {
-					
+
+			for (Asistente asistente : this.asistentes) {
+
+				if (asistente.getIdentificador() == identificador) {
+
 					asistente.setNombre(newNombre);
 					asistente.setApellidos(newApellidos);
-					asistente.setFecha_nacimiento(newFecha);
-					asistente.setRequiere_atencion(newAtencion);
-					
+					asistente.setFechaNacimiento(newFecha);
+					asistente.setRequiereAtencion(newAtencion);
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		else {
-			
+
 			System.out.println("No existe ninun usuario con el ID indicado");
-			
+
 		}
-<<<<<<< HEAD
-			
-=======
 		teclado.close();
->>>>>>> f70575cc029561133a8bb3fbc7f3a0ad3b26085f
 	}
 	public void eliminarAsistente(Scanner teclado) {
 
