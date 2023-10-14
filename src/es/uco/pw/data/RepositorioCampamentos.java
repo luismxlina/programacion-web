@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import es.uco.pw.classes.campamento.Campamento;
 
-public class Interfaz_Campamento {
+public class RepositorioCampamentos {
     public void guardarEnFichero(ArrayList<Campamento> obj, String archivo) {
         try (FileOutputStream fileOut = new FileOutputStream(archivo);
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {

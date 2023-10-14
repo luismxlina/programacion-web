@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import es.uco.pw.classes.asistente.Asistente;
-import es.uco.pw.data.Repositorio_Asistentes;
+import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.gestores.GestorAsistentes;
 
 public class MainPrincipal {
@@ -17,7 +17,7 @@ public class MainPrincipal {
 		int opcion;
 		
 		//Crear los gestores
-		Repositorio_Asistentes ra = new Repositorio_Asistentes();
+		RepositorioAsistentes ra = new RepositorioAsistentes();
 		ArrayList<Asistente> arrayAsistentesFichero = ra.cargarDatosFichero("db/asistentes.txt");
 		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance(arrayAsistentesFichero);
 		
