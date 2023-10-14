@@ -51,7 +51,10 @@ public class MainCampamentos {
                     gestor_campamentos.altaCampamento(nuevoCampamento);
                     break;
                 case 4:
-                    MainEditarCampamento.mostrarMenuEditarCampamento(teclado, gestor_campamentos);
+                    System.out.println("Introduzca id del campamento a editar");
+                    teclado.nextLine();
+                    idCampamento = teclado.nextInt();
+                    MainEditarCampamento.mostrarMenuEditarCampamento(teclado, gestor_campamentos,idCampamento);
                     break;
                 default:
                     System.out.println("Opción no válida");

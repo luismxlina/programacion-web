@@ -26,6 +26,9 @@ public class Campamento implements Serializable {
 		this.max_asistentes = 0;
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();
+
+		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
+		this.actividades.add(actividadPredeterminada);
 	}
 
 	public Campamento(int identificador, Date fechaInicio, Date fechaFin, NivelEducativo nivel, int max_asistentes) {
@@ -36,10 +39,22 @@ public class Campamento implements Serializable {
 		this.max_asistentes = max_asistentes;
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();
+
+		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
+		this.actividades.add(actividadPredeterminada);
 	}
 
 	public Campamento(int identificador) {
 		this.identificador = identificador;
+		this.fechaInicio = new Date();
+		this.fechaFin = new Date();
+		this.nivel = NivelEducativo.INFANTIL;
+		this.max_asistentes = 0;
+		this.actividades = new ArrayList<Actividad>();
+		this.monitoresResponsables = new ArrayList<Monitor>();
+
+		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, "Mañana", 50, 5);
+		this.actividades.add(actividadPredeterminada);
 	}
 
 	public int getIdentificador() {

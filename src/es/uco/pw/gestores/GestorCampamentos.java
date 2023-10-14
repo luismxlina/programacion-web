@@ -100,6 +100,19 @@ public class GestorCampamentos {
         return false;
     }
 
+    public Boolean buscarActividadCampamento(Actividad actividad, int idCampamento) {
+        for (Campamento campamento : campamentos) {
+            if (campamento.getIdentificador() == idCampamento) {
+                for (Actividad a : campamento.getActividades()) {
+                    if (a.getNombreActividad().equals(actividad.getNombreActividad())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public static Monitor getMonitor(int id, ArrayList<Monitor> monitores) {
         for (Monitor monitor : monitores) {
             if (monitor.getIdentificador() == id) {
@@ -224,7 +237,7 @@ public class GestorCampamentos {
         // Ver si existe la actividad en el campamento
         if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
             for (Actividad a : campamento.getActividades()) {
-                if (a.getNombreActividad().equals(nombreActividad)) {
+                if (a.getNombreActividad().equals(nombreActividad) && a.getMonitores().size() < a.getNum_monitores()) {
                     // Ver si el monitor ya está asociado a la actividad
                     for (Monitor m : a.getMonitores()) {
                         if (m.getIdentificador() == idMonitor) {
@@ -280,7 +293,6 @@ public class GestorCampamentos {
         System.out.println("Introduzca los datos del nuevo campamento:");
 
         System.out.print("Fecha inicio (yyyy-mm-dd): ");
-        System.out.print(" ");
         teclado.nextLine();
         fechaInicioTexto = teclado.nextLine();
 
@@ -305,13 +317,15 @@ public class GestorCampamentos {
             return false;
         }
 
-        System.out.print("Indique el nivel educativo campamento:");
+        System.out.print("Indique el nivel educativo del campamento:\n");
         System.out.println("(1) INFANTIL");
         System.out.println("(2) JUVENIL");
         System.out.println("(3) ADOLESCENTE");
-        int opcion = teclado.nextInt();
+        System.out.print("");
+        int opcion;
         do {
             opcion = teclado.nextInt();
+
             switch (opcion) {
                 case 1:
                     nivel = NivelEducativo.INFANTIL;
@@ -328,14 +342,11 @@ public class GestorCampamentos {
             }
         } while (opcion < 1 || opcion > 3);
 
-        teclado.nextInt();
+        System.out.print("Máximo número de asistentes: ");
         max_asistentes = teclado.nextInt();
         while (max_asistentes <= 0) {
-            System.out.print("Máximo número de aistentes: ");
-            if (max_asistentes <= 0) {
-                System.out.print("Error al indicar el número máximo de asistentes...");
-                return false;
-            }
+            System.out.print("Error al indicar el número máximo de asistentes...");
+            return false;
         }
 
         nuevoCampamento.setFechaInicio(fechaInicioDate);
@@ -348,10 +359,13 @@ public class GestorCampamentos {
     public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
         Campamento campamento = getCampamento(idCampamento);
         String nombreActividad = actividad.getNombreActividad();
+        
+        NivelEducativo nivel = actividad.getNivel();
+        
         if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
             // Si no se encontró una actividad con el mismo nombre
             for (Actividad a : campamento.getActividades()) {
-                if (a.getNombreActividad().equals(nombreActividad)) {
+                if (a.getNombreActividad().equals(nombreActividad) || actividad.getNivel() == campamento.getNivel()) {
                     return false;
                 }
                 campamento.getActividades().add(actividad);
@@ -401,25 +415,45 @@ public class GestorCampamentos {
 
         System.out.println("Introduzca los datos de la nueva actividad:");
 
-        System.out.print("Nombre de la actividad");
+        System.out.print("Nombre de la actividad: ");
         teclado.nextLine();
         nombreActividad = teclado.nextLine();
 
-        System.out.print("Introduzca el horario:(Mañana o Tarde)");
-        teclado.nextLine();
+        System.out.print("Introduzca el horario (Mañana o Tarde): ");
         hora = teclado.nextLine();
 
-        // AÑADIR EL NIVEL EDUCATIVO*******************
+        int opcion;
+        do {
+            System.out.println("Elija el nivel educativo de la actividad:");
+            System.out.println("(1) INFANTIL");
+            System.out.println("(2) JUVENIL");
+            System.out.println("(3) ADOLESCENTE");
+            opcion = teclado.nextInt();
 
-        System.out.print("Introduzca el número maximo de asistentes:");
-        teclado.nextLine();
+            switch (opcion) {
+                case 1:
+                    nivel = NivelEducativo.INFANTIL;
+                    break;
+                case 2:
+                    nivel = NivelEducativo.JUVENIL;
+                    break;
+                case 3:
+                    nivel = NivelEducativo.ADOLESCENTE;
+                    break;
+                default:
+                    System.out.println("Opción no válida. Escriba otro número válido:");
+                    break;
+            }
+        } while (opcion < 1 || opcion > 3);
+
+        System.out.print("Introduzca el número máximo de asistentes: ");
         max_participantes = teclado.nextInt();
 
-        System.out.print("Introduzca el número máximo de monitores:");
-        teclado.nextLine();
+        System.out.print("Introduzca el número máximo de monitores: ");
         max_monitores = teclado.nextInt();
 
         nuevaActividad.setNombreActividad(nombreActividad);
+        nuevaActividad.setNivel(nivel);
         nuevaActividad.setHora(hora);
         nuevaActividad.setMax_participantes(max_participantes);
         nuevaActividad.setNum_monitores(max_monitores);

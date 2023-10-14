@@ -14,7 +14,6 @@ public class RepositorioCampamentos {
         try (FileOutputStream fileOut = new FileOutputStream(archivo);
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(obj);
-            System.out.println("Campamentos serializados y guardados en " + archivo);
 
         } catch (IOException e) {
 
@@ -28,7 +27,6 @@ public class RepositorioCampamentos {
         try (FileInputStream fileIn = new FileInputStream(archivo);
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
             obj = (ArrayList<Campamento>) in.readObject();
-            System.out.println("Campamentos deserializados desde " + archivo);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             obj = new ArrayList<>();
