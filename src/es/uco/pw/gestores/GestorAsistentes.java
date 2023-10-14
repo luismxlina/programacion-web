@@ -189,4 +189,31 @@ public class GestorAsistentes {
 		}
 		teclado.close();
 	}
+	public void eliminarAsistente(Scanner teclado) {
+
+		int identificador;
+
+		System.out.print("Escriba el identificador del asistente a eliminar: ");
+		identificador = teclado.nextInt();
+
+		if (buscarAsistente(identificador)) {
+
+			for (Asistente a : this.asistentes) {
+
+				if (a.getIdentificador() == identificador) {
+
+					this.asistentes.remove(a);
+
+				}
+
+			}
+
+		}
+
+		else {
+
+			System.out.println("No existe ningún usuario con el ID indicado");
+
+		}
+	} 
 }
