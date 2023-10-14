@@ -60,17 +60,45 @@ public class MainEditarCampamento {
                     System.out.println("Introduzca el ID del campamento donde desea asociar monitor");
                     teclado.nextInt();
                     idCampamento = teclado.nextInt();
-                    System.out.println("Introduzca el ID del monitor que desee asociar");
-                    teclado.nextLine();
-                    int idMonitor = teclado.nextInt();
+                    Campamento campamento = gestor_campamentos.getCampamento(idCampamento);
+                    monitor = new Monitor();
+                    System.out.print("Dispone del ID del monitor que desea asociar? (s/N): ");
+                    String respuesta = teclado.nextLine();
+                    // Caso que dispone de ID
+                    if (respuesta.equalsIgnoreCase("s")) {
+                        System.out.println("Desea mostrar los monitores disponibles? (s/N): ");
+                        respuesta = teclado.nextLine();
+                        // Caso para listar los monitores disponibles
+                        if (respuesta.equalsIgnoreCase("s")) {
+                            for (Monitor m : campamento.getMonitoresResponsables()) {
+                                System.out.println(m.toString());
+                                //Existe el monitor
+                                
+                            }
+                        //
+                        } else {
+                            System.out.println("Introduzca el ID del monitor que desea asociar");
+                            teclado.nextInt();
+                            int idMonitor = teclado.nextInt();
+                            monitor = campamento.getMonitor(idMonitor);
+                        }
+                    // Caso que no dispone de ID
+                    } else {
+                        monitor = new Monitor(generarIDUnico());
+                        GestorCampamentos.crearMonitor(teclado, monitor);
+                    }
+
                     System.out.println("Introduzca el nombre de la actividad a la que desea asociar el monitor");
                     teclado.nextLine();
                     nombreActividad = teclado.nextLine();
 
-                    Campamento campamento = gestor_campamentos.getCampamento(idCampamento);
-                    monitor = campamento.getMonitor(idMonitor);
+                    gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento);
 
-                    asociarMonitorActividad(idMonitor, nombreActividad, campamento);
+                    // Dispone del ID del monitor que quiere asociar?
+                    // Sí -> Lo buscamos con campamento.getIdMonitor(idMonitor) y lo asociamos a una
+                    // actividad existente;
+                    // No -> Lo creamos y lo insertamos en la actividad que sea. (
+                    // gestor_campamento.asociarMonitorActividad(monitor, nombreActividad) )
 
                 case 5:
 
