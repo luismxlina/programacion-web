@@ -62,6 +62,65 @@ public class GestorAsistentes {
 		}
 	}
 
+	private static String validarNombre(String input) {
+		// Expresión regular para verificar que el nombre no contiene números
+		String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
+
+		if (input.matches(regex)) {
+			return input;
+		} else {
+			System.out.println("El nombre o apellidos no pueden contener números ni caracteres especiales.");
+			return "";
+		}
+	}
+
+	public static Boolean pedirDatosTeclado(Scanner teclado, Asistente nuevoAsistente) {
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+		String nombre = "";
+		String apellidos = "";
+		String fechaTexto;
+		int atencionInt;
+
+		System.out.println("Introduzca los datos del nuevo asistente:");
+		while (nombre.isEmpty()) {
+			System.out.print("Nombre: ");
+			teclado.nextLine();
+			nombre = teclado.nextLine();
+			nombre = validarNombre(nombre);
+		}
+		while (apellidos.isEmpty()) {
+
+			System.out.print("Apellidos: ");
+			apellidos = teclado.nextLine();
+			apellidos = validarNombre(apellidos);
+		}
+		System.out.print("Fecha nacimiento (yyyy-mm-dd): ");
+		fechaTexto = teclado.nextLine();
+		System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
+		atencionInt = teclado.nextInt();
+
+		Date fecha = new Date();
+		try {
+
+			fecha = formatoFecha.parse(fechaTexto);
+
+		} catch (ParseException e) {
+			System.out.println("Error al convertir la fecha...");
+			return false;
+		}
+
+		Boolean atencion = false;
+		if (atencionInt == 1) {
+			atencion = true;
+		}
+
+		nuevoAsistente.setNombre(nombre);
+		nuevoAsistente.setApellidos(apellidos);
+		nuevoAsistente.setFechaNacimiento(fecha);
+		nuevoAsistente.setRequiereAtencion(atencion);
+		return true;
+	}
+
 	public void modificarAsistente() {
 
 		Scanner teclado = new Scanner(System.in);
@@ -89,7 +148,7 @@ public class GestorAsistentes {
 			newNombre = teclado.nextLine();
 			System.out.print("Nuevos apellidos: ");
 			newApellidos = teclado.nextLine();
-			System.out.print("Nueva fecha nacimiento: ");
+			System.out.print("Nueva fecha nacimiento (yyyy-mm-dd): ");
 			newFechaTexto = teclado.nextLine();
 			System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
 			newAtencionTexto = teclado.nextInt();
@@ -128,6 +187,6 @@ public class GestorAsistentes {
 			System.out.println("No existe ninun usuario con el ID indicado");
 
 		}
-
+		teclado.close();
 	}
 }

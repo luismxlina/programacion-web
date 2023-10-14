@@ -1,51 +1,17 @@
 package es.uco.pw.display;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.gestores.GestorAsistentes;
 
 public class MainAsistentes {
-	
-	public static Asistente pedirDatosTeclado(Scanner teclado)
-	{
-		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-		
-		System.out.println("Introduzca los datos del nuevo asistente:");
-		System.out.print("ID del asistente: ");
-		int idAsis = teclado.nextInt();
-		teclado.nextLine();
-		System.out.print("Nombre: ");
-		String nom = teclado.nextLine();
-		System.out.print("Apellidos: ");
-		String ape = teclado.nextLine();
-		System.out.print("Fecha nacimiento (yyyy-mm-dd): ");
-		String fechaTexto = teclado.nextLine();
-		System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
-		int atencionInt = teclado.nextInt();
-		
-		Date fecha = new Date();
-		try {
-			
-			fecha = formatoFecha.parse(fechaTexto);
-		
-		} catch(ParseException e) {
-			System.out.println("Error al convertir la fecha...");
-		}
-		
-		Boolean atencion = false;
-		if(atencionInt == 1) {
-			atencion = true;
-		}
-		
-		return new Asistente(idAsis, nom, ape, fecha, atencion);
-	}
+
+	private static HashSet<Integer> idSet = new HashSet<>();
 
 	public static void mostrarMenuAsistentes(Scanner teclado, GestorAsistentes gestor_asistentes) {
-
 
 		int opcion;
 
@@ -69,7 +35,10 @@ public class MainAsistentes {
 					gestor_asistentes.mostrarAsistentes();
 					break;
 				case 2:
-					Asistente nuevoAsistente = pedirDatosTeclado(teclado);
+					Asistente nuevoAsistente = new Asistente(generarIDUnico());
+					if (!GestorAsistentes.pedirDatosTeclado(teclado, nuevoAsistente)) {
+						break;
+					}
 					gestor_asistentes.altaAsistente(nuevoAsistente);
 					break;
 				default:
@@ -81,4 +50,13 @@ public class MainAsistentes {
 		// teclado.close();
 	}
 
+	public static int generarIDUnico() {
+		Random random = new Random();
+		int id;
+		do {
+			id = random.nextInt(100000);
+		} while (idSet.contains(id));
+		idSet.add(id);
+		return id;
+	}
 }

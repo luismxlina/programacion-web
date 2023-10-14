@@ -23,9 +23,9 @@ public class MainPrincipal {
 		
 		do {
 			
-			System.out.println("*************************************");
-			System.out.println("********    MENÚ PRINCIPAL  *********");
-			System.out.println("*************************************");
+			System.out.println("*-----------------------------------*");
+			System.out.println("|           MENÚ PRINCIPAL          |");
+			System.out.println("*-----------------------------------*");
 			System.out.println("1) Gestor de asistentes");
 			System.out.println("2) Gestor de campamentos");
 			System.out.println("3) Gestor de inscripciones");
