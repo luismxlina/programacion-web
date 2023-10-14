@@ -1,6 +1,6 @@
 package es.uco.pw.data;
 
-public interface Interfaz_Repositorio<T> {
+public interface InterfazRepositorio<T> {
 	
 	void guardarEnFichero(T obj,String nombreFichero);
 	

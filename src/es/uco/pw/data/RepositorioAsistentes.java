@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import es.uco.pw.classes.asistente.Asistente;
 
-public class Repositorio_Asistentes implements Interfaz_Repositorio<ArrayList<Asistente>> {
+public class RepositorioAsistentes implements InterfazRepositorio<ArrayList<Asistente>> {
 
 	public void guardarEnFichero(ArrayList<Asistente> obj, String archivo) {
 		try (FileOutputStream fileOut = new FileOutputStream(archivo);
