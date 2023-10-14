@@ -1,5 +1,6 @@
 package es.uco.pw.display;
 
+<<<<<<< HEAD
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,4 +63,8 @@ public class Campamentos {
 		// teclado.close();
 	}
 
+=======
+public class MainCampamentos {
+    
+>>>>>>> ce7f67d83ad9934ee1ea4e034aab9b13f43e52ee
 }
