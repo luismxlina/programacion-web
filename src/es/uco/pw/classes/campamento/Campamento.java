@@ -9,7 +9,6 @@ import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.monitor.Monitor;
 
 public class Campamento implements Serializable {
-
 	private int identificador;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -149,27 +148,21 @@ public class Campamento implements Serializable {
 
 	public Boolean asociarActividad(Actividad nuevaActividad) {
 
-		/*
-		 * for(int numero : vector)
-		 * 
-		 * for(Actividad actividad : this.actividades)
-		 * {
-		 * if(actividad.getNombreActividad() == nuevaActividad.getNombreActividad())
-		 * {
-		 * return false;
-		 * }
-		 * }
-		 */
-
 		if (this.buscarActividad(nuevaActividad.getNombreActividad()) == true)
 			return false;
 
-		if (nuevaActividad.getNivel() == this.nivel) {
-			this.actividades.add(nuevaActividad);
-			return true;
+		if (nuevaActividad.getNivel() != this.nivel) {
+			return false;
+		}
+		this.actividades.add(nuevaActividad);
+		for (int i = 0; i < nuevaActividad.getMonitores().size(); i++) {
+			if (this.monitoresResponsables.contains(nuevaActividad.getMonitores().get(i)) == false) {
+				this.monitoresResponsables.add(nuevaActividad.getMonitores().get(i));
+			}
 		}
 
-		return false;
+		return true;
+
 	}
 
 	public Boolean buscarActividad(String nombreActividad) {
@@ -199,28 +192,51 @@ public class Campamento implements Serializable {
 		return null;
 	}
 
-	public Boolean asociarMonitor(Monitor nuevoMonitor) {
-		for (Actividad actividad : this.actividades) {
-			for (Monitor monitor : actividad.getMonitores()) {
-				if (monitor.getIdentificador() == nuevoMonitor.getIdentificador()) {
-					this.monitoresResponsables.add(nuevoMonitor);
-					return true;
-				}
+	public Boolean borrarActividad(String nombreActividad) {
+		Actividad actividadAEliminar = null;
+		for (Actividad actividad : actividades) {
+			if (actividad.getNombreActividad().equals(nombreActividad)) {
+				actividadAEliminar = actividad;
+				break;
 			}
 		}
-		return false;
+
+		if (actividadAEliminar == null) {
+			return false;
+		}
+
+		for (Monitor monitor : actividadAEliminar.getMonitores()) {
+			System.out.println("Borrando monitor " + monitor.getNombre());
+			monitoresResponsables.remove(monitor);
+		}
+		System.out.println("Borrando actividad finalizado" + actividadAEliminar.getNombreActividad());
+		actividades.remove(actividadAEliminar);
+
+		return true;
 	}
 
-	public Boolean asociarMonitorEspecial(Monitor nuevoMonitorEspecial) {
-		if (nuevoMonitorEspecial.getEsEducador()) {
-			for (Actividad actividad : actividades) {
-				if (actividad.getMonitores().contains(nuevoMonitorEspecial)) {
-					return false;
-				}
+	private Boolean asociarMonitorNoEspecial(Monitor nuevoMonitor) {
+		for (Actividad actividad : actividades) {
+			if (!actividad.getMonitores().contains(nuevoMonitor)) {
+				return false;
 			}
-			monitoresResponsables.add(nuevoMonitorEspecial);
-			return true;
 		}
-		return false;
+		monitoresResponsables.add(nuevoMonitor);
+		return true;
+	}
+
+	private Boolean asociarMonitorEspecial(Monitor nuevoMonitorEspecial) {
+		for (Actividad actividad : actividades) {
+			if (actividad.getMonitores().contains(nuevoMonitorEspecial)) {
+				return false;
+			}
+		}
+		monitoresResponsables.add(nuevoMonitorEspecial);
+		return true;
+
+	}
+
+	public Boolean asociarMonitor(Monitor monitor) {
+		return (monitor.getEsEducador()) ? asociarMonitorEspecial(monitor) : asociarMonitorNoEspecial(monitor);
 	}
 }

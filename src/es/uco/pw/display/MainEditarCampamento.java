@@ -3,14 +3,12 @@ package es.uco.pw.display;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
 import es.uco.pw.gestores.GestorCampamentos;
-import es.uco.pw.display.MainCampamentos;
 
 public class MainEditarCampamento {
 
@@ -58,8 +56,9 @@ public class MainEditarCampamento {
                     nombreActividad = teclado.nextLine(); // Leer la entrada del usuario y asignarla a nombreActividad
                     Monitor monitor = new Monitor(generarIDUnico());
                     GestorCampamentos.crearMonitor(teclado, monitor);
+                    monitor.toString();
                     campamento = gestor_campamentos.getCampamento(idCampamento);
-                    gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento);
+                    gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento.getIdentificador());
 
                     break;
                 case 4:
@@ -81,7 +80,9 @@ public class MainEditarCampamento {
                         } else {
                             System.out.println("Introduzca el ID del monitor que desea asociar");
                             teclado.nextInt();
+                            teclado.nextLine();
                             int idMonitor = teclado.nextInt();
+                            teclado.nextLine();
                             monitor = campamento.getMonitor(idMonitor);
                         }
 
@@ -94,14 +95,14 @@ public class MainEditarCampamento {
                     teclado.nextLine();
                     nombreActividad = teclado.nextLine();
 
-                    gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento);
+                    gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento.getIdentificador());
 
                     // Dispone del ID del monitor que quiere asociar?
                     // Sí -> Lo buscamos con campamento.getIdMonitor(idMonitor) y lo asociamos a una
                     // actividad existente;
                     // No -> Lo creamos y lo insertamos en la actividad que sea. (
                     // gestor_campamento.asociarMonitorActividad(monitor, nombreActividad) )
-
+                    break;
                 default:
                     System.out.println("Opción no válida");
             }

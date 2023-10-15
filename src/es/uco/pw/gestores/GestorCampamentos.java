@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
-import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
 
@@ -128,7 +127,8 @@ public class GestorCampamentos {
                 return actividad;
             }
         }
-        return new Actividad();
+        System.out.println("La actividad solicitada no existe (getActividad) ...");
+        return null;
     }
 
     // public Date obtenerFecha(int newIdCampamento) {
@@ -231,28 +231,31 @@ public class GestorCampamentos {
 
     }
 
-    public Boolean asociarMonitorActividad(Monitor monitor, String nombreActividad, Campamento campamento) {
+    public Boolean asociarMonitorActividad(Monitor monitor, String nombreActividad, int idCampamento) {
 
-        int idMonitor = monitor.getIdentificador();
-        int idCampamento = campamento.getIdentificador();
-        // Ver si existe la actividad en el campamento
-        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
-            for (Actividad a : campamento.getActividades()) {
-                if (a.getNombreActividad().equals(nombreActividad) && a.getMonitores().size() < a.getNum_monitores()) {
-                    // Ver si el monitor ya está asociado a la actividad
-                    for (Monitor m : a.getMonitores()) {
-                        if (m.getIdentificador() == idMonitor) {
-                            return false; // El monitor ya está asociado a la actividad
-                        }
-                    }
-                    // Si no está asociado, se añade
-                    a.getMonitores().add(monitor);
-                    return true;
-                }
-                return false; // La actividad no existe en el campamento indicado
-            }
+        if (monitor.getEsEducador()) {
+            System.out.println("El monitor de educacion especial no se puede asociar a una actividad...");
+            return false;
         }
-        return false; // La actividad ya está asociada al campamento
+
+        Actividad actividad = getActividad(nombreActividad, getCampamento(idCampamento).getActividades());
+        if (actividad == null ) {
+            System.out.println("La actividad no existe en el campamento indicado...");
+            return false;
+        }
+        if (actividad.getMonitores().size() >= actividad.getNum_monitores()) {
+            System.out.println("La actividad ya tiene el número máximo de monitores...");
+            return false;
+        }
+        if (actividad.getMonitores().contains(monitor)) {
+            System.out.println("El monitor ya está asociado a la actividad...");
+            return false;
+        }
+        System.out.println("Monitor asociado con éxito.");
+        actividad.getMonitores().add(monitor);
+        getCampamento(idCampamento).getMonitoresResponsables().add(monitor);
+        return true;
+
     }
 
     // public void asociarActividadCampamento() {
@@ -268,9 +271,18 @@ public class GestorCampamentos {
 
     // }
 
-    // public void asociarMonitorEspecialCampamento() {
+    // public void asociarMonitorEspecialCampamento(int idMonitor, int idCampamento)
+    // {
+
+    // Campamento campamento = getCampamento(idCampamento);
+    // Monitor monitor = getMonitor(idMonitor,
+    // campamento.getMonitoresResponsables());
+
+    // if (buscarMonitorCampamento() )
 
     // }
+
+    // Voy a compilar un segundillo
 
     private static String validarNombre(String input) {
         // Expresión regular para verificar que el nombre no contiene números
@@ -359,23 +371,23 @@ public class GestorCampamentos {
 
     public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
         Campamento campamento = getCampamento(idCampamento);
+
         String nombreActividad = actividad.getNombreActividad();
         NivelEducativo nivel = actividad.getNivel();
 
-        if (!buscarActividadCampamento(actividad, idCampamento)) {
-            // Si no se encontró una actividad con el mismo nombre
-            for (Actividad a : campamento.getActividades()) {
-                if (a.getNombreActividad().equals(nombreActividad) || a.getNivel() == nivel) {
-                    System.out.println("La actividad no se puede asociar al campamento.");
-                    return false;
-                }
-            }
-            campamento.getActividades().add(actividad);
-            System.out.println("Actividad asociada con éxito.");
-            return true;
+        if (buscarActividadCampamento(actividad, idCampamento)) {
+            return false;
         }
-        System.out.println("La actividad ya está asociada al campamento.");
-        return false;
+        if (campamento.getNivel().equals(actividad.getNivel()) == false) {
+            System.out.println("La actividad no se puede asociar al campamento.");
+            return false;
+        }
+
+        campamento.getActividades().add(actividad);
+        
+
+        System.out.println("Actividad asociada con éxito.");
+        return true;
     }
 
     public Boolean buscarMonitorCampamento(int idMonitor, int idCampamento) {
@@ -392,18 +404,20 @@ public class GestorCampamentos {
     }
 
     public Boolean asociarMonitorCampamento(Monitor monitor, int idCampamento) {
+        // TODO añadir la funcion asociarMonitor de la clase Campamento
+        // return getCampamento(idCampamento).asociarMonitor(monitor);
+
         if (!buscarCampamento(idCampamento)) {
             System.out.printf("Error, el campamento solicitado no existe...");
             return false;
-        } else if (!buscarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
-            for (Campamento campamento : campamentos) {
-                if (campamento.getIdentificador() == idCampamento) {
-                    campamento.getMonitoresResponsables().add(monitor);
-                    return true;
-                }
-            }
         }
-        return false;
+        if (buscarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
+            return false;
+        }
+
+        getCampamento(idCampamento).getMonitoresResponsables().add(monitor);
+        return true;
+
     }
 
     public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
@@ -437,30 +451,11 @@ public class GestorCampamentos {
     }
 
     public Boolean borrarActividad(int idCampamento, String nombreActividad) {
-        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
-            System.out.println("La actividad no existe en el campamento indicado...");
-            return false;
-        } else {
-            for (Campamento campamento : campamentos) {
-                if (campamento.getIdentificador() == idCampamento) {
-                    for (Actividad actividad : campamento.getActividades()) {
-                        if (actividad.getNombreActividad().equals(nombreActividad)) {
-                            campamento.getActividades().remove(actividad);
-                            System.out.printf("\nLa actividad ha sido borrada con exito\n");
-                            return true;
-                        }
-                    }
-
-                }
-            }
-            System.out.println("La actividad no existe en el campamento indicado...");
-            return false;
-        }
+        return getCampamento(idCampamento).borrarActividad(nombreActividad);
 
     }
 
     public static Boolean crearMonitor(Scanner teclado, Monitor nuevoMonitor) {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String nombre = "";
         String apellidos = "";
         int atencionInt;
@@ -488,7 +483,7 @@ public class GestorCampamentos {
         if (atencionInt == 1) {
             esEducador = true;
         }
-
+        System.out.println(nombre + " " + apellidos + " " + esEducador);
         nuevoMonitor.setNombre(nombre);
         nuevoMonitor.setApellidos(apellidos);
         nuevoMonitor.setEsEducador(esEducador);
