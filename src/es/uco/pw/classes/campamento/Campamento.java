@@ -22,7 +22,7 @@ public class Campamento implements Serializable {
 		this.identificador = 0;
 		this.fechaInicio = new Date();
 		this.fechaFin = new Date();
-		this.nivel = NivelEducativo.INFANTIL;
+		this.nivel = null;
 		this.max_asistentes = 0;
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();
@@ -54,7 +54,7 @@ public class Campamento implements Serializable {
 		this.identificador = identificador;
 		this.fechaInicio = new Date();
 		this.fechaFin = new Date();
-		this.nivel = NivelEducativo.INFANTIL;
+		this.nivel = null;
 		this.max_asistentes = 0;
 		this.actividades = new ArrayList<Actividad>();
 		this.monitoresResponsables = new ArrayList<Monitor>();

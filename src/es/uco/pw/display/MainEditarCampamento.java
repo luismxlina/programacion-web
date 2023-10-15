@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import es.uco.pw.classes.actividad.Actividad;
+import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
 import es.uco.pw.gestores.GestorCampamentos;
@@ -20,6 +21,7 @@ public class MainEditarCampamento {
         int opcion;
         Campamento campamento = gestor_campamentos.getCampamento(idCampamento);
         String nombreActividad;
+        NivelEducativo nivelEducativo = gestor_campamentos.getCampamento(idCampamento).getNivel();
 
         System.out.println("·-----------------------------------·");
         System.out.println("|       SUB-MENÚ de Campamentos     |");
@@ -42,7 +44,7 @@ public class MainEditarCampamento {
                     break;
                 case 1:
                     Actividad actividad = new Actividad();
-                    GestorCampamentos.crearActividad(teclado, actividad);
+                    GestorCampamentos.crearActividad(teclado, actividad, nivelEducativo);
                     gestor_campamentos.asociarActividadCampamento(actividad, idCampamento);
                     break;
                 case 2:

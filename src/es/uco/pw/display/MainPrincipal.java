@@ -1,3 +1,4 @@
+
 package es.uco.pw.display;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class MainPrincipal {
 		Scanner teclado = new Scanner(System.in);
 		int opcion;
 
-		// Crear los gestores
+		// Crear los gestores y repositorios
 		RepositorioAsistentes ra = new RepositorioAsistentes();
 		ArrayList<Asistente> arrayAsistentesFichero = ra.cargarDatosFichero("db/asistentes.txt");
 		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance(arrayAsistentesFichero);
@@ -54,7 +55,7 @@ public class MainPrincipal {
 					MainCampamentos.mostrarMenuCampamentos(teclado,gestor_campamentos);
 					break;
 				default:
-					System.out.println("Opción no valida inútil");
+					System.out.println("Opción no valida...");
 			}
 
 		} while (opcion != 0);

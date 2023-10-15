@@ -206,6 +206,7 @@ public class GestorCampamentos {
                     + ", Participantes maximos: " + campamento.getMax_asistentes()
                     + ", Lista de actividades: " + campamento.getActividades()
                     + ", Lista de monitores: " + campamento.getMonitoresResponsables());
+            System.out.println("");
 
         }
     }
@@ -359,19 +360,19 @@ public class GestorCampamentos {
     public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
         Campamento campamento = getCampamento(idCampamento);
         String nombreActividad = actividad.getNombreActividad();
-        
         NivelEducativo nivel = actividad.getNivel();
-        
-        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+
+        if (!buscarActividadCampamento(actividad, idCampamento)) {
             // Si no se encontró una actividad con el mismo nombre
             for (Actividad a : campamento.getActividades()) {
-                if (a.getNombreActividad().equals(nombreActividad) || actividad.getNivel() == campamento.getNivel()) {
+                if (a.getNombreActividad().equals(nombreActividad) || a.getNivel() == nivel) {
+                    System.out.println("La actividad no se puede asociar al campamento.");
                     return false;
                 }
-                campamento.getActividades().add(actividad);
-                System.out.println("Actividad asociada con éxito.");
-                return true;
             }
+            campamento.getActividades().add(actividad);
+            System.out.println("Actividad asociada con éxito.");
+            return true;
         }
         System.out.println("La actividad ya está asociada al campamento.");
         return false;
@@ -405,11 +406,10 @@ public class GestorCampamentos {
         return false;
     }
 
-    public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad) {
+    public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
 
         String nombreActividad;
         String hora;
-        NivelEducativo nivel = NivelEducativo.INFANTIL;
         int max_participantes = 0;
         int max_monitores = 0;
 
@@ -421,30 +421,6 @@ public class GestorCampamentos {
 
         System.out.print("Introduzca el horario (Mañana o Tarde): ");
         hora = teclado.nextLine();
-
-        int opcion;
-        do {
-            System.out.println("Elija el nivel educativo de la actividad:");
-            System.out.println("(1) INFANTIL");
-            System.out.println("(2) JUVENIL");
-            System.out.println("(3) ADOLESCENTE");
-            opcion = teclado.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    nivel = NivelEducativo.INFANTIL;
-                    break;
-                case 2:
-                    nivel = NivelEducativo.JUVENIL;
-                    break;
-                case 3:
-                    nivel = NivelEducativo.ADOLESCENTE;
-                    break;
-                default:
-                    System.out.println("Opción no válida. Escriba otro número válido:");
-                    break;
-            }
-        } while (opcion < 1 || opcion > 3);
 
         System.out.print("Introduzca el número máximo de asistentes: ");
         max_participantes = teclado.nextInt();
@@ -470,7 +446,7 @@ public class GestorCampamentos {
                     for (Actividad actividad : campamento.getActividades()) {
                         if (actividad.getNombreActividad().equals(nombreActividad)) {
                             campamento.getActividades().remove(actividad);
-                            System.out.printf("La actividad ha sido borrada con exito");
+                            System.out.printf("\nLa actividad ha sido borrada con exito\n");
                             return true;
                         }
                     }
