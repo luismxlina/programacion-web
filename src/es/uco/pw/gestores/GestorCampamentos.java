@@ -239,7 +239,7 @@ public class GestorCampamentos {
         }
 
         Actividad actividad = getActividad(nombreActividad, getCampamento(idCampamento).getActividades());
-        if (actividad == null ) {
+        if (actividad == null) {
             System.out.println("La actividad no existe en el campamento indicado...");
             return false;
         }
@@ -384,7 +384,6 @@ public class GestorCampamentos {
         }
 
         campamento.getActividades().add(actividad);
-        
 
         System.out.println("Actividad asociada con éxito.");
         return true;
@@ -404,8 +403,6 @@ public class GestorCampamentos {
     }
 
     public Boolean asociarMonitorCampamento(Monitor monitor, int idCampamento) {
-        // TODO añadir la funcion asociarMonitor de la clase Campamento
-        // return getCampamento(idCampamento).asociarMonitor(monitor);
 
         if (!buscarCampamento(idCampamento)) {
             System.out.printf("Error, el campamento solicitado no existe...");

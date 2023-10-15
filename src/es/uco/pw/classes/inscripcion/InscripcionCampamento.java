@@ -17,6 +17,10 @@ public class InscripcionCampamento extends Asistente {
         super(identificador, nombre, apellidos, fechaNacimiento, requiereAtencion);
         this.idCampamento = idCampamento;
     }
+    public InscripcionCampamento(Asistente asistente, int idCampamento) {
+        super(asistente.getIdentificador(), asistente.getNombre(), asistente.getApellidos(), asistente.getFechaNacimiento(), asistente.getRequiereAtencion());
+        this.idCampamento = idCampamento;
+    }
 
     public int getIdCampamento() {
         return idCampamento;

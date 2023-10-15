@@ -29,6 +29,15 @@ public class GestorAsistentes {
 		return this.asistentes;
 	}
 
+	public Asistente getAsistente(int id) {
+		for (Asistente asistente : this.asistentes) {
+			if (asistente.getIdentificador() == id) {
+				return asistente;
+			}
+		}
+		return null;
+	}
+
 	public Boolean altaAsistente(Asistente nuevoAsistente) {
 		if (buscarAsistente(nuevoAsistente.getIdentificador()) == false) {
 			this.asistentes.add(nuevoAsistente);

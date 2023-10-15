@@ -8,7 +8,6 @@ public class MainInscripciones {
     public static void mostrarMenuInscripciones(Scanner teclado, GestorInscripciones gestor_inscripciones) {
 
         int opcion;
-        GestorInscripciones gestorInscripciones = new GestorInscripciones();
 
         System.out.println("·-----------------------------------·");
         System.out.println("|         MENÚ de Inscripciones      |");

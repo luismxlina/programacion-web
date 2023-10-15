@@ -9,10 +9,15 @@ import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
+import es.uco.pw.classes.inscripcion.Inscripcion;
+import es.uco.pw.classes.inscripcion.InscripcionCampamento;
+import es.uco.pw.classes.inscripcion.InscripcionCompleta;
 import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.data.RepositorioCampamentos;
+import es.uco.pw.data.RepositoryInscripciones;
 import es.uco.pw.gestores.GestorAsistentes;
 import es.uco.pw.gestores.GestorCampamentos;
+import es.uco.pw.gestores.GestorInscripciones;
 import es.uco.pw.classes.monitor.Monitor;
 
 public class MainPrincipal {
@@ -20,32 +25,32 @@ public class MainPrincipal {
 	public static void main(String[] args) {
 
 		System.out.println("Bienvenido UCOCampamentos");
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechaEspecifica = null;
-		try {
-			fechaEspecifica = formato.parse("15/10/2023");
-			System.out.println(fechaEspecifica);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date fechaEspecifica = null;
+		// try {
+		// 	fechaEspecifica = formato.parse("15/10/2023");
+		// 	System.out.println(fechaEspecifica);
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 		
-		Campamento campamento = new Campamento(1, fechaEspecifica, fechaEspecifica, NivelEducativo.ADOLESCENTE, 4);
-		Actividad actividad = new Actividad("Prueba", NivelEducativo.ADOLESCENTE, "2023-01-12", 20, 3);
-		Monitor director = new Monitor(1, "MontiorPrueba", "Centro", false);
-		ArrayList<Monitor> monitores = new ArrayList<Monitor>();
-		monitores.add(director);
+		// Campamento campamento = new Campamento(1, fechaEspecifica, fechaEspecifica, NivelEducativo.ADOLESCENTE, 4);
+		// Actividad actividad = new Actividad("Prueba", NivelEducativo.ADOLESCENTE, "2023-01-12", 20, 3);
+		// Monitor director = new Monitor(1, "MontiorPrueba", "Centro", false);
+		// ArrayList<Monitor> monitores = new ArrayList<Monitor>();
+		// monitores.add(director);
 		
-		GestorCampamentos gestor = GestorCampamentos.getInstance(new ArrayList<Campamento>());
-		gestor.altaCampamento(campamento);
-		gestor.asociarActividadCampamento(actividad, 1);
-		gestor.asociarMonitorActividad(director, actividad.getNombreActividad(), 1);
-		gestor.mostrarCampamento(1);
-		gestor.borrarActividad(1, actividad.getNombreActividad());
-		gestor.mostrarCampamento(1);
+		// GestorCampamentos gestor = GestorCampamentos.getInstance(new ArrayList<Campamento>());
+		// gestor.altaCampamento(campamento);
+		// gestor.asociarActividadCampamento(actividad, 1);
+		// gestor.asociarMonitorActividad(director, actividad.getNombreActividad(), 1);
+		// gestor.mostrarCampamento(1);
+		// gestor.borrarActividad(1, actividad.getNombreActividad());
+		// gestor.mostrarCampamento(1);
 
-		int a = 0;
-		if (a == 0)
-			return;
+		// int a = 0;
+		// if (a == 0)
+		// 	return;
 
 		Scanner teclado = new Scanner(System.in);
 		int opcion;
@@ -58,6 +63,10 @@ public class MainPrincipal {
 		RepositorioCampamentos rc = new RepositorioCampamentos();
 		ArrayList<Campamento> arrayCampamentosFichero = rc.cargarDatosFichero("db/campamentos.txt");
 		GestorCampamentos gestor_campamentos = GestorCampamentos.getInstance(arrayCampamentosFichero);
+
+		RepositoryInscripciones ri = new RepositoryInscripciones();
+		ArrayList<InscripcionCampamento> arrayInscripcionesFichero = ri.cargarDatosFichero("db/inscripciones.txt");
+		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero);
 
 		System.out.println("·-----------------------------------·");
 		System.out.println("|           MENÚ PRINCIPAL          |");
