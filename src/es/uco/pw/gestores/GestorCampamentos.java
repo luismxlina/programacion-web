@@ -284,10 +284,12 @@ public class GestorCampamentos {
     }
 
     /**
-     * Valida un nombre o apellidos asegurando que no contengan números ni caracteres especiales.
+     * Valida un nombre o apellidos asegurando que no contengan números ni
+     * caracteres especiales.
      *
      * @param input El nombre o apellidos a validar.
-     * @return El nombre o apellidos si la validación es exitosa, una cadena vacía si no lo es.
+     * @return El nombre o apellidos si la validación es exitosa, una cadena vacía
+     *         si no lo es.
      */
     private static String validarNombre(String input) {
         // Expresión regular para verificar que el nombre no contiene números
@@ -306,8 +308,10 @@ public class GestorCampamentos {
      * Verifica y asigna los datos al objeto Campamento proporcionado.
      *
      * @param teclado         El objeto Scanner para la entrada del teclado.
-     * @param nuevoCampamento El objeto Campamento que se actualizará con los datos introducidos.
-     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     * @param nuevoCampamento El objeto Campamento que se actualizará con los datos
+     *                        introducidos.
+     * @return {@code true} si se introducen y asignan los datos correctamente,
+     *         {@code false} en caso contrario.
      */
     public static Boolean pedirDatosTeclado(Scanner teclado, Campamento nuevoCampamento) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -386,19 +390,20 @@ public class GestorCampamentos {
      * Asocia una actividad a un campamento.
      *
      * @param actividad    La actividad que se desea asociar.
-     * @param idCampamento El ID del campamento al que se desea asociar la actividad.
-     * @return {@code true} si la asociación fue exitosa, {@code false} en caso contrario.
+     * @param idCampamento El ID del campamento al que se desea asociar la
+     *                     actividad.
+     * @return {@code true} si la asociación fue exitosa, {@code false} en caso
+     *         contrario.
      */
     public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
         Campamento campamento = getCampamento(idCampamento);
 
-        String nombreActividad = actividad.getNombreActividad();
         NivelEducativo nivel = actividad.getNivel();
 
         if (buscarActividadCampamento(actividad, idCampamento)) {
             return false;
         }
-        if (campamento.getNivel().equals(actividad.getNivel()) == false) {
+        if (campamento.getNivel().equals(nivel) == false) {
             System.out.println("La actividad no se puede asociar al campamento.");
             return false;
         }
@@ -413,8 +418,10 @@ public class GestorCampamentos {
      * Busca si un monitor está asociado a un campamento.
      *
      * @param idMonitor    El ID del monitor que se desea buscar.
-     * @param idCampamento El ID del campamento en el que se desea buscar al monitor.
-     * @return {@code true} si el monitor está asociado al campamento, {@code false} en caso contrario.
+     * @param idCampamento El ID del campamento en el que se desea buscar al
+     *                     monitor.
+     * @return {@code true} si el monitor está asociado al campamento, {@code false}
+     *         en caso contrario.
      */
     public Boolean buscarMonitorCampamento(int idMonitor, int idCampamento) {
         for (Campamento campamento : campamentos) {
@@ -434,7 +441,8 @@ public class GestorCampamentos {
      *
      * @param monitor      El monitor que se desea asociar al campamento.
      * @param idCampamento El ID del campamento al que se desea asociar el monitor.
-     * @return {@code true} si la asociación fue exitosa, {@code false} en caso contrario.
+     * @return {@code true} si la asociación fue exitosa, {@code false} en caso
+     *         contrario.
      */
     public Boolean asociarMonitorCampamento(Monitor monitor, int idCampamento) {
 
@@ -455,9 +463,11 @@ public class GestorCampamentos {
      * Crea una nueva actividad solicitando datos al usuario desde el teclado.
      *
      * @param teclado        El objeto Scanner para la entrada del teclado.
-     * @param nuevaActividad El objeto Actividad que se actualizará con los datos introducidos.
+     * @param nuevaActividad El objeto Actividad que se actualizará con los datos
+     *                       introducidos.
      * @param nivel          El nivel educativo de la actividad.
-     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     * @return {@code true} si se introducen y asignan los datos correctamente,
+     *         {@code false} en caso contrario.
      */
     public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
 
@@ -494,7 +504,8 @@ public class GestorCampamentos {
      *
      * @param idCampamento    El ID del campamento al que pertenece la actividad.
      * @param nombreActividad El nombre de la actividad que se desea borrar.
-     * @return {@code true} si se borra la actividad correctamente, {@code false} en caso contrario.
+     * @return {@code true} si se borra la actividad correctamente, {@code false} en
+     *         caso contrario.
      */
     public Boolean borrarActividad(int idCampamento, String nombreActividad) {
         return getCampamento(idCampamento).borrarActividad(nombreActividad);
@@ -505,8 +516,10 @@ public class GestorCampamentos {
      * Crea un nuevo monitor solicitando datos al usuario desde el teclado.
      *
      * @param teclado      El objeto Scanner para la entrada del teclado.
-     * @param nuevoMonitor El objeto Monitor que se actualizará con los datos introducidos.
-     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     * @param nuevoMonitor El objeto Monitor que se actualizará con los datos
+     *                     introducidos.
+     * @return {@code true} si se introducen y asignan los datos correctamente,
+     *         {@code false} en caso contrario.
      */
     public static Boolean crearMonitor(Scanner teclado, Monitor nuevoMonitor) {
         String nombre = "";
