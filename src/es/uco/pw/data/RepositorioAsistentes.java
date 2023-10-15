@@ -51,8 +51,7 @@ public class RepositorioAsistentes implements InterfazRepositorio<ArrayList<Asis
 			obj = (ArrayList<Asistente>) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			// Manejo de excepciones al cargar datos desde el fichero
-			e.printStackTrace();
-			obj = new ArrayList<>();
+			obj = new ArrayList<Asistente>();
 		}
 		return obj;
 	}

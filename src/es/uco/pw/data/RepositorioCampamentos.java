@@ -46,8 +46,8 @@ public class RepositorioCampamentos {
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
             obj = (ArrayList<Campamento>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            obj = new ArrayList<>();
+
+            obj = new ArrayList<Campamento>();
         }
         return obj;
     }

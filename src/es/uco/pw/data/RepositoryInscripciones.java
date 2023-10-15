@@ -47,8 +47,7 @@ public class RepositoryInscripciones {
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
             obj = (ArrayList<Inscripcion>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            obj = new ArrayList<>();
+            obj = new ArrayList<Inscripcion>();
         }
         return obj;
     }

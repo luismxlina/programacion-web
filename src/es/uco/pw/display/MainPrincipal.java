@@ -3,6 +3,8 @@ package es.uco.pw.display;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
@@ -16,17 +18,41 @@ import es.uco.pw.gestores.GestorCampamentos;
 import es.uco.pw.gestores.GestorInscripciones;
 
 /**
- * Clase principal que contiene el punto de entrada del programa Campamentos de programación.
+ * Clase principal que contiene el punto de entrada del programa Campamentos de
+ * programación.
  */
 public class MainPrincipal {
 
+	public static void comprobarFicheros() {
+		try {
+			comprobarYCrearFichero("db/asistentes.txt");
+			comprobarYCrearFichero("db/campamentos.txt");
+			comprobarYCrearFichero("db/inscripciones.txt");
+		} catch (IOException e) {
+			System.out.println("Error al crear los ficheros");
+		}
+	}
+
+	private static void comprobarYCrearFichero(String rutaFichero) throws IOException {
+		File fichero = new File(rutaFichero);
+
+		if (!fichero.exists()) {
+			if (fichero.createNewFile()) {
+				System.out.println("Fichero " + rutaFichero + " creado correctamente.");
+			} else {
+				System.out.println("Error al intentar crear el fichero " + rutaFichero);
+			}
+		}
+	}
+
 	/**
-	 * Método principal del programa que inicia la ejecución del sistema Campamentos de programación.
+	 * Método principal del programa que inicia la ejecución del sistema Campamentos
+	 * de programación.
 	 * 
 	 * @param args Argumentos de la línea de comandos (no se utilizan).
 	 */
 	public static void main(String[] args) {
-
+		comprobarFicheros();
 		System.out.println("Bienvenido a Campamentos de programanción.");
 
 		Scanner teclado = new Scanner(System.in);
