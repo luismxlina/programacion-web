@@ -9,10 +9,21 @@ import java.util.ArrayList;
 
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.inscripcion.Inscripcion;
-import es.uco.pw.classes.inscripcion.InscripcionCampamento;
+
+/**
+ * La clase RepositoryInscripciones proporciona métodos para guardar y cargar datos de inscripciones en un archivo.
+ */
 
 public class RepositoryInscripciones {
-    public void guardarEnFichero(ArrayList<InscripcionCampamento> obj, String archivo) {
+
+     /**
+     * Guarda una lista de inscripciones en un archivo.
+     *
+     * @param obj      La lista de inscripciones a guardar.
+     * @param archivo  La ruta del archivo en el que se guardará la información.
+     */
+
+    public void guardarEnFichero(ArrayList<Inscripcion> obj, String archivo) {
         try (FileOutputStream fileOut = new FileOutputStream(archivo);
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(obj);
@@ -24,11 +35,18 @@ public class RepositoryInscripciones {
         }
     }
 
-    public ArrayList<InscripcionCampamento> cargarDatosFichero(String archivo) {
-        ArrayList<InscripcionCampamento> obj;
+     /**
+     * Carga una lista de inscripciones desde un archivo.
+     *
+     * @param archivo  La ruta del archivo del que se cargarán las inscripciones.
+     * @return         La lista de inscripciones cargada desde el archivo.
+     */
+
+    public ArrayList<Inscripcion> cargarDatosFichero(String archivo) {
+        ArrayList<Inscripcion> obj;
         try (FileInputStream fileIn = new FileInputStream(archivo);
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            obj = (ArrayList<InscripcionCampamento>) in.readObject();
+            obj = (ArrayList<Inscripcion>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             obj = new ArrayList<>();

@@ -3,7 +3,20 @@ package es.uco.pw.display;
 import java.util.Scanner;
 import es.uco.pw.gestores.GestorInscripciones;
 
+/**
+ * La clase MainInscripciones proporciona un menú de opciones relacionadas con
+ * la gestión de inscripciones.
+ */
+
 public class MainInscripciones {
+
+    /**
+     * Muestra un menú de opciones para la gestión de inscripciones.
+     *
+     * @param teclado              Scanner para la entrada de usuario.
+     * @param gestor_inscripciones El gestor de inscripciones utilizado para
+     *                             realizar operaciones.
+     */
 
     public static void mostrarMenuInscripciones(Scanner teclado, GestorInscripciones gestor_inscripciones) {
 
@@ -34,26 +47,45 @@ public class MainInscripciones {
                     gestor_inscripciones.mostrarInscripciones();
                     break;
                 case 2:
-                    System.out.println("Introduzca id de la inscripción a buscar");
+                    System.out.println("Introduzca id del participante a buscar");
                     teclado.nextLine();
-                    int idInscripcion = teclado.nextInt();
-                    gestor_inscripciones.mostrarInscripcion(idInscripcion);
+                    int idParticipante = teclado.nextInt();
+                    System.out.println("Introduzca id del campamento a buscar");
+                    teclado.nextLine();
+                    int idCampamento = teclado.nextInt();
+                    gestor_inscripciones.mostrarInscripcion(idParticipante, idCampamento);
                     break;
                 case 3:
                     // Método para añadir una nueva inscripción
-                    gestor_inscripciones.addInscripcion(null);
+                    System.out.println("Introduzca id del participante");
+                    teclado.nextLine();
+                    idParticipante = teclado.nextInt();
+                    System.out.println("Introduzca id del campamento");
+                    teclado.nextLine();
+                    idCampamento = teclado.nextInt();
+                    boolean temprana = false;
+                    boolean necesidadesEspeciales = false;
+                    gestor_inscripciones.addInscripcion(idParticipante, idCampamento, temprana, necesidadesEspeciales);
                     break;
                 case 4:
-                    System.out.println("Introduzca id de la inscripción a editar");
+                    System.out.println("Introduzca id del participante a editar");
                     teclado.nextLine();
-                    idInscripcion = teclado.nextInt();
-                    gestor_inscripciones.editarInscripcion(idInscripcion);
+                    idParticipante = teclado.nextInt();
+                    System.out.println("Introduzca id del campamento a editar");
+                    teclado.nextLine();
+                    idCampamento = teclado.nextInt();
+                    gestor_inscripciones.editarInscripcion(idParticipante, idCampamento);
                     break;
+
                 case 5:
-                    System.out.println("Introduzca id de la inscripción a eliminar");
+                    System.out.println("Introduzca id del participante a eliminar");
                     teclado.nextLine();
-                    idInscripcion = teclado.nextInt();
-                    gestor_inscripciones.deleteInscripcion(idInscripcion);
+                    idParticipante = teclado.nextInt();
+                    System.out.println("Introduzca id del campamento a eliminar");
+                    teclado.nextLine();
+                    idCampamento = teclado.nextInt();
+                    gestor_inscripciones.deleteInscripcion(idParticipante, idCampamento);
+
                     break;
                 default:
                     System.out.println("Opción no válida");

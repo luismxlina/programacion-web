@@ -7,9 +7,21 @@ import java.util.Random;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.gestores.GestorCampamentos;
 
+/**
+ * La clase MainCampamentos proporciona un menú de opciones relacionadas con la gestión de campamentos.
+ * Se utiliza para interactuar con el usuario a través de la consola y realizar operaciones en el sistema.
+ */
+
 public class MainCampamentos {
 
     private static HashSet<Integer> idSet = new HashSet<>();
+
+    /**
+     * Muestra un menú de opciones relacionadas con la gestión de campamentos.
+     *
+     * @param teclado               Scanner para la entrada del usuario.
+     * @param gestor_campamentos    Objeto GestorCampamentos para gestionar las operaciones con campamentos.
+     */
 
     public static void mostrarMenuCampamentos(Scanner teclado, GestorCampamentos gestor_campamentos) {
 
@@ -62,6 +74,12 @@ public class MainCampamentos {
 
         } while (opcion != 0);
     }
+
+    /**
+     * Genera un ID único para un campamento utilizando un conjunto HashSet para evitar duplicados.
+     *
+     * @return Un ID único generado aleatoriamente.
+     */
 
     public static int generarIDUnico() {
         Random random = new Random();

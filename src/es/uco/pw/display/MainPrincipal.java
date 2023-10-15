@@ -10,7 +10,6 @@ import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.inscripcion.Inscripcion;
-import es.uco.pw.classes.inscripcion.InscripcionCampamento;
 import es.uco.pw.classes.inscripcion.InscripcionCompleta;
 import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.data.RepositorioCampamentos;
@@ -65,8 +64,8 @@ public class MainPrincipal {
 		GestorCampamentos gestor_campamentos = GestorCampamentos.getInstance(arrayCampamentosFichero);
 
 		RepositoryInscripciones ri = new RepositoryInscripciones();
-		ArrayList<InscripcionCampamento> arrayInscripcionesFichero = ri.cargarDatosFichero("db/inscripciones.txt");
-		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero);
+		ArrayList<Inscripcion> arrayInscripcionesFichero = ri.cargarDatosFichero("db/inscripciones.txt");
+		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero, arrayCampamentosFichero);
 
 		System.out.println("·-----------------------------------·");
 		System.out.println("|           MENÚ PRINCIPAL          |");
@@ -92,6 +91,9 @@ public class MainPrincipal {
 					break;
 				case 2:
 					MainCampamentos.mostrarMenuCampamentos(teclado, gestor_campamentos);
+					break;
+				case 3:
+					MainInscripciones.mostrarMenuInscripciones(teclado, gestor_inscripciones);
 					break;
 				default:
 					System.out.println("Opción no valida...");

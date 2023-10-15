@@ -10,9 +10,22 @@ import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
 import es.uco.pw.gestores.GestorCampamentos;
 
+/**
+ * La clase MainEditarCampamento proporciona un submenú de opciones para editar un campamento específico.
+ * Se utiliza para interactuar con el usuario a través de la consola y realizar operaciones de edición en el sistema.
+ */
+
 public class MainEditarCampamento {
 
     private static HashSet<Integer> idSet = new HashSet<>();
+
+    /**
+     * Muestra un submenú de edición para un campamento específico.
+     *
+     * @param teclado               Scanner para la entrada del usuario.
+     * @param gestor_campamentos    Objeto GestorCampamentos para gestionar las operaciones con campamentos.
+     * @param idCampamento          Identificador del campamento que se desea editar.
+     */
 
     public static void mostrarMenuEditarCampamento(Scanner teclado, GestorCampamentos gestor_campamentos,
             int idCampamento) {
@@ -109,6 +122,12 @@ public class MainEditarCampamento {
 
         } while (opcion != 0);
     }
+
+    /**
+     * Genera un ID único para un monitor utilizando un conjunto HashSet para evitar duplicados.
+     *
+     * @return Un ID único generado aleatoriamente.
+     */
 
     public static int generarIDUnico() {
         Random random = new Random();

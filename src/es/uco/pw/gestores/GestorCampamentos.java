@@ -11,6 +11,11 @@ import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
 
+/**
+ * El GestorCampamentos gestiona las operaciones relacionadas con los
+ * campamentos.
+ */
+
 public class GestorCampamentos {
 
     private ArrayList<Campamento> campamentos;
@@ -22,6 +27,13 @@ public class GestorCampamentos {
         this.campamentos = campamentos;
 
     }
+
+    /**
+     * Obtiene la instancia única del GestorCampamentos.
+     *
+     * @param campamentos Lista de campamentos.
+     * @return Instancia única del GestorCampamentos.
+     */
 
     public static GestorCampamentos getInstance(ArrayList<Campamento> campamentos) {
 
@@ -35,12 +47,24 @@ public class GestorCampamentos {
 
     }
 
+    /**
+     * Obtiene la lista de campamentos.
+     *
+     * @return Lista de campamentos.
+     */
+
     public ArrayList<Campamento> getCampamentos() {
 
         return this.campamentos;
 
     }
 
+    /**
+     * Obtiene un campamento por su identificador.
+     *
+     * @param id Identificador del campamento.
+     * @return Campamento correspondiente al identificador, o null si no existe.
+     */
     public Campamento getCampamento(int id) {
         for (Campamento campamento : campamentos) {
             if (campamento.getIdentificador() == id) {
@@ -51,6 +75,13 @@ public class GestorCampamentos {
         return null;
     }
 
+    /**
+     * Realiza el alta de un nuevo campamento.
+     *
+     * @param nuevoCampamento Nuevo campamento a dar de alta.
+     * @return true si el alta se realiza con éxito, false si el campamento ya
+     *         existe.
+     */
     public Boolean altaCampamento(Campamento nuevoCampamento) {
 
         if (buscarCampamento(nuevoCampamento.getIdentificador()) == false) {
@@ -64,6 +95,12 @@ public class GestorCampamentos {
 
     }
 
+    /**
+     * Busca un campamento por su identificador.
+     *
+     * @param id Identificador del campamento.
+     * @return true si el campamento existe, false si no existe.
+     */
     public Boolean buscarCampamento(int id) {
 
         if (campamentos.size() == 0) {
@@ -86,6 +123,13 @@ public class GestorCampamentos {
 
     }
 
+    /**
+     * Busca una actividad en un campamento por su nombre.
+     *
+     * @param nombreActividad Nombre de la actividad.
+     * @param idCampamento    Identificador del campamento.
+     * @return true si la actividad existe en el campamento, false si no existe.
+     */
     public Boolean buscarActividadCampamento(String nombreActividad, int idCampamento) {
         for (Campamento campamento : campamentos) {
             if (campamento.getIdentificador() == idCampamento) {
@@ -99,6 +143,13 @@ public class GestorCampamentos {
         return false;
     }
 
+    /**
+     * Busca una actividad en un campamento por objeto Actividad.
+     *
+     * @param actividad    Actividad a buscar.
+     * @param idCampamento Identificador del campamento.
+     * @return true si la actividad existe en el campamento, false si no existe.
+     */
     public Boolean buscarActividadCampamento(Actividad actividad, int idCampamento) {
         for (Campamento campamento : campamentos) {
             if (campamento.getIdentificador() == idCampamento) {
@@ -112,6 +163,14 @@ public class GestorCampamentos {
         return false;
     }
 
+    /**
+     * Obtiene un monitor por su identificador.
+     *
+     * @param id        Identificador del monitor.
+     * @param monitores Lista de monitores.
+     * @return Monitor correspondiente al identificador, o un nuevo monitor si no
+     *         existe.
+     */
     public static Monitor getMonitor(int id, ArrayList<Monitor> monitores) {
         for (Monitor monitor : monitores) {
             if (monitor.getIdentificador() == id) {
@@ -121,6 +180,13 @@ public class GestorCampamentos {
         return new Monitor();
     }
 
+    /**
+     * Obtiene una actividad por su nombre.
+     *
+     * @param nombreActividad Nombre de la actividad.
+     * @param actividades     Lista de actividades.
+     * @return Actividad correspondiente al nombre, o null si no existe.
+     */
     public static Actividad getActividad(String nombreActividad, ArrayList<Actividad> actividades) {
         for (Actividad actividad : actividades) {
             if (actividad.getNombreActividad().equals(nombreActividad)) {
@@ -131,71 +197,12 @@ public class GestorCampamentos {
         return null;
     }
 
-    // public Date obtenerFecha(int newIdCampamento) {
-
-    // for (Campamento campamentosaux : campamentos) {
-
-    // if (campamentosaux.getIdCampamento() == newIdCampamento) {
-
-    // return campamentosaux.getFechaInicio();
-
-    // }
-
-    // }
-
-    // return new Date();
-
-    // }
-
-    // public double calcularPrecioExtra(int newIdCampamento) {
-
-    // double extra = 0.0;
-    // int cont = 0;
-
-    // for (Campamento campamentosAux : campamentos) {
-
-    // if (campamentosAux.getIdCampamento() == newIdCampamento)
-
-    // for (Actividad actividadesAux : campamentosAux.getActividades()) {
-
-    // cont++;
-
-    // }
-
-    // }
-
-    // extra = 20.0 * cont;
-
-    // return extra;
-    // }
-
-    // public ArrayList<Campamento> campamentosDisponibles() {
-
-    // ArrayList<Campamento> array = new ArrayList<Campamento>();
-    // Date fechaActual = new Date();
-
-    // for (Campamento campamentosAux : campamentos) {
-
-    // long tiempo1 = fechaActual.getTime();
-    // long tiempo2 = campamentosAux.getFechaInicio().getTime();
-
-    // // Calcular la diferencia en milisegundos
-    // long diferenciaEnMilisegundos = tiempo2 - tiempo1;
-
-    // // Calcular la diferencia en días
-    // long diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
-
-    // if (diferenciaEnDias > 2) {
-
-    // array.add(campamentosAux);
-
-    // }
-
-    // }
-
-    // return array;
-    // }
-
+    /**
+     * Muestra la información detallada de todos los campamentos en el sistema.
+     * Imprime en la consola los detalles de cada campamento, incluyendo ID, fechas,
+     * nivel educativo, participantes máximos, lista de actividades y lista de
+     * monitores.
+     */
     public void mostrarCampamentos() {
         for (Campamento campamento : campamentos) {
 
@@ -211,6 +218,14 @@ public class GestorCampamentos {
         }
     }
 
+    /**
+     * Muestra la información detallada de un campamento específico.
+     * Imprime en la consola los detalles del campamento con el ID proporcionado,
+     * incluyendo fechas, nivel educativo, participantes máximos, lista de
+     * actividades y lista de monitores.
+     *
+     * @param idCampamento El ID del campamento que se desea mostrar.
+     */
     public void mostrarCampamento(int idCampamento) {
 
         for (Campamento campamento : campamentos) {
@@ -231,6 +246,16 @@ public class GestorCampamentos {
 
     }
 
+    /**
+     * Asocia un monitor a una actividad en un campamento.
+     *
+     * @param monitor         El monitor que se desea asociar.
+     * @param nombreActividad El nombre de la actividad a la que se desea asociar el
+     *                        monitor.
+     * @param idCampamento    El ID del campamento al que pertenece la actividad.
+     * @return {@code true} si la asociación fue exitosa, {@code false} en caso
+     *         contrario.
+     */
     public Boolean asociarMonitorActividad(Monitor monitor, String nombreActividad, int idCampamento) {
 
         if (monitor.getEsEducador()) {
@@ -258,32 +283,12 @@ public class GestorCampamentos {
 
     }
 
-    // public void asociarActividadCampamento() {
-
-    // Actividad actividadAux = new Actividad();
-    // Scanner teclado = new Scanner(System.in);
-
-    // System.out.println("Introduzca el nombre de la nueva actividad: ");
-
-    // }
-
-    // public void asociarMonitorCampameto() {
-
-    // }
-
-    // public void asociarMonitorEspecialCampamento(int idMonitor, int idCampamento)
-    // {
-
-    // Campamento campamento = getCampamento(idCampamento);
-    // Monitor monitor = getMonitor(idMonitor,
-    // campamento.getMonitoresResponsables());
-
-    // if (buscarMonitorCampamento() )
-
-    // }
-
-    // Voy a compilar un segundillo
-
+    /**
+     * Valida un nombre o apellidos asegurando que no contengan números ni caracteres especiales.
+     *
+     * @param input El nombre o apellidos a validar.
+     * @return El nombre o apellidos si la validación es exitosa, una cadena vacía si no lo es.
+     */
     private static String validarNombre(String input) {
         // Expresión regular para verificar que el nombre no contiene números
         String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
@@ -296,6 +301,14 @@ public class GestorCampamentos {
         }
     }
 
+    /**
+     * Solicita datos al usuario desde el teclado para crear un nuevo campamento.
+     * Verifica y asigna los datos al objeto Campamento proporcionado.
+     *
+     * @param teclado         El objeto Scanner para la entrada del teclado.
+     * @param nuevoCampamento El objeto Campamento que se actualizará con los datos introducidos.
+     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     */
     public static Boolean pedirDatosTeclado(Scanner teclado, Campamento nuevoCampamento) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaInicioTexto;
@@ -369,6 +382,13 @@ public class GestorCampamentos {
         return true;
     }
 
+    /**
+     * Asocia una actividad a un campamento.
+     *
+     * @param actividad    La actividad que se desea asociar.
+     * @param idCampamento El ID del campamento al que se desea asociar la actividad.
+     * @return {@code true} si la asociación fue exitosa, {@code false} en caso contrario.
+     */
     public Boolean asociarActividadCampamento(Actividad actividad, int idCampamento) {
         Campamento campamento = getCampamento(idCampamento);
 
@@ -389,6 +409,13 @@ public class GestorCampamentos {
         return true;
     }
 
+    /**
+     * Busca si un monitor está asociado a un campamento.
+     *
+     * @param idMonitor    El ID del monitor que se desea buscar.
+     * @param idCampamento El ID del campamento en el que se desea buscar al monitor.
+     * @return {@code true} si el monitor está asociado al campamento, {@code false} en caso contrario.
+     */
     public Boolean buscarMonitorCampamento(int idMonitor, int idCampamento) {
         for (Campamento campamento : campamentos) {
             if (campamento.getIdentificador() == idCampamento) {
@@ -402,6 +429,13 @@ public class GestorCampamentos {
         return false;
     }
 
+    /**
+     * Asocia un monitor a un campamento.
+     *
+     * @param monitor      El monitor que se desea asociar al campamento.
+     * @param idCampamento El ID del campamento al que se desea asociar el monitor.
+     * @return {@code true} si la asociación fue exitosa, {@code false} en caso contrario.
+     */
     public Boolean asociarMonitorCampamento(Monitor monitor, int idCampamento) {
 
         if (!buscarCampamento(idCampamento)) {
@@ -417,6 +451,14 @@ public class GestorCampamentos {
 
     }
 
+    /**
+     * Crea una nueva actividad solicitando datos al usuario desde el teclado.
+     *
+     * @param teclado        El objeto Scanner para la entrada del teclado.
+     * @param nuevaActividad El objeto Actividad que se actualizará con los datos introducidos.
+     * @param nivel          El nivel educativo de la actividad.
+     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     */
     public static Boolean crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
 
         String nombreActividad;
@@ -447,11 +489,25 @@ public class GestorCampamentos {
         return true;
     }
 
+    /**
+     * Borra una actividad de un campamento.
+     *
+     * @param idCampamento    El ID del campamento al que pertenece la actividad.
+     * @param nombreActividad El nombre de la actividad que se desea borrar.
+     * @return {@code true} si se borra la actividad correctamente, {@code false} en caso contrario.
+     */
     public Boolean borrarActividad(int idCampamento, String nombreActividad) {
         return getCampamento(idCampamento).borrarActividad(nombreActividad);
 
     }
 
+    /**
+     * Crea un nuevo monitor solicitando datos al usuario desde el teclado.
+     *
+     * @param teclado      El objeto Scanner para la entrada del teclado.
+     * @param nuevoMonitor El objeto Monitor que se actualizará con los datos introducidos.
+     * @return {@code true} si se introducen y asignan los datos correctamente, {@code false} en caso contrario.
+     */
     public static Boolean crearMonitor(Scanner teclado, Monitor nuevoMonitor) {
         String nombre = "";
         String apellidos = "";

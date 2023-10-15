@@ -7,9 +7,21 @@ import java.util.Scanner;
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.gestores.GestorAsistentes;
 
+/**
+ * La clase MainAsistentes proporciona un menú de opciones relacionadas con la gestión de asistentes.
+ * Se utiliza para interactuar con el usuario a través de la consola y realizar operaciones en el sistema.
+ */
+
 public class MainAsistentes {
 
 	private static HashSet<Integer> idSet = new HashSet<>();
+
+	 /**
+     * Muestra un menú de opciones relacionadas con la gestión de asistentes.
+     *
+     * @param teclado           Scanner para la entrada del usuario.
+     * @param gestor_asistentes Objeto GestorAsistentes para gestionar las operaciones con asistentes.
+     */
 
 	public static void mostrarMenuAsistentes(Scanner teclado, GestorAsistentes gestor_asistentes) {
 
@@ -53,6 +65,12 @@ public class MainAsistentes {
 		} while (opcion != 0);
 
 	}
+
+	 /**
+     * Genera un ID único para un asistente utilizando un conjunto HashSet para evitar duplicados.
+     *
+     * @return Un ID único generado aleatoriamente.
+     */
 
 	public static int generarIDUnico() {
 		Random random = new Random();

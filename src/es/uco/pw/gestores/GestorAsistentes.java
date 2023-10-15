@@ -8,16 +8,33 @@ import java.text.SimpleDateFormat;
 
 import es.uco.pw.classes.asistente.Asistente;
 
+/**
+ * Clase que gestiona los asistentes.
+ */
 public class GestorAsistentes {
+	// Atributos
 
+	// ArrayList que contiene los asistentes.
 	private ArrayList<Asistente> asistentes;
 
+	// Singleton - Instancia única de GestorAsistentes.
 	private static GestorAsistentes instance = null;
 
+	/**
+	 * Constructor privado para crear una instancia de GestorAsistentes.
+	 *
+	 * @param arrayNuevo ArrayList de asistentes.
+	 */
 	private GestorAsistentes(ArrayList<Asistente> arrayNuevo) {
 		this.asistentes = arrayNuevo;
 	}
 
+	/**
+	 * Método estático para obtener la instancia única de GestorAsistentes.
+	 *
+	 * @param arrayNuevo ArrayList de asistentes.
+	 * @return Instancia única de GestorAsistentes.
+	 */
 	public static GestorAsistentes getInstance(ArrayList<Asistente> arrayNuevo) {
 		if (instance == null) {
 			instance = new GestorAsistentes(arrayNuevo);
@@ -25,10 +42,23 @@ public class GestorAsistentes {
 		return instance;
 	}
 
+	// Métodos
+
+	/**
+	 * Obtiene la lista de asistentes.
+	 *
+	 * @return ArrayList de asistentes.
+	 */
 	public ArrayList<Asistente> getAsistentes() {
 		return this.asistentes;
 	}
 
+	/**
+	 * Obtiene un asistente por su identificador.
+	 *
+	 * @param id Identificador del asistente.
+	 * @return Asistente o null si no se encuentra.
+	 */
 	public Asistente getAsistente(int id) {
 		for (Asistente asistente : this.asistentes) {
 			if (asistente.getIdentificador() == id) {
@@ -38,6 +68,12 @@ public class GestorAsistentes {
 		return null;
 	}
 
+	/**
+	 * Da de alta a un nuevo asistente.
+	 *
+	 * @param nuevoAsistente Nuevo asistente a dar de alta.
+	 * @return true si se pudo dar de alta, false si el asistente ya existe.
+	 */
 	public Boolean altaAsistente(Asistente nuevoAsistente) {
 		if (buscarAsistente(nuevoAsistente.getIdentificador()) == false) {
 			this.asistentes.add(nuevoAsistente);
@@ -46,6 +82,12 @@ public class GestorAsistentes {
 		return false;
 	}
 
+	/**
+	 * Busca un asistente por su identificador.
+	 *
+	 * @param id Identificador del asistente.
+	 * @return true si el asistente existe, false en caso contrario.
+	 */
 	public Boolean buscarAsistente(int id) {
 		if (asistentes.size() == 0)
 			return false;
@@ -59,6 +101,9 @@ public class GestorAsistentes {
 		return false;
 	}
 
+	/**
+	 * Muestra la lista de asistentes en consola.
+	 */
 	public void mostrarAsistentes() {
 		if (instance != null) {
 			for (int i = 0; i < this.asistentes.size(); i++) {
@@ -71,6 +116,12 @@ public class GestorAsistentes {
 		}
 	}
 
+	/**
+	 * Método que valida el nombre o apellidos de un asistente.
+	 *
+	 * @param input Nombre o apellidos a validar.
+	 * @return Nombre o apellidos si son válidos, cadena vacía si no lo son.
+	 */
 	private static String validarNombre(String input) {
 		// Expresión regular para verificar que el nombre no contiene números
 		String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
@@ -83,6 +134,13 @@ public class GestorAsistentes {
 		}
 	}
 
+	/**
+	 * Método que recopila los datos del nuevo asistente desde el teclado.
+	 *
+	 * @param teclado        Scanner para entrada por teclado.
+	 * @param nuevoAsistente Nuevo asistente a crear.
+	 * @return true si se pudieron recopilar los datos, false en caso contrario.
+	 */
 	public static Boolean pedirDatosTeclado(Scanner teclado, Asistente nuevoAsistente) {
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 		String nombre = "";
@@ -130,6 +188,9 @@ public class GestorAsistentes {
 		return true;
 	}
 
+	/**
+	 * Método que modifica los datos de un asistente.
+	 */
 	public void modificarAsistente() {
 
 		Scanner teclado = new Scanner(System.in);
@@ -199,6 +260,11 @@ public class GestorAsistentes {
 		teclado.close();
 	}
 
+	/**
+	 * Método que elimina un asistente.
+	 *
+	 * @param teclado Scanner para entrada por teclado.
+	 */
 	public void eliminarAsistente(Scanner teclado) {
 
 		int identificador;
