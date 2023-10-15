@@ -41,7 +41,7 @@ public class MainInscripciones {
                     break;
                 case 3:
                     // Método para añadir una nueva inscripción
-                    gestor_inscripciones.añadirInscripcion();
+                    gestor_inscripciones.addInscripcion(null);
                     break;
                 case 4:
                     System.out.println("Introduzca id de la inscripción a editar");
@@ -53,7 +53,7 @@ public class MainInscripciones {
                     System.out.println("Introduzca id de la inscripción a eliminar");
                     teclado.nextLine();
                     idInscripcion = teclado.nextInt();
-                    gestor_inscripciones.eliminarInscripcion(idInscripcion);
+                    gestor_inscripciones.deleteInscripcion(idInscripcion);
                     break;
                 default:
                     System.out.println("Opción no válida");
