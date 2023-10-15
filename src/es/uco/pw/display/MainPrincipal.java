@@ -43,8 +43,7 @@ public class MainPrincipal {
 
 		RepositoryInscripciones ri = new RepositoryInscripciones();
 		ArrayList<Inscripcion> arrayInscripcionesFichero = ri.cargarDatosFichero("db/inscripciones.txt");
-		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero,
-				arrayCampamentosFichero);
+		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero);
 
 		System.out.println("·-----------------------------------·");
 		System.out.println("|           MENÚ PRINCIPAL          |");

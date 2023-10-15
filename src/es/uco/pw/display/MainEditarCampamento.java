@@ -11,8 +11,10 @@ import es.uco.pw.classes.monitor.Monitor;
 import es.uco.pw.gestores.GestorCampamentos;
 
 /**
- * La clase MainEditarCampamento proporciona un submenú de opciones para editar un campamento específico.
- * Se utiliza para interactuar con el usuario a través de la consola y realizar operaciones de edición en el sistema.
+ * La clase MainEditarCampamento proporciona un submenú de opciones para editar
+ * un campamento específico.
+ * Se utiliza para interactuar con el usuario a través de la consola y realizar
+ * operaciones de edición en el sistema.
  */
 
 public class MainEditarCampamento {
@@ -22,9 +24,10 @@ public class MainEditarCampamento {
     /**
      * Muestra un submenú de edición para un campamento específico.
      *
-     * @param teclado               Scanner para la entrada del usuario.
-     * @param gestor_campamentos    Objeto GestorCampamentos para gestionar las operaciones con campamentos.
-     * @param idCampamento          Identificador del campamento que se desea editar.
+     * @param teclado            Scanner para la entrada del usuario.
+     * @param gestor_campamentos Objeto GestorCampamentos para gestionar las
+     *                           operaciones con campamentos.
+     * @param idCampamento       Identificador del campamento que se desea editar.
      */
 
     public static void mostrarMenuEditarCampamento(Scanner teclado, GestorCampamentos gestor_campamentos,
@@ -77,29 +80,22 @@ public class MainEditarCampamento {
                 case 4:
                     campamento = gestor_campamentos.getCampamento(idCampamento);
                     monitor = new Monitor();
-                    System.out.print("Dispone del ID del monitor que desea asociar? (s/N): ");
-                    String respuesta = teclado.nextLine();
+                    System.out.print("Dispone del ID del monitor que desea asociar? (si = 1/No = 0): ");
+                    int hasMonitor = teclado.nextInt();
+                    teclado.nextLine();
 
-                    if (respuesta.equalsIgnoreCase("s")) { // Caso que dispone de ID
-                        System.out.println("Desea mostrar los monitores disponibles? (s/N): ");
-                        respuesta = teclado.nextLine();
-                        // Caso para listar los monitores disponibles
-                        if (respuesta.equalsIgnoreCase("s")) {
-                            for (Monitor m : campamento.getMonitoresResponsables()) {
-                                System.out.println(m.toString());
-                                // Existe el monitor
-                            }
-                            //
-                        } else {
-                            System.out.println("Introduzca el ID del monitor que desea asociar");
-                            teclado.nextInt();
-                            teclado.nextLine();
-                            int idMonitor = teclado.nextInt();
-                            teclado.nextLine();
-                            monitor = campamento.getMonitor(idMonitor);
+                    if (hasMonitor == 1) { 
+                        for (Monitor m : campamento.getMonitoresResponsables()) {
+                            System.out.println(m.toString());
                         }
+                        System.out.println("Introduzca el ID del monitor que desea asociar");
+                        teclado.nextInt();
+                        teclado.nextLine();
+                        int idMonitor = teclado.nextInt();
+                        teclado.nextLine();
+                        monitor = campamento.getMonitor(idMonitor);
 
-                    } else { // Caso que no dispone de ID
+                    } else {
                         monitor = new Monitor(generarIDUnico());
                         GestorCampamentos.crearMonitor(teclado, monitor);
                     }
@@ -109,12 +105,6 @@ public class MainEditarCampamento {
                     nombreActividad = teclado.nextLine();
 
                     gestor_campamentos.asociarMonitorActividad(monitor, nombreActividad, campamento.getIdentificador());
-
-                    // Dispone del ID del monitor que quiere asociar?
-                    // Sí -> Lo buscamos con campamento.getIdMonitor(idMonitor) y lo asociamos a una
-                    // actividad existente;
-                    // No -> Lo creamos y lo insertamos en la actividad que sea. (
-                    // gestor_campamento.asociarMonitorActividad(monitor, nombreActividad) )
                     break;
                 default:
                     System.out.println("Opción no válida");
@@ -124,7 +114,8 @@ public class MainEditarCampamento {
     }
 
     /**
-     * Genera un ID único para un monitor utilizando un conjunto HashSet para evitar duplicados.
+     * Genera un ID único para un monitor utilizando un conjunto HashSet para evitar
+     * duplicados.
      *
      * @return Un ID único generado aleatoriamente.
      */

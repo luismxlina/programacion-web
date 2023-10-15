@@ -31,8 +31,7 @@ public class MainInscripciones {
             System.out.println("(1) Mostrar inscripciones");
             System.out.println("(2) Mostrar inscripción");
             System.out.println("(3) Añadir inscripción");
-            System.out.println("(4) Editar inscripción");
-            System.out.println("(5) Eliminar inscripción");
+            System.out.println("(4) Eliminar inscripción");
             System.out.println("(0) Volver al menú principal");
             System.out.println("");
 
@@ -67,17 +66,8 @@ public class MainInscripciones {
                     boolean necesidadesEspeciales = false;
                     gestor_inscripciones.addInscripcion(idParticipante, idCampamento, temprana, necesidadesEspeciales);
                     break;
+              
                 case 4:
-                    System.out.println("Introduzca id del participante a editar");
-                    teclado.nextLine();
-                    idParticipante = teclado.nextInt();
-                    System.out.println("Introduzca id del campamento a editar");
-                    teclado.nextLine();
-                    idCampamento = teclado.nextInt();
-                    gestor_inscripciones.editarInscripcion(idParticipante, idCampamento);
-                    break;
-
-                case 5:
                     System.out.println("Introduzca id del participante a eliminar");
                     teclado.nextLine();
                     idParticipante = teclado.nextInt();

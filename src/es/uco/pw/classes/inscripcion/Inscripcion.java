@@ -1,10 +1,7 @@
 package es.uco.pw.classes.inscripcion;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
-
-import es.uco.pw.classes.actividad.Actividad;
 
 /**
  * Clase abstracta que representa una inscripción a un campamento.
@@ -13,135 +10,131 @@ import es.uco.pw.classes.actividad.Actividad;
 
 public abstract class Inscripcion implements Serializable {
 
- // Atributos comunes
+     // Atributos comunes
 
-    /**
-     * Identificador del participante asociado a la inscripción.
-     */
+     /**
+      * Identificador del participante asociado a la inscripción.
+      */
 
-	private int id_Participante;
-	/**
-     * Identificador del campamento al que se realiza la inscripción.
-     */
-	private int id_Campamento;
-	/**
-     * Fecha en la que se realizó la inscripción.
-     */
-	private Date fechaInscripcion;
-	/**
-     * Precio total de la inscripción.
-     */
-	private Double precio;
-	/**
-     * Indica si la inscripción es cancelable.
-     */
+     private int id_Participante;
+     /**
+      * Identificador del campamento al que se realiza la inscripción.
+      */
+     private int id_Campamento;
+     /**
+      * Fecha en la que se realizó la inscripción.
+      */
+     private Date fechaInscripcion;
 
-	private Boolean cancelable;
+     /**
+      * Indica si la inscripción es cancelable.
+      */
 
-	 // Métodos abstractos
+     private Boolean cancelable;
 
-    /**
-     * Devuelve una representación en cadena de la inscripción.
-     *
-     * @return Cadena que representa la inscripción.
-     */
-	public abstract String toString();
+     public Inscripcion() {
+          this.id_Participante = 0;
+          this.id_Campamento = 0;
+          this.fechaInscripcion = new Date();
+          this.cancelable = false;
+     }
 
-	/**
-     * Obtiene el identificador del participante asociado a la inscripción.
-     *
-     * @return Identificador del participante.
-     */
-	public int getId_Participante() {
-		return id_Participante;
-	}
+     public Inscripcion(int id_Participante, int id_Campamento, Date fechaInscripcion, 
+               boolean cancelable) {
+          this.id_Participante = id_Participante;
+          this.id_Campamento = id_Campamento;
+          this.fechaInscripcion = fechaInscripcion;
+          this.cancelable = cancelable;
+     }
 
-	/**
-     * Establece el identificador del participante asociado a la inscripción.
-     *
-     * @param id_Participante Identificador del participante.
-     */
-	public void setId_Participante(int id_Participante) {
-		this.id_Participante = id_Participante;
-	}
+     // Métodos abstractos
 
-	/**
-     * Obtiene el identificador del campamento al que se realiza la inscripción.
-     *
-     * @return Identificador del campamento.
-     */
-	public int getId_Campamento() {
-		return id_Campamento;
-	}
+     /**
+      * Devuelve una representación en cadena de la inscripción.
+      *
+      * @return Cadena que representa la inscripción.
+      */
+     public abstract String toString();
 
-	/**
-     * Establece el identificador del campamento al que se realiza la inscripción.
-     *
-     * @param id_Campamento Identificador del campamento.
-     */
-	public void setId_Campamento(int id_Campamento) {
-		this.id_Campamento = id_Campamento;
-	}
+     /**
+      * Obtiene el precio total de la inscripción.
+      *
+      * @return Precio de la inscripción.
+      */
 
-	/**
-     * Obtiene la fecha en la que se realizó la inscripción.
-     *
-     * @return Fecha de inscripción.
-     */
-	public Date getFechaInscripcion() {
-		return fechaInscripcion;
-	}
+     public abstract Double getPrecio();
 
-	/**
-     * Establece la fecha en la que se realizó la inscripción.
-     *
-     * @param fechaInscripcion Fecha de inscripción.
-     */
-	public void setFechaInscripcion(Date fechaInscripcion) {
-		this.fechaInscripcion = fechaInscripcion;
-	}
+     /**
+      * Obtiene el identificador del participante asociado a la inscripción.
+      *
+      * @return Identificador del participante.
+      */
+     public int getId_Participante() {
+          return id_Participante;
+     }
 
-	 /**
-     * Obtiene el precio total de la inscripción.
-     *
-     * @return Precio de la inscripción.
-     */
-	public Double getPrecio() {
-		return precio;
-	}
+     /**
+      * Establece el identificador del participante asociado a la inscripción.
+      *
+      * @param id_Participante Identificador del participante.
+      */
+     public void setId_Participante(int id_Participante) {
+          this.id_Participante = id_Participante;
+     }
 
-	/**
-     * Establece el precio total de la inscripción.
-     *
-     * @param precio Precio de la inscripción.
-     */
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
+     /**
+      * Obtiene el identificador del campamento al que se realiza la inscripción.
+      *
+      * @return Identificador del campamento.
+      */
+     public int getId_Campamento() {
+          return id_Campamento;
+     }
 
-	/**
-     * Establece el precio de la inscripción basado en la lista de actividades proporcionada.
-     *
-     * @param actividades Lista de actividades asociadas a la inscripción.
-     */
-	public abstract void setPrecio(ArrayList<Actividad> actividades);
+     /**
+      * Establece el identificador del campamento al que se realiza la inscripción.
+      *
+      * @param id_Campamento Identificador del campamento.
+      */
+     public void setId_Campamento(int id_Campamento) {
+          this.id_Campamento = id_Campamento;
+     }
 
-	 /**
-     * Obtiene si la inscripción es cancelable.
-     *
-     * @return true si la inscripción es cancelable, false en caso contrario.
-     */
-	public Boolean getCancelable() {
-		return cancelable;
-	}
+     /**
+      * Obtiene la fecha en la que se realizó la inscripción.
+      *
+      * @return Fecha de inscripción.
+      */
+     public Date getFechaInscripcion() {
+          return fechaInscripcion;
+     }
 
-	 /**
-     * Establece si la inscripción es cancelable.
-     *
-     * @param cancelable true si la inscripción es cancelable, false en caso contrario.
-     */
-	public void setCancelable(Boolean cancelable) {
-		this.cancelable = cancelable;
-	}
+     /**
+      * Establece la fecha en la que se realizó la inscripción.
+      *
+      * @param fechaInscripcion Fecha de inscripción.
+      */
+     public void setFechaInscripcion(Date fechaInscripcion) {
+          this.fechaInscripcion = fechaInscripcion;
+     }
+
+     /**
+      * Obtiene si la inscripción es cancelable.
+      *
+      * @return true si la inscripción es cancelable, false en caso contrario.
+      */
+     public Boolean getCancelable() {
+          return cancelable;
+     }
+
+     /**
+      * Establece si la inscripción es cancelable.
+      *
+      * @param cancelable true si la inscripción es cancelable, false en caso
+      *                   contrario.
+      */
+     public void setCancelable(Boolean cancelable) {
+          this.cancelable = cancelable;
+     }
 
 }

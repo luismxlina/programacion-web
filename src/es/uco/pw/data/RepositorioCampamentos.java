@@ -39,6 +39,7 @@ public class RepositorioCampamentos {
      * @param archivo Nombre del archivo del que se cargarán los datos.
      * @return ArrayList de objetos Campamento cargado desde el archivo.
      */
+    @SuppressWarnings("unchecked")
     public ArrayList<Campamento> cargarDatosFichero(String archivo) {
         ArrayList<Campamento> obj;
         try (FileInputStream fileIn = new FileInputStream(archivo);

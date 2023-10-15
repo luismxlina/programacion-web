@@ -40,7 +40,7 @@ public class RepositoryInscripciones {
      * @param archivo  La ruta del archivo del que se cargarán las inscripciones.
      * @return         La lista de inscripciones cargada desde el archivo.
      */
-
+	@SuppressWarnings("unchecked")
     public ArrayList<Inscripcion> cargarDatosFichero(String archivo) {
         ArrayList<Inscripcion> obj;
         try (FileInputStream fileIn = new FileInputStream(archivo);

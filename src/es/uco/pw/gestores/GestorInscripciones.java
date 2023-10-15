@@ -17,9 +17,6 @@ public class GestorInscripciones {
     // ArrayList que contiene las inscripciones.
     private ArrayList<Inscripcion> inscripciones;
 
-    // ArrayList que contiene los campamentos.
-    private ArrayList<Campamento> campamentos;
-
     // Singleton - Instancia única de GestorInscripciones.
     private static GestorInscripciones instance = null;
 
@@ -27,11 +24,9 @@ public class GestorInscripciones {
      * Constructor privado para crear una instancia de GestorInscripciones.
      *
      * @param inscripciones ArrayList de inscripciones.
-     * @param campamentos   ArrayList de campamentos.
      */
-    private GestorInscripciones(ArrayList<Inscripcion> inscripciones, ArrayList<Campamento> campamentos) {
+    private GestorInscripciones(ArrayList<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
-        this.campamentos = campamentos;
     }
 
     /**
@@ -41,10 +36,9 @@ public class GestorInscripciones {
      * @param campamentos   ArrayList de campamentos.
      * @return Instancia única de GestorInscripciones.
      */
-    public static GestorInscripciones getInstance(ArrayList<Inscripcion> inscripciones,
-            ArrayList<Campamento> campamentos) {
+    public static GestorInscripciones getInstance(ArrayList<Inscripcion> inscripciones) {
         if (instance == null) {
-            instance = new GestorInscripciones(inscripciones, campamentos);
+            instance = new GestorInscripciones(inscripciones);
         }
         return instance;
     }
@@ -101,13 +95,8 @@ public class GestorInscripciones {
             }
         }
 
-        Campamento campamento = null;
-        for (Campamento c : campamentos) {
-            if (c.getIdentificador() == idCampamento) {
-                campamento = c;
-                break;
-            }
-        }
+        Campamento campamento = GestorCampamentos.getInstance(null).getCampamento(idCampamento);
+        
 
         if (campamento == null) {
             System.out.println("El campamento con ID " + idCampamento + " no existe.");
@@ -141,28 +130,6 @@ public class GestorInscripciones {
         System.out.println("Inscripción creada con éxito.");
 
         return true;
-    }
-
-    /**
-     * Edita una inscripción existente.
-     *
-     * @param id_Participante Identificador del participante.
-     * @param id_Campamento   Identificador del campamento.
-     * @return true si se editó la inscripción con éxito, false si no.
-     */
-    public Boolean editarInscripcion(int id_Participante, int id_Campamento) {
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getId_Campamento() == id_Campamento
-                    && inscripcion.getId_Participante() == id_Participante) {
-                // Realizar edición de la inscripción
-                // ...
-                System.out.println("Inscripción editada con éxito.");
-                return true;
-            }
-        }
-        System.out.println("No se encontró una inscripción con ID " + id_Participante + " en el campamento con ID "
-                + id_Campamento);
-        return false;
     }
 
     /**
@@ -200,7 +167,7 @@ public class GestorInscripciones {
      */
     public void consultarCampamentosDisponibles() {
         Date fechaActual = new Date();
-        for (Campamento campamento : campamentos) {
+        for (Campamento campamento : GestorCampamentos.getInstance(null).getCampamentos()) {
             if (campamento.getFechaInicio().after(fechaActual)) {
                 int cupoDisponible = campamento.getMax_asistentes()
                         - contarInscripciones(campamento.getIdentificador());

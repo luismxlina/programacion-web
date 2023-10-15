@@ -1,55 +1,63 @@
 package es.uco.pw.classes.inscripcion;
 
+import es.uco.pw.classes.campamento.Campamento;
+import es.uco.pw.gestores.GestorCampamentos;
 import java.util.ArrayList;
 import java.util.Date;
-
-import es.uco.pw.classes.actividad.Actividad;
 
 /**
  * Clase que representa una inscripción completa a un campamento.
  * Extiende la clase abstracta Inscripcion.
  */
 public class InscripcionCompleta extends Inscripcion {
-	
-	 /**
-     * Constructor que inicializa los atributos de la inscripción completa.
-     * El identificador del participante y del campamento se establecen en 0.
-     * La fecha de inscripción se establece en la fecha actual.
-     * La inscripción no es cancelable.
-     */
-	public InscripcionCompleta()
-	{
-		this.setId_Participante(0);
-		this.setId_Campamento(0);
-		this.setFechaInscripcion(new Date());
-		this.setCancelable(false);
+
+	private static final int PRECIOINICIAL = 300;
+	private Double precio;
+
+	/**
+	 * Constructor que inicializa los atributos de la inscripción completa.
+	 * El identificador del participante y del campamento se establecen en 0.
+	 * La fecha de inscripción se establece en la fecha actual.
+	 * La inscripción no es cancelable.
+	 */
+	public InscripcionCompleta() {
+		super();
 	}
 
-	
-	
+	public InscripcionCompleta(int id_Participante, int id_Campamento, Date fechaInscripcion,
+			boolean cancelable) {
+		super(id_Participante, id_Campamento, fechaInscripcion, cancelable);
+		this.precio = calculatePrice(id_Campamento);
+
+	}
+
 	/**
-     * Devuelve una representación en cadena de la inscripción completa.
-     *
-     * @return Cadena que representa la inscripción completa.
-     */
+	 * Calcula el precio de la inscripción.
+	 * 
+	 * @param costeIncial
+	 * @param idCampamento
+	 * @return precio de la inscripción
+	 */
+	private double calculatePrice(int idCampamento) {
+		int numeroActividades = GestorCampamentos.getInstance(new ArrayList<Campamento>()).getCampamento(idCampamento)
+				.getActividades().size();
+		return PRECIOINICIAL + (numeroActividades * 20);
+	}
+	@Override
+	public Double getPrecio() {
+		return this.precio;
+	}
+
+	/**
+	 * Devuelve una representación en cadena de la inscripción completa.
+	 *
+	 * @return Cadena que representa la inscripción completa.
+	 */
 	@Override
 	public String toString() {
 		return "InscripcionCompleta [getId_Participante()=" + getId_Participante() + ", getId_Campamento()="
 				+ getId_Campamento() + ", getFechaInscripcion()=" + getFechaInscripcion() + ", getPrecio()="
 				+ getPrecio() + ", getCancelable()=" + getCancelable() + "]";
-	}
-	
-	/**
-     * Calcula y establece el precio de la inscripción completa
-     * basado en el número de actividades asociadas.
-     *
-     * @param actividades Lista de actividades asociadas a la inscripción completa.
-     */
-	public void setPrecio(ArrayList<Actividad> actividades)
-	{
-		Double precio = 300.0;
-		precio += (actividades.size()*20);
-		this.setPrecio(precio);
 	}
 
 }
