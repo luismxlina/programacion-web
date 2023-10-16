@@ -12,7 +12,7 @@ Para ejecutar este proyecto, sigue estos pasos:
 
 3. Abre una terminal y navega hasta la ubicación donde se encuentra el archivo `GM3i12molml.jar`.
 
-4. Ejecuta el proyecto utilizando el siguiente comando:
+4. Ejecuta el proyecto utilizando el siguiente comando: `java -jar GM3i12molml.jar`
 
 
 ## Nota sobre la persistencia en ficheros
