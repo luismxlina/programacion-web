@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import es.uco.pw.classes.inscripcion.Inscripcion;
+import es.uco.pw.bussines.inscripcion.models.inscripcion.Inscripcion;
 
 /**
  * La clase RepositoryInscripciones proporciona métodos para guardar y cargar datos de inscripciones en un archivo.

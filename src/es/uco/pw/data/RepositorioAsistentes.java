@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import es.uco.pw.classes.asistente.Asistente;
+
+import es.uco.pw.bussines.users.models.asistente.Asistente;
 
 /**
  * Esta clase proporciona métodos para guardar y cargar datos de asistentes en

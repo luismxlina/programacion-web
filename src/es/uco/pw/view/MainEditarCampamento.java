@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
-import es.uco.pw.classes.actividad.Actividad;
-import es.uco.pw.classes.actividad.NivelEducativo;
-import es.uco.pw.classes.campamento.Campamento;
-import es.uco.pw.classes.monitor.Monitor;
-import es.uco.pw.handlers.GestorCampamentos;
+import es.uco.pw.bussines.campamento.handlers.GestorCampamentos;
+import es.uco.pw.bussines.campamento.models.actividad.Actividad;
+import es.uco.pw.bussines.campamento.models.actividad.NivelEducativo;
+import es.uco.pw.bussines.campamento.models.campamento.Campamento;
+import es.uco.pw.bussines.users.models.monitor.Monitor;
 
 /**
  * La clase MainEditarCampamento proporciona un submenú de opciones para editar

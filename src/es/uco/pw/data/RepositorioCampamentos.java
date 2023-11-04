@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import es.uco.pw.classes.campamento.Campamento;
+import es.uco.pw.bussines.campamento.models.campamento.Campamento;
 
 /**
  * Esta clase proporciona métodos para guardar y cargar datos de un archivo

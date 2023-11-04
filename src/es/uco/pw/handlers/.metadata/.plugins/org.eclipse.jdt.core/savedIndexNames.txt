@@ -1,1 +1,0 @@
-INDEX VERSION 1.134+/home/felipe/Escritorio/PW/programacion-web/src/es/uco/pw/gestores/.metadata/.plugins/org.eclipse.jdt.core

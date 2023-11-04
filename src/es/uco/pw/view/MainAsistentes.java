@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
-import es.uco.pw.classes.asistente.Asistente;
-import es.uco.pw.handlers.GestorAsistentes;
+import es.uco.pw.bussines.users.handlers.GestorAsistentes;
+import es.uco.pw.bussines.users.models.asistente.Asistente;
 
 /**
  * La clase MainAsistentes proporciona un menú de opciones relacionadas con la gestión de asistentes.

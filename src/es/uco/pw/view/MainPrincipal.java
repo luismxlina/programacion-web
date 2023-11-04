@@ -6,16 +6,15 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
-import es.uco.pw.classes.asistente.Asistente;
-import es.uco.pw.classes.campamento.Campamento;
-import es.uco.pw.classes.inscripcion.Inscripcion;
-
+import es.uco.pw.bussines.campamento.handlers.GestorCampamentos;
+import es.uco.pw.bussines.campamento.models.campamento.Campamento;
+import es.uco.pw.bussines.inscripcion.handlers.GestorInscripciones;
+import es.uco.pw.bussines.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.bussines.users.handlers.GestorAsistentes;
+import es.uco.pw.bussines.users.models.asistente.Asistente;
 import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.data.RepositorioCampamentos;
 import es.uco.pw.data.RepositoryInscripciones;
-import es.uco.pw.handlers.GestorAsistentes;
-import es.uco.pw.handlers.GestorCampamentos;
-import es.uco.pw.handlers.GestorInscripciones;
 
 /**
  * Clase principal que contiene el punto de entrada del programa Campamentos de
