@@ -1,11 +1,11 @@
-package es.uco.pw.display;
+package es.uco.pw.view;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
 import es.uco.pw.classes.asistente.Asistente;
-import es.uco.pw.gestores.GestorAsistentes;
+import es.uco.pw.handlers.GestorAsistentes;
 
 /**
  * La clase MainAsistentes proporciona un menú de opciones relacionadas con la gestión de asistentes.

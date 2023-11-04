@@ -3,7 +3,7 @@ package es.uco.pw.classes.inscripcion;
 import java.util.Date;
 import java.util.ArrayList;
 import es.uco.pw.classes.campamento.Campamento;
-import es.uco.pw.gestores.GestorCampamentos;
+import es.uco.pw.handlers.GestorCampamentos;
 
 /**
  * Clase que representa una inscripción parcial a un campamento.

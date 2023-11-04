@@ -1,5 +1,5 @@
 
-package es.uco.pw.display;
+package es.uco.pw.view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,9 +13,9 @@ import es.uco.pw.classes.inscripcion.Inscripcion;
 import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.data.RepositorioCampamentos;
 import es.uco.pw.data.RepositoryInscripciones;
-import es.uco.pw.gestores.GestorAsistentes;
-import es.uco.pw.gestores.GestorCampamentos;
-import es.uco.pw.gestores.GestorInscripciones;
+import es.uco.pw.handlers.GestorAsistentes;
+import es.uco.pw.handlers.GestorCampamentos;
+import es.uco.pw.handlers.GestorInscripciones;
 
 /**
  * Clase principal que contiene el punto de entrada del programa Campamentos de

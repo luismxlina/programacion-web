@@ -1,11 +1,11 @@
-package es.uco.pw.display;
+package es.uco.pw.view;
 
 import java.util.Scanner;
 import java.util.HashSet;
 import java.util.Random;
 
 import es.uco.pw.classes.campamento.Campamento;
-import es.uco.pw.gestores.GestorCampamentos;
+import es.uco.pw.handlers.GestorCampamentos;
 
 /**
  * La clase MainCampamentos proporciona un menú de opciones relacionadas con la gestión de campamentos.

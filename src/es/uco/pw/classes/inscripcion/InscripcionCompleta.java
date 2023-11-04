@@ -1,7 +1,8 @@
 package es.uco.pw.classes.inscripcion;
 
 import es.uco.pw.classes.campamento.Campamento;
-import es.uco.pw.gestores.GestorCampamentos;
+import es.uco.pw.handlers.GestorCampamentos;
+
 import java.util.ArrayList;
 import java.util.Date;
 

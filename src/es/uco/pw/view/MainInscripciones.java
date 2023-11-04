@@ -1,7 +1,8 @@
-package es.uco.pw.display;
+package es.uco.pw.view;
 
 import java.util.Scanner;
-import es.uco.pw.gestores.GestorInscripciones;
+
+import es.uco.pw.handlers.GestorInscripciones;
 
 /**
  * La clase MainInscripciones proporciona un menú de opciones relacionadas con

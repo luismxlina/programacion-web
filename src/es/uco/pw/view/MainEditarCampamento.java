@@ -1,4 +1,4 @@
-package es.uco.pw.display;
+package es.uco.pw.view;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -8,7 +8,7 @@ import es.uco.pw.classes.actividad.Actividad;
 import es.uco.pw.classes.actividad.NivelEducativo;
 import es.uco.pw.classes.campamento.Campamento;
 import es.uco.pw.classes.monitor.Monitor;
-import es.uco.pw.gestores.GestorCampamentos;
+import es.uco.pw.handlers.GestorCampamentos;
 
 /**
  * La clase MainEditarCampamento proporciona un submenú de opciones para editar

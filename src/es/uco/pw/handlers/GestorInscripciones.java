@@ -1,4 +1,4 @@
-package es.uco.pw.gestores;
+package es.uco.pw.handlers;
 
 import es.uco.pw.classes.asistente.Asistente;
 import es.uco.pw.classes.campamento.Campamento;
