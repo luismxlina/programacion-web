@@ -53,9 +53,8 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
     public boolean delete(String nombreActividad) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("DELETE_ACTIVIDAD_BY_NOMBRE"); // Agregar la consulta SQL
-                                                                                           // correspondiente en tu
-                                                                                           // archivo de propiedades
+        String query = conexController.getSql().getProperty("DELETE_ACTIVIDAD");          
+                                                                                           
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setString(1, nombreActividad);

@@ -12,8 +12,7 @@ import es.uco.pw.data.common.Conexion;
 public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
 
     @Override
-    public boolean insert(AsistenteDTO asistente)
-    {
+    public boolean insert(AsistenteDTO asistente) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_ASISTENTE");
@@ -32,11 +31,10 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
     }
 
     @Override
-    public boolean update(AsistenteDTO asistente)
-    {
+    public boolean update(AsistenteDTO asistente) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("INSERT_ASISTENTE");
+        String query = conexController.getSql().getProperty("UPDATE_ASISTENTE");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, asistente.getIdentificador());
@@ -52,9 +50,8 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
     }
 
     @Override
-    public boolean delete(Integer id)
-    {
-         Conexion conexController = Conexion.getInstance();
+    public boolean delete(Integer id) {
+        Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("DELETE_ASISTENTE");
         try {
@@ -68,21 +65,24 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
     }
 
     @Override
-    public ArrayList<AsistenteDTO> getAll()
-    {
-         Conexion conexController = Conexion.getInstance();
+    public ArrayList<AsistenteDTO> getAll() {
+        Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("SELECT_ALL_CAMPAMENTO");
+        String query = conexController.getSql().getProperty("SELECT_ALL_ASISTENTE");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             ResultSet rs = st.executeQuery();
-            ArrayList<AsistenteDTO> asistente = new ArrayList<AsistenteDTO>();
+            ArrayList<AsistenteDTO> asistentes = new ArrayList<AsistenteDTO>();
             while (rs.next()) {
-                // Debes crear un constructor en AsistenteDTO para inicializar los atributos desde un ResultSet
-                // Ejemplo: return new AsistenteDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-                asistente.add(new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"), rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion")));
+                // Debes crear un constructor en AsistenteDTO para inicializar los atributos
+                // desde un ResultSet
+                // Ejemplo: return new AsistenteDTO(rs.getInt("identificador"),
+                // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
+                // rs.getInt("maxAsistentes"));
+                asistentes.add(new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"),
+                        rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion")));
             }
-            return asistente;
+            return asistentes;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,9 +90,8 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
     }
 
     @Override
-    public AsistenteDTO get(Integer id) 
-    {
-         Conexion conexController = Conexion.getInstance();
+    public AsistenteDTO get(Integer id) {
+        Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("SELECT_ID_CAMPAMENTO");
         try {
@@ -100,9 +99,13 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                // Debes crear un constructor en AsistenteDTO para inicializar los atributos desde un ResultSet
-                // Ejemplo: return new AsistenteDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-              return new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"), rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion"));
+                // Debes crear un constructor en AsistenteDTO para inicializar los atributos
+                // desde un ResultSet
+                // Ejemplo: return new AsistenteDTO(rs.getInt("identificador"),
+                // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
+                // rs.getInt("maxAsistentes"));
+                return new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"), rs.getString("apellidos"),
+                        rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
