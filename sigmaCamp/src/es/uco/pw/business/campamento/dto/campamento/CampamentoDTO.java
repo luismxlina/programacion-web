@@ -10,6 +10,11 @@ public class CampamentoDTO {
     private int maxAsistentes;
 
     public CampamentoDTO() {
+        this.identificador = 0;
+        this.fechaInicio = new Date();
+        this.fechaFin = new Date();
+        this.nivel = "";
+        this.maxAsistentes = 0;
     }
 
     public CampamentoDTO(int identificador, Date fechaInicio, Date fechaFin, String nivel, int maxAsistentes) {
@@ -52,11 +57,11 @@ public class CampamentoDTO {
         this.nivel = nivel;
     }
 
-    public int getmaxAsistentes() {
+    public int getMaxAsistentes() {
         return maxAsistentes;
     }
 
-    public void setmaxAsistentes(int maxAsistentes) {
+    public void setMaxAsistentes(int maxAsistentes) {
         this.maxAsistentes = maxAsistentes;
     }
 }
