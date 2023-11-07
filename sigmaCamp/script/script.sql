@@ -20,7 +20,7 @@ CREATE TABLE Actividad (
     Identificador INT PRIMARY KEY,
     Nombre VARCHAR(255),
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
-    Horario VARCHAR(50),
+    Horario TIME,
     NumeroMaximoParticipantes INT,
     NumeroMonitoresNecesarios INT
 );

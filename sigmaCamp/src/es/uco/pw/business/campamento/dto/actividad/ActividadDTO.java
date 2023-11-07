@@ -1,18 +1,26 @@
 package es.uco.pw.business.campamento.dto.actividad;
 
+import java.time.LocalTime;
+
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
+
 
 public class ActividadDTO {
     private String nombreActividad;
     private NivelEducativo nivel;
-    private String hora;
+    private LocalTime hora;
     private int maxParticipantes;
     private int numMonitores;
 
     public ActividadDTO() {
+        this.nombreActividad = "";
+        this.nivel = NivelEducativo.INFANTIL;
+        this.hora = LocalTime.now();
+        this.maxParticipantes = 0;
+        this.numMonitores = 0;
     }
 
-    public ActividadDTO(String nombreActividad, NivelEducativo nivel, String hora, int maxParticipantes,
+    public ActividadDTO(String nombreActividad, NivelEducativo nivel, LocalTime hora, int maxParticipantes,
             int numMonitores) {
         this.nombreActividad = nombreActividad;
         this.nivel = nivel;
@@ -40,11 +48,11 @@ public class ActividadDTO {
     }
 
     // métodos getter y setter para hora
-    public String getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
