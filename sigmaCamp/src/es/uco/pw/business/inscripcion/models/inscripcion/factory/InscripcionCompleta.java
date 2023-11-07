@@ -1,11 +1,11 @@
 package es.uco.pw.business.inscripcion.models.inscripcion.factory;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Clase que representa una inscripción completa a un campamento.

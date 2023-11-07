@@ -1,7 +1,7 @@
 package es.uco.pw.business.users.models.asistente;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * La clase Asistente representa a una persona asistente con información básica.

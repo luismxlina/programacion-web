@@ -1,13 +1,12 @@
 package es.uco.pw.business.campamento.models.campamento;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.users.models.monitor.Monitor;
-
-import java.io.Serializable;
 
 /**
  * Esta clase representa un campamento.

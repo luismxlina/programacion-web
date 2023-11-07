@@ -1,7 +1,7 @@
 package es.uco.pw.business.inscripcion.models.inscripcion;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Clase abstracta que representa una inscripción a un campamento.

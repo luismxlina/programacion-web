@@ -24,7 +24,7 @@ public class MainInscripciones {
         int opcion;
 
         System.out.println("·-----------------------------------·");
-        System.out.println("|         MENÚ de Inscripciones     |");
+        System.out.println("|         MENÚ de Inscripciones      |");
         System.out.println("·-----------------------------------·");
 
         do {
