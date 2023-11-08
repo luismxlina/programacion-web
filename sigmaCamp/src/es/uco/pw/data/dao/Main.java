@@ -13,19 +13,19 @@ public class Main {
     public static void main(String[] args) {
         // Crear una instancia de ActividadDAO y CampamentoDAO
         ActividadDAO actividadDAO = new ActividadDAO();
-        CampamentoDAO campamentoDAO = new CampamentoDAO();
+        // CampamentoDAO campamentoDAO = new CampamentoDAO();
 
         // Crear objetos de prueba para ActividadDTO y CampamentoDTO
-        ActividadDTO actividad1 = new ActividadDTO("Actividad1", NivelEducativo.INFANTIL, LocalTime.of(10, 0), 20, 2);
-        ActividadDTO actividad2 = new ActividadDTO("Actividad2", NivelEducativo.JUVENIL, LocalTime.of(14, 30), 30, 3);
-        CampamentoDTO campamento1 = new CampamentoDTO(1, new Date(), new Date(), "Nivel3", 50);
-        CampamentoDTO campamento2 = new CampamentoDTO(2, new Date(), new Date(), "Nivel4", 40);
+        ActividadDTO actividad1 = new ActividadDTO("Actividad5", NivelEducativo.INFANTIL, LocalTime.of(10, 0), 20, 2);
+        ActividadDTO actividad2 = new ActividadDTO("Actividad6", NivelEducativo.JUVENIL, LocalTime.of(14, 30), 30, 3);
+        // CampamentoDTO campamento1 = new CampamentoDTO(1, new Date(), new Date(), "Nivel3", 50);
+        // CampamentoDTO campamento2 = new CampamentoDTO(2, new Date(), new Date(), "Nivel4", 40);
 
         // Insertar actividades y campamentos en la base de datos
         boolean insertActividad1 = actividadDAO.insert(actividad1);
         boolean insertActividad2 = actividadDAO.insert(actividad2);
-        boolean insertCampamento1 = campamentoDAO.insert(campamento1);
-        boolean insertCampamento2 = campamentoDAO.insert(campamento2);
+        // boolean insertCampamento1 = campamentoDAO.insert(campamento1);
+        // boolean insertCampamento2 = campamentoDAO.insert(campamento2);
 
         if (insertActividad1 && insertActividad2) {
             System.out.println("Actividades insertadas con éxito.");
@@ -33,58 +33,58 @@ public class Main {
             System.out.println("Error al insertar actividades.");
         }
 
-        if (insertCampamento1 && insertCampamento2) {
-            System.out.println("Campamentos insertados con éxito.");
-        } else {
-            System.out.println("Error al insertar campamentos.");
-        }
+        // if (insertCampamento1 && insertCampamento2) {
+        //     System.out.println("Campamentos insertados con éxito.");
+        // } else {
+        //     System.out.println("Error al insertar campamentos.");
+        // }
 
         // Actualizar una actividad y un campamento
-        actividad1.setNombreActividad("NuevaActividad");
-        campamento1.setNivel("NuevoNivel");
-        boolean updateActividad = actividadDAO.update(actividad1);
-        boolean updateCampamento = campamentoDAO.update(campamento1);
+        // actividad1.setNombreActividad("NuevaActividad");
+        // campamento1.setNivel("NuevoNivel");
+        // boolean updateActividad = actividadDAO.update(actividad1);
+        // boolean updateCampamento = campamentoDAO.update(campamento1);
 
-        if (updateActividad) {
-            System.out.println("Actividad actualizada con éxito.");
-        } else {
-            System.out.println("Error al actualizar actividad.");
-        }
+        // if (updateActividad) {
+            // System.out.println("Actividad actualizada con éxito.");
+        // } else {
+            // System.out.println("Error al actualizar actividad.");
+        // }
 
-        if (updateCampamento) {
-            System.out.println("Campamento actualizado con éxito.");
-        } else {
-            System.out.println("Error al actualizar campamento.");
-        }
+        // if (updateCampamento) {
+        //     System.out.println("Campamento actualizado con éxito.");
+        // } else {
+        //     System.out.println("Error al actualizar campamento.");
+        // }
 
         // Eliminar una actividad y un campamento
-        boolean deleteActividad = actividadDAO.delete(actividad1.getNombreActividad());
-        boolean deleteCampamento = campamentoDAO.delete(campamento1.getIdentificador());
+        // boolean deleteActividad = actividadDAO.delete(actividad1.getNombreActividad());
+        // boolean deleteCampamento = campamentoDAO.delete(campamento1.getIdentificador());
 
-        if (deleteActividad) {
-            System.out.println("Actividad eliminada con éxito.");
-        } else {
-            System.out.println("Error al eliminar actividad.");
-        }
+        // if (deleteActividad) {
+        //     System.out.println("Actividad eliminada con éxito.");
+        // } else {
+        //     System.out.println("Error al eliminar actividad.");
+        // }
 
-        if (deleteCampamento) {
-            System.out.println("Campamento eliminado con éxito.");
-        } else {
-            System.out.println("Error al eliminar campamento.");
-        }
+        // if (deleteCampamento) {
+        //     System.out.println("Campamento eliminado con éxito.");
+        // } else {
+        //     System.out.println("Error al eliminar campamento.");
+        // }
 
         // Obtener todas las actividades y campamentos
         ArrayList<ActividadDTO> actividades = actividadDAO.getAll();
-        ArrayList<CampamentoDTO> campamentos = campamentoDAO.getAll();
+        // ArrayList<CampamentoDTO> campamentos = campamentoDAO.getAll();
 
         System.out.println("Actividades en la base de datos:");
         for (ActividadDTO actividad : actividades) {
             System.out.println(actividad.getNombreActividad());
         }
 
-        System.out.println("Campamentos en la base de datos:");
-        for (CampamentoDTO campamento : campamentos) {
-            System.out.println(campamento.getIdentificador());
-        }
+        // System.out.println("Campamentos en la base de datos:");
+        // for (CampamentoDTO campamento : campamentos) {
+        //     System.out.println(campamento.getIdentificador());
+        // }
     }
 }

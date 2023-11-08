@@ -53,8 +53,8 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
     public boolean delete(String nombreActividad) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("DELETE_ACTIVIDAD");          
-                                                                                           
+        String query = conexController.getSql().getProperty("DELETE_ACTIVIDAD");
+
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setString(1, nombreActividad);
@@ -81,9 +81,15 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
                 // NivelEducativo.valueOf(rs.getString("nivel")),
                 // rs.getTime("hora").toLocalTime(), rs.getInt("maxParticipantes"),
                 // rs.getInt("numMonitores"));
-                actividades.add(new ActividadDTO(rs.getString("nombreActividad"),
-                        NivelEducativo.valueOf(rs.getString("nivel")), rs.getTime("hora").toLocalTime(),
-                        rs.getInt("maxParticipantes"), rs.getInt("numMonitores")));
+
+                // Nombre VARCHAR(255) PRIMARY KEY,
+                // NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
+                // Horario TIME,
+                // NumeroMaximoParticipantes INT,
+                // NumeroMonitoresNecesarios INT
+                actividades.add(new ActividadDTO(rs.getString("Nombre"),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()), rs.getTime("Horario").toLocalTime(),
+                        rs.getInt("NumeroMaximoParticipantes"), rs.getInt("NumeroMonitoresNecesarios")));
             }
             return actividades;
         } catch (SQLException e) {
@@ -115,6 +121,6 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             e.printStackTrace();
         }
         return null;
-    }   
+    }
 
 }

@@ -17,8 +17,7 @@ CREATE TABLE Monitor (
 
 -- Tabla para la entidad Actividad
 CREATE TABLE Actividad (
-    Identificador INT PRIMARY KEY,
-    Nombre VARCHAR(255),
+    Nombre VARCHAR(255) PRIMARY KEY,
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
     Horario TIME,
     NumeroMaximoParticipantes INT,

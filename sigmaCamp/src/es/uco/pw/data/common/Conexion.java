@@ -67,7 +67,8 @@ public class Conexion {
 
     private Connection connect() {
         try {
-            connection = DriverManager.getConnection(this.url, this.user, this.passwd);
+            System.out.println(this.url);
+            connection = (Connection) DriverManager.getConnection(this.url, this.user, this.passwd);
         } catch (SQLException e) {
             System.out.println("Connection with the database has failed!");
             e.printStackTrace();
