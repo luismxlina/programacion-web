@@ -42,6 +42,7 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
             st.setString(3, asistente.getApellidos());
             st.setDate(4, new java.sql.Date(asistente.getFechaNacimiento().getTime()));
             st.setBoolean(5, asistente.getRequiereAtencion());
+            st.setInt(6, asistente.getIdentificador());
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,7 +81,7 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
                 // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
                 // rs.getInt("maxAsistentes"));
                 asistentes.add(new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"),
-                        rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion")));
+                        rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencionEspecial")));
             }
             return asistentes;
         } catch (SQLException e) {
@@ -93,7 +94,7 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
     public AsistenteDTO get(Integer id) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("SELECT_ID_CAMPAMENTO");
+        String query = conexController.getSql().getProperty("SELECT_ID_ASISTENTE");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, id);
@@ -104,8 +105,8 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
                 // Ejemplo: return new AsistenteDTO(rs.getInt("identificador"),
                 // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
                 // rs.getInt("maxAsistentes"));
-                return new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"), rs.getString("apellidos"),
-                        rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencion"));
+                return new AsistenteDTO(rs.getInt("Identificador"), rs.getString("Nombre"), rs.getString("Apellidos"),
+                        rs.getDate("FechaNacimiento"), rs.getBoolean("RequiereAtencionEspecial"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

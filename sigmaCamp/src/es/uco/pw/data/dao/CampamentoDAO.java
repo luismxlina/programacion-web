@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
+import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.data.common.Conexion;
 
 public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
@@ -16,6 +17,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO");
+        System.out.println(campamento.getNivel());
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, campamento.getIdentificador());
@@ -77,7 +79,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             while (rs.next()) {
                 // Debes crear un constructor en CampamentoDTO para inicializar los atributos desde un ResultSet
                 // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-                campamentos.add(new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes")));
+                campamentos.add(new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"), rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes")));
             }
             return campamentos;
         } catch (SQLException e) {
@@ -98,7 +100,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             if (rs.next()) {
                 // Debes crear un constructor en CampamentoDTO para inicializar los atributos desde un ResultSet
                 // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-                return new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
+                return new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"), rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
