@@ -43,6 +43,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             st.setTime(3, java.sql.Time.valueOf(actividad.getHora()));
             st.setInt(4, actividad.getMaxParticipantes());
             st.setInt(5, actividad.getNumMonitores());
+            st.setString(6, actividad.getNombreActividad());
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,20 +76,9 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             ResultSet rs = st.executeQuery();
             ArrayList<ActividadDTO> actividades = new ArrayList<ActividadDTO>();
             while (rs.next()) {
-                // Debes crear un constructor en ActividadDTO para inicializar los atributos
-                // desde un ResultSet
-                // Ejemplo: new ActividadDTO(rs.getString("nombreActividad"),
-                // NivelEducativo.valueOf(rs.getString("nivel")),
-                // rs.getTime("hora").toLocalTime(), rs.getInt("maxParticipantes"),
-                // rs.getInt("numMonitores"));
-
-                // Nombre VARCHAR(255) PRIMARY KEY,
-                // NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
-                // Horario TIME,
-                // NumeroMaximoParticipantes INT,
-                // NumeroMonitoresNecesarios INT
                 actividades.add(new ActividadDTO(rs.getString("Nombre"),
-                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()), rs.getTime("Horario").toLocalTime(),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
+                        rs.getTime("Horario").toLocalTime(),
                         rs.getInt("NumeroMaximoParticipantes"), rs.getInt("NumeroMonitoresNecesarios")));
             }
             return actividades;
@@ -108,14 +98,10 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             st.setString(1, nombre);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                // Debes crear un constructor en ActividadDTO para inicializar los atributos
-                // desde un ResultSet
-                // Ejemplo: return new ActividadDTO(rs.getString("nombreActividad"),
-                // NivelEducativo.valueOf(rs.getString("nivel")),
-                // rs.getTime("hora").toLocalTime(), rs.getInt("maxParticipantes"),
-                // rs.getInt("numMonitores"));
-                return new ActividadDTO(rs.getString("nombreActividad"), NivelEducativo.valueOf(rs.getString("nivel")),
-                        rs.getTime("hora").toLocalTime(), rs.getInt("maxParticipantes"), rs.getInt("numMonitores"));
+                return new ActividadDTO(rs.getString("Nombre"),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
+                        rs.getTime("Horario").toLocalTime(), rs.getInt("NumeroMaximoParticipantes"),
+                        rs.getInt("NumeroMonitoresNecesarios"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
