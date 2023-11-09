@@ -106,5 +106,37 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             e.printStackTrace();
         }
         return null;
-    }
+        }
+
+        public boolean insertCampamentoMonitor(Integer campamentoId, Integer monitorId) {
+            Conexion conexController = Conexion.getInstance();
+            Connection conex = conexController.getConnection();
+            String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOMONITOR");
+            try {
+                PreparedStatement st = conex.prepareStatement(query);
+                st.setInt(1, campamentoId);
+                st.setInt(2, monitorId);
+                return st.executeUpdate() == 1;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        
+
+        public boolean insertCampamentoActividad(Integer campamentoId, Integer actividadId) {
+            Conexion conexController = Conexion.getInstance();
+            Connection conex = conexController.getConnection();
+            String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOACTIVIDAD");
+            try {
+                PreparedStatement st = conex.prepareStatement(query);
+                st.setInt(1, campamentoId);
+                st.setInt(2, actividadId);
+                return st.executeUpdate() == 1;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
 }

@@ -109,4 +109,19 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
         return null;
     }
 
+    public boolean insertActividadMonitor(Integer actividadId, Integer monitorId) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("INSERT_ACTIVIDADMONITOR");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, actividadId);
+            st.setInt(2, monitorId);
+            return st.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

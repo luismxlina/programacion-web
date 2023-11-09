@@ -1,10 +1,18 @@
+DROP TABLE Asistente IF EXISTS;
+DROP TABLE Monitor IF EXISTS;
+DROP TABLE Actividad IF EXISTS;
+DROP TABLE Campamento IF EXISTS;
+DROP TABLE Inscripcion IF EXISTS;
+DROP TABLE CampamentoMonitor IF EXISTS;
+DROP TABLE CampamentoActividad IF EXISTS;
+
 -- Tabla para la entidad Asistente
-CREATE TABLE Asistente (
+CREATE TABLE Asistente IF NOT EXISTS(
     Identificador INT PRIMARY KEY,
     Nombre VARCHAR(255),
     Apellidos VARCHAR(255),
     FechaNacimiento DATE,
-    RequiereAtencionEspecial BOOLEAN
+    RequiereAtencionEspecial BOOLEAN DEFAULT false
 );
 
 -- Tabla para la entidad Monitor
@@ -12,7 +20,7 @@ CREATE TABLE Monitor (
     Identificador INT PRIMARY KEY,
     Nombre VARCHAR(255),
     Apellidos VARCHAR(255),
-    EducadorEspecial BOOLEAN
+    EducadorEspecial BOOLEAN DEFAULT false
 );
 
 -- Tabla para la entidad Actividad
@@ -30,7 +38,8 @@ CREATE TABLE Campamento (
     FechaInicio DATE,
     FechaFin DATE,
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
-    NumeroMaximoAsistentes INT
+    NumeroMaximoAsistentes INT,
+    INDEX idx_nivel_educativo (NivelEducativo)
 );
 
 -- Tabla para la entidad Inscripción
@@ -41,8 +50,8 @@ CREATE TABLE Inscripcion (
     Precio DECIMAL(10, 2),
     TipoInscripcion ENUM('Completa', 'Parcial'),
     PRIMARY KEY (AsistenteId, CampamentoId),
-    FOREIGN KEY (AsistenteId) REFERENCES Asistente(Identificador),
-    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador)
+    FOREIGN KEY (AsistenteId) REFERENCES Asistente(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tabla de unión para la relación N-M entre Campamento y Monitor
@@ -50,8 +59,8 @@ CREATE TABLE CampamentoMonitor (
     CampamentoId INT,
     MonitorId INT,
     PRIMARY KEY (CampamentoId, MonitorId),
-    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador),
-    FOREIGN KEY (MonitorId) REFERENCES Monitor(Identificador)
+    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MonitorId) REFERENCES Monitor(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Relación directa entre Campamento y Actividad
@@ -59,6 +68,6 @@ CREATE TABLE CampamentoActividad (
     CampamentoId INT,
     ActividadId INT,
     PRIMARY KEY (CampamentoId, ActividadId),
-    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador),
-    FOREIGN KEY (ActividadId) REFERENCES Actividad(Identificador)
+    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ActividadId) REFERENCES Actividad(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
 );
