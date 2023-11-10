@@ -51,6 +51,10 @@ public class InscripcionDTO {
         this.precio = precioTotal;
     }
 
+    public void setTipoInscripcion(String tipoInscripcion) {
+        this.tipoInscripcion = tipoInscripcion;
+    }
+
     public String getTipoInscripcion() {
         return tipoInscripcion;
     }
