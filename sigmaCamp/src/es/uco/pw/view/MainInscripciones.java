@@ -2,7 +2,9 @@ package es.uco.pw.view;
 
 import java.util.Scanner;
 
+import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
+import es.uco.pw.business.users.handler.GestorAsistentes;
 
 /**
  * La clase MainInscripciones proporciona un menú de opciones relacionadas con
@@ -67,7 +69,7 @@ public class MainInscripciones {
                     boolean necesidadesEspeciales = false;
                     gestor_inscripciones.addInscripcion(idParticipante, idCampamento, temprana, necesidadesEspeciales);
                     break;
-              
+
                 case 4:
                     System.out.println("Introduzca id del participante a eliminar");
                     teclado.nextLine();
@@ -75,7 +77,16 @@ public class MainInscripciones {
                     System.out.println("Introduzca id del campamento a eliminar");
                     teclado.nextLine();
                     idCampamento = teclado.nextInt();
-                    gestor_inscripciones.deleteInscripcion(idParticipante, idCampamento);
+                    if (gestor_inscripciones.deleteInscripcion(idParticipante, idCampamento)) {
+                        System.out.println("Inscripción del usuario "
+                                + GestorAsistentes.getInstance().getAsistente(idParticipante)
+                                + " en el campamento " + GestorCampamentos.getInstance().getCampamento(idCampamento)
+                                + " eliminada con éxito.");
+                    } else {
+                        System.out.println(
+                                "No se encontró una inscripción con ID " + idParticipante + " en el campamento con ID "
+                                        + idCampamento);
+                    }
 
                     break;
                 default:

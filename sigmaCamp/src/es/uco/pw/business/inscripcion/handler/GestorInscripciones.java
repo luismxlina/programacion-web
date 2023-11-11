@@ -11,28 +11,19 @@ import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTard
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
 import es.uco.pw.business.users.handler.GestorAsistentes;
 import es.uco.pw.business.users.models.asistente.Asistente;
+import es.uco.pw.data.dao.InscripcionDAO;
+import es.uco.pw.data.dao.CampamentoDAO;
+import es.uco.pw.data.dao.AsistenteDAO;
+import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 
 /**
  * Clase que gestiona las inscripciones a campamentos.
  */
 public class GestorInscripciones {
 
-    // Atributos
-
-    // ArrayList que contiene las inscripciones.
-    private ArrayList<Inscripcion> inscripciones;
-
     // Singleton - Instancia única de GestorInscripciones.
     private static GestorInscripciones instance = null;
-
-    /**
-     * Constructor privado para crear una instancia de GestorInscripciones.
-     *
-     * @param inscripciones ArrayList de inscripciones.
-     */
-    private GestorInscripciones(ArrayList<Inscripcion> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
+    private static InscripcionDAO inscripcionDAO;
 
     /**
      * Método estático para obtener la instancia única de GestorInscripciones.
@@ -43,67 +34,28 @@ public class GestorInscripciones {
      */
     public static GestorInscripciones getInstance(ArrayList<Inscripcion> inscripciones) {
         if (instance == null) {
-            instance = new GestorInscripciones(inscripciones);
+            instance = new GestorInscripciones();
+            inscripcionDAO = new InscripcionDAO();
         }
         return instance;
     }
 
     // Métodos
 
-    /**
-     * Muestra todas las inscripciones en consola.
-     *
-     * @return false.
-     */
-    public Boolean mostrarInscripciones() {
-        for (Inscripcion inscripcion : inscripciones) {
-            System.out.println(inscripcion.toString());
-        }
-        return false;
-    }
-
-    /**
-     * Muestra una inscripción específica en consola.
-     *
-     * @param idParticipante Identificador del participante.
-     * @param idCampamento   Identificador del campamento.
-     * @return true si se encontró la inscripción, false si no.
-     */
-    public Boolean mostrarInscripcion(int idParticipante, int idCampamento) {
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getId_Campamento() == idCampamento && inscripcion.getId_Participante() == idParticipante) {
-                System.out.println(inscripcion.toString());
-                return true;
-            }
-        }
-        System.out.println("No se encontró una inscripción para el participante con ID " + idParticipante
-                + " en el campamento con ID " + idCampamento);
-        return false;
-    }
-
-    /**
-     * Añade una nueva inscripción.
-     *
-     * @param idParticipante        Identificador del participante.
-     * @param idCampamento          Identificador del campamento.
-     * @param temprana              Booleano indicando si es inscripción temprana.
-     * @param necesidadesEspeciales Booleano indicando si hay necesidades
-     *                              especiales.
-     * @return true si se añadió la inscripción con éxito, false si no.
-     */
     public Boolean addInscripcion(int idParticipante, int idCampamento, boolean temprana,
             boolean necesidadesEspeciales) {
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getId_Campamento() == idCampamento && inscripcion.getId_Participante() == idParticipante) {
-                System.out.println("El participante ya está inscrito en este campamento.");
-                return false;
-            }
+
+        if (existeInscripcion(idParticipante, idCampamento)) {
+            System.out.println("El participante ya está inscrito en este campamento.\n");
+            return false;
         }
 
-        Campamento campamento = GestorCampamentos.getInstance(null).getCampamento(idCampamento);
-        
+        if (!GestorAsistentes.getInstance().existeAsistente(idParticipante)) {
+            System.out.println("El participante no existe\n");
+            return false;
+        }
 
-        if (campamento == null) {
+        if (!GestorCampamentos.getInstance().existeCampamento(idCampamento)) {
             System.out.println("El campamento con ID " + idCampamento + " no existe.");
             return false;
         }
@@ -145,16 +97,9 @@ public class GestorInscripciones {
      * @return true si se eliminó la inscripción con éxito, false si no.
      */
     public Boolean deleteInscripcion(int id_Participante, int id_Campamento) {
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getId_Campamento() == id_Campamento
-                    && inscripcion.getId_Participante() == id_Participante) {
-                inscripciones.remove(inscripcion);
-                System.out.println("Inscripción eliminada con éxito.");
-                return true;
-            }
+        if (inscripcionDAO.delete(id_Participante, id_Campamento)) {
+            return true;
         }
-        System.out.println("No se encontró una inscripción con ID " + id_Participante + " en el campamento con ID "
-                + id_Campamento);
         return false;
     }
 
@@ -164,7 +109,7 @@ public class GestorInscripciones {
      * @return ArrayList de inscripciones.
      */
     public ArrayList<Inscripcion> getInscripciones() {
-        return inscripciones;
+
     }
 
     /**
