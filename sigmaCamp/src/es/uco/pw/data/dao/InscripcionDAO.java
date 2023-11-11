@@ -106,5 +106,61 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         }
         return null;
     }
-}
 
+    public ArrayList<InscripcionDTO> getAllInscripcionesCompletas() {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_INSCRIPCION_COMPLETA");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            ArrayList<InscripcionDTO> inscripciones = new ArrayList<InscripcionDTO>();
+            while (rs.next()) {
+                inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
+                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getString("TipoInscripcion")));
+            }
+            return inscripciones;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<InscripcionDTO> getAllInscripcionesParciales() {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_INSCRIPCION_PARCIAL");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            ArrayList<InscripcionDTO> inscripciones = new ArrayList<InscripcionDTO>();
+            while (rs.next()) {
+                inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
+                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getString("TipoInscripcion")));
+            }
+            return inscripciones;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int count(Integer campamentoId) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("COUNT_INSCRIPCION_BY_CAMPAMENTO");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, campamentoId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+}

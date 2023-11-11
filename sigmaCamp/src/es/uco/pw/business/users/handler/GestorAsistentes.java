@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
+import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.users.models.asistente.Asistente;
+import es.uco.pw.data.dao.AsistenteDAO;
+import es.uco.pw.data.dao.InscripcionDAO;
 
 /**
  * Clase que gestiona los asistentes.
@@ -15,16 +19,46 @@ public class GestorAsistentes {
 	// Atributos
 
 	// ArrayList que contiene los asistentes.
+	private ArrayList<Asistente> asistentes;
 
 	// Singleton - Instancia única de GestorAsistentes.
 	private static GestorAsistentes instance = null;
+    private static AsistenteDAO asistenteDAO;
+
+    /**
+     * Método estático para obtener la instancia única de GestorInscripciones.
+     *
+     * @param asistentes ArrayList de inscripciones.
+     * @param campamentos   ArrayList de campamentos.
+     * @return Instancia única de GestorInscripciones.
+     */
+    
+	public static GestorAsistentes getInstance(ArrayList<Asistente> arrayNuevo) {
+		if (instance == null) {
+			instance = new GestorAsistentes(arrayNuevo);
+			asistenteDAO = new AsistenteDAO();
+		}
+		return instance;
+	}
+	
 
 	/**
 	 * Constructor privado para crear una instancia de GestorAsistentes.
 	 *
 	 * @param arrayNuevo ArrayList de asistentes.
 	 */
-	private GestorAsistentes() {
+	private GestorAsistentes(ArrayList<Asistente> arrayNuevo) {
+		this.asistentes = arrayNuevo;
+	}
+
+	public Boolean existeAsistente(int id)
+	{
+		for (Asistente asistente : this.asistentes) {
+			if (asistente.getIdentificador() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -33,12 +67,7 @@ public class GestorAsistentes {
 	 * @param arrayNuevo ArrayList de asistentes.
 	 * @return Instancia única de GestorAsistentes.
 	 */
-	public static GestorAsistentes getInstance() {
-		if (instance == null) {
-			instance = new GestorAsistentes(arrayNuevo);
-		}
-		return instance;
-	}
+	
 
 	// Métodos
 
@@ -99,20 +128,20 @@ public class GestorAsistentes {
 		return false;
 	}
 
-	/**
-	 * Muestra la lista de asistentes en consola.
-	 */
-	public void mostrarAsistentes() {
-		if (instance != null) {
-			for (int i = 0; i < this.asistentes.size(); i++) {
-				System.out.println("ID: " + this.asistentes.get(i).getIdentificador()
-						+ ", Nombre: " + this.asistentes.get(i).getNombre()
-						+ ", Apellidos: " + this.asistentes.get(i).getApellidos()
-						+ ", Fecha nacimiento: " + this.asistentes.get(i).getFechaNacimiento()
-						+ ", Necesita atención: " + this.asistentes.get(i).getRequiereAtencion());
-			}
-		}
-	}
+	// /**
+	//  * Muestra la lista de asistentes en consola.
+	//  */
+	// public void mostrarAsistentes() {
+	// 	if (instance != null) {
+	// 		for (int i = 0; i < this.asistentes.size(); i++) {
+	// 			System.out.println("ID: " + this.asistentes.get(i).getIdentificador()
+	// 					+ ", Nombre: " + this.asistentes.get(i).getNombre()
+	// 					+ ", Apellidos: " + this.asistentes.get(i).getApellidos()
+	// 					+ ", Fecha nacimiento: " + this.asistentes.get(i).getFechaNacimiento()
+	// 					+ ", Necesita atención: " + this.asistentes.get(i).getRequiereAtencion());
+	// 		}
+	// 	}
+	// }
 
 	/**
 	 * Método que valida el nombre o apellidos de un asistente.
@@ -189,13 +218,13 @@ public class GestorAsistentes {
 	/**
 	 * Método que modifica los datos de un asistente.
 	 */
-	public void modificarAsistente() {
+	public Boolean modificar(int identificador) {
 
 		Scanner teclado = new Scanner(System.in);
-		int identificador;
+		// int identificador;
 
-		System.out.print("Escriba el identificador del asistente a modificar: ");
-		identificador = teclado.nextInt();
+		// System.out.print("Escriba el identificador del asistente a modificar: ");
+		// identificador = teclado.nextInt();
 
 		if (buscarAsistente(identificador)) {
 
@@ -248,14 +277,21 @@ public class GestorAsistentes {
 
 			}
 
-		}
+			teclado.close();
 
+			return true;
+
+		}
 		else {
 
-			System.out.println("No existe ninun usuario con el ID indicado");
+			teclado.close();			
+
+			return false;
 
 		}
-		teclado.close();
+
+		
+		
 	}
 
 	/**
@@ -263,12 +299,8 @@ public class GestorAsistentes {
 	 *
 	 * @param teclado Scanner para entrada por teclado.
 	 */
-	public void eliminarAsistente(Scanner teclado) {
-
-		int identificador;
-
-		System.out.print("Escriba el identificador del asistente a eliminar: ");
-		identificador = teclado.nextInt();
+	
+	 public boolean eliminar(int identificador) {
 
 		if (buscarAsistente(identificador)) {
 
@@ -281,11 +313,12 @@ public class GestorAsistentes {
 				}
 
 			}
+			return true;
 		}
 
 		else {
 
-			System.out.println("No existe ningún usuario con el ID indicado");
+			return false;
 
 		}
 	}

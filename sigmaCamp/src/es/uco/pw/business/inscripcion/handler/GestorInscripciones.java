@@ -1,20 +1,24 @@
 package es.uco.pw.business.inscripcion.handler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
+import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionCompleta;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionCreator;
+import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionParcial;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTardia;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
 import es.uco.pw.business.users.handler.GestorAsistentes;
 import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.dao.InscripcionDAO;
-import es.uco.pw.data.dao.CampamentoDAO;
-import es.uco.pw.data.dao.AsistenteDAO;
-import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 
 /**
  * Clase que gestiona las inscripciones a campamentos.
@@ -25,14 +29,7 @@ public class GestorInscripciones {
     private static GestorInscripciones instance = null;
     private static InscripcionDAO inscripcionDAO;
 
-    /**
-     * Método estático para obtener la instancia única de GestorInscripciones.
-     *
-     * @param inscripciones ArrayList de inscripciones.
-     * @param campamentos   ArrayList de campamentos.
-     * @return Instancia única de GestorInscripciones.
-     */
-    public static GestorInscripciones getInstance(ArrayList<Inscripcion> inscripciones) {
+    public static GestorInscripciones getInstance() {
         if (instance == null) {
             instance = new GestorInscripciones();
             inscripcionDAO = new InscripcionDAO();
@@ -42,25 +39,30 @@ public class GestorInscripciones {
 
     // Métodos
 
+    public Boolean buscarInscripcion(int idParticipante, int idCampamento) {
+        return inscripcionDAO.get(idParticipante, idCampamento) != null;
+    }
+
     public Boolean addInscripcion(int idParticipante, int idCampamento, boolean temprana,
             boolean necesidadesEspeciales) {
-
-        if (existeInscripcion(idParticipante, idCampamento)) {
+        // TODO
+        if (buscarInscripcion(idParticipante, idCampamento)) {
             System.out.println("El participante ya está inscrito en este campamento.\n");
             return false;
         }
 
-        if (!GestorAsistentes.getInstance().existeAsistente(idParticipante)) {
+        if (!GestorAsistentes.getInstance().buscarAsistente(idParticipante)) {
             System.out.println("El participante no existe\n");
             return false;
         }
 
-        if (!GestorCampamentos.getInstance().existeCampamento(idCampamento)) {
+        if (!GestorCampamentos.getInstance().buscarCampamento(idCampamento)) {
             System.out.println("El campamento con ID " + idCampamento + " no existe.");
             return false;
         }
 
         InscripcionCreator creator;
+
         if (temprana) {
             creator = new InscripcionTemprana();
         } else {
@@ -89,59 +91,154 @@ public class GestorInscripciones {
         return true;
     }
 
-    /**
-     * Elimina una inscripción existente.
-     *
-     * @param id_Participante Identificador del participante.
-     * @param id_Campamento   Identificador del campamento.
-     * @return true si se eliminó la inscripción con éxito, false si no.
-     */
     public Boolean deleteInscripcion(int id_Participante, int id_Campamento) {
+
         if (inscripcionDAO.delete(id_Participante, id_Campamento)) {
             return true;
         }
         return false;
     }
 
-    /**
-     * Obtiene las inscripciones.
-     * 
-     * @return ArrayList de inscripciones.
-     */
     public ArrayList<Inscripcion> getInscripciones() {
 
+        ArrayList<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+        getInscripcionesParciales(inscripciones);
+        getInscripcionesCompletas(inscripciones);
+        return inscripciones;
     }
 
-    /**
-     * Consulta los campamentos disponibles.
-     */
-    public void consultarCampamentosDisponibles() {
-        Date fechaActual = new Date();
-        for (Campamento campamento : GestorCampamentos.getInstance(null).getCampamentos()) {
-            if (campamento.getFechaInicio().after(fechaActual)) {
-                int cupoDisponible = campamento.getMax_asistentes()
-                        - contarInscripciones(campamento.getIdentificador());
-                if (cupoDisponible > 0) {
-                    System.out.println("Campamento con ID " + campamento.getIdentificador()
-                            + " disponible. Cupo restante: " + cupoDisponible);
-                }
-            }
+    public ArrayList<Inscripcion> getInscripcionesParciales() {
+
+        ArrayList<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+        Boolean cancelable = false;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+
+        // Mapea cada id de campamento con su fecha de inicio
+        HashMap<Integer, Date> fechasInicioCampamentos = new HashMap<>();
+
+        for (Campamento campamento : campamentos) {
+            fechasInicioCampamentos.put(campamento.getIdentificador(), campamento.getFechaInicio());
         }
+
+        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAllInscripcionesParciales()) {
+
+            try {
+                Date fechaInscripcion = formatoFecha.parse(inscripcionDTO.getFechaInscripcion());
+                Date fechaInicioCampamento = fechasInicioCampamentos.get(inscripcionDTO.getCampamentoId());
+
+                long diferenciaEnMilisegundos = fechaInicioCampamento.getTime() - fechaInscripcion.getTime();
+                long diferenciaEnDias = TimeUnit.DAYS.convert(diferenciaEnMilisegundos, TimeUnit.MILLISECONDS);
+                cancelable = diferenciaEnDias >= 15;
+                inscripciones.add(new InscripcionParcial(inscripcionDTO.getAsistenteId(),
+                        inscripcionDTO.getCampamentoId(), fechaInscripcion, cancelable));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return inscripciones;
     }
 
-    /**
-     * Cuenta el número de inscripciones en un campamento.
-     *
-     * @param idCampamento Identificador del campamento.
-     * @return Número de inscripciones.
-     */
-    private int contarInscripciones(int idCampamento) {
-        int count = 0;
-        for (Inscripcion inscripcion : inscripciones) {
-            if (inscripcion.getId_Campamento() == idCampamento) {
-                count++;
+    public ArrayList<Inscripcion> getInscripcionesParciales(ArrayList<Inscripcion> inscripciones) {
+        Boolean cancelable = false;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+        // Mapea cada id de campamento con su fecha de inicio
+        HashMap<Integer, Date> fechasInicioCampamentos = new HashMap<>();
+        for (Campamento campamento : campamentos) {
+            fechasInicioCampamentos.put(campamento.getIdentificador(), campamento.getFechaInicio());
+        }
+        //
+        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAllInscripcionesParciales()) {
+
+            try {
+                Date fechaInscripcion = formatoFecha.parse(inscripcionDTO.getFechaInscripcion());
+                Date fechaInicioCampamento = fechasInicioCampamentos.get(inscripcionDTO.getCampamentoId());
+
+                long diferenciaEnMilisegundos = fechaInicioCampamento.getTime() - fechaInscripcion.getTime();
+                long diferenciaEnDias = TimeUnit.DAYS.convert(diferenciaEnMilisegundos, TimeUnit.MILLISECONDS);
+                cancelable = diferenciaEnDias >= 15;
+                inscripciones.add(new InscripcionParcial(inscripcionDTO.getAsistenteId(),
+                        inscripcionDTO.getCampamentoId(), fechaInscripcion, cancelable));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return inscripciones;
+    }
+
+    public ArrayList<Inscripcion> getInscripcionesCompletas() {
+        ArrayList<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+        Boolean cancelable = false;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+        // Mapea cada id de campamento con su fecha de inicio
+        HashMap<Integer, Date> fechasInicioCampamentos = new HashMap<>();
+        for (Campamento campamento : campamentos) {
+            fechasInicioCampamentos.put(campamento.getIdentificador(), campamento.getFechaInicio());
+        }
+        //
+        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAllInscripcionesCompletas()) {
+
+            try {
+                Date fechaInscripcion = formatoFecha.parse(inscripcionDTO.getFechaInscripcion());
+                Date fechaInicioCampamento = fechasInicioCampamentos.get(inscripcionDTO.getCampamentoId());
+
+                long diferenciaEnMilisegundos = fechaInicioCampamento.getTime() - fechaInscripcion.getTime();
+                long diferenciaEnDias = TimeUnit.DAYS.convert(diferenciaEnMilisegundos, TimeUnit.MILLISECONDS);
+                cancelable = diferenciaEnDias >= 15;
+                inscripciones.add(new InscripcionCompleta(inscripcionDTO.getAsistenteId(),
+                        inscripcionDTO.getCampamentoId(), fechaInscripcion, cancelable));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return inscripciones;
+    }
+
+    public ArrayList<Inscripcion> getInscripcionesCompletas(ArrayList<Inscripcion> inscripciones) {
+        Boolean cancelable = false;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+        // Mapea cada id de campamento con su fecha de inicio
+        HashMap<Integer, Date> fechasInicioCampamentos = new HashMap<>();
+        for (Campamento campamento : campamentos) {
+            fechasInicioCampamentos.put(campamento.getIdentificador(), campamento.getFechaInicio());
+        }
+        //
+        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAllInscripcionesCompletas()) {
+
+            try {
+                Date fechaInscripcion = formatoFecha.parse(inscripcionDTO.getFechaInscripcion());
+                Date fechaInicioCampamento = fechasInicioCampamentos.get(inscripcionDTO.getCampamentoId());
+
+                long diferenciaEnMilisegundos = fechaInicioCampamento.getTime() - fechaInscripcion.getTime();
+                long diferenciaEnDias = TimeUnit.DAYS.convert(diferenciaEnMilisegundos, TimeUnit.MILLISECONDS);
+                cancelable = diferenciaEnDias >= 15;
+                inscripciones.add(new InscripcionCompleta(inscripcionDTO.getAsistenteId(),
+                        inscripcionDTO.getCampamentoId(), fechaInscripcion, cancelable));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return inscripciones;
+    }
+
+    public ArrayList<Campamento> getCampamentosDisponibles() {
+        ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+        for (Campamento campamento : GestorCampamentos.getInstance().getCampamentos()) {
+            if (campamento.getMax_asistentes() > 0) {
+                campamentos.add(campamento);
             }
         }
-        return count;
+        return campamentos;
+    }
+
+    public int contarInscripciones(int idCampamento) {
+        return inscripcionDAO.count(idCampamento);
     }
 }

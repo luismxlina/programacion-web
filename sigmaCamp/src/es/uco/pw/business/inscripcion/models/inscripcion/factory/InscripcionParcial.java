@@ -1,10 +1,8 @@
 package es.uco.pw.business.inscripcion.models.inscripcion.factory;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
-import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 
 /**
@@ -33,10 +31,11 @@ public class InscripcionParcial extends Inscripcion {
 	 * @return precio de la inscripción
 	 */
 	private double calculatePrice(int idCampamento) {
-		int numeroActividades = GestorCampamentos.getInstance(new ArrayList<Campamento>()).getCampamento(idCampamento)
+		int numeroActividades = GestorCampamentos.getInstance().getCampamento(idCampamento)
 				.getActividades().size();
 		return PRECIOINICIAL + (numeroActividades * 20);
 	}
+
 	@Override
 	public Double getPrecio() {
 		return this.precio;

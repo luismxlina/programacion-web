@@ -1,13 +1,13 @@
-DROP TABLE Asistente IF EXISTS;
-DROP TABLE Monitor IF EXISTS;
-DROP TABLE Actividad IF EXISTS;
-DROP TABLE Campamento IF EXISTS;
-DROP TABLE Inscripcion IF EXISTS;
-DROP TABLE CampamentoMonitor IF EXISTS;
-DROP TABLE CampamentoActividad IF EXISTS;
+DROP TABLE IF EXISTS CampamentoActividad;
+DROP TABLE IF EXISTS CampamentoMonitor;
+DROP TABLE IF EXISTS Inscripcion;
+DROP TABLE IF EXISTS Campamento;
+DROP TABLE IF EXISTS Actividad;
+DROP TABLE IF EXISTS Monitor;
+DROP TABLE IF EXISTS Asistente;
 
 -- Tabla para la entidad Asistente
-CREATE TABLE Asistente IF NOT EXISTS(
+CREATE TABLE Asistente (
     Identificador INT PRIMARY KEY,
     Nombre VARCHAR(255),
     Apellidos VARCHAR(255),
@@ -66,8 +66,8 @@ CREATE TABLE CampamentoMonitor (
 -- Relación directa entre Campamento y Actividad
 CREATE TABLE CampamentoActividad (
     CampamentoId INT,
-    ActividadId INT,
-    PRIMARY KEY (CampamentoId, ActividadId),
+    ActividadNombre VARCHAR(255),
+    PRIMARY KEY (CampamentoId, ActividadNombre),
     FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ActividadId) REFERENCES Actividad(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (ActividadNombre) REFERENCES Actividad(Nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );

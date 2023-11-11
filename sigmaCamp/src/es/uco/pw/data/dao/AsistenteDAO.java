@@ -81,7 +81,8 @@ public class AsistenteDAO implements DAO<AsistenteDTO, Integer> {
                 // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
                 // rs.getInt("maxAsistentes"));
                 asistentes.add(new AsistenteDTO(rs.getInt("identificador"), rs.getString("nombre"),
-                        rs.getString("apellidos"), rs.getDate("fechaNacimiento"), rs.getBoolean("RequiereAtencionEspecial")));
+                        rs.getString("apellidos"), rs.getDate("fechaNacimiento"),
+                        rs.getBoolean("RequiereAtencionEspecial")));
             }
             return asistentes;
         } catch (SQLException e) {

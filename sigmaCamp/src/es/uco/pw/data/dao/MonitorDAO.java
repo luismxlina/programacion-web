@@ -100,4 +100,21 @@ public class MonitorDAO implements DAO<MonitorDTO, Integer> {
         }
         return null;
     }
+
+    public boolean exists(int identificador) {
+        try {
+            Conexion conexController = Conexion.getInstance();
+            Connection conex = conexController.getConnection();
+            String query = conexController.getSql().getProperty("SELECT_ID_MONITOR");
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, identificador);
+            ResultSet rs = st.executeQuery();
+
+            return rs.next(); // Devuelve true si hay al menos una fila (monitor encontrado), false en caso contrario.
+
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }

@@ -18,13 +18,11 @@ import es.uco.pw.business.users.models.monitor.Monitor;
 
 public class GestorCampamentos {
 
-    private ArrayList<Campamento> campamentos;
 
     private static GestorCampamentos instance = null;
 
     private GestorCampamentos(ArrayList<Campamento> campamentos) {
 
-        this.campamentos = campamentos;
 
     }
 
@@ -35,7 +33,7 @@ public class GestorCampamentos {
      * @return Instancia única del GestorCampamentos.
      */
 
-    public static GestorCampamentos getInstance(ArrayList<Campamento> campamentos) {
+    public static GestorCampamentos getInstance() {
 
         if (instance == null) {
 

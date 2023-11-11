@@ -77,9 +77,14 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             ResultSet rs = st.executeQuery();
             ArrayList<CampamentoDTO> campamentos = new ArrayList<CampamentoDTO>();
             while (rs.next()) {
-                // Debes crear un constructor en CampamentoDTO para inicializar los atributos desde un ResultSet
-                // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-                campamentos.add(new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"), rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes")));
+                // Debes crear un constructor en CampamentoDTO para inicializar los atributos
+                // desde un ResultSet
+                // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"),
+                // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
+                // rs.getInt("maxAsistentes"));
+                campamentos.add(
+                        new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
+                                rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes")));
             }
             return campamentos;
         } catch (SQLException e) {
@@ -98,45 +103,47 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                // Debes crear un constructor en CampamentoDTO para inicializar los atributos desde un ResultSet
-                // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"), rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"), rs.getInt("maxAsistentes"));
-                return new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"), rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes"));
+                // Debes crear un constructor en CampamentoDTO para inicializar los atributos
+                // desde un ResultSet
+                // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"),
+                // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
+                // rs.getInt("maxAsistentes"));
+                return new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
+                        rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-        }
+    }
 
-        public boolean insertCampamentoMonitor(Integer campamentoId, Integer monitorId) {
-            Conexion conexController = Conexion.getInstance();
-            Connection conex = conexController.getConnection();
-            String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOMONITOR");
-            try {
-                PreparedStatement st = conex.prepareStatement(query);
-                st.setInt(1, campamentoId);
-                st.setInt(2, monitorId);
-                return st.executeUpdate() == 1;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
+    public boolean insertCampamentoMonitor(Integer campamentoId, Integer monitorId) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOMONITOR");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, campamentoId);
+            st.setInt(2, monitorId);
+            return st.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
+        return false;
+    }
 
-        public boolean insertCampamentoActividad(Integer campamentoId, Integer actividadId) {
-            Conexion conexController = Conexion.getInstance();
-            Connection conex = conexController.getConnection();
-            String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOACTIVIDAD");
-            try {
-                PreparedStatement st = conex.prepareStatement(query);
-                st.setInt(1, campamentoId);
-                st.setInt(2, actividadId);
-                return st.executeUpdate() == 1;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
+    public boolean insertCampamentoActividad(Integer campamentoId, Integer actividadId) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOACTIVIDAD");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, campamentoId);
+            st.setInt(2, actividadId);
+            return st.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
+        return false;
+    }
 }
