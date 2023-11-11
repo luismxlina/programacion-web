@@ -18,6 +18,7 @@ import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTard
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
 import es.uco.pw.business.users.handler.GestorAsistentes;
 import es.uco.pw.business.users.models.asistente.Asistente;
+import es.uco.pw.business.users.models.monitor.Monitor;
 import es.uco.pw.data.dao.InscripcionDAO;
 
 /**
@@ -43,9 +44,9 @@ public class GestorInscripciones {
         return inscripcionDAO.get(idParticipante, idCampamento) != null;
     }
 
-    public Boolean addInscripcion(int idParticipante, int idCampamento, boolean temprana,
+    public Boolean addInscripcion(int idParticipante, int idCampamento, boolean completa,
             boolean necesidadesEspeciales) {
-        // TODO
+
         if (buscarInscripcion(idParticipante, idCampamento)) {
             System.out.println("El participante ya está inscrito en este campamento.\n");
             return false;
@@ -63,6 +64,9 @@ public class GestorInscripciones {
 
         InscripcionCreator creator;
 
+        Boolean temprana = GestorCampamentos.getInstance().getCampamento(idCampamento).getFechaInicio().getTime()
+                - new Date().getTime() >= 15 * 24 * 60 * 60 * 1000;
+
         if (temprana) {
             creator = new InscripcionTemprana();
         } else {
@@ -71,20 +75,29 @@ public class GestorInscripciones {
 
         Asistente asistente = GestorAsistentes.getInstance(null).getAsistente(idParticipante);
 
-        if (asistente == null) {
-            System.out.println("El participante con ID " + idParticipante + " no existe.");
-            return false;
-        }
-
         Inscripcion nuevaInscripcion;
-        if (necesidadesEspeciales) {
+        if (completa) {
             nuevaInscripcion = creator.registrarInscripcionCompleta(idParticipante, idCampamento, new Date());
         } else {
             nuevaInscripcion = creator.registrarInscripcionParcial(idParticipante, idCampamento, new Date());
         }
 
+        if(necesidadesEspeciales) {
+            Boolean aux = GestorCampamentos.getInstance().buscarMonitorEspecialCampamento(idCampamento);
+
+            if(!aux) {
+                ArrayList<Monitor> = GestorCampamentos.getInstance().getMonitores();
+                for(Monitor monitor : monitores) {
+                    if(monitor.getEsEducador()) {
+                        GestorCampamentos.getInstance().asociarMonitorCampamento(monitor.getIdentificador(), idCampamento);
+                        break;
+                    }
+                }
+            }
+        }
+
         // asistente.addInscripcion(nuevaInscripcion);
-        inscripciones.add(nuevaInscripcion);
+        inscripcionDAO.add(nuevaInscripcion);
 
         System.out.println("Inscripción creada con éxito.");
 
