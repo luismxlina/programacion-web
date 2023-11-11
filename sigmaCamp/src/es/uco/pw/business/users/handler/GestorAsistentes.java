@@ -15,7 +15,6 @@ public class GestorAsistentes {
 	// Atributos
 
 	// ArrayList que contiene los asistentes.
-	private ArrayList<Asistente> asistentes;
 
 	// Singleton - Instancia única de GestorAsistentes.
 	private static GestorAsistentes instance = null;
@@ -25,8 +24,7 @@ public class GestorAsistentes {
 	 *
 	 * @param arrayNuevo ArrayList de asistentes.
 	 */
-	private GestorAsistentes(ArrayList<Asistente> arrayNuevo) {
-		this.asistentes = arrayNuevo;
+	private GestorAsistentes() {
 	}
 
 	/**
@@ -35,7 +33,7 @@ public class GestorAsistentes {
 	 * @param arrayNuevo ArrayList de asistentes.
 	 * @return Instancia única de GestorAsistentes.
 	 */
-	public static GestorAsistentes getInstance(ArrayList<Asistente> arrayNuevo) {
+	public static GestorAsistentes getInstance() {
 		if (instance == null) {
 			instance = new GestorAsistentes(arrayNuevo);
 		}
