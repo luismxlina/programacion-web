@@ -3,7 +3,7 @@ package es.uco.pw.business.campamento.models.actividad;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import es.uco.pw.business.users.models.monitor.Monitor;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 /**
  * Clase que representa una actividad.

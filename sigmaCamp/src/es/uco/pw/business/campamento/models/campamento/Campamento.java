@@ -6,7 +6,7 @@ import java.util.Date;
 
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
-import es.uco.pw.business.users.models.monitor.Monitor;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 /**
  * Esta clase representa un campamento.

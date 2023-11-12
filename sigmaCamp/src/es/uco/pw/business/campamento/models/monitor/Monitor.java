@@ -1,4 +1,4 @@
-package es.uco.pw.business.users.models.monitor;
+package es.uco.pw.business.campamento.models.monitor;
 
 import java.io.Serializable;
 

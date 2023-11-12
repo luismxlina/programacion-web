@@ -1,6 +1,6 @@
-package es.uco.pw.business.users.dto.monitor;
+package es.uco.pw.business.campamento.dto.monitor;
 
-import es.uco.pw.business.users.models.monitor.Monitor;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 public class MonitorDTO {
     private int identificador;

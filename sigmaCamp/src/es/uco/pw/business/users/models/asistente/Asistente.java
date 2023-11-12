@@ -2,6 +2,7 @@ package es.uco.pw.business.users.models.asistente;
 
 import java.io.Serializable;
 import java.util.Date;
+import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
 
 /**
  * La clase Asistente representa a una persona asistente con información básica.
@@ -58,6 +59,14 @@ public class Asistente implements Serializable {
         this.apellidos = apellidos;
         this.fechaNacimiento = fecha;
         this.requiereAtencion = atencion;
+    }
+
+    public Asistente(AsistenteDTO asistente) {
+        this.identificador = asistente.getIdentificador();
+        this.nombre = asistente.getNombre();
+        this.apellidos = asistente.getApellidos();
+        this.fechaNacimiento = asistente.getFechaNacimiento();
+        this.requiereAtencion = asistente.getRequiereAtencion();
     }
 
     /**

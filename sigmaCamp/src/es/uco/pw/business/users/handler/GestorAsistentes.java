@@ -1,5 +1,6 @@
 package es.uco.pw.business.users.handler;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,318 +9,139 @@ import java.util.Scanner;
 
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
 import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.dao.AsistenteDAO;
-import es.uco.pw.data.dao.InscripcionDAO;
+import es.uco.pw.data.dao.MonitorDAO;
 
 /**
  * Clase que gestiona los asistentes.
  */
 public class GestorAsistentes {
-	// Atributos
 
-	// ArrayList que contiene los asistentes.
-	private ArrayList<Asistente> asistentes;
-
-	// Singleton - Instancia única de GestorAsistentes.
 	private static GestorAsistentes instance = null;
-    private static AsistenteDAO asistenteDAO;
+	private static AsistenteDAO asistenteDAO;
 
-    /**
-     * Método estático para obtener la instancia única de GestorInscripciones.
-     *
-     * @param asistentes ArrayList de inscripciones.
-     * @param campamentos   ArrayList de campamentos.
-     * @return Instancia única de GestorInscripciones.
-     */
-    
-	public static GestorAsistentes getInstance(ArrayList<Asistente> arrayNuevo) {
+	public static GestorAsistentes getInstance() {
 		if (instance == null) {
-			instance = new GestorAsistentes(arrayNuevo);
+			instance = new GestorAsistentes();
 			asistenteDAO = new AsistenteDAO();
 		}
 		return instance;
 	}
-	
 
-	/**
-	 * Constructor privado para crear una instancia de GestorAsistentes.
-	 *
-	 * @param arrayNuevo ArrayList de asistentes.
-	 */
-	private GestorAsistentes(ArrayList<Asistente> arrayNuevo) {
-		this.asistentes = arrayNuevo;
-	}
-
-	public Boolean existeAsistente(int id)
-	{
-		for (Asistente asistente : this.asistentes) {
-			if (asistente.getIdentificador() == id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Método estático para obtener la instancia única de GestorAsistentes.
-	 *
-	 * @param arrayNuevo ArrayList de asistentes.
-	 * @return Instancia única de GestorAsistentes.
-	 */
-	
-
-	// Métodos
-
-	/**
-	 * Obtiene la lista de asistentes.
-	 *
-	 * @return ArrayList de asistentes.
-	 */
-	public ArrayList<Asistente> getAsistentes() {
-		return this.asistentes;
-	}
-
-	/**
-	 * Obtiene un asistente por su identificador.
-	 *
-	 * @param id Identificador del asistente.
-	 * @return Asistente o null si no se encuentra.
-	 */
-	public Asistente getAsistente(int id) {
-		for (Asistente asistente : this.asistentes) {
-			if (asistente.getIdentificador() == id) {
-				return asistente;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Da de alta a un nuevo asistente.
-	 *
-	 * @param nuevoAsistente Nuevo asistente a dar de alta.
-	 * @return true si se pudo dar de alta, false si el asistente ya existe.
-	 */
-	public Boolean altaAsistente(Asistente nuevoAsistente) {
-		if (buscarAsistente(nuevoAsistente.getIdentificador()) == false) {
-			this.asistentes.add(nuevoAsistente);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Busca un asistente por su identificador.
-	 *
-	 * @param id Identificador del asistente.
-	 * @return true si el asistente existe, false en caso contrario.
-	 */
 	public Boolean buscarAsistente(int id) {
-		if (asistentes.size() == 0)
-			return false;
-
-		for (int i = 0; i < asistentes.size(); i++) {
-			if (this.asistentes.get(i).getIdentificador() == id) {
-				return true;
-			}
-		}
-
-		return false;
+		return asistenteDAO.get(id) != null;
 	}
 
-	// /**
-	//  * Muestra la lista de asistentes en consola.
-	//  */
-	// public void mostrarAsistentes() {
-	// 	if (instance != null) {
-	// 		for (int i = 0; i < this.asistentes.size(); i++) {
-	// 			System.out.println("ID: " + this.asistentes.get(i).getIdentificador()
-	// 					+ ", Nombre: " + this.asistentes.get(i).getNombre()
-	// 					+ ", Apellidos: " + this.asistentes.get(i).getApellidos()
-	// 					+ ", Fecha nacimiento: " + this.asistentes.get(i).getFechaNacimiento()
-	// 					+ ", Necesita atención: " + this.asistentes.get(i).getRequiereAtencion());
-	// 		}
-	// 	}
-	// }
-
-	/**
-	 * Método que valida el nombre o apellidos de un asistente.
-	 *
-	 * @param input Nombre o apellidos a validar.
-	 * @return Nombre o apellidos si son válidos, cadena vacía si no lo son.
-	 */
-	private static String validarNombre(String input) {
-		// Expresión regular para verificar que el nombre no contiene números
-		String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
-
-		if (input.matches(regex)) {
-			return input;
-		} else {
-			System.out.println("El nombre o apellidos no pueden contener números ni caracteres especiales.");
-			return "";
+	public ArrayList<Asistente> getAsistentes() {
+		ArrayList<Asistente> asistentes = new ArrayList<Asistente>();
+		for (AsistenteDTO asistente : asistenteDAO.getAll()) {
+			asistentes.add(new Asistente(asistente));
 		}
+		return asistentes;
 	}
 
-	/**
-	 * Método que recopila los datos del nuevo asistente desde el teclado.
-	 *
-	 * @param teclado        Scanner para entrada por teclado.
-	 * @param nuevoAsistente Nuevo asistente a crear.
-	 * @return true si se pudieron recopilar los datos, false en caso contrario.
-	 */
-	public static Boolean pedirDatosTeclado(Scanner teclado, Asistente nuevoAsistente) {
-		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-		String nombre = "";
-		String apellidos = "";
-		String fechaTexto;
-		int atencionInt;
-
-		System.out.println("Introduzca los datos del nuevo asistente:");
-		while (nombre.isEmpty()) {
-			System.out.print("Nombre: ");
-			teclado.nextLine();
-			nombre = teclado.nextLine();
-			nombre = validarNombre(nombre);
+	public ArrayList<Integer> getAllIds() {
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		for (AsistenteDTO asistente : asistenteDAO.getAll()) {
+			ids.add(asistente.getIdentificador());
 		}
-		while (apellidos.isEmpty()) {
+		return ids;
+	}
 
-			System.out.print("Apellidos: ");
-			apellidos = teclado.nextLine();
-			apellidos = validarNombre(apellidos);
-		}
-		System.out.print("Fecha nacimiento (yyyy-mm-dd): ");
-		fechaTexto = teclado.nextLine();
-		System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
-		atencionInt = teclado.nextInt();
+	public Asistente getAsistente(int id) {
+		return new Asistente(asistenteDAO.get(id));
+	}
 
-		Date fecha = new Date();
-		try {
-
-			fecha = formatoFecha.parse(fechaTexto);
-
-		} catch (ParseException e) {
-			System.out.println("Error al convertir la fecha...");
+	public Boolean altaAsistente(Asistente nuevoAsistente) {
+		if (buscarAsistente(nuevoAsistente.getIdentificador())) {
 			return false;
 		}
-
-		Boolean atencion = false;
-		if (atencionInt == 1) {
-			atencion = true;
-		}
-
-		nuevoAsistente.setNombre(nombre);
-		nuevoAsistente.setApellidos(apellidos);
-		nuevoAsistente.setFechaNacimiento(fecha);
-		nuevoAsistente.setRequiereAtencion(atencion);
+		asistenteDAO.insert(new AsistenteDTO(nuevoAsistente));
 		return true;
 	}
 
-	/**
-	 * Método que modifica los datos de un asistente.
-	 */
-	public Boolean modificar(int identificador) {
-
-		Scanner teclado = new Scanner(System.in);
-		// int identificador;
-
-		// System.out.print("Escriba el identificador del asistente a modificar: ");
-		// identificador = teclado.nextInt();
-
-		if (buscarAsistente(identificador)) {
-
-			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-
-			String newNombre;
-			String newApellidos;
-			String newFechaTexto;
-			Date newFecha = new Date();
-			int newAtencionTexto;
-			Boolean newAtencion = false;
-
-			System.out.println("Introduzca los nuevos datos del asistente: ");
-			// String saltoDeLinea = teclado.nextLine();
-
-			// Leer los nuevos datos del asistente
-			System.out.print("Nuevo nombre: ");
-			newNombre = teclado.nextLine();
-			System.out.print("Nuevos apellidos: ");
-			newApellidos = teclado.nextLine();
-			System.out.print("Nueva fecha nacimiento (yyyy-mm-dd): ");
-			newFechaTexto = teclado.nextLine();
-			System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
-			newAtencionTexto = teclado.nextInt();
-
-			if (newAtencionTexto == 1) {
-				newAtencion = true;
-			}
-
-			try {
-
-				newFecha = formatoFecha.parse(newFechaTexto);
-
-			} catch (ParseException e) {
-
-				System.out.println("Error al convertir la fecha");
-
-			}
-
-			for (Asistente asistente : this.asistentes) {
-
-				if (asistente.getIdentificador() == identificador) {
-
-					asistente.setNombre(newNombre);
-					asistente.setApellidos(newApellidos);
-					asistente.setFechaNacimiento(newFecha);
-					asistente.setRequiereAtencion(newAtencion);
-
-				}
-
-			}
-
-			teclado.close();
-
-			return true;
-
-		}
-		else {
-
-			teclado.close();			
-
-			return false;
-
-		}
-
-		
-		
-	}
-
-	/**
-	 * Método que elimina un asistente.
-	 *
-	 * @param teclado Scanner para entrada por teclado.
-	 */
 	
-	 public boolean eliminar(int identificador) {
+
+	
+	
+
+
+	
+
+	// public Asistente modificarAsistenteTeclado(int identificador) {
+
+	// 	Scanner teclado = new Scanner(System.in);
+	// 	// int identificador;
+
+	// 	// System.out.print("Escriba el identificador del asistente a modificar: ");
+	// 	// identificador = teclado.nextInt();
+
+	// 	if (buscarAsistente(identificador)) {
+
+	// 		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+
+	// 		String newNombre;
+	// 		String newApellidos;
+	// 		String newFechaTexto;
+	// 		Date newFecha = new Date();
+	// 		int newAtencionTexto;
+	// 		Boolean newAtencion = false;
+
+	// 		System.out.println("Introduzca los nuevos datos del asistente: ");
+	// 		// String saltoDeLinea = teclado.nextLine();
+
+	// 		// Leer los nuevos datos del asistente
+	// 		System.out.print("Nuevo nombre: ");
+	// 		newNombre = teclado.nextLine();
+	// 		System.out.print("Nuevos apellidos: ");
+	// 		newApellidos = teclado.nextLine();
+	// 		System.out.print("Nueva fecha nacimiento (yyyy-mm-dd): ");
+	// 		newFechaTexto = teclado.nextLine();
+	// 		System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
+	// 		newAtencionTexto = teclado.nextInt();
+
+	// 		if (newAtencionTexto == 1) {
+	// 			newAtencion = true;
+	// 		}
+
+	// 		try {
+
+	// 			newFecha = formatoFecha.parse(newFechaTexto);
+
+	// 		} catch (ParseException e) {
+
+	// 			System.out.println("Error al convertir la fecha");
+
+	// 		}
+
+	// 		asistente.setNombre(newNombre);
+	// 		asistente.setApellidos(newApellidos);
+	// 		asistente.setFechaNacimiento(newFecha);
+	// 		asistente.setRequiereAtencion(newAtencion);
+
+	// 		teclado.close();
+
+	// 		return true;
+
+	// 	} else {
+
+	// 		teclado.close();
+
+	// 		return false;
+
+	// 	}
+
+	// }
+
+
+	public boolean eliminarAsistente(int identificador) {
 
 		if (buscarAsistente(identificador)) {
-
-			for (int i = 0; i < this.asistentes.size(); i++) {
-
-				if (this.asistentes.get(i).getIdentificador() == identificador) {
-
-					this.asistentes.remove(i);
-
-				}
-
-			}
+			asistenteDAO.delete(identificador);
 			return true;
 		}
-
-		else {
-
-			return false;
-
-		}
+		return false;
 	}
 }

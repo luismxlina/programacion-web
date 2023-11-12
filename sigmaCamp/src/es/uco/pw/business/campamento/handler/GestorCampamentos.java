@@ -9,7 +9,7 @@ import java.util.Scanner;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
-import es.uco.pw.business.users.models.monitor.Monitor;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 /**
  * El GestorCampamentos gestiona las operaciones relacionadas con los

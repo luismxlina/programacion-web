@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import es.uco.pw.business.users.dto.monitor.MonitorDTO;
+
+import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
 import es.uco.pw.data.common.Conexion;
 
 public class MonitorDAO implements DAO<MonitorDTO, Integer> {

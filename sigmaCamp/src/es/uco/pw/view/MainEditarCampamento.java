@@ -8,7 +8,7 @@ import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
-import es.uco.pw.business.users.models.monitor.Monitor;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 /**
  * La clase MainEditarCampamento proporciona un submenú de opciones para editar
