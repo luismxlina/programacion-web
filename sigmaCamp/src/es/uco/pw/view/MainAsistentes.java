@@ -1,6 +1,5 @@
 package es.uco.pw.view;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
@@ -22,13 +21,6 @@ import es.uco.pw.business.users.models.asistente.Asistente;
 public class MainAsistentes {
 
 	private static HashSet<Integer> idSet = new HashSet<>();
-	// Obtiene todos los id de asistentes de la base de datos y los guarda en la
-	// tabla hash
-	ArrayList<Integer> ids = GestorAsistentes.getInstance().getAllIds();for(
-	int i = 0;i<ids.size();i++)
-	{
-		idSet.add(ids.get(i));
-	}
 
 	/**
 	 * Muestra un menú de opciones relacionadas con la gestión de asistentes.
@@ -39,6 +31,12 @@ public class MainAsistentes {
 	 */
 
 	public static void mostrarMenuAsistentes(Scanner teclado, GestorAsistentes gestor_asistentes) {
+
+		ArrayList<Integer> ids = GestorAsistentes.getInstance().getAllIds();
+
+		for (int i = 0; i < ids.size(); i++) {
+			idSet.add(ids.get(i));
+		}
 
 		int opcion;
 
@@ -64,14 +62,16 @@ public class MainAsistentes {
 					mostrarAsistentes(gestor_asistentes.getAsistentes());
 					break;
 				case 2:
-					Asistente nuevoAsistente = new Asistente(generarIDUnico());
-					if (!GestorAsistentes.pedirDatosTeclado(teclado, nuevoAsistente)) {
-						break;
-					}
+					Asistente nuevoAsistente = pedirDatosTeclado(teclado, new Asistente(generarIDUnico()));
 					gestor_asistentes.altaAsistente(nuevoAsistente);
 					break;
 				case 3:
-					gestor_asistentes.eliminarAsistente(teclado);
+					int identificador = leerDatosEliminarAsistente(teclado);
+					if (gestor_asistentes.eliminarAsistente(identificador)) {
+						System.out.println("Asistente eliminado correctamente");
+					} else {
+						System.out.println("No existe ningún usuario con el ID indicado");
+					}
 					break;
 				default:
 					System.out.println("Opción no válida");
@@ -165,5 +165,15 @@ public class MainAsistentes {
 			System.out.println("El nombre o apellidos no pueden contener números ni caracteres especiales.");
 			return "";
 		}
+	}
+
+	public static int leerDatosEliminarAsistente(Scanner teclado) {
+
+		int identificador;
+
+		System.out.print("Escriba el identificador del asistente a eliminar: ");
+		identificador = teclado.nextInt();
+
+		return identificador;
 	}
 }

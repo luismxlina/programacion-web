@@ -1,18 +1,10 @@
 package es.uco.pw.business.users.handler;
 
-import java.lang.reflect.Array;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 
-import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
-import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
 import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.dao.AsistenteDAO;
-import es.uco.pw.data.dao.MonitorDAO;
 
 /**
  * Clase que gestiona los asistentes.
@@ -62,79 +54,70 @@ public class GestorAsistentes {
 		return true;
 	}
 
-	
-
-	
-	
-
-
-	
-
 	// public Asistente modificarAsistenteTeclado(int identificador) {
 
-	// 	Scanner teclado = new Scanner(System.in);
-	// 	// int identificador;
+	// Scanner teclado = new Scanner(System.in);
+	// // int identificador;
 
-	// 	// System.out.print("Escriba el identificador del asistente a modificar: ");
-	// 	// identificador = teclado.nextInt();
+	// // System.out.print("Escriba el identificador del asistente a modificar: ");
+	// // identificador = teclado.nextInt();
 
-	// 	if (buscarAsistente(identificador)) {
+	// if (buscarAsistente(identificador)) {
 
-	// 		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+	// SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 
-	// 		String newNombre;
-	// 		String newApellidos;
-	// 		String newFechaTexto;
-	// 		Date newFecha = new Date();
-	// 		int newAtencionTexto;
-	// 		Boolean newAtencion = false;
+	// String newNombre;
+	// String newApellidos;
+	// String newFechaTexto;
+	// Date newFecha = new Date();
+	// int newAtencionTexto;
+	// Boolean newAtencion = false;
 
-	// 		System.out.println("Introduzca los nuevos datos del asistente: ");
-	// 		// String saltoDeLinea = teclado.nextLine();
+	// System.out.println("Introduzca los nuevos datos del asistente: ");
+	// // String saltoDeLinea = teclado.nextLine();
 
-	// 		// Leer los nuevos datos del asistente
-	// 		System.out.print("Nuevo nombre: ");
-	// 		newNombre = teclado.nextLine();
-	// 		System.out.print("Nuevos apellidos: ");
-	// 		newApellidos = teclado.nextLine();
-	// 		System.out.print("Nueva fecha nacimiento (yyyy-mm-dd): ");
-	// 		newFechaTexto = teclado.nextLine();
-	// 		System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
-	// 		newAtencionTexto = teclado.nextInt();
+	// // Leer los nuevos datos del asistente
+	// System.out.print("Nuevo nombre: ");
+	// newNombre = teclado.nextLine();
+	// System.out.print("Nuevos apellidos: ");
+	// newApellidos = teclado.nextLine();
+	// System.out.print("Nueva fecha nacimiento (yyyy-mm-dd): ");
+	// newFechaTexto = teclado.nextLine();
+	// System.out.print("Requiere atencion especial (Si - 1 / No - 0): ");
+	// newAtencionTexto = teclado.nextInt();
 
-	// 		if (newAtencionTexto == 1) {
-	// 			newAtencion = true;
-	// 		}
+	// if (newAtencionTexto == 1) {
+	// newAtencion = true;
+	// }
 
-	// 		try {
+	// try {
 
-	// 			newFecha = formatoFecha.parse(newFechaTexto);
+	// newFecha = formatoFecha.parse(newFechaTexto);
 
-	// 		} catch (ParseException e) {
+	// } catch (ParseException e) {
 
-	// 			System.out.println("Error al convertir la fecha");
-
-	// 		}
-
-	// 		asistente.setNombre(newNombre);
-	// 		asistente.setApellidos(newApellidos);
-	// 		asistente.setFechaNacimiento(newFecha);
-	// 		asistente.setRequiereAtencion(newAtencion);
-
-	// 		teclado.close();
-
-	// 		return true;
-
-	// 	} else {
-
-	// 		teclado.close();
-
-	// 		return false;
-
-	// 	}
+	// System.out.println("Error al convertir la fecha");
 
 	// }
 
+	// asistente.setNombre(newNombre);
+	// asistente.setApellidos(newApellidos);
+	// asistente.setFechaNacimiento(newFecha);
+	// asistente.setRequiereAtencion(newAtencion);
+
+	// teclado.close();
+
+	// return true;
+
+	// } else {
+
+	// teclado.close();
+
+	// return false;
+
+	// }
+
+	// }
 
 	public boolean eliminarAsistente(int identificador) {
 
