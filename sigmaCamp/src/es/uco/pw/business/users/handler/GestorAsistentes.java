@@ -6,9 +6,6 @@ import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
 import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.dao.AsistenteDAO;
 
-/**
- * Clase que gestiona los asistentes.
- */
 public class GestorAsistentes {
 
 	private static GestorAsistentes instance = null;
