@@ -34,11 +34,11 @@ public class Conexion {
         try {
         	Class.forName("com.mysql.jdbc.Driver");
  
-        	// InputStream pathConfig = getClass().getClassLoader().getResourceAsStream("/config.properties");
-        	// InputStream pathSQL = getClass().getClassLoader().getResourceAsStream("/sql.properties");
+        	InputStream pathConfig = getClass().getClassLoader().getResourceAsStream("config.properties");
+        	InputStream pathSQL = getClass().getClassLoader().getResourceAsStream("sql.properties");
 
-            InputStream pathConfig = ClassLoader.getSystemResourceAsStream("config.properties");
-            InputStream pathSQL = ClassLoader.getSystemResourceAsStream("sql.properties");
+            // InputStream pathConfig = ClassLoader.getSystemResourceAsStream("config.properties");
+            // InputStream pathSQL = ClassLoader.getSystemResourceAsStream("sql.properties");
 
         	BufferedReader readerConfig = new BufferedReader(new InputStreamReader(pathConfig));
         	BufferedReader readerSQL = new BufferedReader(new InputStreamReader(pathSQL));

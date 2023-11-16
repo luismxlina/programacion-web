@@ -31,15 +31,15 @@ public class Asistente implements Serializable {
      * Constructor que permite crear un objeto Asistente con valores específicos.
      *
      * @param identificador
-     *            El identificador del asistente.
+     *                         El identificador del asistente.
      * @param nombre
-     *            El nombre del asistente.
+     *                         El nombre del asistente.
      * @param apellidos
-     *            Los apellidos del asistente.
+     *                         Los apellidos del asistente.
      * @param fechaNacimiento
-     *            La fecha de nacimiento del asistente.
+     *                         La fecha de nacimiento del asistente.
      * @param requiereAtencion
-     *            Indica si el asistente requiere atención especial.
+     *                         Indica si el asistente requiere atención especial.
      */
     public Asistente(int identificador, String nombre, String apellidos, Date fechaNacimiento,
             Boolean requiereAtencion) {
@@ -50,10 +50,25 @@ public class Asistente implements Serializable {
         this.requiereAtencion = requiereAtencion;
     }
 
+    /**
+     * Constructor que inicializa un nuevo Asistente con un identificador
+     * específico.
+     *
+     * @param identificador El identificador único del asistente.
+     */
     public Asistente(int identificador) {
         this.identificador = identificador;
     }
 
+    /**
+     * Constructor que inicializa un nuevo Asistente con los detalles
+     * proporcionados.
+     *
+     * @param nombre    El nombre del asistente.
+     * @param apellidos Los apellidos del asistente.
+     * @param fecha     La fecha de nacimiento del asistente.
+     * @param atencion  Indica si el asistente requiere atención especial.
+     */
     public Asistente(String nombre, String apellidos, Date fecha, Boolean atencion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -61,6 +76,13 @@ public class Asistente implements Serializable {
         this.requiereAtencion = atencion;
     }
 
+    /**
+     * Constructor que inicializa un nuevo Asistente a partir de un objeto
+     * AsistenteDTO.
+     *
+     * @param asistente Un objeto AsistenteDTO que contiene los detalles del
+     *                  asistente.
+     */
     public Asistente(AsistenteDTO asistente) {
         this.identificador = asistente.getIdentificador();
         this.nombre = asistente.getNombre();
@@ -82,7 +104,7 @@ public class Asistente implements Serializable {
      * Establece el identificador del asistente.
      *
      * @param identificador
-     *            El identificador a establecer.
+     *                      El identificador a establecer.
      */
     public void setIdentificador(int identificador) {
         this.identificador = identificador;
@@ -101,7 +123,7 @@ public class Asistente implements Serializable {
      * Establece el nombre del asistente.
      *
      * @param nombre
-     *            El nombre a establecer.
+     *               El nombre a establecer.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -120,7 +142,7 @@ public class Asistente implements Serializable {
      * Establece los apellidos del asistente.
      *
      * @param apellidos
-     *            Los apellidos a establecer.
+     *                  Los apellidos a establecer.
      */
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
@@ -139,7 +161,7 @@ public class Asistente implements Serializable {
      * Establece la fecha de nacimiento del asistente.
      *
      * @param fechaNacimiento
-     *            La fecha de nacimiento a establecer.
+     *                        La fecha de nacimiento a establecer.
      */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
@@ -159,8 +181,9 @@ public class Asistente implements Serializable {
      * Establece si el asistente requiere atención especial.
      *
      * @param requiereAtencion
-     *            true si el asistente requiere atención especial, false en caso
-     *            contrario.
+     *                         true si el asistente requiere atención especial,
+     *                         false en caso
+     *                         contrario.
      */
     public void setRequiereAtencion(Boolean requiereAtencion) {
         this.requiereAtencion = requiereAtencion;

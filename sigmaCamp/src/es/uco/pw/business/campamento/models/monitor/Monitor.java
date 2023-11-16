@@ -2,6 +2,8 @@ package es.uco.pw.business.campamento.models.monitor;
 
 import java.io.Serializable;
 
+import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
+
 /**
  * La clase Monitor representa a una persona encargada de dirigir actividades en un campamento.
  * Implementa la interfaz Serializable para permitir su almacenamiento y recuperación.
@@ -45,6 +47,13 @@ public class Monitor implements Serializable {
 
 	public Monitor(int id) {
 		this.identificador = id;
+	}
+
+	public Monitor(MonitorDTO monitor) {
+		this.identificador = monitor.getIdentificador();
+		this.nombre = monitor.getNombre();
+		this.apellidos = monitor.getApellidos();
+		this.esEducador = monitor.getEsEducador();
 	}
 
 	// Métodos de acceso (getters y setters)

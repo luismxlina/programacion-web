@@ -1,5 +1,6 @@
 package es.uco.pw.view;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -58,7 +59,7 @@ public class MainEditarCampamento {
                     break;
                 case 1:
                     Actividad actividad = new Actividad();
-                    GestorCampamentos.crearActividad(teclado, actividad, nivelEducativo);
+                    crearActividad(teclado, actividad, nivelEducativo);
                     gestor_campamentos.asociarActividadCampamento(actividad, idCampamento);
                     break;
                 case 2:
@@ -128,5 +129,46 @@ public class MainEditarCampamento {
         } while (idSet.contains(id));
         idSet.add(id);
         return id;
+    }
+
+    /**
+     * Crea una nueva actividad.
+     * 
+     * @param teclado        el Scanner para la entrada de datos
+     * @param nuevaActividad la nueva actividad a crear
+     * @param nivel          el nivel educativo de la actividad
+     * @return la actividad creada
+     */
+    public static Actividad crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
+
+        String nombreActividad;
+        String hora;
+        int max_participantes = 0;
+        int max_monitores = 0;
+        Actividad Actividad = new Actividad();
+
+        System.out.println("Introduzca los datos de la nueva actividad:");
+
+        System.out.print("Nombre de la actividad: ");
+        teclado.nextLine();
+        nombreActividad = teclado.nextLine();
+
+        System.out.print("Introduzca la hora a la que empieza (HH:MM:SS): ");
+        hora = teclado.nextLine();
+        // Parsea el string howa a LocalTime
+        LocalTime horaLocalTime = LocalTime.parse(hora);
+
+        System.out.print("Introduzca el número máximo de asistentes: ");
+        max_participantes = teclado.nextInt();
+
+        System.out.print("Introduzca el número máximo de monitores: ");
+        max_monitores = teclado.nextInt();
+
+        nuevaActividad.setNombreActividad(nombreActividad);
+        nuevaActividad.setNivel(nivel);
+        nuevaActividad.setHora(horaLocalTime);
+        nuevaActividad.setMax_participantes(max_participantes);
+        nuevaActividad.setNum_monitores(max_monitores);
+        return Actividad;
     }
 }

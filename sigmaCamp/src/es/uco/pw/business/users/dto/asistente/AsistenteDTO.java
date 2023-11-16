@@ -18,7 +18,6 @@ public class AsistenteDTO {
         this.requiereAtencion = false;
     }
 
-
     public AsistenteDTO(int identificador, String nombre, String apellidos, Date fechaNacimiento,
             Boolean requiereAtencion) {
         this.identificador = identificador;

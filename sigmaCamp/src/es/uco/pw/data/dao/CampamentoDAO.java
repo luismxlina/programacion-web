@@ -120,7 +120,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
     public boolean insertCampamentoMonitor(Integer campamentoId, Integer monitorId) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOMONITOR");
+        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO_MONITOR");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, campamentoId);
@@ -135,7 +135,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
     public boolean insertCampamentoActividad(Integer campamentoId, Integer actividadId) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTOACTIVIDAD");
+        String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO_ACTIVIDAD");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, campamentoId);
@@ -146,4 +146,6 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
         }
         return false;
     }
+
+    
 }

@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS CampamentoActividad;
+DROP TABLE IF EXISTS CampamentoMonitorEspecial;
 DROP TABLE IF EXISTS CampamentoMonitor;
 DROP TABLE IF EXISTS Inscripcion;
 DROP TABLE IF EXISTS Campamento;
@@ -27,7 +28,7 @@ CREATE TABLE Monitor (
 CREATE TABLE Actividad (
     Nombre VARCHAR(255) PRIMARY KEY,
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
-    Horario TIME,
+    Horario ENUM('Mañana', 'Tarde'),
     NumeroMaximoParticipantes INT,
     NumeroMonitoresNecesarios INT
 );
@@ -56,6 +57,15 @@ CREATE TABLE Inscripcion (
 
 -- Tabla de unión para la relación N-M entre Campamento y Monitor
 CREATE TABLE CampamentoMonitor (
+    CampamentoId INT,
+    MonitorId INT,
+    PRIMARY KEY (CampamentoId, MonitorId),
+    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MonitorId) REFERENCES Monitor(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tabla de unión para la relación N-M entre Campamento y MonitorEspecial
+CREATE TABLE CampamentoMonitorEspecial (
     CampamentoId INT,
     MonitorId INT,
     PRIMARY KEY (CampamentoId, MonitorId),

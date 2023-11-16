@@ -1,26 +1,25 @@
 package es.uco.pw.business.campamento.dto.actividad;
 
-import java.time.LocalTime;
-
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
-
+import es.uco.pw.business.campamento.models.actividad.Actividad;
+import es.uco.pw.business.campamento.models.actividad.Horario;
 
 public class ActividadDTO {
     private String nombreActividad;
     private NivelEducativo nivel;
-    private LocalTime hora;
+    private Horario hora;
     private int maxParticipantes;
     private int numMonitores;
 
     public ActividadDTO() {
         this.nombreActividad = "";
         this.nivel = NivelEducativo.INFANTIL;
-        this.hora = LocalTime.now();
+        this.hora = Horario.MAÑANA;
         this.maxParticipantes = 0;
         this.numMonitores = 0;
     }
 
-    public ActividadDTO(String nombreActividad, NivelEducativo nivel, LocalTime hora, int maxParticipantes,
+    public ActividadDTO(String nombreActividad, NivelEducativo nivel, Horario hora, int maxParticipantes,
             int numMonitores) {
         this.nombreActividad = nombreActividad;
         this.nivel = nivel;
@@ -29,7 +28,14 @@ public class ActividadDTO {
         this.numMonitores = numMonitores;
     }
 
-    // métodos getter y setter para nombreActividad
+    public ActividadDTO(Actividad actividad) {
+        this.nombreActividad = actividad.getNombreActividad();
+        this.nivel = actividad.getNivel();
+        this.hora = actividad.getHora();
+        this.maxParticipantes = actividad.getMaxParticipantes();
+        this.numMonitores = actividad.getNumMonitores();
+    }
+
     public String getNombreActividad() {
         return nombreActividad;
     }
@@ -38,7 +44,6 @@ public class ActividadDTO {
         this.nombreActividad = nombreActividad;
     }
 
-    // métodos getter y setter para nivel
     public NivelEducativo getNivel() {
         return nivel;
     }
@@ -47,16 +52,14 @@ public class ActividadDTO {
         this.nivel = nivel;
     }
 
-    // métodos getter y setter para hora
-    public LocalTime getHora() {
+    public Horario getHora() {
         return hora;
     }
 
-    public void setHora(LocalTime hora) {
+    public void setHora(Horario hora) {
         this.hora = hora;
     }
 
-    // métodos getter y setter para maxParticipantes
     public int getMaxParticipantes() {
         return maxParticipantes;
     }
@@ -65,7 +68,6 @@ public class ActividadDTO {
         this.maxParticipantes = maxParticipantes;
     }
 
-    // métodos getter y setter para numMonitores
     public int getNumMonitores() {
         return numMonitores;
     }
