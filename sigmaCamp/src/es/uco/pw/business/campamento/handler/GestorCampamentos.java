@@ -310,16 +310,7 @@ public class GestorCampamentos {
         return monitorDAO.getMonitorCampamento(idMonitor, idCampamento) != null;
     }
 
-    /**
-     * Busca a un monitor especial en un campamento específico.
-     * 
-     * @param idMonitor
-     * @param idCampamento
-     * @return
-     */
-    public Boolean buscarMonitorEspecialCampamento(Integer idMonitor, Integer idCampamento) {
-        return monitorDAO.getMonitorEspecialCampamento(idMonitor, idCampamento) != null;
-    }
+    
 
     /**
      * Asocia un monitor a una actividad.
@@ -376,23 +367,7 @@ public class GestorCampamentos {
         return ids;
     }
 
-    /**
-     * Busca un monitor en un campamento específico.
-     * 
-     * @param idMonitor    el ID del monitor
-     * @param idCampamento el ID del campamento
-     * @return true si el monitor existe en el campamento, false en caso contrario
-     */
-    public Boolean buscarMonitorCampamento(int idMonitor, int idCampamento) {
-        CampamentoDAO campamentoDAO = new CampamentoDAO();
-        ArrayList<MonitorDTO> monitores = campamentoDAO.getCampamentoMonitor(idMonitor, idCampamento);
-        for (MonitorDTO monitor : monitores) {
-            if (monitor.getIdentificador() == idMonitor) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     /**
      * Asocia un monitor a un campamento.

@@ -1,10 +1,17 @@
 DROP TABLE IF EXISTS CampamentoActividad;
+
 DROP TABLE IF EXISTS CampamentoMonitorEspecial;
+
 DROP TABLE IF EXISTS CampamentoMonitor;
+
 DROP TABLE IF EXISTS Inscripcion;
+
 DROP TABLE IF EXISTS Campamento;
+
 DROP TABLE IF EXISTS Actividad;
+
 DROP TABLE IF EXISTS Monitor;
+
 DROP TABLE IF EXISTS Asistente;
 
 -- Tabla para la entidad Asistente
@@ -57,15 +64,6 @@ CREATE TABLE Inscripcion (
 
 -- Tabla de unión para la relación N-M entre Campamento y Monitor
 CREATE TABLE CampamentoMonitor (
-    CampamentoId INT,
-    MonitorId INT,
-    PRIMARY KEY (CampamentoId, MonitorId),
-    FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MonitorId) REFERENCES Monitor(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Tabla de unión para la relación N-M entre Campamento y MonitorEspecial
-CREATE TABLE CampamentoMonitorEspecial (
     CampamentoId INT,
     MonitorId INT,
     PRIMARY KEY (CampamentoId, MonitorId),

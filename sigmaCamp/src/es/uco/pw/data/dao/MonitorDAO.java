@@ -121,7 +121,7 @@ public class MonitorDAO implements DAO<MonitorDTO, Integer> {
         return null;
     }
 
-    public MonitorDTO getMonitorEspecialCampamento(Integer idMonitor, Inte) {
+    public MonitorDTO getMonitorEspecialCampamento(Integer idMonitor, Integer ) {
 
     }
 }
