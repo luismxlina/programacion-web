@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
-import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.data.common.Conexion;
 
 public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
@@ -132,14 +131,14 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
         return false;
     }
 
-    public boolean insertCampamentoActividad(Integer campamentoId, Integer actividadId) {
+    public boolean insertCampamentoActividad(Integer campamentoId, String nombreActividad) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO_ACTIVIDAD");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, campamentoId);
-            st.setInt(2, actividadId);
+            st.setString(2, nombreActividad);
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,5 +146,20 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
         return false;
     }
 
-    
+    public ArrayList<Integer> getAllIdsCampamentos() {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_IDS_CAMPAMENTO");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ids.add(rs.getInt("Identificador"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.data.common.Conexion;
+import es.uco.pw.business.campamento.models.actividad.Actividad;
+import es.uco.pw.business.campamento.models.actividad.Horario;
 
 public class ActividadDAO implements DAO<ActividadDTO, String> {
 
@@ -21,7 +23,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             PreparedStatement st = conex.prepareStatement(query);
             st.setString(1, actividad.getNombreActividad());
             st.setString(2, actividad.getNivel().name());
-            st.setTime(3, java.sql.Time.valueOf(actividad.getHora()));
+            st.setString(3, actividad.getHora().name());
             st.setInt(4, actividad.getMaxParticipantes());
             st.setInt(5, actividad.getNumMonitores());
             return st.executeUpdate() == 1;
@@ -40,7 +42,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             PreparedStatement st = conex.prepareStatement(query);
             st.setString(1, actividad.getNombreActividad());
             st.setString(2, actividad.getNivel().name());
-            st.setTime(3, java.sql.Time.valueOf(actividad.getHora()));
+            st.setString(3, actividad.getHora().name());
             st.setInt(4, actividad.getMaxParticipantes());
             st.setInt(5, actividad.getNumMonitores());
             st.setString(6, actividad.getNombreActividad());
@@ -78,7 +80,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             while (rs.next()) {
                 actividades.add(new ActividadDTO(rs.getString("Nombre"),
                         NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
-                        rs.getTime("Horario").toLocalTime(),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()),
                         rs.getInt("NumeroMaximoParticipantes"), rs.getInt("NumeroMonitoresNecesarios")));
             }
             return actividades;
@@ -100,7 +102,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             if (rs.next()) {
                 return new ActividadDTO(rs.getString("Nombre"),
                         NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
-                        rs.getTime("Horario").toLocalTime(), rs.getInt("NumeroMaximoParticipantes"),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()), rs.getInt("NumeroMaximoParticipantes"),
                         rs.getInt("NumeroMonitoresNecesarios"));
             }
         } catch (SQLException e) {
@@ -112,7 +114,7 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
     public boolean insertActividadMonitor(Integer actividadId, Integer monitorId) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("INSERT_ACTIVIDADMONITOR");
+        String query = conexController.getSql().getProperty("INSERT_ACTIVIDAD_MONITOR");
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, actividadId);
@@ -124,4 +126,62 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
         return false;
     }
 
+    public ActividadDTO getActividadCampamento(String nombreActividad, Integer idCampamento) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ACTIVIDAD_CAMPAMENTO");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, idCampamento);
+            st.setString(2, nombreActividad);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new ActividadDTO(rs.getString("Nombre"),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()), rs.getInt("NumeroMaximoParticipantes"),
+                        rs.getInt("NumeroMonitoresNecesarios"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<ActividadDTO> getActividadesCampamento(Integer idCampamento) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ACTIVIDADES_CAMPAMENTO");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, idCampamento);
+            ResultSet rs = st.executeQuery();
+            ArrayList<ActividadDTO> actividades = new ArrayList<ActividadDTO>();
+            while (rs.next()) {
+                actividades.add(new ActividadDTO(rs.getString("Nombre"),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()),
+                        rs.getInt("NumeroMaximoParticipantes"), rs.getInt("NumeroMonitoresNecesarios")));
+            }
+            return actividades;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Boolean deleteActividadCampamento(String nombreActividad, Integer idCampamento) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("DELETE_ACTIVIDAD_CAMPAMENTO");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, idCampamento);
+            st.setString(2, nombreActividad);
+            return st.executeUpdate() == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

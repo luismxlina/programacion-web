@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
+            "mainClass": "sigmaCamp/es.uco.pw.view.Main",
+            "projectName": "sigmaCamp"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
             "mainClass": "sigmaCamp/es.uco.pw.data.dao.Main",
             "projectName": "sigmaCamp"
         },

@@ -103,6 +103,17 @@ public class GestorCampamentos {
     }
 
     /**
+     * Devuelve todos los IDs de los campamentos.
+     * 
+     * @return una lista de todos los IDs de los campamentos
+     */
+    public ArrayList<Integer> getAllIdsCampamentos() {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        ids = campamentoDAO.getAllIdsCampamentos();
+        return ids;
+    }
+
+    /**
      * Devuelve una actividad específica.
      * 
      * @param nombreActividad el nombre de la actividad
@@ -113,18 +124,131 @@ public class GestorCampamentos {
     }
 
     /**
+     * Devuelve todas las actividades.
+     * 
+     * @return
+     */
+    public ArrayList<Actividad> getActividades() {
+        ArrayList<Actividad> actividades = new ArrayList<Actividad>();
+        for (ActividadDTO actividad : actividadDAO.getAll()) {
+            actividades.add(new Actividad(actividad));
+        }
+        return actividades;
+    }
+
+    /**
+     * Devuelve una actividad específica de un campamento específico.
+     * 
+     * @param nombreActividad
+     * @param idCampamento
+     * @return la actividad
+     */
+    public Actividad getActividadCampamento(String nombreActividad, Integer idCampamento) {
+        ActividadDTO actividad = actividadDAO.getActividadCampamento(nombreActividad, idCampamento);
+        if (actividad == null) {
+            return null;
+        }
+        return new Actividad(actividad);
+    }
+
+    /**
      * Devuelve las actividades de un campamento específico.
      * 
      * @param idCampamento el ID del campamento
      * @return una lista de las actividades del campamento
      */
-    public ArrayList<Actividad> getActividades(int idCampamento) {
+    public ArrayList<Actividad> getActividadesCampamento(int idCampamento) {
         ArrayList<Actividad> actividades = new ArrayList<Actividad>();
-        for (ActividadDTO actividad : campamentoDAO.getActividadesCampamento(idCampamento)) {
+        for (ActividadDTO actividad : actividadDAO.getActividadesCampamento(idCampamento)) {
             actividades.add(new Actividad(actividad));
         }
-
         return actividades;
+    }
+
+    /**
+     * Compueba si una actividad existe.
+     * 
+     * @param nombreActividad
+     * @return true si la actividad existe, false en caso contrario
+     */
+    public Boolean buscarActividad(String nombreActividad) {
+        return actividadDAO.get(nombreActividad) != null;
+    }
+
+    /**
+     * Comprueba si una actividad existe en un campamento específico.
+     * 
+     * @param nombreActividad
+     * @param idCampamento
+     * @return true si la actividad existe en el campamento, false en caso contrario
+     */
+    public Boolean buscarActividadCampamento(String nombreActividad, int idCampamento) {
+        return actividadDAO.getActividadCampamento(nombreActividad, idCampamento) != null;
+    }
+
+    /**
+     * Añade una actividad específica.
+     * 
+     * @param id el ID del campamento
+     * @return true si el campamento se ha borrado correctamente, false en caso
+     *         contrario
+     */
+    public Boolean addActividad(Actividad actividad) {
+        if (buscarActividad(actividad.getNombreActividad())) {
+            return false;
+        }
+        actividadDAO.insert(new ActividadDTO(actividad));
+        return true;
+    }
+
+    /**
+     * Asocia una actividad a un campamento.
+     * 
+     * @param actividad    el nombre de la actividad
+     * @param idCampamento el ID del campamento
+     * @return true si la actividad se ha asociado correctamente, false en caso
+     *         contrario
+     */
+    public Boolean asociarActividadCampamento(String actividad, int idCampamento) {
+        if (!buscarActividad(actividad)) {
+            return false;
+        }
+        if (buscarActividadCampamento(actividad, idCampamento) != null) {
+            return false;
+        }
+        campamentoDAO.insertCampamentoActividad(idCampamento, actividad);
+        return true;
+    }
+
+    /**
+     * Borra una actividad específica.
+     * 
+     * @param nombreActividad el nombre de la actividad
+     * @return true si la actividad se ha borrado correctamente, false en caso
+     *         contrario.
+     */
+    public Boolean borrarActividad(String nombreActividad) {
+        if (!buscarActividad(nombreActividad)) {
+            return false;
+        }
+        actividadDAO.delete(nombreActividad);
+        return true;
+    }
+
+    /**
+     * Borra una actividad específica de un campamento específico.
+     * 
+     * @param nombreActividad el nombre de la actividad
+     * @param idCampamento    el ID del campamento
+     * @return true si la actividad se ha borrado correctamente, false en caso
+     *         contrario
+     */
+    public Boolean borrarActividadCampamento(String nombreActividad, int idCampamento) {
+        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+            return false;
+        }
+        actividadDAO.deleteActividadCampamento(nombreActividad, idCampamento);
+        return true;
     }
 
     /**
@@ -151,29 +275,50 @@ public class GestorCampamentos {
     }
 
     /**
-     * Busca un monitor especial en un campamento específico.
+     * Inserta un nuevo monitor.
      * 
-     * @param idCampamento el ID del campamento
-     * @return true si el monitor especial existe, false en caso contrario
+     * @param monitor
+     * @return true si el monitor se ha insertado correctamente, false en caso
+     *         contrario
      */
-    public Boolean buscarMonitorEspecialCampamento(Integer idCampamento) {
-
+    public Boolean addMonitor(Monitor monitor) {
+        if (buscarMonitor(monitor.getIdentificador())) {
+            return false;
+        }
+        monitorDAO.insert(new MonitorDTO(monitor));
+        return true;
     }
 
     /**
-     * Busca una actividad en un campamento específico.
+     * Busca un monitor específico.
      * 
-     * @param nombreActividad el nombre de la actividad
-     * @param idCampamento    el ID del campamento
-     * @return true si la actividad existe en el campamento, false en caso contrario
+     * @param id el ID del monitor
+     * @return true si el monitor existe, false en caso contrario
      */
-    public Boolean buscarActividadCampamento(String nombreActividad, int idCampamento) {
-        for (ActividadDTO actividad : campamentoDAO.getActividadesCampamento(idCampamento)) {
-            if (actividad.getNombreActividad().equals(nombreActividad)) {
-                return true;
-            }
-        }
-        return false;
+    public Boolean buscarMonitor(Integer id) {
+        return monitorDAO.get(id) != null;
+    }
+
+    /**
+     * Busca a un monitor en un campamento específico.
+     * 
+     * @param idMonitor
+     * @param idCampamento
+     * @return
+     */
+    public Boolean buscarMonitorCampamento(Integer idMonitor, Integer idCampamento) {
+        return monitorDAO.getMonitorCampamento(idMonitor, idCampamento) != null;
+    }
+
+    /**
+     * Busca a un monitor especial en un campamento específico.
+     * 
+     * @param idMonitor
+     * @param idCampamento
+     * @return
+     */
+    public Boolean buscarMonitorEspecialCampamento(Integer idMonitor, Integer idCampamento) {
+        return monitorDAO.getMonitorEspecialCampamento(idMonitor, idCampamento) != null;
     }
 
     /**
@@ -200,17 +345,6 @@ public class GestorCampamentos {
         return true;
     }
 
-    public Boolean addMonitor(Monitor monitor) {
-        ArrayList<MonitorDTO> monitores = monitorDAO.getAll();
-        for (MonitorDTO m : monitores) {
-            if (m.getIdentificador() == monitor.getIdentificador()) {
-                return false;
-            }
-        }
-        monitorDAO.insert(new MonitorDTO(monitor));
-        return true;
-    }
-
     public Boolean addMonitor(Monitor monitor, Integer idCampamento) {
         ArrayList<MonitorDTO> monitores = monitorDAO.getAll();
         for (MonitorDTO m : monitores) {
@@ -224,62 +358,22 @@ public class GestorCampamentos {
         return true;
     }
 
+    /**
+     * Busca un monitor especial en un campamento específico.
+     * 
+     * @param idCampamento el ID del campamento
+     * @return true si el monitor especial existe, false en caso contrario
+     */
+    public Boolean buscarMonitorEspecialCampamento(Integer idCampamento) {
+
+    }
+
     public ArrayList<Integer> getAllIds() {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         for (CampamentoDTO campamento : campamentoDAO.getAll()) {
             ids.add(campamento.getIdentificador());
         }
         return ids;
-    }
-
-    /**
-     * Asocia una actividad a un campamento.
-     * 
-     * @param actividad    el nombre de la actividad
-     * @param idCampamento el ID del campamento
-     * @return true si la actividad se ha asociado correctamente, false en caso
-     *         contrario
-     */
-    public Boolean asociarActividadCampamento(String actividad, int idCampamento) {
-        campamentoDAO.insertCampamentoActividad(idCampamento, actividad);
-        return true;
-    }
-
-    /**
-     * Borra un campamento específico.
-     * 
-     * @param id el ID del campamento
-     * @return true si el campamento se ha borrado correctamente, false en caso
-     *         contrario
-     */
-    public Boolean borrarActividad(String nombreActividad, Integer idCampamento) {
-        ArrayList<ActividadDTO> actividades = actividadDAO.getAll();
-        for (ActividadDTO actividad : actividades) {
-            if (actividad.getNombreActividad().equals(nombreActividad)) {
-                actividadDAO.delete(nombreActividad);
-                actividadDAO.deleteActividadCampamento(nombreActividad, idCampamento);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Añade una actividad específica.
-     * 
-     * @param id el ID del campamento
-     * @return true si el campamento se ha borrado correctamente, false en caso
-     *         contrario
-     */
-    public Boolean addActividad(Actividad actividad) {
-        ArrayList<ActividadDTO> actividades = actividadDAO.getAll();
-        for (ActividadDTO a : actividades) {
-            if (a.getNombreActividad().equals(actividad.getNombreActividad())) {
-                return false;
-            }
-        }
-        campamentoDAO.insertActividad(new ActividadDTO(actividad));
-        return true;
     }
 
     /**

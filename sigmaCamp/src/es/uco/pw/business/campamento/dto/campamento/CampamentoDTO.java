@@ -51,7 +51,7 @@ public class CampamentoDTO {
         this.fechaInicio = campamento.getFechaInicio();
         this.fechaFin = campamento.getFechaFin();
         this.nivel = campamento.getNivel().toString();
-        this.maxAsistentes = campamento.getMax_asistentes();
+        this.maxAsistentes = campamento.getMaxAsistentes();
     }
 
     /**
