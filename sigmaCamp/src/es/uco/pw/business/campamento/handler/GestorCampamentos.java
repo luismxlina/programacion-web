@@ -1,13 +1,10 @@
 package es.uco.pw.business.campamento.handler;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalTime;
 
 import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
-import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
@@ -310,7 +307,40 @@ public class GestorCampamentos {
         return monitorDAO.getMonitorCampamento(idMonitor, idCampamento) != null;
     }
 
-    
+    /**
+     * Busca un monitor especial en un campamento específico.
+     * 
+     * @param idCampamento el ID del campamento
+     * @return true si el monitor especial existe, false en caso contrario
+     */
+    public Boolean buscarMonitoresEspecialesCampamento(Integer idCampamento) {
+        return monitorDAO.getMonitoresEspecialesCampamento(idCampamento) != null;
+    }
+
+    /**
+     * Asocia un monitor a un campamento.
+     * 
+     * @param idMonitor    el ID del monitor a asociar
+     * @param idCampamento el ID del campamento
+     * @return true si el monitor se ha asociado correctamente, false en caso
+     *         contrario
+     */
+    public Boolean asociarMonitorCampamento(Integer idMonitor, Integer idCampamento) {
+
+        if (!buscarMonitor(idMonitor)) {
+            return false;
+        }
+
+        if (buscarMonitorCampamento(idMonitor, idCampamento)) {
+            return false;
+        }
+
+        if (campamentoDAO.insertCampamentoMonitor(idCampamento, idMonitor)) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Asocia un monitor a una actividad.
@@ -321,64 +351,37 @@ public class GestorCampamentos {
      * @return true si el monitor se ha asociado correctamente, false en caso
      *         contrario
      */
-    public Boolean asociarMonitorActividad(int idMonitor, String nombreActividad, int idCampamento) {
+    public Boolean asociarMonitorActividad(int idMonitor, String nombreActividad, int idCampamento) throws Exception {
         MonitorDTO monitor = monitorDAO.get(idMonitor);
         if (monitor.getEsEducador()) {
-            System.out.println("El monitor de educacion especial no se puede asociar a una actividad...");
-            return false;
+            throw new Exception("El monitor es un educador");
+        }
+        if (!buscarMonitor(idMonitor)) {
+            throw new Exception("Monitor no encontrado");
         }
 
-        if (!actividadDAO.exists(nombreActividad, idCampamento)) {
-            System.out.println("La actividad no existe en el campamento indicado...");
-            return false;
-        }
-        actividadDAO.insertActividadMonitor(nombreActividad, idMonitor);
-        return true;
-    }
-
-    public Boolean addMonitor(Monitor monitor, Integer idCampamento) {
-        ArrayList<MonitorDTO> monitores = monitorDAO.getAll();
-        for (MonitorDTO m : monitores) {
-            if (m.getIdentificador() == monitor.getIdentificador()) {
-                return false;
-            }
+        if (!buscarActividad(nombreActividad)) {
+            throw new Exception("Actividad no encontrada");
         }
 
-        monitorDAO.insert(new MonitorDTO(monitor));
-        campamentoDAO.insertCampamentoMonitor(idCampamento, monitor.getIdentificador());
-        return true;
+        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+            throw new Exception("Actividad no encontrada en el campamento");
+        }
+        if (actividadDAO.insertActividadMonitor(nombreActividad, idMonitor)) {
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Busca un monitor especial en un campamento específico.
+     * Retorna todos los ids de los monitores almacenados en el sistema
      * 
-     * @param idCampamento el ID del campamento
-     * @return true si el monitor especial existe, false en caso contrario
+     * @return ArrayList<Integer> con los ids de los monitores
      */
-    public Boolean buscarMonitorEspecialCampamento(Integer idCampamento) {
-
-    }
-
-    public ArrayList<Integer> getAllIds() {
+    public ArrayList<Integer> getAllIdsMonitores() {
         ArrayList<Integer> ids = new ArrayList<Integer>();
-        for (CampamentoDTO campamento : campamentoDAO.getAll()) {
-            ids.add(campamento.getIdentificador());
-        }
+        ids = monitorDAO.getAllIdsMonitores();
         return ids;
     }
 
-
-
-    /**
-     * Asocia un monitor a un campamento.
-     * 
-     * @param monitorDTO   el monitor a asociar
-     * @param idCampamento el ID del campamento
-     * @return la lista de monitores después de la asociación
-     */
-    public ArrayList<Monitor> asociarMonitorCampamento(MonitorDTO monitorDTO, int idCampamento) {
-        CampamentoDAO campamentoDAO = new CampamentoDAO();
-        campamentoDAO.insertCampamentoMonitor(idCampamento, monitorDTO.getIdentificador());
-        return getMonitores();
-    }
 }

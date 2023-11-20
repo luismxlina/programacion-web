@@ -76,7 +76,11 @@ public class MonitorDAO implements DAO<MonitorDTO, Integer> {
                 monitors.add(new MonitorDTO(rs.getInt("Identificador"), rs.getString("Nombre"),
                         rs.getString("Apellidos"), rs.getBoolean("EducadorEspecial")));
             }
-            return monitors;
+            if (monitors.isEmpty()) {
+                return null;
+            } else {
+                return monitors;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,7 +125,50 @@ public class MonitorDAO implements DAO<MonitorDTO, Integer> {
         return null;
     }
 
-    public MonitorDTO getMonitorEspecialCampamento(Integer idMonitor, Integer ) {
+    public ArrayList<MonitorDTO> getMonitoresEspecialesCampamento(Integer idCampamento) {
 
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_MONITOR_ESPECIAL_CAMPAMENTO");
+        ArrayList<MonitorDTO> monitoresEspeciales = new ArrayList<>();
+
+        try {
+
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, idCampamento);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                monitoresEspeciales.add(new MonitorDTO(rs.getInt("Identificador"), rs.getString("Nombre"),
+                        rs.getString("Apellidos"), rs.getBoolean("EducadorEspecial")));
+            }
+
+            if (monitoresEspeciales.isEmpty()) {
+                return null;
+            } else {
+                return monitoresEspeciales;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Integer> getAllIdsMonitores() {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_IDS_MONITOR");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ids.add(rs.getInt("Identificador"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 }

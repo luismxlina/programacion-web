@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.data.common.Conexion;
-import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.Horario;
 
 public class ActividadDAO implements DAO<ActividadDTO, String> {
@@ -111,13 +110,13 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
         return null;
     }
 
-    public boolean insertActividadMonitor(Integer actividadId, Integer monitorId) {
+    public boolean insertActividadMonitor(String nombreActividad, Integer monitorId) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_ACTIVIDAD_MONITOR");
         try {
             PreparedStatement st = conex.prepareStatement(query);
-            st.setInt(1, actividadId);
+            st.setString(1, nombreActividad);
             st.setInt(2, monitorId);
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
