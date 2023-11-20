@@ -18,8 +18,16 @@ import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTard
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
 import es.uco.pw.business.users.handler.GestorAsistentes;
 import es.uco.pw.business.users.models.asistente.Asistente;
-import es.uco.pw.business.users.models.monitor.Monitor;
 import es.uco.pw.data.dao.InscripcionDAO;
+
+// ("");
+// ("(1) Mostrar inscripciones");
+// ("(2) Mostrar inscripción");
+// ("(3) Añadir inscripción");
+// ("(4) Eliminar inscripción");
+// ("(0) Volver al menú principal");
+// ("");
+
 
 /**
  * Clase que gestiona las inscripciones a campamentos.
