@@ -98,6 +98,11 @@ public class MainAsistentes {
 		return id;
 	}
 
+	/**
+     * Muestra los detalles de los asistentes en la consola.
+     *
+     * @param asistentes Lista de objetos Asistente que se mostrarán.
+     */
 	public static void mostrarAsistentes(ArrayList<Asistente> asistentes) {
 		for (int i = 0; i < asistentes.size(); i++) {
 			System.out.println("ID: " + asistentes.get(i).getIdentificador()
@@ -108,6 +113,13 @@ public class MainAsistentes {
 		}
 	}
 
+	/**
+     * Solicita datos al usuario a través del teclado para crear un nuevo Asistente.
+     *
+     * @param teclado         Scanner para la entrada de datos desde el teclado.
+     * @param nuevoAsistente  Objeto Asistente que se actualizará con los datos ingresados.
+     * @return El objeto Asistente actualizado con los datos ingresados.
+     */
 	public static Asistente pedirDatosTeclado(Scanner teclado, Asistente nuevoAsistente) {
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 		String nombre = "";
@@ -155,6 +167,12 @@ public class MainAsistentes {
 		return nuevoAsistente;
 	}
 
+	/**
+     * Valida que el nombre ingresado no contenga números ni caracteres especiales.
+     *
+     * @param input Nombre o apellidos a validar.
+     * @return El nombre o apellidos válidos, o una cadena vacía si la validación falla.
+     */
 	private static String validarNombre(String input) {
 		// Expresión regular para verificar que el nombre no contiene números
 		String regex = "^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\\s]+$";
@@ -167,6 +185,12 @@ public class MainAsistentes {
 		}
 	}
 
+	/**
+     * Lee el identificador del asistente que se desea eliminar desde el teclado.
+     *
+     * @param teclado Scanner para la entrada de datos desde el teclado.
+     * @return El identificador del asistente a eliminar.
+     */
 	public static int leerDatosEliminarAsistente(Scanner teclado) {
 
 		int identificador;

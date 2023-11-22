@@ -1,9 +1,11 @@
 package es.uco.pw.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
+import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.users.handler.GestorAsistentes;
 
 /**
@@ -46,7 +48,11 @@ public class MainInscripciones {
                     break;
                 case 1:
                     // Método para mostrar todas las inscripciones
-                    gestor_inscripciones.mostrarInscripciones();
+                    System.out.println("Introduzca id del campamento");   
+                    teclado.nextLine();
+                    Integer idCampamento = teclado.nextInt();
+                    // ArrayList<Inscripcion> inscripciones = gestor_inscripciones.getInscripcionesCampamento(idCampamento);
+                    // mostrarInscripciones(inscripciones);
                     break;
                 case 2:
                     System.out.println("Introduzca id del participante a buscar");
@@ -54,8 +60,9 @@ public class MainInscripciones {
                     int idParticipante = teclado.nextInt();
                     System.out.println("Introduzca id del campamento a buscar");
                     teclado.nextLine();
-                    int idCampamento = teclado.nextInt();
-                    gestor_inscripciones.mostrarInscripcion(idParticipante, idCampamento);
+                    int idcampamento = teclado.nextInt();
+                    // ArrayList<Inscripcion> inscripcion = gestor_inscripciones.getInscripcionesCampamento(idcampamento);
+                    // mostrarInscripcion(inscripcion, idParticipante, idcampamento);
                     break;
                 case 3:
                     // Método para añadir una nueva inscripción
@@ -94,5 +101,46 @@ public class MainInscripciones {
             }
 
         } while (opcion != 0);
+    }
+
+    
+    /**
+     * Muestra la información de las inscripciones.
+     *
+     * @param inscripciones Lista de inscripciones a mostrar.
+     */
+    public static void mostrarInscripciones(ArrayList<Inscripcion> inscripciones)
+    {
+        for (int i = 0; i < inscripciones.size(); i++) {
+            System.out.println("Id de asistente: " + inscripciones.get(i).getId_Participante()
+                    + ", Id de campamento: " + inscripciones.get(i).getId_Campamento()
+                    + ", Fecha de inscripcion" + inscripciones.get(i).getFechaInscripcion()
+                    + ", Precio: " + inscripciones.get(i).getPrecio()
+                    + ", Tipo de inscripcion: " + inscripciones.get(i).getCancelable());
+            System.out.println("");
+
+        }
+    }
+
+    /**
+     * Muestra la información de una inscripción específica.
+     *
+     * @param inscripciones Lista de inscripciones donde buscar.
+     * @param idAsistente   ID del asistente de la inscripción.
+     * @param idCampamento  ID del campamento de la inscripción.
+     */
+    public static void mostrarInscripcion(ArrayList<Inscripcion> inscripciones, int idAsistente, int idCampamento)
+    {
+        for (int i = 0; i < inscripciones.size(); i++) {
+            if (inscripciones.get(i).getId_Participante() == idAsistente && inscripciones.get(i).getId_Campamento() == idCampamento) {
+                System.out.println("Id de asistente: " + inscripciones.get(i).getId_Participante()
+                        + ", Id de campamento: " + inscripciones.get(i).getId_Campamento()
+                        + ", Fecha de inscripcion" + inscripciones.get(i).getFechaInscripcion()
+                        + ", Precio: " + inscripciones.get(i).getPrecio()
+                        + ", Tipo de inscripcion: " + inscripciones.get(i).getCancelable());
+                System.out.println("");
+            }
+        }
+    
     }
 }

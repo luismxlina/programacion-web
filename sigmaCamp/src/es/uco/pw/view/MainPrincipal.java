@@ -3,15 +3,11 @@ package es.uco.pw.view;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
-import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
-import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.users.handler.GestorAsistentes;
-import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.RepositorioAsistentes;
 import es.uco.pw.data.RepositorioCampamentos;
 import es.uco.pw.data.RepositorioInscripciones;
@@ -22,6 +18,9 @@ import es.uco.pw.data.RepositorioInscripciones;
  */
 public class MainPrincipal {
 
+	/**
+	 * Comprueba la existencia de los ficheros necesarios y los crea si no existen.
+	 */
 	public static void comprobarFicheros() {
 		try {
 			comprobarYCrearFichero("db/asistentes.txt");
@@ -32,6 +31,12 @@ public class MainPrincipal {
 		}
 	}
 
+	/**
+	 * Comprueba y crea un fichero en la ruta especificada si no existe.
+	 *
+	 * @param rutaFichero Ruta del fichero a comprobar/crear.
+	 * @throws IOException Si hay un error al intentar crear el fichero.
+	 */
 	private static void comprobarYCrearFichero(String rutaFichero) throws IOException {
 		File fichero = new File(rutaFichero);
 
@@ -49,8 +54,9 @@ public class MainPrincipal {
 	 * de programación.
 	 * 
 	 * @param args Argumentos de la línea de comandos (no se utilizan).
+	 * @throws Exception
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		comprobarFicheros();
 		System.out.println("Bienvenido a Campamentos de programanción.");
 
@@ -59,16 +65,13 @@ public class MainPrincipal {
 
 		// Crear los gestores y repositorios
 		RepositorioAsistentes ra = new RepositorioAsistentes();
-		ArrayList<Asistente> arrayAsistentesFichero = ra.cargarDatosFichero("db/asistentes.txt");
-		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance(arrayAsistentesFichero);
+		GestorAsistentes gestor_asistentes = GestorAsistentes.getInstance();
 
 		RepositorioCampamentos rc = new RepositorioCampamentos();
-		ArrayList<Campamento> arrayCampamentosFichero = rc.cargarDatosFichero("db/campamentos.txt");
-		GestorCampamentos gestor_campamentos = GestorCampamentos.getInstance(arrayCampamentosFichero);
+		GestorCampamentos gestor_campamentos = GestorCampamentos.getInstance();
 
 		RepositorioInscripciones ri = new RepositorioInscripciones();
-		ArrayList<Inscripcion> arrayInscripcionesFichero = ri.cargarDatosFichero("db/inscripciones.txt");
-		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance(arrayInscripcionesFichero);
+		GestorInscripciones gestor_inscripciones = GestorInscripciones.getInstance();
 
 		System.out.println("·-----------------------------------·");
 		System.out.println("|           MENÚ PRINCIPAL          |");
@@ -97,6 +100,7 @@ public class MainPrincipal {
 					MainCampamentos.mostrarMenuCampamentos(teclado, gestor_campamentos);
 					break;
 				case 3:
+
 					MainInscripciones.mostrarMenuInscripciones(teclado, gestor_inscripciones);
 					break;
 				default:
