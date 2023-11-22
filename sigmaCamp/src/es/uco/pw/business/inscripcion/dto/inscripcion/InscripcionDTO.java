@@ -1,5 +1,7 @@
 package es.uco.pw.business.inscripcion.dto.inscripcion;
 
+import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+
 public class InscripcionDTO {
     private int asistenteId;
     private int campamentoId;
@@ -17,6 +19,13 @@ public class InscripcionDTO {
         this.fechaInscripcion = fechaInscripcion;
         this.precio = precio;
         this.tipoInscripcion = tipoInscripcion;
+    }
+    public InscripcionDTO(Inscripcion inscripcion) {
+        this.asistenteId = inscripcion.getId_Participante();
+        this.campamentoId = inscripcion.getId_Campamento();
+        this.fechaInscripcion = inscripcion.getFechaInscripcion().toString();
+        this.precio = inscripcion.getPrecio();
+        this.tipoInscripcion = inscripcion.get
     }
 
     public int getAsistenteId() {

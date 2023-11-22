@@ -13,6 +13,11 @@ public class InscripcionParcial extends Inscripcion {
 	private static final int PRECIOINICIAL = 100;
 	private Double precio;
 
+
+	public InscripcionParcial() {
+		super();
+	}
+
 	/**
 	 * Constructor por defecto que inicializa los atributos comunes de la
 	 * inscripción parcial.
