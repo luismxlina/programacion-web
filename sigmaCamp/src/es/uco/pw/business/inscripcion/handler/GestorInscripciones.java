@@ -48,22 +48,70 @@ public class GestorInscripciones {
     // - buscarInscripcion
     // - borrarInscripcion
 
+    /*
+     * InscripcionCreator creator;
+     * if (temprana) {
+     * creator = new InscripcionTemprana();
+     * } else {
+     * creator = new InscripcionTardia();
+     * }
+     * Inscripcion nuevaInscripcion;
+     * if (completa) {
+     * nuevaInscripcion = creator.registrarInscripcionCompleta(idParticipante,
+     * idCampamento, new Date());
+     * } else {
+     * nuevaInscripcion = creator.registrarInscripcionParcial(idParticipante,
+     * idCampamento, new Date());
+     * }
+     */
+
     public Inscripcion getInscripcion(Integer asistenteId, Integer campamentoId) {
         InscripcionDTO inscripcionDTO = inscripcionDAO.get(asistenteId, campamentoId);
         if (inscripcionDTO == null) {
             return null; // No se encontró la inscripción
         }
-        return Inscripcion(inscripcionDTO);
+
+        Boolean esTemprana = getEsTemprana(inscripcionDTO.getFechaInscripcion(),
+                GestorCampamentos.getInstance().getCampamento(campamentoId).getFechaInicio());
+        InscripcionCreator creator;
+
+        if (esTemprana) {
+            creator = new InscripcionTemprana();
+        } else {
+            creator = new InscripcionTardia();
+        }
+
+        Inscripcion inscripcion;
+
+        if (inscripcionDTO.getTipoInscripcion().equals("Completa")) {
+
+            inscripcion = creator.registrarInscripcionCompleta(inscripcionDTO.getAsistenteId(),
+                    inscripcionDTO.getCampamentoId(), inscripcionDTO.getFechaInscripcion());
+
+        } else {
+
+            inscripcion = creator.registrarInscripcionParcial(inscripcionDTO.getAsistenteId(),
+                    inscripcionDTO.getCampamentoId(), inscripcionDTO.getFechaInscripcion());
+
+        }
+
+        return inscripcion;
     }
 
-    public ArrayList<Inscripcion> getInscripciones() {
-        ArrayList<Inscripcion> inscripciones = new ArrayList<>();
-        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAll()) {
-            Inscripcion inscripcion = Inscripcion(inscripcionDTO);
-            inscripciones.add(inscripcion);
-        }
-        return inscripciones;
+    public Boolean getEsTemprana(Date fechaInscripcion, Date fechaInicioCampamento) {
+        long diffInMillies = Math.abs(fechaInicioCampamento.getTime() - fechaInscripcion.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        return diff > 15;
     }
+
+    // public ArrayList<Inscripcion> getInscripciones() {
+    //     ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+    //     for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAll()) {
+    //         Inscripcion inscripcion = Inscripcion(inscripcionDTO);
+    //         inscripciones.add(inscripcion);
+    //     }
+    //     return inscripciones;
+    // }
 
     public boolean addInscripcion(Inscripcion inscripcion) {
         if (buscarInscripcion(inscripcion.getId_Participante(), inscripcion.getId_Campamento())) {
@@ -75,66 +123,67 @@ public class GestorInscripciones {
         return false;
     }
 
-    // public boolean addInscripcion(int asistenteId, int campamentoId, Date fechaInscripcion, String tipoInscripcion) {
-    //     // Comprobar si la inscripción ya existe
-    //     if (buscarInscripcion(asistenteId, campamentoId) != null) {
-    //         return false; // Ya existe la inscripción
-    //     }
-    //     // si la fecha de inscripcion es anterior a 15 dias de la fecha de inicio del
-    //     // campamento, la inscripcion es cancelable
-    //     // haz que cancelable sea true si fechaInscripcion es anterior a 15 dias de la
-    //     // fecha de inicio del campamento
-    //     Campamento campamento = GestorCampamentos.getInstance().getCampamento(campamentoId);
-    //     Date campStartDate = campamento.getFechaInicio();
-    //     long diffInMillies = Math.abs(campStartDate.getTime() - fechaInscripcion.getTime());
-    //     long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    // public boolean addInscripcion(int asistenteId, int campamentoId, Date
+    // fechaInscripcion, String tipoInscripcion) {
+    // // Comprobar si la inscripción ya existe
+    // if (buscarInscripcion(asistenteId, campamentoId) != null) {
+    // return false; // Ya existe la inscripción
+    // }
+    // // si la fecha de inscripcion es anterior a 15 dias de la fecha de inicio del
+    // // campamento, la inscripcion es cancelable
+    // // haz que cancelable sea true si fechaInscripcion es anterior a 15 dias de
+    // la
+    // // fecha de inicio del campamento
+    // Campamento campamento =
+    // GestorCampamentos.getInstance().getCampamento(campamentoId);
+    // Date campStartDate = campamento.getFechaInicio();
+    // long diffInMillies = Math.abs(campStartDate.getTime() -
+    // fechaInscripcion.getTime());
+    // long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-    //     Boolean temprana = diff > 15;
+    // Boolean temprana = diff > 15;
 
-    //     InscripcionCreator creator;
-    //     if (temprana) {
-    //         creator = new InscripcionTemprana();
-    //     } else {
-    //         creator = new InscripcionTardia();
-    //     }
+    // InscripcionCreator creator;
+    // if (temprana) {
+    // creator = new InscripcionTemprana();
+    // } else {
+    // creator = new InscripcionTardia();
+    // }
 
-    //     // Asistente asistente =
-    //     // GestorAsistentes.getInstance(null).getAsistente(idParticipante);
+    // Asistente asistente = GestorAsistentes.getInstance().getAsistente();
 
-    //     // if (asistente == null) {
-    //     // System.out.println("El participante con ID " + idParticipante + " no
-    //     // existe.");
-    //     // return false;
-    //     // }
+    // Inscripcion nuevaInscripcion;
+    // if (necesidadesEspeciales) {
+    // nuevaInscripcion = creator.registrarInscripcionCompleta(idParticipante,
+    // idCampamento, new Date());
+    // } else {
+    // nuevaInscripcion = creator.registrarInscripcionParcial(idParticipante,
+    // idCampamento, new Date());
+    // }
 
-    //     // Inscripcion nuevaInscripcion;
-    //     // if (necesidadesEspeciales) {
-    //     // nuevaInscripcion = creator.registrarInscripcionCompleta(idParticipante,
-    //     // idCampamento, new Date());
-    //     // } else {
-    //     // nuevaInscripcion = creator.registrarInscripcionParcial(idParticipante,
-    //     // idCampamento, new Date());
-    //     // }
+    // asistente.addInscripcion(nuevaInscripcion);
+    // inscripciones.add(nuevaInscripcion);
 
-    //     // // asistente.addInscripcion(nuevaInscripcion);
-    //     // inscripciones.add(nuevaInscripcion);
-    //     //
+    // // Crear la inscripción según el tipo (Completa o Parcial)
+    // InscripcionCreator inscripcionCreator;
+    // if (tipoInscripcion.equals("Completa")) {
+    // inscripcionCreator = new InscripcionTemprana(); // O InscripcionTardia si es
+    // necesario
+    // } else {
+    // inscripcionCreator = new InscripcionParcial(); // O InscripcionParcialTardia
+    // si es necesario
+    // }
+    // Inscripcion inscripcion =
+    // inscripcionCreator.registrarInscripcion(asistenteId, campamentoId,
+    // fechaInscripcion);
 
-    //     // Crear la inscripción según el tipo (Completa o Parcial)
-    //     InscripcionCreator inscripcionCreator;
-    //     if (tipoInscripcion.equals("Completa")) {
-    //         inscripcionCreator = new InscripcionTemprana(); // O InscripcionTardia si es necesario
-    //     } else {
-    //         inscripcionCreator = new InscripcionParcial(); // O InscripcionParcialTardia si es necesario
-    //     }
-    //     Inscripcion inscripcion = inscripcionCreator.registrarInscripcion(asistenteId, campamentoId, fechaInscripcion);
+    // // Guardar la inscripción en la base de datos
+    // InscripcionDTO inscripcionDTO = new InscripcionDTO(asistenteId, campamentoId,
+    // fechaInscripcion,
+    // inscripcion.getPrecio(), tipoInscripcion);
+    // inscripcionDAO.insert(inscripcionDTO);
 
-    //     // Guardar la inscripción en la base de datos
-    //     InscripcionDTO inscripcionDTO = new InscripcionDTO(asistenteId, campamentoId, fechaInscripcion,
-    //             inscripcion.getPrecio(), tipoInscripcion);
-    //     inscripcionDAO.insert(inscripcionDTO);
-
-    //     return true; // Inserción exitosa
+    // return true; // Inserción exitosa
     // }
 
     public Boolean buscarInscripcion(int asistenteId, int campamentoId) {

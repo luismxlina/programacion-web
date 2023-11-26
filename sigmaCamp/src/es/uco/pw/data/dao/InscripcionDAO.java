@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 import es.uco.pw.data.common.Conexion;
 
+/**
+ * Esta clase implementa la interfaz DAOInscripcion y proporciona métodos para
+ * realizar operaciones CRUD
+ * (Create, Read, Update, Delete) en la entidad Inscripción en la base de datos.
+ */
 public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
 
     @Override
@@ -20,7 +25,9 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, inscripcion.getAsistenteId());
             st.setInt(2, inscripcion.getCampamentoId());
-            st.setDate(3, java.sql.Date.valueOf(inscripcion.getFechaInscripcion()));
+            java.util.Date fechaInscripcionUtil = inscripcion.getFechaInscripcion();
+            java.sql.Date fechaInscripcionSql = new java.sql.Date(fechaInscripcionUtil.getTime());
+            st.setDate(3, fechaInscripcionSql);
             st.setDouble(4, inscripcion.getPrecio());
             st.setString(5, inscripcion.getTipoInscripcion());
             return st.executeUpdate() == 1;
@@ -37,7 +44,9 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         String query = conexController.getSql().getProperty("UPDATE_INSCRIPCION");
         try {
             PreparedStatement st = conex.prepareStatement(query);
-            st.setDate(1, java.sql.Date.valueOf(inscripcion.getFechaInscripcion()));
+            java.util.Date fechaInscripcionUtil = inscripcion.getFechaInscripcion();
+            java.sql.Date fechaInscripcionSql = new java.sql.Date(fechaInscripcionUtil.getTime());
+            st.setDate(1, fechaInscripcionSql);
             st.setDouble(2, inscripcion.getPrecio());
             st.setString(3, inscripcion.getTipoInscripcion());
             st.setInt(4, inscripcion.getAsistenteId());
@@ -76,7 +85,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             ArrayList<InscripcionDTO> inscripciones = new ArrayList<InscripcionDTO>();
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
-                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
                         rs.getString("TipoInscripcion")));
             }
             return inscripciones;
@@ -98,7 +107,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
-                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
                         rs.getString("TipoInscripcion"));
             }
         } catch (SQLException e) {
@@ -107,6 +116,12 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         return null;
     }
 
+    /**
+     * Obtiene todas las inscripciones completas almacenadas en la base de datos.
+     *
+     * @return Una lista de objetos InscripcionDTO que representan inscripciones
+     *         completas.
+     */
     public ArrayList<InscripcionDTO> getAllInscripcionesCompletas() {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
@@ -117,7 +132,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             ArrayList<InscripcionDTO> inscripciones = new ArrayList<InscripcionDTO>();
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
-                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
                         rs.getString("TipoInscripcion")));
             }
             return inscripciones;
@@ -127,6 +142,12 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         return null;
     }
 
+    /**
+     * Obtiene todas las inscripciones parciales almacenadas en la base de datos.
+     *
+     * @return Una lista de objetos InscripcionDTO que representan inscripciones
+     *         parciales.
+     */
     public ArrayList<InscripcionDTO> getAllInscripcionesParciales() {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
@@ -137,7 +158,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             ArrayList<InscripcionDTO> inscripciones = new ArrayList<InscripcionDTO>();
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
-                        rs.getDate("FechaInscripcion").toString(), rs.getDouble("Precio"),
+                        rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
                         rs.getString("TipoInscripcion")));
             }
             return inscripciones;
@@ -147,6 +168,12 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         return null;
     }
 
+    /**
+     * Cuenta el número de inscripciones asociadas a un campamento.
+     *
+     * @param campamentoId El identificador del campamento.
+     * @return El número de inscripciones asociadas al campamento.
+     */
     public int count(Integer campamentoId) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
@@ -163,4 +190,40 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
         }
         return 0;
     }
+
+    /**
+     * Obtiene todas las inscripciones asociadas a un campamento.
+     *
+     * @param campamentoId El identificador del campamento.
+     * @return Una lista de objetos InscripcionDTO que representan las inscripciones
+     *         asociadas al campamento.
+     */
+    public ArrayList<InscripcionDTO> getAllInscripcionesCampamento(Integer campamentoId) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ALL_INSCRIPCION_BY_CAMPAMENTO");
+
+        try (PreparedStatement st = conex.prepareStatement(query)) {
+            st.setInt(1, campamentoId);
+            ResultSet rs = st.executeQuery();
+
+            ArrayList<InscripcionDTO> inscripciones = new ArrayList<>();
+
+            while (rs.next()) {
+                inscripciones.add(new InscripcionDTO(
+                        rs.getInt("AsistenteId"),
+                        rs.getInt("CampamentoId"),
+                        rs.getDate("FechaInscripcion"),
+                        rs.getDouble("Precio"),
+                        rs.getString("TipoInscripcion")));
+            }
+
+            return inscripciones;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // or return an empty list if no results are found or an exception occurs
+    }
+
 }

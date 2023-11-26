@@ -13,7 +13,6 @@ public class InscripcionParcial extends Inscripcion {
 	private static final int PRECIOINICIAL = 100;
 	private Double precio;
 
-
 	public InscripcionParcial() {
 		super();
 	}
@@ -44,6 +43,13 @@ public class InscripcionParcial extends Inscripcion {
 	@Override
 	public Double getPrecio() {
 		return this.precio;
+	}
+
+	/**
+	 * Devuelve el tipo de inscripción.
+	 */
+	public String getTipoInscripcion() {
+		return "Parcial";
 	}
 
 	/**

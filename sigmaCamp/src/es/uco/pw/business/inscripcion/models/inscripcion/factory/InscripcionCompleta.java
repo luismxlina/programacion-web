@@ -49,6 +49,10 @@ public class InscripcionCompleta extends Inscripcion {
 		return this.precio;
 	}
 
+	public String getTipoInscripcion() {
+		return "Completa";
+	}
+
 	/**
 	 * Devuelve una representación en cadena de la inscripción completa.
 	 *

@@ -1,18 +1,21 @@
 package es.uco.pw.business.inscripcion.dto.inscripcion;
 
+import java.util.Date;
+
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 
 public class InscripcionDTO {
     private int asistenteId;
     private int campamentoId;
-    private String fechaInscripcion;
+    private Date fechaInscripcion;
     private double precio;
     private String tipoInscripcion;
 
     public InscripcionDTO() {
+
     }
 
-    public InscripcionDTO(int asistenteId, int campamentoId, String fechaInscripcion, double precio,
+    public InscripcionDTO(int asistenteId, int campamentoId, Date fechaInscripcion, double precio,
             String tipoInscripcion) {
         this.asistenteId = asistenteId;
         this.campamentoId = campamentoId;
@@ -20,12 +23,13 @@ public class InscripcionDTO {
         this.precio = precio;
         this.tipoInscripcion = tipoInscripcion;
     }
+
     public InscripcionDTO(Inscripcion inscripcion) {
         this.asistenteId = inscripcion.getId_Participante();
         this.campamentoId = inscripcion.getId_Campamento();
-        this.fechaInscripcion = inscripcion.getFechaInscripcion().toString();
+        this.fechaInscripcion = inscripcion.getFechaInscripcion();
         this.precio = inscripcion.getPrecio();
-        this.tipoInscripcion = inscripcion.get
+        this.tipoInscripcion = inscripcion.getTipoInscripcion();
     }
 
     public int getAsistenteId() {
@@ -44,11 +48,11 @@ public class InscripcionDTO {
         this.campamentoId = campamentoId;
     }
 
-    public String getFechaInscripcion() {
+    public Date getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(String fechaInscripcion) {
+    public void setFechaInscripcion(Date fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 

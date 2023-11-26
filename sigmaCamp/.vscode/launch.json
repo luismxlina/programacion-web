@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "sigmaCamp/es.uco.pw.business.inscripcion.handler.main",
+            "projectName": "sigmaCamp"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "sigmaCamp/es.uco.pw.view.Main",
