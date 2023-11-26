@@ -4,6 +4,7 @@ import java.util.Date;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 
 /**
  * Clase que representa una inscripción parcial a un campamento.
@@ -12,6 +13,7 @@ import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 public class InscripcionParcial extends Inscripcion {
 	private static final int PRECIOINICIAL = 100;
 	private Double precio;
+	private TipoInscripcion tipoInscripcion = TipoInscripcion.PARCIAL;
 
 	public InscripcionParcial() {
 		super();
@@ -48,8 +50,8 @@ public class InscripcionParcial extends Inscripcion {
 	/**
 	 * Devuelve el tipo de inscripción.
 	 */
-	public String getTipoInscripcion() {
-		return "Parcial";
+	public TipoInscripcion getTipoInscripcion() {
+		return this.tipoInscripcion;
 	}
 
 	/**

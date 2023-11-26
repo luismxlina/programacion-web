@@ -47,6 +47,13 @@ public abstract class Inscripcion implements Serializable {
           this.cancelable = cancelable;
      }
 
+     public Inscripcion(int id_Participante, int id_Campamento, Date fechaInscripcion) {
+          this.id_Participante = id_Participante;
+          this.id_Campamento = id_Campamento;
+          this.fechaInscripcion = fechaInscripcion;
+          this.cancelable = false;
+     }
+
      // Métodos abstractos
 
      /**
@@ -69,7 +76,7 @@ public abstract class Inscripcion implements Serializable {
       * 
       * @return Tipo de inscripción.
       */
-     public abstract String getTipoInscripcion();
+     public abstract TipoInscripcion getTipoInscripcion();
 
      /**
       * Obtiene el identificador del participante asociado a la inscripción.

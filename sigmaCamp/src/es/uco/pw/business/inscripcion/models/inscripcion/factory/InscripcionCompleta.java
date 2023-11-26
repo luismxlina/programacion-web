@@ -4,6 +4,7 @@ import java.util.Date;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 
 /**
  * Clase que representa una inscripción completa a un campamento.
@@ -13,6 +14,7 @@ public class InscripcionCompleta extends Inscripcion {
 
 	private static final int PRECIOINICIAL = 300;
 	private Double precio;
+	private TipoInscripcion tipoInscripcion = TipoInscripcion.COMPLETA;
 
 	/**
 	 * Constructor que inicializa los atributos de la inscripción completa.
@@ -49,8 +51,8 @@ public class InscripcionCompleta extends Inscripcion {
 		return this.precio;
 	}
 
-	public String getTipoInscripcion() {
-		return "Completa";
+	public TipoInscripcion getTipoInscripcion() {
+		return this.tipoInscripcion;
 	}
 
 	/**

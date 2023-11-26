@@ -1,7 +1,5 @@
 DROP TABLE IF EXISTS CampamentoActividad;
 
-DROP TABLE IF EXISTS CampamentoMonitorEspecial;
-
 DROP TABLE IF EXISTS CampamentoMonitor;
 
 DROP TABLE IF EXISTS Inscripcion;
@@ -33,11 +31,12 @@ CREATE TABLE Monitor (
 
 -- Tabla para la entidad Actividad
 CREATE TABLE Actividad (
-    Nombre VARCHAR(255) PRIMARY KEY,
+    Nombre VARCHAR(255),
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),
     Horario ENUM('Mañana', 'Tarde'),
     NumeroMaximoParticipantes INT,
-    NumeroMonitoresNecesarios INT
+    NumeroMonitoresNecesarios INT,
+    PRIMARY KEY (Nombre, NivelEducativo, Horario)
 );
 
 -- Tabla para la entidad Campamento

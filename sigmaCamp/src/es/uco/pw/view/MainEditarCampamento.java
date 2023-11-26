@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
-
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
+import es.uco.pw.business.campamento.models.actividad.Horario;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
@@ -52,7 +52,7 @@ public class MainEditarCampamento {
         do {
             System.out.println("");
             System.out.println("(1) Crear actividad");
-            System.out.println("(2) Borrar actividad");
+            System.out.println("(2) Borrar actividad de un campamento");
             System.out.println("(3) Crear monitor");
             System.out.println("(4) Asociar monitor a una actividad");
             System.out.println("(0) Volver al menú principal");
@@ -66,7 +66,7 @@ public class MainEditarCampamento {
                     break;
                 case 1:
                     Actividad actividad = new Actividad();
-                    gestor_campamentos.addActividad(actividad);
+                    crearActividad(teclado, actividad, nivelEducativo);
                     gestor_campamentos.addActividad(actividad);
                     gestor_campamentos.asociarActividadCampamento(actividad.getNombreActividad(), idCampamento);
                     break;
@@ -74,7 +74,7 @@ public class MainEditarCampamento {
                     System.out.println("Introduzca nombre de la actividad a borrar");
                     teclado.nextLine();
                     nombreActividad = teclado.nextLine();
-                    gestor_campamentos.borrarActividad(nombreActividad);
+                    gestor_campamentos.borrarActividadCampamento(nombreActividad, idCampamento);
                     break;
                 case 3:
                     System.out.println("A qué actividad desea asociar el monitor?");
@@ -82,7 +82,6 @@ public class MainEditarCampamento {
                     Monitor monitor = new Monitor(generarIDUnico());
                     monitor = crearMonitor(teclado, monitor);
                     gestor_campamentos.addMonitor(monitor);
-                    System.out.println(nombreActividad);
                     gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
                             campamento.getIdentificador());
                     break;
@@ -176,6 +175,47 @@ public class MainEditarCampamento {
         nuevoMonitor.setApellidos(apellidos);
         nuevoMonitor.setEsEducador(esEducador);
         return nuevoMonitor;
+    }
+
+    /**
+     * Crea una nueva actividad.
+     * 
+     * @param teclado        el Scanner para la entrada de datos
+     * @param nuevaActividad la nueva actividad a crear
+     * @param nivel          el nivel educativo de la actividad
+     * @return la actividad creada
+     */
+    public static Actividad crearActividad(Scanner teclado, Actividad nuevaActividad, NivelEducativo nivel) {
+
+        String nombreActividad;
+        String hora;
+        int max_participantes = 0;
+        int max_monitores = 0;
+        Actividad Actividad = new Actividad();
+
+        System.out.println("Introduzca los datos de la nueva actividad:");
+
+        System.out.print("Nombre de la actividad: ");
+        teclado.nextLine();
+        nombreActividad = teclado.nextLine();
+
+        System.out.print("Introduzca si la actividad es de mañanas o tardes (En el formato: \"Mañana\"/\"Tarde\"): ");
+        hora = teclado.nextLine();
+        // Parsea el string howa a LocalTime
+        Horario horario = hora.equals("Mañana") ? Horario.MAÑANA : Horario.TARDE;
+
+        System.out.print("Introduzca el número máximo de asistentes: ");
+        max_participantes = teclado.nextInt();
+
+        System.out.print("Introduzca el número máximo de monitores: ");
+        max_monitores = teclado.nextInt();
+
+        nuevaActividad.setNombreActividad(nombreActividad);
+        nuevaActividad.setNivel(nivel);
+        nuevaActividad.setHora(horario);
+        nuevaActividad.setMaxParticipantes(max_participantes);
+        nuevaActividad.setNumMonitores(max_monitores);
+        return Actividad;
     }
 
     /**

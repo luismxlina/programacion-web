@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
+import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 import es.uco.pw.data.common.Conexion;
 
 /**
@@ -29,7 +30,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             java.sql.Date fechaInscripcionSql = new java.sql.Date(fechaInscripcionUtil.getTime());
             st.setDate(3, fechaInscripcionSql);
             st.setDouble(4, inscripcion.getPrecio());
-            st.setString(5, inscripcion.getTipoInscripcion());
+            st.setString(5, inscripcion.getTipoInscripcion().name());
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +49,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             java.sql.Date fechaInscripcionSql = new java.sql.Date(fechaInscripcionUtil.getTime());
             st.setDate(1, fechaInscripcionSql);
             st.setDouble(2, inscripcion.getPrecio());
-            st.setString(3, inscripcion.getTipoInscripcion());
+            st.setString(3, inscripcion.getTipoInscripcion().name());
             st.setInt(4, inscripcion.getAsistenteId());
             st.setInt(5, inscripcion.getCampamentoId());
             return st.executeUpdate() == 1;
@@ -86,7 +87,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        rs.getString("TipoInscripcion")));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion").toUpperCase())));
             }
             return inscripciones;
         } catch (SQLException e) {
@@ -108,7 +109,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             if (rs.next()) {
                 return new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        rs.getString("TipoInscripcion"));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion").toUpperCase()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,7 +134,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        rs.getString("TipoInscripcion")));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
             }
             return inscripciones;
         } catch (SQLException e) {
@@ -159,7 +160,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        rs.getString("TipoInscripcion")));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
             }
             return inscripciones;
         } catch (SQLException e) {
@@ -215,7 +216,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
                         rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"),
                         rs.getDouble("Precio"),
-                        rs.getString("TipoInscripcion")));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
             }
 
             return inscripciones;

@@ -3,20 +3,21 @@ package es.uco.pw.business.inscripcion.dto.inscripcion;
 import java.util.Date;
 
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 
 public class InscripcionDTO {
     private int asistenteId;
     private int campamentoId;
     private Date fechaInscripcion;
     private double precio;
-    private String tipoInscripcion;
+    private TipoInscripcion tipoInscripcion;
 
     public InscripcionDTO() {
 
     }
 
     public InscripcionDTO(int asistenteId, int campamentoId, Date fechaInscripcion, double precio,
-            String tipoInscripcion) {
+            TipoInscripcion tipoInscripcion) {
         this.asistenteId = asistenteId;
         this.campamentoId = campamentoId;
         this.fechaInscripcion = fechaInscripcion;
@@ -64,11 +65,11 @@ public class InscripcionDTO {
         this.precio = precioTotal;
     }
 
-    public void setTipoInscripcion(String tipoInscripcion) {
+    public void setTipoInscripcion(TipoInscripcion tipoInscripcion) {
         this.tipoInscripcion = tipoInscripcion;
     }
 
-    public String getTipoInscripcion() {
+    public TipoInscripcion getTipoInscripcion() {
         return tipoInscripcion;
     }
 }
