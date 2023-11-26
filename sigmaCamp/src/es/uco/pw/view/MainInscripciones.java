@@ -8,6 +8,7 @@ import java.util.Date;
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionCreator;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTardia;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
@@ -58,7 +59,7 @@ public class MainInscripciones {
                     teclado.nextLine();
                     Integer idCampamento = teclado.nextInt();
                     inscripciones = gestor_inscripciones.getInscripcionesCampamento(idCampamento);
-                    if(inscripciones.isEmpty()){
+                    if (inscripciones.isEmpty()) {
                         System.out.println("No hay inscripciones en el campamento con id " + idCampamento);
                     }
                     mostrarInscripciones(inscripciones);
@@ -83,7 +84,7 @@ public class MainInscripciones {
                     System.out.println("Introduzca id del campamento");
                     teclado.nextLine();
                     idCampamento = teclado.nextInt();
-                    System.out.println("Introduzca tipo de inscripcion");
+                    System.out.println("Introduzca tipo de inscripcion (Parcial/Completa)");
                     teclado.nextLine();
                     String tipoInscripcion = teclado.nextLine();
                     boolean temprana = getEsTemprana(new Date(),
@@ -96,10 +97,12 @@ public class MainInscripciones {
                         creator = new InscripcionTardia();
                     }
 
-                    if (tipoInscripcion == "completa") {
+                    if (tipoInscripcion.equals("Completa")) {
                         inscripcion = creator.registrarInscripcionCompleta(idParticipante, idCampamento, new Date());
+                        inscripcion.setTipoInscripcion(TipoInscripcion.COMPLETA);
                     } else {
                         inscripcion = creator.registrarInscripcionParcial(idParticipante, idCampamento, new Date());
+                        inscripcion.setTipoInscripcion(TipoInscripcion.PARCIAL);
                     }
                     gestor_inscripciones.addInscripcion(inscripcion);
                     break;
@@ -139,9 +142,9 @@ public class MainInscripciones {
         for (int i = 0; i < inscripciones.size(); i++) {
             System.out.println("Id de asistente: " + inscripciones.get(i).getId_Participante()
                     + ", Id de campamento: " + inscripciones.get(i).getId_Campamento()
-                    + ", Fecha de inscripcion" + inscripciones.get(i).getFechaInscripcion()
+                    + ", Fecha de inscripcion: " + inscripciones.get(i).getFechaInscripcion()
                     + ", Precio: " + inscripciones.get(i).getPrecio()
-                    + ", Tipo de inscripcion: " + inscripciones.get(i).getCancelable());
+                    + ", Tipo de inscripcion: " + inscripciones.get(i).getTipoInscripcion());
             System.out.println("");
 
         }
@@ -162,7 +165,7 @@ public class MainInscripciones {
                         + ", Id de campamento: " + inscripciones.get(i).getId_Campamento()
                         + ", Fecha de inscripcion" + inscripciones.get(i).getFechaInscripcion()
                         + ", Precio: " + inscripciones.get(i).getPrecio()
-                        + ", Tipo de inscripcion: " + inscripciones.get(i).getCancelable());
+                        + ", Tipo de inscripcion: " + inscripciones.get(i).getTipoInscripcion());
                 System.out.println("");
             }
         }

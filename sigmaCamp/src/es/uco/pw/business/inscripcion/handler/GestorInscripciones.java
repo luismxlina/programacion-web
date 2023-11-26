@@ -149,7 +149,6 @@ public class GestorInscripciones {
                         inscripcionDTO.getCampamentoId(), inscripcionDTO.getFechaInscripcion());
             }
             inscripciones.add(inscripcion);
-
         }
         return inscripciones;
     }

@@ -134,7 +134,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion").toUpperCase())));
             }
             return inscripciones;
         } catch (SQLException e) {
@@ -160,7 +160,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
             while (rs.next()) {
                 inscripciones.add(new InscripcionDTO(rs.getInt("AsistenteId"), rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"), rs.getDouble("Precio"),
-                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion").toUpperCase())));
             }
             return inscripciones;
         } catch (SQLException e) {
@@ -216,7 +216,7 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
                         rs.getInt("CampamentoId"),
                         rs.getDate("FechaInscripcion"),
                         rs.getDouble("Precio"),
-                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion"))));
+                        TipoInscripcion.valueOf(rs.getString("TipoInscripcion").toUpperCase())));
             }
 
             return inscripciones;

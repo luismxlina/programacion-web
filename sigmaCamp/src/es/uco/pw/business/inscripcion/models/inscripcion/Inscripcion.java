@@ -151,4 +151,6 @@ public abstract class Inscripcion implements Serializable {
           this.cancelable = cancelable;
      }
 
+     public abstract void setTipoInscripcion(TipoInscripcion tipoInscripcion);
+
 }

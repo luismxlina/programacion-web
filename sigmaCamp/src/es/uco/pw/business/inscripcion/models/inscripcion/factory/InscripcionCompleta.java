@@ -41,8 +41,7 @@ public class InscripcionCompleta extends Inscripcion {
 	 * @return precio de la inscripción
 	 */
 	private double calculatePrice(int idCampamento) {
-		int numeroActividades = GestorCampamentos.getInstance().getCampamento(idCampamento)
-				.getActividades().size();
+		int numeroActividades = GestorCampamentos.getInstance().getActividadesCampamento(idCampamento).size();
 		return PRECIOINICIAL + (numeroActividades * 20);
 	}
 
@@ -53,6 +52,10 @@ public class InscripcionCompleta extends Inscripcion {
 
 	public TipoInscripcion getTipoInscripcion() {
 		return this.tipoInscripcion;
+	}
+
+	public void setTipoInscripcion(TipoInscripcion tipoInscripcion) {
+		this.tipoInscripcion = tipoInscripcion;
 	}
 
 	/**
