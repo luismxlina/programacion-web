@@ -163,7 +163,7 @@ public class MainInscripciones {
                     && inscripciones.get(i).getId_Campamento() == idCampamento) {
                 System.out.println("Id de asistente: " + inscripciones.get(i).getId_Participante()
                         + ", Id de campamento: " + inscripciones.get(i).getId_Campamento()
-                        + ", Fecha de inscripcion" + inscripciones.get(i).getFechaInscripcion()
+                        + ", Fecha de inscripcion: " + inscripciones.get(i).getFechaInscripcion()
                         + ", Precio: " + inscripciones.get(i).getPrecio()
                         + ", Tipo de inscripcion: " + inscripciones.get(i).getTipoInscripcion());
                 System.out.println("");

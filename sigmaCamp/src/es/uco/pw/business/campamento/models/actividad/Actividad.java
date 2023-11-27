@@ -2,11 +2,8 @@ package es.uco.pw.business.campamento.models.actividad;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.time.LocalTime;
-
 import es.uco.pw.business.campamento.models.monitor.Monitor;
 import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
-import es.uco.pw.business.campamento.models.actividad.Horario;
 
 /**
  * Clase que representa una actividad.
