@@ -104,7 +104,12 @@ public class MainInscripciones {
                         inscripcion = creator.registrarInscripcionParcial(idParticipante, idCampamento, new Date());
                         inscripcion.setTipoInscripcion(TipoInscripcion.PARCIAL);
                     }
-                    gestor_inscripciones.addInscripcion(inscripcion);
+                    try {
+                        gestor_inscripciones.addInscripcion(inscripcion);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
 
                 case 4:

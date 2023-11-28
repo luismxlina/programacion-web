@@ -45,18 +45,17 @@ public class MainEditarCampamento {
         String nombreActividad;
         NivelEducativo nivelEducativo = gestor_campamentos.getCampamento(idCampamento).getNivel();
 
-        System.out.println("·-----------------------------------·");
-        System.out.println("|       SUB-MENÚ de Campamentos     |");
-        System.out.println("·-----------------------------------·");
-
+        System.out.println("·---------------------------------------------·");
+        System.out.println("|            SUB-MENÚ de Campamentos          |");
+        
         do {
-            System.out.println("");
-            System.out.println("(1) Crear actividad");
-            System.out.println("(2) Borrar actividad de un campamento");
-            System.out.println("(3) Crear monitor");
-            System.out.println("(4) Asociar monitor a una actividad");
-            System.out.println("(0) Volver al menú principal");
-            System.out.println("");
+            System.out.println("·---------------------------------------------·");
+            System.out.println("|   (1) Crear actividad                       |");
+            System.out.println("|   (2) Borrar actividad de un campamento     |");
+            System.out.println("|   (3) Crear monitor                         |");
+            System.out.println("|   (4) Asociar monitor a una actividad       |");
+            System.out.println("|   (0) Volver al menú principal              |");
+            System.out.println("·---------------------------------------------·");
 
             opcion = teclado.nextInt();
 
@@ -77,13 +76,14 @@ public class MainEditarCampamento {
                     gestor_campamentos.borrarActividadCampamento(nombreActividad, idCampamento);
                     break;
                 case 3:
-                    System.out.println("A qué actividad desea asociar el monitor?");
-                    nombreActividad = teclado.nextLine(); // Leer la entrada del usuario y asignarla a nombreActividad
                     Monitor monitor = new Monitor(generarIDUnico());
                     monitor = crearMonitor(teclado, monitor);
                     gestor_campamentos.addMonitor(monitor);
-                    gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
-                            campamento.getIdentificador());
+                    if (gestor_campamentos.asociarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
+                        System.out.println("\nMonitor guardado correctamente\n");
+                    } else {
+                        System.out.println("\nNo se ha podido crear el monitor\n");
+                    }
                     break;
                 case 4:
                     campamento = gestor_campamentos.getCampamento(idCampamento);
@@ -102,15 +102,20 @@ public class MainEditarCampamento {
                     } else {
                         monitor = new Monitor(generarIDUnico());
                         monitor = crearMonitor(teclado, monitor);
+                        gestor_campamentos.addMonitor(monitor);
                     }
 
                     System.out.println("Introduzca el nombre de la actividad a la que desea asociar el monitor");
                     nombreActividad = teclado.nextLine();
 
-                    gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
-                            idCampamento);
+                    if (gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
+                            idCampamento)) {
+                        System.out.println("\nMonitor asociado correctamente\n");
+                    } else {
+                        System.out.println("\nNo se ha podido asociar el monitor\n");
+                    }
                     break;
-                    
+
                 default:
                     System.out.println("Opción no válida");
             }
@@ -171,7 +176,6 @@ public class MainEditarCampamento {
         if (atencionInt == 1) {
             esEducador = true;
         }
-        System.out.println(nombre + " " + apellidos + " " + esEducador);
         nuevoMonitor.setNombre(nombre);
         nuevoMonitor.setApellidos(apellidos);
         nuevoMonitor.setEsEducador(esEducador);

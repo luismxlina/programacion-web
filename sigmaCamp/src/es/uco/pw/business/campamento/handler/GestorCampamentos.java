@@ -374,7 +374,7 @@ public class GestorCampamentos {
             throw new Exception("Monitor ya asociado a la actividad");
         }
 
-        if (actividadDAO.get(nombreActividad) == null) {
+        if (!buscarActividad(nombreActividad)) {
             throw new Exception("Actividad no encontrada");
         }
 

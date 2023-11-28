@@ -38,16 +38,15 @@ public class MainCampamentos {
 
         System.out.println("·-----------------------------------·");
         System.out.println("|         MENÚ de Campamentos       |");
-        System.out.println("·-----------------------------------·");
 
         do {
-            System.out.println("");
-            System.out.println("(1) Mostrar campamentos");
-            System.out.println("(2) Mostrar campamento");
-            System.out.println("(3) Añadir campamento");
-            System.out.println("(4) Editar campamento");
-            System.out.println("(0) Volver al menú principal");
-            System.out.println("");
+            System.out.println("·-----------------------------------·");
+            System.out.println("|     (1) Mostrar campamentos       |");
+            System.out.println("|     (2) Mostrar campamento        |");
+            System.out.println("|     (3) Añadir campamento         |");
+            System.out.println("|     (4) Editar campamento         |");
+            System.out.println("|     (0) Volver al menú principal  |");
+            System.out.println("·-----------------------------------·");
 
             opcion = teclado.nextInt();
 
@@ -62,15 +61,9 @@ public class MainCampamentos {
                     System.out.println("Introduzca id del campamento a buscar");
                     teclado.nextLine();
                     int idCampamento = teclado.nextInt();
-                    // gestor_campamentos.mostrarCampamento(idCampamento);
                     mostrarCampamento(gestor_campamentos.getCampamentos(), idCampamento);
                     break;
                 case 3:
-                    // Campamento nuevoCampamento = new Campamento(generarIDUnico());
-                    // if (!GestorCampamentos.pedirDatosTeclado(teclado, nuevoCampamento)) {
-                    // break;
-                    // }
-                    // gestor_campamentos.altaCampamento(nuevoCampamento);
                     Campamento nuevoCampamento = pedirDatosTeclado(teclado, new Campamento(generarIDUnico()));
                     gestor_campamentos.altaCampamento(nuevoCampamento);
                     break;
@@ -116,9 +109,7 @@ public class MainCampamentos {
                     + ", Fecha de inicio: " + campamentos.get(i).getFechaInicio()
                     + ", Fecha de fin: " + campamentos.get(i).getFechaFin()
                     + ", Nivel: " + campamentos.get(i).getNivel()
-                    + ", Participantes maximos: " + campamentos.get(i).getMaxAsistentes()
-            // + ", Lista de actividades: " + campamentos.get(i).getActividades()
-            /* + ", Lista de monitores: " + campamentos.get(i).getMonitoresResponsables() */);
+                    + ", Participantes maximos: " + campamentos.get(i).getMaxAsistentes());
             System.out.println("");
 
         }
@@ -222,11 +213,7 @@ public class MainCampamentos {
                         + ", Fecha de inicio: " + campamento.getFechaInicio()
                         + ", Fecha de fin: " + campamento.getFechaFin()
                         + ", Nivel: " + campamento.getNivel()
-                        + ", Participantes maximos: " + campamento.getMaxAsistentes()
-                /*
-                 * + ", Lista de actividades: " + campamento.getActividades()
-                 * /*+ ", Lista de monitores: " + campamento.getMonitoresResponsables()
-                 */);
+                        + ", Participantes maximos: " + campamento.getMaxAsistentes());
 
             }
 
