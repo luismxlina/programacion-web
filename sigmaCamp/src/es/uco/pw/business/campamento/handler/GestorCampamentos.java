@@ -208,21 +208,18 @@ public class GestorCampamentos {
      */
     public Boolean asociarActividadCampamento(String actividad, int idCampamento) {
 
-        System.out.println("ESTOY AQUI AQUI");
-
         if (!buscarActividad(actividad)) {
             return false;
         }
 
-        System.out.println("Busco actiidad campamento a ver si lo encuentra");
-
         if (buscarActividadCampamento(actividad, idCampamento)) {
-            System.out.println("Lo he encontrado asi q me voy");
             return false;
         }
+
         if (campamentoDAO.insertCampamentoActividad(idCampamento, actividad)) {
             return true;
         }
+
         return false;
     }
 
@@ -373,15 +370,14 @@ public class GestorCampamentos {
             throw new Exception("Monitor no encontrado");
         }
 
-        System.out.println(actividadDAO.get(nombreActividad).getNombreActividad() + " COÑOOOOOOOOOOOOOOOOOOOOO");
-
-        if (buscarActividad(nombreActividad) == false) {
+        if (!buscarActividad(nombreActividad)) {
             throw new Exception("Actividad no encontrada");
         }
 
         if (buscarActividadCampamento(nombreActividad, idCampamento) == false) {
             throw new Exception("Actividad no encontrada en el campamento");
         }
+        
         if (actividadDAO.insertActividadMonitor(nombreActividad, idMonitor)) {
             return true;
         }
