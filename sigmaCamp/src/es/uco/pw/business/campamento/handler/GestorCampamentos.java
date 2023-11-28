@@ -207,14 +207,23 @@ public class GestorCampamentos {
      *         contrario
      */
     public Boolean asociarActividadCampamento(String actividad, int idCampamento) {
+
+        System.out.println("ESTOY AQUI AQUI");
+
         if (!buscarActividad(actividad)) {
             return false;
         }
-        if (buscarActividadCampamento(actividad, idCampamento) != null) {
+
+        System.out.println("Busco actiidad campamento a ver si lo encuentra");
+
+        if (buscarActividadCampamento(actividad, idCampamento)) {
+            System.out.println("Lo he encontrado asi q me voy");
             return false;
         }
-        campamentoDAO.insertCampamentoActividad(idCampamento, actividad);
-        return true;
+        if (campamentoDAO.insertCampamentoActividad(idCampamento, actividad)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -317,6 +326,10 @@ public class GestorCampamentos {
         return monitorDAO.getMonitoresEspecialesCampamento(idCampamento) != null;
     }
 
+    public Boolean buscarMonitorActividad(String nombreActividad, Integer idMonitor) {
+        return monitorDAO.getMonitorActividad(nombreActividad, idMonitor) != null;
+    }
+
     /**
      * Asocia un monitor a un campamento.
      * 
@@ -360,11 +373,13 @@ public class GestorCampamentos {
             throw new Exception("Monitor no encontrado");
         }
 
-        if (!buscarActividad(nombreActividad)) {
+        System.out.println(actividadDAO.get(nombreActividad).getNombreActividad() + " COÑOOOOOOOOOOOOOOOOOOOOO");
+
+        if (buscarActividad(nombreActividad) == false) {
             throw new Exception("Actividad no encontrada");
         }
 
-        if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
+        if (buscarActividadCampamento(nombreActividad, idCampamento) == false) {
             throw new Exception("Actividad no encontrada en el campamento");
         }
         if (actividadDAO.insertActividadMonitor(nombreActividad, idMonitor)) {

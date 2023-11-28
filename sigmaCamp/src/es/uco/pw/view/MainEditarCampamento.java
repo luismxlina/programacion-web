@@ -108,8 +108,9 @@ public class MainEditarCampamento {
                     nombreActividad = teclado.nextLine();
 
                     gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
-                            campamento.getIdentificador());
+                            idCampamento);
                     break;
+                    
                 default:
                     System.out.println("Opción no válida");
             }

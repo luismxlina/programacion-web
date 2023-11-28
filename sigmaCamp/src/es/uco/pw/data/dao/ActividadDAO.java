@@ -101,7 +101,8 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
             if (rs.next()) {
                 return new ActividadDTO(rs.getString("Nombre"),
                         NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
-                        Horario.valueOf(rs.getString("Horario").toUpperCase()), rs.getInt("NumeroMaximoParticipantes"),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()),
+                        rs.getInt("NumeroMaximoParticipantes"),
                         rs.getInt("NumeroMonitoresNecesarios"));
             }
         } catch (SQLException e) {

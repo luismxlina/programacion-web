@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS ActividadMonitor;
+
 DROP TABLE IF EXISTS CampamentoActividad;
 
 DROP TABLE IF EXISTS CampamentoMonitor;
@@ -76,4 +78,13 @@ CREATE TABLE CampamentoActividad (
     PRIMARY KEY (CampamentoId, ActividadNombre),
     FOREIGN KEY (CampamentoId) REFERENCES Campamento(Identificador) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ActividadNombre) REFERENCES Actividad(Nombre) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Relación directa entre Actividad y Monitor
+CREATE TABLE ActividadMonitor (
+    ActividadNombre VARCHAR(255),
+    MonitorId INT,
+    PRIMARY KEY (ActividadNombre, MonitorId),
+    FOREIGN KEY (ActividadNombre) REFERENCES Actividad(Nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MonitorId) REFERENCES Monitor(Identificador) ON DELETE CASCADE ON UPDATE CASCADE
 );

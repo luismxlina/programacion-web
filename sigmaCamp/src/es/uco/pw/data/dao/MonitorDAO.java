@@ -155,6 +155,25 @@ public class MonitorDAO implements DAO<MonitorDTO, Integer> {
         return null;
     }
 
+    public MonitorDTO getMonitorActividad(String nombreActividad, Integer idMonitor) {
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_MONITOR_ACTIVIDAD");
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setString(1, nombreActividad);
+            st.setInt(2, idMonitor);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new MonitorDTO(rs.getInt("Identificador"), rs.getString("Nombre"), rs.getString("Apellidos"),
+                        rs.getBoolean("EducadorEspecial"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Integer> getAllIdsMonitores() {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         Conexion conexController = Conexion.getInstance();
