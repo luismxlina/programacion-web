@@ -370,14 +370,18 @@ public class GestorCampamentos {
             throw new Exception("Monitor no encontrado");
         }
 
-        if (!buscarActividad(nombreActividad)) {
+        if (buscarMonitorActividad(nombreActividad, idMonitor)) {
+            throw new Exception("Monitor ya asociado a la actividad");
+        }
+
+        if (actividadDAO.get(nombreActividad) == null) {
             throw new Exception("Actividad no encontrada");
         }
 
         if (buscarActividadCampamento(nombreActividad, idCampamento) == false) {
             throw new Exception("Actividad no encontrada en el campamento");
         }
-        
+
         if (actividadDAO.insertActividadMonitor(nombreActividad, idMonitor)) {
             return true;
         }
