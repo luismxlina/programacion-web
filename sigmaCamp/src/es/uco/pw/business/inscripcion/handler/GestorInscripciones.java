@@ -5,9 +5,11 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
+import es.uco.pw.business.campamento.models.monitor.Monitor;
 import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.*;
+import es.uco.pw.business.users.handler.GestorAsistentes;
 import es.uco.pw.data.dao.InscripcionDAO;
 import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 
@@ -147,6 +149,28 @@ public class GestorInscripciones {
         if (numInscripciones >= numPlazas) {
             throw new Exception("No hay plazas disponibles");
         }
+
+        if (GestorAsistentes.getInstance().getAsistente(inscripcion.getId_Participante()).getRequiereAtencion()
+                && !GestorCampamentos.getInstance()
+                        .buscarMonitoresEspecialesCampamento(inscripcion.getId_Campamento())) {
+
+            ArrayList<Monitor> monitoresEspeciales = GestorCampamentos.getInstance().getMonitoresEspeciales();
+
+            for (Monitor monitor : monitoresEspeciales) {
+
+                if (!GestorCampamentos.getInstance().buscarMonitorCampamento(monitor.getIdentificador(),
+                        inscripcion.getId_Campamento())) {
+
+                    if (!GestorCampamentos.getInstance().asociarMonitorCampamento(monitor.getIdentificador(),
+                            inscripcion.getId_Campamento())) {
+
+                        return false;
+                    }
+                    break;
+                }
+            }
+        }
+
         if (inscripcionDAO.insert(new InscripcionDTO(inscripcion))) {
             return true;
         }

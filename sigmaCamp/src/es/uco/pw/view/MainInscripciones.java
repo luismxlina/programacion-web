@@ -37,9 +37,9 @@ public class MainInscripciones {
 
         System.out.println("·-----------------------------------·");
         System.out.println("|         MENÚ de Inscripciones      |");
-        System.out.println("·-----------------------------------·");
 
         do {
+            System.out.println("·-----------------------------------·");
             System.out.println("|    (1) Mostrar inscripciones      |");
             System.out.println("|    (2) Mostrar inscripción        |");
             System.out.println("|    (3) Añadir inscripción         |");

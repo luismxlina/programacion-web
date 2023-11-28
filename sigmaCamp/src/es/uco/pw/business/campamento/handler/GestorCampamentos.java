@@ -278,6 +278,33 @@ public class GestorCampamentos {
     }
 
     /**
+     * Devuelve todos los monitores de un campamento específico.
+     * 
+     * @param idCampamento
+     * @return una lista de todos los monitores del campamento
+     */
+    public ArrayList<Monitor> getMonitoresEspecialesCampamento(Integer idCampamento) {
+        ArrayList<Monitor> monitores = new ArrayList<Monitor>();
+        for (MonitorDTO monitor : monitorDAO.getMonitoresEspecialesCampamento(idCampamento)) {
+            monitores.add(new Monitor(monitor));
+        }
+        return monitores;
+    }
+
+    /**
+     * Devuelve todos los monitores especiales.
+     * 
+     * @return una lista de todos los monitores especiales
+     */
+    public ArrayList<Monitor> getMonitoresEspeciales() {
+        ArrayList<Monitor> monitores = new ArrayList<Monitor>();
+        for (MonitorDTO monitor : monitorDAO.getMonitoresEspeciales()) {
+            monitores.add(new Monitor(monitor));
+        }
+        return monitores;
+    }
+
+    /**
      * Inserta un nuevo monitor.
      * 
      * @param monitor
@@ -307,7 +334,7 @@ public class GestorCampamentos {
      * 
      * @param idMonitor
      * @param idCampamento
-     * @return
+     * @return true si el monitor existe, false en caso contrario
      */
     public Boolean buscarMonitorCampamento(Integer idMonitor, Integer idCampamento) {
         return monitorDAO.getMonitorCampamento(idMonitor, idCampamento) != null;

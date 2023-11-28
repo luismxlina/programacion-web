@@ -16,7 +16,6 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO");
-        System.out.println(campamento.getNivel());
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setInt(1, campamento.getIdentificador());

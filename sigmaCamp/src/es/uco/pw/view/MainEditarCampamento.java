@@ -8,7 +8,6 @@ import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.actividad.Horario;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
-import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
 
 /**
@@ -41,13 +40,12 @@ public class MainEditarCampamento {
         }
 
         int opcion;
-        Campamento campamento = gestor_campamentos.getCampamento(idCampamento);
         String nombreActividad;
         NivelEducativo nivelEducativo = gestor_campamentos.getCampamento(idCampamento).getNivel();
 
         System.out.println("·---------------------------------------------·");
         System.out.println("|            SUB-MENÚ de Campamentos          |");
-        
+
         do {
             System.out.println("·---------------------------------------------·");
             System.out.println("|   (1) Crear actividad                       |");
@@ -66,8 +64,12 @@ public class MainEditarCampamento {
                 case 1:
                     Actividad actividad = new Actividad();
                     crearActividad(teclado, actividad, nivelEducativo);
-                    gestor_campamentos.addActividad(actividad);
-                    gestor_campamentos.asociarActividadCampamento(actividad.getNombreActividad(), idCampamento);
+                    if (gestor_campamentos.addActividad(actividad) && gestor_campamentos
+                            .asociarActividadCampamento(actividad.getNombreActividad(), idCampamento)) {
+                        System.out.println("\nActividad guardada correctamente\n");
+                    } else {
+                        System.out.println("\nNo se ha podido crear la actividad\n");
+                    }
                     break;
                 case 2:
                     System.out.println("Introduzca nombre de la actividad a borrar");
@@ -86,7 +88,6 @@ public class MainEditarCampamento {
                     }
                     break;
                 case 4:
-                    campamento = gestor_campamentos.getCampamento(idCampamento);
                     monitor = new Monitor();
                     System.out.print("Dispone del ID del monitor que desea asociar? (si = 1/No = 0): ");
                     teclado.nextLine();
