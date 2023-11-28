@@ -390,9 +390,11 @@ public class GestorCampamentos {
      */
     public Boolean asociarMonitorActividad(int idMonitor, String nombreActividad, int idCampamento) throws Exception {
         MonitorDTO monitor = monitorDAO.get(idMonitor);
+
         if (monitor.getEsEducador()) {
             throw new Exception("El monitor es un educador");
         }
+
         if (!buscarMonitor(idMonitor)) {
             throw new Exception("Monitor no encontrado");
         }

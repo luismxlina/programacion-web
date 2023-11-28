@@ -42,6 +42,7 @@ public class MainEditarCampamento {
         int opcion;
         String nombreActividad;
         NivelEducativo nivelEducativo = gestor_campamentos.getCampamento(idCampamento).getNivel();
+        Monitor monitor;
 
         System.out.println("·---------------------------------------------·");
         System.out.println("|            SUB-MENÚ de Campamentos          |");
@@ -78,7 +79,7 @@ public class MainEditarCampamento {
                     gestor_campamentos.borrarActividadCampamento(nombreActividad, idCampamento);
                     break;
                 case 3:
-                    Monitor monitor = new Monitor(generarIDUnico());
+                    monitor = new Monitor(generarIDUnico());
                     monitor = crearMonitor(teclado, monitor);
                     gestor_campamentos.addMonitor(monitor);
                     if (gestor_campamentos.asociarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
@@ -103,10 +104,16 @@ public class MainEditarCampamento {
                     } else {
                         monitor = new Monitor(generarIDUnico());
                         monitor = crearMonitor(teclado, monitor);
-                        gestor_campamentos.addMonitor(monitor);
+                        if (gestor_campamentos.addMonitor(monitor) && gestor_campamentos
+                                .asociarMonitorCampamento(monitor.getIdentificador(), idCampamento)) {
+                            System.out.println("\nMonitor dado de alta correctamente\n");
+                        } else {
+                            System.out.println("\nNo se ha podido crear el monitor\n");
+                        }
                     }
 
                     System.out.println("Introduzca el nombre de la actividad a la que desea asociar el monitor");
+                    teclado.nextLine();
                     nombreActividad = teclado.nextLine();
 
                     if (gestor_campamentos.asociarMonitorActividad(monitor.getIdentificador(), nombreActividad,
@@ -159,7 +166,6 @@ public class MainEditarCampamento {
         System.out.println("Introduzca los datos del nuevo monitor:");
         while (nombre.isEmpty()) {
             System.out.print("Nombre: ");
-            // teclado.nextLine();
             nombre = teclado.nextLine();
             nombre = validarNombre(nombre);
         }
