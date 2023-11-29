@@ -21,7 +21,7 @@ public class MainPrincipal {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		// comprobarFicheros();
+
 		System.out.println("Bienvenido a Campamentos de programanción.");
 
 		Scanner teclado = new Scanner(System.in);
