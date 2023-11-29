@@ -50,7 +50,7 @@ public class MainEditarCampamento {
         do {
             System.out.println("·---------------------------------------------·");
             System.out.println("|   (1) Crear actividad                       |");
-            System.out.println("|   (2) Borrar actividad de un campamento     |");
+            System.out.println("|   (2) Borrar una actividad                  |");
             System.out.println("|   (3) Crear monitor                         |");
             System.out.println("|   (4) Asociar monitor a una actividad       |");
             System.out.println("|   (0) Volver al menú principal              |");
@@ -76,7 +76,7 @@ public class MainEditarCampamento {
                     System.out.println("Introduzca nombre de la actividad a borrar");
                     teclado.nextLine();
                     nombreActividad = teclado.nextLine();
-                    gestor_campamentos.borrarActividadCampamento(nombreActividad, idCampamento);
+                    gestor_campamentos.borrarActividad(nombreActividad);
                     break;
                 case 3:
                     monitor = new Monitor(generarIDUnico());

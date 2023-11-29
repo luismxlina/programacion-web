@@ -103,12 +103,14 @@ public class MainAsistentes {
 	 * @param asistentes Lista de objetos Asistente que se mostrarán.
 	 */
 	public static void mostrarAsistentes(ArrayList<Asistente> asistentes) {
+		System.out.println("\nAsistentes:\n");
 		for (int i = 0; i < asistentes.size(); i++) {
 			System.out.println("ID: " + asistentes.get(i).getIdentificador()
 					+ ", Nombre: " + asistentes.get(i).getNombre()
 					+ ", Apellidos: " + asistentes.get(i).getApellidos()
 					+ ", Fecha nacimiento: " + asistentes.get(i).getFechaNacimiento()
-					+ ", Necesita atención: " + asistentes.get(i).getRequiereAtencion());
+					+ ", Necesita atención: " + (asistentes.get(i).getRequiereAtencion() ? "Sí" : "No")
+					+ "\n");
 		}
 	}
 

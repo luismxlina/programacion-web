@@ -22,7 +22,7 @@ public class MainPrincipal {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		System.out.println("Bienvenido a Campamentos de programanción.");
+		System.out.println("\nBienvenido a UCOCAMPAMENTOS.");
 
 		Scanner teclado = new Scanner(System.in);
 		int opcion;

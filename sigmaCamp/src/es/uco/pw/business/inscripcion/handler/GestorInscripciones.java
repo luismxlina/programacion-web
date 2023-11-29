@@ -138,6 +138,15 @@ public class GestorInscripciones {
     }
 
     public Boolean addInscripcion(Inscripcion inscripcion) throws Exception {
+
+        if (!GestorAsistentes.getInstance().buscarAsistente(inscripcion.getId_Participante())) {
+            throw new Exception("El asistente no existe");
+        }
+
+        if (!GestorCampamentos.getInstance().buscarCampamento(inscripcion.getId_Campamento())) {
+            throw new Exception("El campamento no existe");
+        }
+
         if (buscarInscripcion(inscripcion.getId_Participante(), inscripcion.getId_Campamento())) {
             throw new Exception("Ya existe la inscripción");
         }

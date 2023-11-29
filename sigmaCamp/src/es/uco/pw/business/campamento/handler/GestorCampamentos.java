@@ -207,7 +207,6 @@ public class GestorCampamentos {
      *         contrario
      */
     public Boolean asociarActividadCampamento(String actividad, int idCampamento) {
-
         if (!buscarActividad(actividad)) {
             return false;
         }
@@ -219,7 +218,6 @@ public class GestorCampamentos {
         if (campamentoDAO.insertCampamentoActividad(idCampamento, actividad)) {
             return true;
         }
-
         return false;
     }
 
@@ -234,8 +232,10 @@ public class GestorCampamentos {
         if (!buscarActividad(nombreActividad)) {
             return false;
         }
-        actividadDAO.delete(nombreActividad);
-        return true;
+        if (actividadDAO.delete(nombreActividad)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -247,11 +247,16 @@ public class GestorCampamentos {
      *         contrario
      */
     public Boolean borrarActividadCampamento(String nombreActividad, int idCampamento) {
+
         if (!buscarActividadCampamento(nombreActividad, idCampamento)) {
             return false;
         }
-        actividadDAO.deleteActividadCampamento(nombreActividad, idCampamento);
-        return true;
+
+        if (actividadDAO.deleteActividadCampamento(nombreActividad, idCampamento)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -286,6 +291,20 @@ public class GestorCampamentos {
     public ArrayList<Monitor> getMonitoresEspecialesCampamento(Integer idCampamento) {
         ArrayList<Monitor> monitores = new ArrayList<Monitor>();
         for (MonitorDTO monitor : monitorDAO.getMonitoresEspecialesCampamento(idCampamento)) {
+            monitores.add(new Monitor(monitor));
+        }
+        return monitores;
+    }
+
+    /**
+     * Devuelve todos los monitores no especiales de un campamento específico.
+     * 
+     * @param idCampamento
+     * @return una lista de todos los monitores no especiales del campamento
+     */
+    public ArrayList<Monitor> getMonitoresNoEspecialesCampamento(Integer idCampamento) {
+        ArrayList<Monitor> monitores = new ArrayList<Monitor>();
+        for (MonitorDTO monitor : monitorDAO.getMonitoresNoEspecialesCampamento(idCampamento)) {
             monitores.add(new Monitor(monitor));
         }
         return monitores;
