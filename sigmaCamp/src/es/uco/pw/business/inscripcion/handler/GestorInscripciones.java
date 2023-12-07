@@ -167,16 +167,12 @@ public class GestorInscripciones {
 
             for (Monitor monitor : monitoresEspeciales) {
 
-                if (!GestorCampamentos.getInstance().buscarMonitorCampamento(monitor.getIdentificador(),
+                if (!GestorCampamentos.getInstance().asociarMonitorCampamento(monitor.getIdentificador(),
                         inscripcion.getId_Campamento())) {
 
-                    if (!GestorCampamentos.getInstance().asociarMonitorCampamento(monitor.getIdentificador(),
-                            inscripcion.getId_Campamento())) {
-
-                        return false;
-                    }
-                    break;
+                    throw new Exception("No se ha podido asociar el monitor al campamento");
                 }
+                break;
             }
         }
 
