@@ -8,6 +8,9 @@ import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
+import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
+import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
+import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.data.dao.ActividadDAO;
 import es.uco.pw.data.dao.CampamentoDAO;
 import es.uco.pw.data.dao.MonitorDAO;
@@ -415,6 +418,20 @@ public class GestorCampamentos {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Retorna todos los campamentos a los que un asistente está inscrito
+     * 
+     * @return ArrayList<Campamento> con los campamentos a los que está inscrito el
+     *         asistente
+     */
+    public ArrayList<Campamento> getCampamentosAsistente(Integer idAsistente) {
+        ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+        for (Inscripcion inscripcion : GestorInscripciones.getInstance().getInscripcionesAsistente(idAsistente)) {
+            campamentos.add(new Campamento(campamentoDAO.get(inscripcion.getId_Campamento())));
+        }
+        return campamentos;
     }
 
     /**

@@ -227,5 +227,5 @@ public class InscripcionDAO implements DAOInscripcion<InscripcionDTO, Integer> {
 
         return null; // or return an empty list if no results are found or an exception occurs
     }
-
+	
 }

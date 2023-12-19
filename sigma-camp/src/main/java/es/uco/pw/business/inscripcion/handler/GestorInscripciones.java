@@ -12,8 +12,10 @@ import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.*;
-import es.uco.pw.business.users.handler.GestorAsistentes;
+import es.uco.pw.business.users.handler.asistente.GestorAsistentes;
 import es.uco.pw.data.dao.InscripcionDAO;
+import es.uco.pw.business.users.handler.user.GestorUsuarios;
+import es.uco.pw.business.users.models.usuario.Usuario;
 
 /**
  * Clase que gestiona las inscripciones a campamentos.
@@ -63,6 +65,44 @@ public class GestorInscripciones {
         }
 
         return inscripcion;
+    }
+
+    public ArrayList<Inscripcion> getInscripcionesAsistente(Integer idAsistente) {
+        ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+        for (InscripcionDTO inscripcionDTO : inscripcionDAO.getAll()) {
+            if (inscripcionDTO.getAsistenteId() == idAsistente) {
+                ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+
+                Campamento campamento = null;
+                for (Campamento c : campamentos) {
+                    if (c.getIdentificador() == inscripcionDTO.getCampamentoId()) {
+                        campamento = c;
+                        break;
+                    }
+                }
+
+                Boolean esTemprana = getEsTemprana(inscripcionDTO.getFechaInscripcion(), campamento.getFechaInicio());
+                InscripcionCreator creator;
+
+                if (esTemprana) {
+                    creator = new InscripcionTemprana();
+                } else {
+                    creator = new InscripcionTardia();
+                }
+
+                Inscripcion inscripcion;
+
+                if (inscripcionDTO.getTipoInscripcion() == TipoInscripcion.COMPLETA) {
+                    inscripcion = creator.registrarInscripcionCompleta(inscripcionDTO.getAsistenteId(),
+                            inscripcionDTO.getCampamentoId(), inscripcionDTO.getFechaInscripcion());
+                } else {
+                    inscripcion = creator.registrarInscripcionParcial(inscripcionDTO.getAsistenteId(),
+                            inscripcionDTO.getCampamentoId(), inscripcionDTO.getFechaInscripcion());
+                }
+                inscripciones.add(inscripcion);
+            }
+        }
+        return inscripciones;
     }
 
     public ArrayList<Inscripcion> getInscripciones() {
@@ -206,4 +246,5 @@ public class GestorInscripciones {
         }
         return false;
     }
+
 }

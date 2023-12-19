@@ -10,22 +10,25 @@ public class Usuario {
     private LocalDate birthdayDate;
     private LocalDate inscriptionDate;
     private String email;
+    private Integer id;
     private String password;
     private String rol;
 
-    public Usuario(String fullName, LocalDate birthdayDate, LocalDate inscriptionDate, String email, String password,
+    public Usuario(String fullName, LocalDate birthdayDate, LocalDate inscriptionDate, String email,Integer id ,String password,
             String rol) {
         super();
         this.fullName = fullName;
         this.birthdayDate = birthdayDate;
         this.inscriptionDate = inscriptionDate;
         this.email = email;
+        this.id = id;
         this.password = password;
         this.rol = rol;
     }
 
     public Usuario() {
         this.email = "";
+        this.id = 0;
         this.inscriptionDate = LocalDate.now();
         this.password = "";
         this.rol = "USER";
@@ -36,13 +39,24 @@ public class Usuario {
         this.birthdayDate = user.getFecha();
         this.inscriptionDate = user.getFechaIncripcion();
         this.email = user.getEmail();
+        this.id = user.getId();
         this.rol = user.getRol();
         this.password = user.getPassword();
     }
 
-    public Usuario(String email) {
+    public Usuario(String email, Integer id) {
         this.email = email;
+        this.id = id;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public String getFullName() {
         return fullName;

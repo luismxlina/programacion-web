@@ -1,5 +1,5 @@
-Añadir tabla USER
-Crear DAOS pal USER
+Añadir tabla USER 👍
+Crear DAOS pal USER 👍
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -11,18 +11,18 @@ Reserva -> Inscripcion
 
 Ejercicio 1
 
-Login       |} En ambos se comtempla la existencia de dos tipos de usuario: Asistente y Admin
-Registro    |}
+Login       |} En ambos se comtempla la existencia de dos tipos de usuario: Asistente y Admin 👍
+Registro    |} 👍
 
 - En caso de acceso incorrecto:
-        - Se mostrará un mensaje de error y dará opción a volver a intentarlo.
+        - Se mostrará un mensaje de error y dará opción a volver a intentarlo. 👍
 
-- Una vez accedemos se crea el user bean
+- Una vez accedemos se crea el user bean 👍
 
 - La vista del menú cambia según el rol:
     Para el caso del usuario "asistente" la página principal mostrará:
-        - Un mensaje de bienvenida al usuario.
-        - La fecha actual.
+        - Un mensaje de bienvenida al usuario. 👍
+        - La fecha actual. 👍
         - Una lista de los campamentos a los que está inscrito.
         - La lista de campamentos debe estar ordenada por fecha (de más antigua a más nueva).
         - Debe indicar únicamente el identificador del campamento y la fecha de inicio.

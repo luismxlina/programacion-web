@@ -19,12 +19,13 @@ public class UserDAO implements DAO<UserDTO, Integer> {
         String query = conexController.getSql().getProperty("INSERT_USER");
         try {
             PreparedStatement st = conex.prepareStatement(query);
-            st.setString(1, a.getEmail());
-            st.setString(2, a.getPassword());
-            st.setString(3, a.getRol());
-            st.setDate(4, Date.valueOf(a.getFecha()));
-            st.setString(5, a.getNombreCompleto());
-            st.setDate(6, Date.valueOf(a.getFechaIncripcion()));
+            st.setInt(1, a.getId()); // Añadir el campo id
+            st.setString(2, a.getEmail());
+            st.setString(3, a.getPassword());
+            st.setString(4, a.getRol());
+            st.setDate(5, Date.valueOf(a.getFecha()));
+            st.setString(6, a.getNombreCompleto());
+            st.setDate(7, Date.valueOf(a.getFechaIncripcion()));
 
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -47,6 +48,8 @@ public class UserDAO implements DAO<UserDTO, Integer> {
             st.setString(4, a.getNombreCompleto());
             st.setDate(5, Date.valueOf(a.getFechaIncripcion()));
             st.setString(6, a.getEmail());
+            st.setInt(7, a.getId()); // Añadir el campo id
+
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,45 +78,45 @@ public class UserDAO implements DAO<UserDTO, Integer> {
     }
 
     @Override
-    public ArrayList<UserDTO> getAll() {
-        Conexion conexController = Conexion.getInstance();
-        Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("GET_ALL_USERS");
-        try {
-            PreparedStatement st = conex.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            ArrayList<UserDTO> users = new ArrayList<UserDTO>();
-            while (rs.next()) {
-                users.add(new UserDTO(rs.getString("email"), rs.getString("password"), rs.getString("rol"),
-                        rs.getDate("fechaNacimiento").toLocalDate(), rs.getString("nombreCompleto"),
-                        rs.getDate("fechaInscripcion").toLocalDate()));
-            }
-            return users;
-        } catch (SQLException e) {
-            e.printStackTrace();
+public ArrayList<UserDTO> getAll() {
+    Conexion conexController = Conexion.getInstance();
+    Connection conex = conexController.getConnection();
+    String query = conexController.getSql().getProperty("GET_ALL_USERS");
+    try {
+        PreparedStatement st = conex.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+        while (rs.next()) {
+            users.add(new UserDTO(rs.getString("email"), rs.getInt("id"), rs.getString("password"), rs.getString("rol"),
+                    rs.getDate("fechaNacimiento").toLocalDate(), rs.getString("nombreCompleto"),
+                    rs.getDate("fechaInscripcion").toLocalDate())); // Añadir id al constructor de UserDTO
         }
-
-        return null;
+        return users;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
 
-    public UserDTO get(String email) {
-        Conexion conexController = Conexion.getInstance();
-        Connection conex = conexController.getConnection();
-        String query = conexController.getSql().getProperty("GET_USER");
-        try {
-            PreparedStatement st = conex.prepareStatement(query);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next())
-                return new UserDTO(rs.getString("email"), rs.getString("password"), rs.getString("rol"),
-                        rs.getDate("fechaNacimiento").toLocalDate(), rs.getString("nombreCompleto"),
-                        rs.getDate("fechaInscripcion").toLocalDate());
+    return null;
+}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+public UserDTO get(String email) {
+    Conexion conexController = Conexion.getInstance();
+    Connection conex = conexController.getConnection();
+    String query = conexController.getSql().getProperty("GET_USER");
+    try {
+        PreparedStatement st = conex.prepareStatement(query);
+        st.setString(1, email);
+        ResultSet rs = st.executeQuery();
+        if (rs.next())
+            return new UserDTO(rs.getString("email"), rs.getInt("id"), rs.getString("password"), rs.getString("rol"),
+                    rs.getDate("fechaNacimiento").toLocalDate(), rs.getString("nombreCompleto"),
+                    rs.getDate("fechaInscripcion").toLocalDate()); // Añadir id al constructor de UserDTO
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
     @Override
     public UserDTO get(Integer id) {
