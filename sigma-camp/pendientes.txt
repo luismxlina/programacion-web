@@ -1,0 +1,43 @@
+Añadir tabla USER
+Crear DAOS pal USER
+
+------------------------------------------------------------------------------------------------------------------------
+
+Kart -> Actividad
+Pista -> Campamento
+Reserva -> Inscripcion
+
+------------------------------------------------------------------------------------------------------------------------
+
+Ejercicio 1
+
+Login       |} En ambos se comtempla la existencia de dos tipos de usuario: Asistente y Admin
+Registro    |}
+
+- En caso de acceso incorrecto:
+        - Se mostrará un mensaje de error y dará opción a volver a intentarlo.
+
+- Una vez accedemos se crea el user bean
+
+- La vista del menú cambia según el rol:
+    Para el caso del usuario "asistente" la página principal mostrará:
+        - Un mensaje de bienvenida al usuario.
+        - La fecha actual.
+        - Una lista de los campamentos a los que está inscrito.
+        - La lista de campamentos debe estar ordenada por fecha (de más antigua a más nueva).
+        - Debe indicar únicamente el identificador del campamento y la fecha de inicio.
+    Para el caso del usuario "administrador" se mostrará un listado con:
+        - Los nombres de los campamentos.
+        - El número de personas inscritas en cada uno hasta la fecha actual.
+        - Diferenciando si son completas o parciales.
+
+- Para ambos tipos de usuarios registrados:
+    Mostrará dos opciones: "desconectar" y "modificar datos".
+
+  - Al seleccionar "desconectar":
+    - Se realizará la desconexión del usuario activo en la sesión.
+  
+  - En la funcionalidad "modificar datos":
+    - La aplicación mostrará los campos del registro del usuario.
+    - Permitirá la modificación de aquellos campos considerados permitidos.
+    - Ejemplo: No se podrá cambiar el correo electrónico por ser el identificador ni tampoco el tipo de usuario.
