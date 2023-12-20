@@ -21,6 +21,7 @@
 	String indexViewPath = application.getInitParameter("index");
 	
 	String email = request.getParameter("email");
+	Integer id = 91;
 	String password = request.getParameter("password");
 	String fechaNacimiento = request.getParameter("date");;
 	String nombreCompleto = request.getParameter("nombrecompleto");
@@ -40,7 +41,7 @@
 	<%
 	}
 	LocalDate nacimiento = LocalDate.parse(fechaNacimiento);
-	Usuario register = new Usuario(nombreCompleto,nacimiento,inscripcion,email,password,rol);
+	Usuario register = new Usuario(nombreCompleto,nacimiento,inscripcion,email,id,password,rol);
 	if( ! GestorUsuarios.getInstance().addUser(register)){
 	%>
 		<jsp:forward page="<%=registerViewPath%>">
@@ -51,6 +52,7 @@
 		int antiguedad = register.antiquity();
 		boolean isMayorEdad = register.isMayorEdad();
 	%>
+		<jsp:setProperty property="id" 				value="<%=id%>" 			name="User"/>
 		<jsp:setProperty property="email" 			value="<%=email%>" 			name="User"/>
 		<jsp:setProperty property="fechaNacimiento" value="<%=nacimiento%>"		name="User"/>
 		<jsp:setProperty property="fechaIncripcion" value="<%=inscripcion%>" 	name="User"/>

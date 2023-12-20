@@ -8,7 +8,6 @@ import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
-import es.uco.pw.business.inscripcion.dto.inscripcion.InscripcionDTO;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.data.dao.ActividadDAO;

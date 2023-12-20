@@ -17,8 +17,9 @@
 				<%String aclNew=application.getInitParameter("aclNew"); %>
 					<jsp:include page="<%=aclNew%>"></jsp:include>
 					<!-- ACL -->
-					<% String loginViewPath=application.getInitParameter("login"); String
-						indexViewPath=application.getInitParameter("index"); String email=request.getParameter("email");
+					<% 	String loginViewPath=application.getInitParameter("login"); 
+						String indexViewPath=application.getInitParameter("index"); 
+						String email=request.getParameter("email");
 						String password=request.getParameter("password"); if(email==null){ %>
 						<jsp:forward page="<%=loginViewPath%>" />
 						<% } else if( ! GestorUsuarios.getInstance().checkout(email,password)){ %>
@@ -27,6 +28,7 @@
 							</jsp:forward>
 							<% }else{ Usuario login=GestorUsuarios.getInstance().getUserByEmail(email); %>
 								<jsp:setProperty property="email" value="<%=email%>" name="User" />
+								<jsp:setProperty property="id" value="<%=login.getId()%>" name="User" />
 								<jsp:setProperty property="fechaNacimiento" value="<%=login.getBirthdayDate()%>"
 									name="User" />
 								<jsp:setProperty property="fechaIncripcion" value="<%=login.getInscriptionDate()%>"

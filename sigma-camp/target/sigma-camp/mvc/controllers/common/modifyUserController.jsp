@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="es.uco.pw.business.user.handlers.UsuarioHandler" %>
+<%@ page import="es.uco.pw.business.user.handlers.GestorUsuarios" %>
 <%@ page import="es.uco.pw.business.user.models.Usuario" %>
 <%@ page import="java.time.LocalDate" %>
 

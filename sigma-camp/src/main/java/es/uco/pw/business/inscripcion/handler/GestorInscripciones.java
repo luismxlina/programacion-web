@@ -14,8 +14,6 @@ import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
 import es.uco.pw.business.inscripcion.models.inscripcion.factory.*;
 import es.uco.pw.business.users.handler.asistente.GestorAsistentes;
 import es.uco.pw.data.dao.InscripcionDAO;
-import es.uco.pw.business.users.handler.user.GestorUsuarios;
-import es.uco.pw.business.users.models.usuario.Usuario;
 
 /**
  * Clase que gestiona las inscripciones a campamentos.

@@ -1,53 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="es.uco.pw.business.inscripcion.handler.GestorInscripciones" %>
+<%@page import="es.uco.pw.business.users.handler.user.GestorUsuarios" %>
+<%@page import="es.uco.pw.business.users.models.usuario.Usuario" %>
+<%@page import="java.time.LocalDate" %>
+<%@page import="java.time.LocalDateTime" %>
+
 <jsp:useBean  id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Iniciar Sesión</title>
+<title>PW</title>
 </head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+
   <body>
+  	<div class="login-box">
+  	<%
+	if(request.getParameter("ACL")!= null){
+		%>
+		<p class="cajaRoja">Acceso denegado></p>
+		<%
+	}else if (request.getAttribute("ACL")!=null){
+		%>
+		<p class="cajaRoja">Acceso denegado</p>
+		<%
+	}
+  	if(User.getEmail() == null || User.getRol() == null){
+	  	%>
+	  	<h2> <img src="/p3/images/super-mario-admin.svg" class="bi d-block mx-auto mb-1"  width="24" height="24">MarioResort<img src="/p3/images/super-mario-admin.svg" class="bi d-block mx-auto mb-1"  width="24" height="24"></h2>
+	  	<div class="user-box">
+	  	<div class="submit">
+	      <span></span>
+	      <span></span>
+	      <span></span>
+	      <span></span>
+			<a href="${pageContext.request.contextPath}<%=application.getInitParameter("registerController")%>">Registrarse</a>
+		</div>
+	  	</div>
+	  	<div class="user-box">
+	  	<div class="submit">
+	      <span></span>
+	      <span></span>
+	      <span></span>
+	      <span></span>
+			<a href="${pageContext.request.contextPath}<%=application.getInitParameter("loginController")%>">Iniciar Sesión</a>
+	  	</div>
+	  	</div>
+	  	<%
+  	}else if(User.getRol().equals("ADMIN")){
+  		String adminMenu=application.getInitParameter("adminMenuController");
+  		%>
+  		<jsp:forward page="<%=adminMenu%>"/>
+  		<%
+  	}else if(User.getRol().equals("USER")){
+  		String userMenu=application.getInitParameter("userMenuController");
+  		%>
+  		<jsp:forward page="<%=userMenu%>"/>
+  		<%
+  	}
+  		%>
+  	</div>
+
+  </body>
   
-<!-- ACL -->
-<%String aclNew = application.getInitParameter("aclNew"); %>
-<jsp:include page="<%=aclNew%>"></jsp:include>
-<!-- ACL -->
-
-	
-	<div class="login-box">
-	  <h2>Iniciar Sesión</h2>
-	   <form id="formulario" method="post" action= "${pageContext.request.contextPath}<%=application.getInitParameter("loginController")%>">  
-	    	<div class="user-box">
-	      		<input type="text"  name="email" id="email" >
-	      		<label>Username</label>
-	    	</div>
-	   	 	<div class="user-box">
-	      		<input type="password" placeholder="password" name="password" id="password">
-	     		<label>Password</label>
-	    	</div>
-    		<div class="submit">
-		      <span></span>
-		      <span></span>
-		      <span></span>
-		      <span></span>
-      		  <input class="sub" type="submit" id="submit" value="Iniciar Sesión">
-			</div>
-	    	
-	  </form>
-	  <div>
-		<a class="sub" href="${pageContext.request.contextPath}<%= application.getInitParameter("registerController")%>">Registrarse</a>
-	  </div>
-	  	<%if(request.getParameter("Errorlogin") != null) {%>
-			<p class="cajaRoja"> Email o contraseña incorrectas. </p>
-	<%}	%>
-	</div>
-
-
-
-   </body>
-  <script src="${pageContext.request.contextPath}/js/script.js"></script>
-  <script src="${pageContext.request.contextPath}/js/login.js"></script>
-
 </html>
