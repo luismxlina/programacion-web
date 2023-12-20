@@ -4,6 +4,8 @@
 			<%@ page import="es.uco.pw.business.users.models.usuario.Usuario" %>
 				<%@page import="java.time.LocalDate" %>
 					<%@page import="java.time.LocalDateTime" %>
+						<%@page import="java.util.ArrayList" %>
+							<%@page import="es.uco.pw.business.campamento.models.campamento.Campamento" %>
 
 						<jsp:useBean id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean">
 						</jsp:useBean>
@@ -34,13 +36,14 @@
 										<p>Bienvenido
 											<jsp:getProperty property="nombreCompleto" name="User" />
 										</p>
-										<p>Hoy es <%=request.getParameter("fechaActual")%>
+										<p>
+											Hoy es <%=request.getAttribute("fechaActual")%>
 										</p>
 										<p>Tu antiguedad es:
 											<jsp:getProperty property="antiguedad" name="User" /> años
 										</p>
 
-										<% if(request.getParameter("campamentos") != (null)){%>
+										<% if(request.getAttribute("campamentos") != (null)){
 											ArrayList<Campamento> campamentos = (ArrayList<Campamento>) request.getAttribute("campamentos");
 											for (Campamento campamento : campamentos) {
 												%>

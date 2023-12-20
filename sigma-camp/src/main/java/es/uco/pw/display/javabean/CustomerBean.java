@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class CustomerBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String email;
+	private Integer id;
 	private LocalDate fechaNacimiento;
 	private LocalDate fechaIncripcion;
 	private String nombreCompleto;
@@ -13,8 +14,9 @@ public class CustomerBean implements Serializable {
 	private String password;
 	private int antiguedad;
 	private boolean mayorEdad;
-	
-	public CustomerBean() {}
+
+	public CustomerBean() {
+	}
 
 	public String getEmail() {
 		return email;
@@ -64,6 +66,14 @@ public class CustomerBean implements Serializable {
 		this.password = password;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public int getAntiguedad() {
 		return antiguedad;
 	}
@@ -79,13 +89,12 @@ public class CustomerBean implements Serializable {
 	public void setMayorEdad(boolean mayorEdad) {
 		this.mayorEdad = mayorEdad;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "CustomerBean [email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", fechaIncripcion="
 				+ fechaIncripcion + ", nombreCompleto=" + nombreCompleto + ", rol=" + rol + ", password=" + password
-				+ ", antiguedad=" + antiguedad + ", MayorEdad=" + mayorEdad + "]";
+				+ ", id=" + id + ", antiguedad=" + antiguedad + ", MayorEdad=" + mayorEdad + "]";
 	}
-	
+
 }

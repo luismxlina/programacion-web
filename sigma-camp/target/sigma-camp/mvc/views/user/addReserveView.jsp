@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="es.uco.pw.business.circuit.models.Pista" %>
+<%@ page import="es.uco.pw.business.campamento.models.campamento.Campamento" %>
 <%@ page import="java.util.ArrayList" %>
 
 <jsp:useBean  id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>A&ntildeadir reservas</title>
+<title>Añadir inscripciones</title>
 </head>
  	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/marco.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
@@ -30,7 +30,7 @@
 	<div class="form-style-6">
 	<%
 	String indexViewPath = application.getInitParameter("index");
-	ArrayList<Pista> pistas = new ArrayList<Pista>(); 
+	ArrayList<Campamento> pistas = new ArrayList<Campamento>(); 
 	if(request.getAttribute("arrayPistas") == null){
 		
 	%>
@@ -54,7 +54,7 @@
 		</form>
 	<%}else{
 		
-		 pistas = (ArrayList<Pista>)request.getAttribute("arrayPistas");	
+		 pistas = (ArrayList<Campamento>)request.getAttribute("arrayPistas");	
 		%>	
 		<label>Pistas disponibles</label>
 		<form id="formulario2" method="get" action="/sigma-camp/addReserve">

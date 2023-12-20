@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="es.uco.pw.business.reserve.models.factory.*" %>
+<%@ page import="es.uco.pw.business.inscripcion.models.factory.*" %>
 <%@ page import="java.util.ArrayList" %>
 
 <jsp:useBean  id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
