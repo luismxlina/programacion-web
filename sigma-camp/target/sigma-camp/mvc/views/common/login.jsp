@@ -20,12 +20,12 @@
 	  <h2>Iniciar Sesión</h2>
 	   <form id="formulario" method="post" action= "${pageContext.request.contextPath}<%=application.getInitParameter("loginController")%>">  
 	    	<div class="user-box">
-	      		<input type="text" placeholder="email" name="email" id="email" >
-	      		<label>Correo electrónico</label>
+	      		<input type="text" placeholder="Correo electrónico" name="email" id="email" >
+	      		<label>email</label>
 	    	</div>
 	   	 	<div class="user-box">
 	      		<input type="password" placeholder="Contraseña" name="password" id="password">
-	     		<label>Password</label>
+	     		<label>password</label>
 	    	</div>
     		<div class="submit">
 		      <span></span>

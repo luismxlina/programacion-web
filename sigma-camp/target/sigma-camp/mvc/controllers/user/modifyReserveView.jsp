@@ -91,7 +91,7 @@
 	<p class="cajaRoja"><%=request.getAttribute("error")%></p>
 	<%}	%>
 	</div>
- <jsp:include page="/include/footer.html"></jsp:include>
+ 
 </main>
 </body>
  <script src="${pageContext.request.contextPath}/js/script.js"></script> 

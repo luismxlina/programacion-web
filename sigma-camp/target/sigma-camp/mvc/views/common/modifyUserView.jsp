@@ -1,11 +1,11 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <jsp:useBean  id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
 <%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>Modificar  Usuario</title>
 </head>
 <!-- ACL -->
@@ -46,19 +46,26 @@
 	<%
 	}
     %>
-      <form id="formulario"  method="post" action= "<%=application.getInitParameter("modifyUserController")%>">
+      <form id="formulario"  method="post" action= "<%=application.getInitParameter("modifyUserControllerr")%>">
         <div class="formulario__grupo" id="grupoUsuario">
-            <input class="cajaBlanca" type="text" 	placeholder="Nombre Apellido1 Apellido2" id="nombrecompleto" name="nombrecompleto">
+            <input class="cajaBlanca" type="text" 	placeholder="Nombre" id="nombre" name="nombre">
+        </div>
+        <div class="formulario__grupo" id="grupoUsuario">
+            <input class="cajaBlanca" type="text" 	placeholder="Apellidos" id="apellidos" name="apellidos">
         </div>
         <input class="cajaBlanca" type="password" placeholder="password" id="password" name="password"><br>
         <label>Fecha de nacimiento</label>
         <input class="cajaBlanca" type="date" placeholder="LocalDate" id="date" name="date"><br>
+		<div class="user-box">
+			<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
+			<label for="requiereAtencion">Requiere atención especial</label>
+		</div>
         <input type="submit" id="submit" value="Submit"><br><br>
         <input type="reset" id="reset">
       </form> 
       
     </div>
-	   <jsp:include page="/include/footer.html"></jsp:include>
+	   
   </main>
   </body>
   <script src="${pageContext.request.contextPath}/js/script.js"></script>

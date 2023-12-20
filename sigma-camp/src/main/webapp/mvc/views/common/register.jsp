@@ -33,7 +33,7 @@
 	      <label>Email</label>
 	    </div>
 	    <div class="user-box">
-	      <input type="password" placeholder="password" name="password" id="password">
+	      <input type="password" placeholder="Contraseña" name="password" id="password">
 	      <label>Password</label>
 	    </div>
 	     <div class="user-box">
@@ -43,7 +43,7 @@
 
 		<div class="user-box">
 			<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
-			<label for="requiereAtencion">Estás malito?</label>
+			<label for="requiereAtencion">¿Requiere atención especial?</label>
 		</div>
 	    <div class="submit">
 	      <span></span>

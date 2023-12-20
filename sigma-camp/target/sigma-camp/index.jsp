@@ -27,7 +27,7 @@
 										<% } if(User.getEmail()==null || User.getRol()==null){ %>
 											<h2> <img src="/p3/images/super-mario-admin.svg"
 													class="bi d-block mx-auto mb-1" width="24"
-													height="24">MarioResort<img src="/p3/images/super-mario-admin.svg"
+													height="24">Sigma-Camp<img src="/p3/images/super-mario-admin.svg"
 													class="bi d-block mx-auto mb-1" width="24" height="24"></h2>
 											<div class="user-box">
 												<div class="submit">

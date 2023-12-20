@@ -23,7 +23,7 @@
 <main>
   <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
   
-  	<div class="form-style-6">
+  	<div class="form-style">
 	<%	if(request.getParameter("ACL")!= null){ %>
 				<p class="cajaRoja">Acceso denegado</p>	
 	<%	}else if (request.getAttribute("ACL")!=null){ %>
@@ -34,39 +34,39 @@
     HashMap<Integer, SimpleEntry<Integer, Integer>> conteos = (HashMap<Integer, SimpleEntry<Integer, Integer>>) request.getAttribute("conteos");
     ArrayList<Campamento> campamentos = (ArrayList<Campamento>) request.getAttribute("campamentos");
 %>
-        <table border="1">
-        <thead>
+<table border="1" class="miTabla">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Fin</th>
+            <th>Nivel</th>
+            <th>Máximo de Asistentes</th>
+            <th>Asistentes a Tiempo Completo</th>
+            <th>Asistentes a Tiempo Parcial</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (Campamento campamento : campamentos) {
+            SimpleEntry<Integer, Integer> conteo = conteos.get(campamento.getIdentificador());
+            int numInscripcionesParciales = conteo != null ? conteo.getKey() : 0;
+            int numInscripcionesCompletas = conteo != null ? conteo.getValue() : 0;
+        %>
             <tr>
-                <th>Identificador</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Fin</th>
-                <th>Nivel</th>
-                <th>Máximo de Asistentes</th>
-                <th>Asistentes a Tiempo Completo</th>
-                <th>Asistentes a Tiempo Parcial</th>
+                <td><%= campamento.getIdentificador() %></td>
+                <td><%= campamento.getFechaInicio() %></td>
+                <td><%= campamento.getFechaFin() %></td>
+                <td><%= campamento.getNivel() %></td>
+                <td><%= campamento.getMaxAsistentes() %></td>
+                <td><%= numInscripcionesCompletas %></td>
+                <td><%= numInscripcionesParciales %></td>
             </tr>
-        </thead>
-        <tbody>
-            <% for (Campamento campamento : campamentos) {
-                SimpleEntry<Integer, Integer> conteo = conteos.get(campamento.getIdentificador());
-                int numInscripcionesParciales = conteo != null ? conteo.getKey() : 0;
-                int numInscripcionesCompletas = conteo != null ? conteo.getValue() : 0;
-            %>
-                <tr>
-                    <td><%= campamento.getIdentificador() %></td>
-                    <td><%= campamento.getFechaInicio() %></td>
-                    <td><%= campamento.getFechaFin() %></td>
-                    <td><%= campamento.getNivel() %></td>
-                    <td><%= campamento.getMaxAsistentes() %></td>
-                    <td><%= numInscripcionesCompletas %></td>
-                    <td><%= numInscripcionesParciales %></td>
-                </tr>
-            <% } %>
-        </tbody>
-        </table>
+        <% } %>
+    </tbody>
+</table>
 <% } %>
   	</div>
-  	<jsp:include page="/include/footer.html"></jsp:include>
+  	
 	</main>
   </body>
 

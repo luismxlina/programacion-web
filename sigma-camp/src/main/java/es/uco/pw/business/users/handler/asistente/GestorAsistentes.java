@@ -68,4 +68,12 @@ public class GestorAsistentes {
 		}
 		return false;
 	}
+
+	public Boolean updateAsistente(Asistente asistente) {
+		if (buscarAsistente(asistente.getIdentificador())) {
+			asistenteDAO.update(new AsistenteDTO(asistente));
+			return true;
+		}
+		return false;
+	}
 }

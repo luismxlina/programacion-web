@@ -35,6 +35,11 @@
       <param-name>modifyUserController</param-name>
       <param-value>/mvc/controllers/common/modifyUserController.jsp</param-value>
    </context-param>
+
+   <context-param>
+      <param-name>modifyUserControllerr</param-name>
+      <param-value>/sigma-camp/mvc/controllers/common/modifyUserController.jsp</param-value>
+   </context-param>
    
    <context-param>
       <param-name>registerController</param-name>

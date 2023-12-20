@@ -5,7 +5,7 @@
     header {
       position: sticky;
       top: 0;
-      background-color: #32373B;
+      background-color: hsl(207, 8%, 21%);
       color: #fff;
     }
 
@@ -25,13 +25,3 @@
     /* background-color: #DBDEDF;*/
     }
 
-    /* Estilos para el footer */
-    footer {
-      clear: both;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #32373B;
-      color: #fff;
-      padding: 10px;
-    }

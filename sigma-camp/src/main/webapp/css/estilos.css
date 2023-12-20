@@ -80,6 +80,19 @@
        background: #32373B;
    }
    
+.miTabla {
+    width: 50%; /* Reducir el ancho para ver el efecto de centrado */
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: auto; /* Centrar la tabla horizontalmente */
+}
 
-   
-   
+.miTabla th, .miTabla td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: center;
+}
+
+.miTabla th {
+    color: white;
+}

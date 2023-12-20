@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded",function(){
         diaFecha:/^^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])T\d\d\:\d\d$/,
         time:/^\d\d:\d\d$/,
         telefono:/^\d{9}$/,
-        nombrecompleto:/^([A-Z][a-z]+\s){2,}[A-Z][a-z]+$/,
+        nombre:/^[a-zA-Z]+( [a-zA-Z]+)*$/,
+        apellidos:/^([A-Z][a-z]+\s){1,}[A-Z][a-z]+$/,
         numero:/^\d+$/
     }
 

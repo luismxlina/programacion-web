@@ -39,9 +39,6 @@
 										<p>
 											Hoy es <%=request.getAttribute("fechaActual")%>
 										</p>
-										<p>Tu antiguedad es:
-											<jsp:getProperty property="antiguedad" name="User" /> años
-										</p>
 										
 										<% if(request.getAttribute("campamentos") != (null)){
 											ArrayList<Campamento> campamentos = (ArrayList<Campamento>) request.getAttribute("campamentos");
@@ -66,7 +63,7 @@
 
 														<% } %>
 									</div>
-									<jsp:include page="/include/footer.html"></jsp:include>
+									
 								</main>
 						</body>
 
