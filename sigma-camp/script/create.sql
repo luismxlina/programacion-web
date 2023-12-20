@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS User;
+
 DROP TABLE IF EXISTS ActividadMonitor;
 
 DROP TABLE IF EXISTS CampamentoActividad;
@@ -16,7 +18,7 @@ DROP TABLE IF EXISTS Asistente;
 
 -- Tabla para la entidad Asistente
 CREATE TABLE Asistente (
-    Identificador INT PRIMARY KEY,
+    Identificador INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(255),
     Apellidos VARCHAR(255),
     FechaNacimiento DATE,

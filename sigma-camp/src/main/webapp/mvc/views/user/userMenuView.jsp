@@ -42,7 +42,9 @@
 										<p>Tu antiguedad es:
 											<jsp:getProperty property="antiguedad" name="User" /> años
 										</p>
-
+										<p>
+											Tus campamentos son estos: %>
+										</p>
 										<% if(request.getAttribute("campamentos") != (null)){
 											ArrayList<Campamento> campamentos = (ArrayList<Campamento>) request.getAttribute("campamentos");
 											for (Campamento campamento : campamentos) {

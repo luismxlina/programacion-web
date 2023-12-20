@@ -25,6 +25,7 @@
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/RepositorioAsistentes.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/users/handler/user/GestorUsuarios.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/InterfazRepositorio.java
+/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/DAOAsistente.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/inscripcion/models/inscripcion/factory/InscripcionTardia.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/inscripcion/models/inscripcion/factory/InscripcionTemprana.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/ActividadDAO.java

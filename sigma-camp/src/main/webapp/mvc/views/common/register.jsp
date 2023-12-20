@@ -20,9 +20,13 @@
 	  <h2>Registro</h2>
 	   <form id="formulario"  method="post" action= "${pageContext.request.contextPath}<%=application.getInitParameter("registerController")%>">
 	       <div class="user-box">
-	     	<input type="text" 	placeholder="Nombre Apellido1 Apellido2" id="nombrecompleto" name="nombrecompleto">
+	     	<input type="text" 	placeholder="Nombre" id="nombre" name="nombre">
 	      	<label>Nombre Completo</label>
 	    </div>
+		<div class="user-box">
+	     	<input type="text" 	placeholder="Apellidos" id="apellidos" name="apellidos">
+			<label>Apellidos</label>
+		</div>
 	       
 	    <div class="user-box">
 	      <input type="text"  name="email" id="email" >
@@ -36,6 +40,11 @@
 	      <input  type="date" placeholder="LocalDate" id="date" name="date">
 	      <label>Fecha de Nacimiento</label>
 	    </div>
+
+		<div class="user-box">
+			<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
+			<label for="requiereAtencion">Estás malito?</label>
+		</div>
 	    <div class="submit">
 	      <span></span>
 	      <span></span>

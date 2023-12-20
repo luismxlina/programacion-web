@@ -57,7 +57,7 @@
 		 pistas = (ArrayList<Campamento>)request.getAttribute("arrayPistas");	
 		%>	
 		<label>Pistas disponibles</label>
-		<form id="formulario2" method="get" action="/sigma-camp/addReserve">
+		<form id="formulario2" method="get" action="/sigma-camp/add">
 		<label>Pista</label>
 		<select class="cajaBlanca" id="idPista" name="idPista">
 			<%for(Pista it : pistas){ %>
