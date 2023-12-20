@@ -20,7 +20,8 @@ public class AsistenteDAO implements DAOAsistente<AsistenteDTO, Integer> {
         String query = conexController.getSql().getProperty("INSERT_ASISTENTE");
         Integer idGenerado = -1;
         try {
-            PreparedStatement st = conex.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement st = conex.prepareStatement(query,
+                    Statement.RETURN_GENERATED_KEYS);
             st.setString(1, asistente.getNombre());
             st.setString(2, asistente.getApellidos());
             st.setDate(3, new java.sql.Date(asistente.getFechaNacimiento().getTime()));
@@ -43,12 +44,11 @@ public class AsistenteDAO implements DAOAsistente<AsistenteDTO, Integer> {
         String query = conexController.getSql().getProperty("UPDATE_ASISTENTE");
         try {
             PreparedStatement st = conex.prepareStatement(query);
-            st.setInt(1, asistente.getIdentificador());
-            st.setString(2, asistente.getNombre());
-            st.setString(3, asistente.getApellidos());
-            st.setDate(4, new java.sql.Date(asistente.getFechaNacimiento().getTime()));
-            st.setBoolean(5, asistente.getRequiereAtencion());
-            st.setInt(6, asistente.getIdentificador());
+            st.setString(1, asistente.getNombre());
+            st.setString(2, asistente.getApellidos());
+            st.setDate(3, new java.sql.Date(asistente.getFechaNacimiento().getTime()));
+            st.setBoolean(4, asistente.getRequiereAtencion());
+            st.setInt(5, asistente.getIdentificador());
             return st.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();

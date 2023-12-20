@@ -29,7 +29,7 @@
 		</div>
 	       
 	    <div class="user-box">
-	      <input type="text"  name="email" id="email" >
+	      <input type="text" placeholder="Correo electrónico" name="email" id="email" >
 	      <label>Email</label>
 	    </div>
 	    <div class="user-box">

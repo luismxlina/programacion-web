@@ -3,6 +3,7 @@ package es.uco.pw.business.users.handler.asistente;
 import java.util.ArrayList;
 
 import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
+import es.uco.pw.business.users.handler.user.GestorUsuarios;
 import es.uco.pw.business.users.models.asistente.Asistente;
 import es.uco.pw.data.dao.AsistenteDAO;
 
@@ -49,6 +50,14 @@ public class GestorAsistentes {
 		}
 		asistenteDAO.insert(new AsistenteDTO(nuevoAsistente));
 		return true;
+	}
+
+	public Integer altaAsistente(Asistente nuevoAsistente, String email) {
+		if (GestorUsuarios.getInstance().existEmail(email)) {
+			return -1;
+		}
+		Integer value = asistenteDAO.insert(new AsistenteDTO(nuevoAsistente));
+		return value;
 	}
 
 	public boolean eliminarAsistente(int identificador) {

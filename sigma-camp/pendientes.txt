@@ -23,9 +23,9 @@ Registro    |} 👍
     Para el caso del usuario "asistente" la página principal mostrará:
         - Un mensaje de bienvenida al usuario. 👍
         - La fecha actual. 👍
-        - Una lista de los campamentos a los que está inscrito.
-        - La lista de campamentos debe estar ordenada por fecha (de más antigua a más nueva).
-        - Debe indicar únicamente el identificador del campamento y la fecha de inicio.
+        - Una lista de los campamentos a los que está inscrito. 👍
+        - La lista de campamentos debe estar ordenada por fecha (de más antigua a más nueva). 👍
+        - Debe indicar únicamente el identificador del campamento y la fecha de inicio. 👍
     Para el caso del usuario "administrador" se mostrará un listado con:
         - Los nombres de los campamentos.
         - El número de personas inscritas en cada uno hasta la fecha actual.
@@ -35,7 +35,7 @@ Registro    |} 👍
     Mostrará dos opciones: "desconectar" y "modificar datos".
 
   - Al seleccionar "desconectar":
-    - Se realizará la desconexión del usuario activo en la sesión.
+    - Se realizará la desconexión del usuario activo en la sesión. 👍
   
   - En la funcionalidad "modificar datos":
     - La aplicación mostrará los campos del registro del usuario.

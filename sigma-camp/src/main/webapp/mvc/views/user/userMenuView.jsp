@@ -42,10 +42,13 @@
 										<p>Tu antiguedad es:
 											<jsp:getProperty property="antiguedad" name="User" /> años
 										</p>
-										<p>
-											Tus campamentos son estos: %>
-										</p>
+									
 										<% if(request.getAttribute("campamentos") != (null)){
+											%>
+											<p>
+											Tus campamentos son estos:
+											</p>
+											<%
 											ArrayList<Campamento> campamentos = (ArrayList<Campamento>) request.getAttribute("campamentos");
 											for (Campamento campamento : campamentos) {
 												%>
@@ -56,9 +59,7 @@
 													Fecha de inicio: <%= campamento.getFechaInicio() %>
 												</p>
 													<%}
-											} %>
-
-												<% if(request.getParameter("ACL")!=null){ %>
+											} if(request.getParameter("ACL")!=null){ %>
 													<p class="cajaRoja">Acceso denegado</p>
 													<% }else if (request.getAttribute("ACL")!=null){ %>
 														<p class="cajaRoja">Acceso denegado</p>

@@ -25,6 +25,15 @@
               String userMenuViewPath=application.getInitParameter("userMenuView"); 
               ArrayList<Campamento> campamentos = null;
               campamentos = GestorCampamentos.getInstance().getCampamentosAsistente(User.getId());
+              for (int i = 0; i < campamentos.size() - 1; i++) {
+                for (int j = 0; j < campamentos.size() - i - 1; j++) {
+                    if (campamentos.get(j).getFechaInicio().compareTo(campamentos.get(j + 1).getFechaInicio()) > 0) {
+                        Campamento temp = campamentos.get(j);
+                        campamentos.set(j, campamentos.get(j + 1));
+                        campamentos.set(j + 1, temp);
+                    }
+                }
+            }
               String todayDate= formatter1.format(LocalDate.now()).toString();
               request.setAttribute("campamentos", campamentos);
               request.setAttribute("fechaActual", todayDate);
