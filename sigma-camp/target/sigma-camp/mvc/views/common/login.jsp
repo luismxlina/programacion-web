@@ -27,18 +27,22 @@
 	      		<input type="password" placeholder="Contraseña" name="password" id="password">
 	     		<label>password</label>
 	    	</div>
-    		<div class="submit">
+			<div class="user-box">
+			<div class="submit">
 		      <span></span>
 		      <span></span>
 		      <span></span>
 		      <span></span>
-      		  <input class="sub" type="submit" id="submit" value="Iniciar Sesión">
+      		  <input type="submit" id="submit" value="Iniciar Sesión">
+			</div>
 			</div>
 	    	
 	  </form>
-	  <div>
-		<a class="sub" href="${pageContext.request.contextPath}<%= application.getInitParameter("registerController")%>">Registrarse</a>
+	  <div class="user-box">
+		<div class="submit">
+		<a href="${pageContext.request.contextPath}<%= application.getInitParameter("registerController")%>">Registrarse</a>
 	  </div>
+		</div>
 	  	<%if(request.getParameter("Errorlogin") != null) {%>
 			<p class="cajaRoja"> Email o contraseña incorrectas. </p>
 	<%}	%>

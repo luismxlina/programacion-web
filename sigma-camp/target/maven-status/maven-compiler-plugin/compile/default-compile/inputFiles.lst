@@ -34,6 +34,7 @@
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/ActividadDAO.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/users/dto/asistente/AsistenteDTO.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/AsistenteDAO.java
+/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/admin/asociarMonitorCampamentoServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/admin/addMonitorServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/campamento/models/actividad/Actividad.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/users/handler/asistente/GestorAsistentes.java

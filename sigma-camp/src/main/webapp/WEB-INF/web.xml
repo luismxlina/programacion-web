@@ -74,6 +74,15 @@
       <param-name>asociarActividadView</param-name>
       <param-value>/mvc/views/admin/asociarActividadCampamentoView.jsp</param-value>
    </context-param>
+   
+   <context-param>
+      <param-name>asociarMonitorActividadView</param-name>
+      <param-value>/mvc/views/admin/asociarMonitorActividadView.jsp</param-value>
+   </context-param>
+   <context-param>
+      <param-name>asociarMonitorCampamentoView</param-name>
+      <param-value>/mvc/views/admin/asociarMonitorCampamentoView.jsp</param-value>
+   </context-param>
  
     <context-param>
       <param-name>modifyActividadView</param-name>

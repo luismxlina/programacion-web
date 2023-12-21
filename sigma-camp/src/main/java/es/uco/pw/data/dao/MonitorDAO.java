@@ -28,9 +28,9 @@ public class MonitorDAO implements DAOIncremental<MonitorDTO, Integer> {
             if (rs.next()) {
                 idGenerado = rs.getInt(1);
             }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return idGenerado;
     }
 
@@ -222,5 +222,35 @@ public class MonitorDAO implements DAOIncremental<MonitorDTO, Integer> {
             e.printStackTrace();
         }
         return ids;
+    }
+
+    public ArrayList<MonitorDTO> getAllMonitoresCampamento(Integer idCampamento) {
+
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_MONITORES_CAMPAMENTO");
+        ArrayList<MonitorDTO> monitores = new ArrayList<>();
+
+        try {
+
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, idCampamento);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                monitores.add(new MonitorDTO(rs.getInt("Identificador"), rs.getString("Nombre"),
+                        rs.getString("Apellidos"), rs.getBoolean("EducadorEspecial")));
+            }
+
+            if (monitores.isEmpty()) {
+                return null;
+            } else {
+                return monitores;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

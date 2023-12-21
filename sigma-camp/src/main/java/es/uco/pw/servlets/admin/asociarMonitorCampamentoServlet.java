@@ -2,7 +2,6 @@ package es.uco.pw.servlets.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +16,11 @@ import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
 import es.uco.pw.display.javabean.CustomerBean;
 
-@WebServlet(name = "asociarMonitorActividad", urlPatterns = "/asociarMonitorActividad")
-public class asociarMonitorActividadServlet extends HttpServlet {
+@WebServlet(name = "asociarMonitorCampamento", urlPatterns = "/asociarMonitorCampamento")
+public class asociarMonitorCampamentoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public asociarMonitorActividadServlet() {
+    public asociarMonitorCampamentoServlet() {
         super();
     }
 
@@ -39,14 +38,6 @@ public class asociarMonitorActividadServlet extends HttpServlet {
         String idCampamentoStr = request.getParameter("idCampamento");
         ArrayList<Monitor> monitores = GestorCampamentos.getInstance().getMonitores();
         ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
-
-        Iterator<Monitor> iterator = monitores.iterator();
-        while (iterator.hasNext()) {
-            Monitor monitor = iterator.next();
-            if (monitor.getEsEducador()) {
-                iterator.remove();
-            }
-        }
 
         if (idMonitorStr == null && idCampamentoStr == null) {
             request.setAttribute("arrayMonitores", monitores);
