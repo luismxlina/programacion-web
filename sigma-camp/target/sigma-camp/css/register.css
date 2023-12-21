@@ -5,7 +5,7 @@ body {
   margin:0;
   padding:0;
   font-family: sans-serif;
-  background-image: radial-gradient(circle, #32373b, #364a53, #365d68, #31727b, #2e8889, #2e8889, #2e8889, #2e8889, #31727b, #365d68, #364a53, #32373b);}
+  background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dgrey%2Bbackground&psig=AOvVaw1qxB2-JPVL6UI23_ZgTaDS&ust=1703255390135000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCICM3vPeoIMDFQAAAAAdAAAAABAJ);}
 
 .login-box {
   position: absolute;

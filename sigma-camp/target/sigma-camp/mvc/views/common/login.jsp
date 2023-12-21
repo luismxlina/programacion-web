@@ -7,7 +7,7 @@
 <title>Iniciar Sesión</title>
 </head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
   <body>
   
 <!-- ACL -->

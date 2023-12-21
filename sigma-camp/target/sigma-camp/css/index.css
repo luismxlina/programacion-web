@@ -1,12 +1,12 @@
 html {
   height: 100%;
+  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dgrey%2Bbackground&psig=AOvVaw1qxB2-JPVL6UI23_ZgTaDS&ust=1703255390135000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCICM3vPeoIMDFQAAAAAdAAAAABAJ'); 
 }
 body {
   margin:0;
   padding:0;
   font-family: sans-serif;
 
-  background-image: url('/sigma-camp/images/foto.jpg'); 
   background-size: cover; 
   background-position: center; 
 }
