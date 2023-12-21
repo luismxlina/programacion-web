@@ -3,7 +3,7 @@ package es.uco.pw.data.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface DAOAsistente<T, K> {
+public interface DAOIncremental<T, K> {
     K insert(T a) throws SQLException;
 
     boolean update(T a) throws SQLException;

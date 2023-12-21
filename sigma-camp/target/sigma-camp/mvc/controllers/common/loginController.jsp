@@ -36,9 +36,7 @@
 									name="User" />
 								<jsp:setProperty property="rol" value="<%=login.getRol()%>" name="User" />
 								<jsp:setProperty property="password" value="<%=password%>" name="User" />
-								<jsp:setProperty property="antiguedad" value="<%=login.antiquity()%>" name="User" />
 								<jsp:setProperty property="mayorEdad" value="<%=login.isMayorEdad()%>" name="User" />
-
 								<jsp:forward page="<%=indexViewPath%>" />
 								<% } %>
 			</body>

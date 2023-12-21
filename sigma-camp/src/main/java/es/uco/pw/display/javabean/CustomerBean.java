@@ -12,7 +12,6 @@ public class CustomerBean implements Serializable {
 	private String nombreCompleto;
 	private String rol;
 	private String password;
-	private int antiguedad;
 	private boolean mayorEdad;
 
 	public CustomerBean() {
@@ -74,14 +73,6 @@ public class CustomerBean implements Serializable {
 		this.id = id;
 	}
 
-	public int getAntiguedad() {
-		return antiguedad;
-	}
-
-	public void setAntiguedad(int antiguedad) {
-		this.antiguedad = antiguedad;
-	}
-
 	public boolean isMayorEdad() {
 		return mayorEdad;
 	}
@@ -94,7 +85,7 @@ public class CustomerBean implements Serializable {
 	public String toString() {
 		return "CustomerBean [email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", fechaIncripcion="
 				+ fechaIncripcion + ", nombreCompleto=" + nombreCompleto + ", rol=" + rol + ", password=" + password
-				+ ", id=" + id + ", antiguedad=" + antiguedad + ", MayorEdad=" + mayorEdad + "]";
+				+ ", id=" + id + ", MayorEdad=" + mayorEdad + "]";
 	}
 
 }

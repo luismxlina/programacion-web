@@ -185,4 +185,26 @@ public class ActividadDAO implements DAO<ActividadDTO, String> {
         }
         return false;
     }
+
+    public ArrayList<ActividadDTO> getActividadesByNivelEducativo(NivelEducativo nivel) {
+        ArrayList<ActividadDTO> actividades = new ArrayList<ActividadDTO>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_ACTIVIDADES_BY_NIVEL");
+
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setString(1, nivel.toString());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                actividades.add(new ActividadDTO(rs.getString("Nombre"),
+                        NivelEducativo.valueOf(rs.getString("NivelEducativo").toUpperCase()),
+                        Horario.valueOf(rs.getString("Horario").toUpperCase()),
+                        rs.getInt("NumeroMaximoParticipantes"), rs.getInt("NumeroMonitoresNecesarios")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return actividades;
+    }
 }

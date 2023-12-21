@@ -6,29 +6,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.sql.Statement;
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
+import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.data.common.Conexion;
 
-public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
+public class CampamentoDAO implements DAOIncremental<CampamentoDTO, Integer> {
 
     @Override
-    public boolean insert(CampamentoDTO campamento) {
+    public Integer insert(CampamentoDTO campamento) {
         Conexion conexController = Conexion.getInstance();
         Connection conex = conexController.getConnection();
         String query = conexController.getSql().getProperty("INSERT_CAMPAMENTO");
+        Integer idGenerado = -1;
         try {
-            PreparedStatement st = conex.prepareStatement(query);
-            st.setInt(1, campamento.getIdentificador());
-            st.setDate(2, new java.sql.Date(campamento.getFechaInicio().getTime()));
-            st.setDate(3, new java.sql.Date(campamento.getFechaFin().getTime()));
-            st.setString(4, campamento.getNivel());
-            st.setInt(5, campamento.getMaxAsistentes());
-            return st.executeUpdate() == 1;
+            PreparedStatement st = conex.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            st.setDate(1, new java.sql.Date(campamento.getFechaInicio().getTime()));
+            st.setDate(2, new java.sql.Date(campamento.getFechaFin().getTime()));
+            st.setString(3, campamento.getNivel());
+            st.setInt(4, campamento.getMaxAsistentes());
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                idGenerado = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return idGenerado;
     }
 
     @Override
@@ -102,11 +107,7 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                // Debes crear un constructor en CampamentoDTO para inicializar los atributos
-                // desde un ResultSet
-                // Ejemplo: return new CampamentoDTO(rs.getInt("identificador"),
-                // rs.getDate("fechaInicio"), rs.getDate("fechaFin"), rs.getString("nivel"),
-                // rs.getInt("maxAsistentes"));
+
                 return new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
                         rs.getString("NivelEducativo".toUpperCase()), rs.getInt("NumeroMaximoAsistentes"));
             }
@@ -161,5 +162,26 @@ public class CampamentoDAO implements DAO<CampamentoDTO, Integer> {
             e.printStackTrace();
         }
         return ids;
+    }
+
+    public ArrayList<CampamentoDTO> getCampamentosByNivelEducativo(NivelEducativo nivel) {
+        ArrayList<CampamentoDTO> campamentos = new ArrayList<CampamentoDTO>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_CAMPAMENTOS_BY_NIVEL");
+
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setString(1, nivel.toString());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                campamentos.add(
+                        new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
+                                rs.getString("NivelEducativo"), rs.getInt("NumeroMaximoAsistentes")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return campamentos;
     }
 }

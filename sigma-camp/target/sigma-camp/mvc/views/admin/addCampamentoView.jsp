@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="es.uco.pw.business.campamento.models.actividad.NivelEducativo" %>
-<%@ page import="es.uco.pw.business.campamento.models.actividad.Horario" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.List" %>
 <jsp:useBean  id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
@@ -8,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Actividad</title>
+    <title>Crear Campamento</title>
 </head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/marco.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
@@ -19,29 +17,25 @@
     <!-- ACL -->
     <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
     <div class="form-style-6">
-        <form id="formulario" action="/sigma-camp/addActividad" method="GET">
-            <div class="formulario__grupo" id="grupoActividad">
-                <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" class="cajaBlanca"><br>
+        <h1>Crear Campamento</h1>
+        <form id="formulario" action="/sigma-camp/addCampamento" method="GET">
+            <div class="formulario__grupo" id="grupoCampamento">
+                <label for="fechaInicio">Fecha de Inicio:</label><br>
+                <input type="date" id="fechaInicio" name="fechaInicio" class="cajaBlanca"><br>
+                <label for="fechaFin">Fecha de Fin:</label><br>
+                <input type="date" id="fechaFin" name="fechaFin" class="cajaBlanca"><br>
                 <label for="nivel">Nivel Educativo:</label><br>
                 <select id="nivel" name="nivel" class="cajaBlanca">
                     <option value="INFANTIL">Infantil</option>
                     <option value="JUVENIL">Juvenil</option>
                     <option value="ADOLESCENTE">Adolescente</option>
                 </select><br>
-                <label for="hora">Horario:</label><br>
-                <select id="hora" name="hora" class="cajaBlanca">
-                      <option value="MANANA">Mañana</option>
-                      <option value="TARDE">Tarde</option>
-                </select><br>
-                <label for="maxParticipantes">Max Participantes:</label><br>
-                <input type="number" id="maxParticipantes" name="maxParticipantes" class="cajaBlanca"><br>
-                <label for="numMonitores">Num Monitores:</label><br>
-                <input type="number" id="numMonitores" name="numMonitores" class="cajaBlanca"><br>
-                <input type="submit" id="submit" value="Crear Actividad"><br><br>
-                <input type="reset" id="reset">
-            </form>
-            <%
+                <label for="maxAsistentes">Máximo de Asistentes:</label><br>
+                <input type="number" id="maxAsistentes" name="maxAsistentes" class="cajaBlanca"><br>
+                <input type="submit" value="Crear Campamento">
+            </div>
+        </form>
+        <%
             if(request.getAttribute("response") != null){
                 if(request.getAttribute("response") == "success"){
             %>
@@ -54,5 +48,4 @@
             %>
     </div>
 </body>
-<script src="${pageContext.request.contextPath}/js/script.js"></script> 
 </html>

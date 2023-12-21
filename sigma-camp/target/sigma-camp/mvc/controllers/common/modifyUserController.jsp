@@ -77,7 +77,6 @@
         <jsp:setProperty property="nombreCompleto" value="<%=nombreCompleto%>" name="User" />
         <jsp:setProperty property="password" value="<%=password%>" name="User" />
         <jsp:setProperty property="id" value="<%=id%>" name="User" />
-        <jsp:setProperty property="antiguedad" value="<%=usuario.antiquity()%>" name="User" />
         <jsp:setProperty property="mayorEdad" value="<%=usuario.isMayorEdad()%>" name="User" />
 
         <jsp:forward page="<%=indexViewPath%>" />

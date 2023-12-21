@@ -27,7 +27,7 @@ CREATE TABLE Asistente (
 
 -- Tabla para la entidad Monitor
 CREATE TABLE Monitor (
-    Identificador INT PRIMARY KEY,
+    Identificador INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(255),
     Apellidos VARCHAR(255),
     EducadorEspecial BOOLEAN DEFAULT false
@@ -44,7 +44,7 @@ CREATE TABLE Actividad (
 
 -- Tabla para la entidad Campamento
 CREATE TABLE Campamento (
-    Identificador INT PRIMARY KEY,
+    Identificador INT AUTO_INCREMENT PRIMARY KEY,
     FechaInicio DATE,
     FechaFin DATE,
     NivelEducativo ENUM('Infantil', 'Juvenil', 'Adolescente'),

@@ -69,6 +69,22 @@ public class Campamento implements Serializable {
 		this.monitoresResponsables.add(director);
 	}
 
+	public Campamento(Date fechaInicio, Date fechaFin, NivelEducativo nivel, int maxAsistentes) {
+		this.identificador = 0;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.nivel = nivel;
+		this.maxAsistentes = maxAsistentes;
+		this.actividades = new ArrayList<Actividad>();
+		this.monitoresResponsables = new ArrayList<Monitor>();
+
+		Actividad actividadPredeterminada = new Actividad("Presentación", nivel, Horario.MAÑANA, 50, 5);
+		this.actividades.add(actividadPredeterminada);
+
+		Monitor director = new Monitor(1, "Director", "Centro", false);
+		this.monitoresResponsables.add(director);
+	}
+
 	/**
 	 * Constructor para la clase Campamento que toma solo el identificador.
 	 * 

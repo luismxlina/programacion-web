@@ -6,6 +6,7 @@ import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
 import es.uco.pw.business.campamento.dto.monitor.MonitorDTO;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
+import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
 import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
@@ -55,6 +56,14 @@ public class GestorCampamentos {
     public ArrayList<Campamento> getCampamentos() {
         ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
         for (CampamentoDTO campamento : campamentoDAO.getAll()) {
+            campamentos.add(new Campamento(campamento));
+        }
+        return campamentos;
+    }
+
+    public ArrayList<Campamento> getCampamentosByNivelEducativo(NivelEducativo nivel) {
+        ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+        for (CampamentoDTO campamento : campamentoDAO.getCampamentosByNivelEducativo(nivel)) {
             campamentos.add(new Campamento(campamento));
         }
         return campamentos;
@@ -130,6 +139,20 @@ public class GestorCampamentos {
     public ArrayList<Actividad> getActividades() {
         ArrayList<Actividad> actividades = new ArrayList<Actividad>();
         for (ActividadDTO actividad : actividadDAO.getAll()) {
+            actividades.add(new Actividad(actividad));
+        }
+        return actividades;
+    }
+
+    /**
+     * Devuelve todas las actividades de un nivel educativo específico.
+     * 
+     * @param nivelEducativo el nivel educativo
+     * @return una lista de las actividades del nivel educativo
+     */
+    public ArrayList<Actividad> getActividadesByNivelEducativo(NivelEducativo nivelEducativo) {
+        ArrayList<Actividad> actividades = new ArrayList<Actividad>();
+        for (ActividadDTO actividad : actividadDAO.getActividadesByNivelEducativo(nivelEducativo)) {
             actividades.add(new Actividad(actividad));
         }
         return actividades;
@@ -215,6 +238,12 @@ public class GestorCampamentos {
         }
 
         if (buscarActividadCampamento(actividad, idCampamento)) {
+            return false;
+        }
+
+        Actividad actividad2 = getActividad(actividad);
+        Campamento campamento = getCampamento(idCampamento);
+        if (actividad2.getNivel() != campamento.getNivel()) {
             return false;
         }
 

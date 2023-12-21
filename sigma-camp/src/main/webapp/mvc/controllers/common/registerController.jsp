@@ -24,17 +24,26 @@
 										<%String aclNew=application.getInitParameter("aclNew"); %>
 											<jsp:include page="<%=aclNew%>"></jsp:include>
 											<!-- ACL -->
+
+
 											<% String registerViewPath=application.getInitParameter("register"); 
 											String indexViewPath=application.getInitParameter("index"); 
-											String email=request.getParameter("email"); 
+											
+											String email=request.getParameter("email");
 											String password=request.getParameter("password"); 
 											String fechaNacimientoStr=request.getParameter("date"); 
 											String nombre=request.getParameter("nombre"); 
+											Integer id = 1;
+											
+											
+											
 											String apellidos=request.getParameter("apellidos"); 
 											Boolean requiereAtencion = "true".equals(request.getParameter("requiereAtencion"));
 											Date fechaNacimiento = new Date();
+											
 											LocalDate inscripcion = LocalDate.now(); 
 											Boolean parseError = false;
+											
 											if (fechaNacimientoStr != null) {
 												SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 												try {
@@ -49,7 +58,7 @@
 											<%
 											}
 											Asistente asistente = new Asistente(nombre, apellidos, fechaNacimiento, requiereAtencion);
-											Integer id = 1;
+											id = 1;
 											id = GestorAsistentes.getInstance().altaAsistente(asistente, email);
 											if(id == -1) {%>
 												<jsp:forward page="<%=registerViewPath%>">
@@ -98,9 +107,6 @@
 
 														<jsp:setProperty property="password" value="<%=password%>"
 															name="User" />
-
-														<jsp:setProperty property="antiguedad"
-															value="<%=register.antiquity()%>" name="User" />
 
 														<jsp:setProperty property="mayorEdad"
 															value="<%=register.isMayorEdad()%>" name="User" />

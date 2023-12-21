@@ -11,7 +11,7 @@ import java.sql.Statement;
 import es.uco.pw.business.users.dto.asistente.AsistenteDTO;
 import es.uco.pw.data.common.Conexion;
 
-public class AsistenteDAO implements DAOAsistente<AsistenteDTO, Integer> {
+public class AsistenteDAO implements DAOIncremental<AsistenteDTO, Integer> {
 
     @Override
     public Integer insert(AsistenteDTO asistente) {

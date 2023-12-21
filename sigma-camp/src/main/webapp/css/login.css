@@ -9,8 +9,8 @@ body {
 }
 
 a{
-	color:#DBDEDF;
-	text-decoration: none;
+    color:#DBDEDF;
+    text-decoration: none;
 }
 .login-box {
   position: absolute;
@@ -80,7 +80,7 @@ a{
   transition: .5s;
   margin-top: 40px;
   letter-spacing: 4px;
-  text-align: center;
+  text-align: left;
   margin: auto;
 }
 
@@ -94,7 +94,7 @@ a{
   letter-spacing: 4px;
   background-color: transparent;
   color: white;
-  border: 1px solid black; 
+  /* border: 1px solid black; */
 }
 
 .login-box .submit:hover {
@@ -110,5 +110,3 @@ a{
   position: absolute;
   display: block;
 }
-
-

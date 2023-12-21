@@ -69,25 +69,25 @@
       <param-name>addActividadView</param-name>
       <param-value>/mvc/views/admin/addActividadView.jsp</param-value>
    </context-param>
- 
-    <context-param>
-      <param-name>modifyKartStateView</param-name>
-      <param-value>/mvc/views/admin/modifyKartStateView.jsp</param-value>
-   </context-param>
- 
-     <context-param>
-      <param-name>modifyPistaStateView</param-name>
-      <param-value>/mvc/views/admin/modifyPistaStateView.jsp</param-value>
-   </context-param>
- 
-   <context-param>
-      <param-name>pairKartView</param-name>
-      <param-value>/mvc/views/admin/pairKartView.jsp</param-value>
-   </context-param>
    
    <context-param>
-      <param-name>addPistaView</param-name>
-      <param-value>/mvc/views/admin/addPistaView.jsp</param-value>
+      <param-name>asociarActividadView</param-name>
+      <param-value>/mvc/views/admin/asociarActividadCampamentoView.jsp</param-value>
+   </context-param>
+ 
+    <context-param>
+      <param-name>modifyActividadView</param-name>
+      <param-value>/mvc/views/admin/modifyActividadView.jsp</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>addCampamentoView</param-name>
+      <param-value>/mvc/views/admin/addCampamentoView.jsp</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>addMonitorView</param-name>
+      <param-value>/mvc/views/admin/addMonitorView.jsp</param-value>
    </context-param>
 
    <context-param>
