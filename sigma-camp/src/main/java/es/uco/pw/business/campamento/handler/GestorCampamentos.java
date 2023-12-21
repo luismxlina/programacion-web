@@ -415,11 +415,45 @@ public class GestorCampamentos {
      * 
      * @param idMonitor       el ID del monitor
      * @param nombreActividad el nombre de la actividad
+     * @return true si el monitor se ha asociado correctamente, false en caso
+     *         contrario
+     */
+    public Boolean asociarMonitorActividad(int idMonitor, String nombreActividad) throws Exception {
+        MonitorDTO monitor = monitorDAO.get(idMonitor);
+
+        if (monitor.getEsEducador()) {
+            throw new Exception("El monitor es un educador");
+        }
+
+        if (!buscarMonitor(idMonitor)) {
+            throw new Exception("Monitor no encontrado");
+        }
+
+        if (buscarMonitorActividad(nombreActividad, idMonitor)) {
+            throw new Exception("Monitor ya asociado a la actividad");
+        }
+
+        if (!buscarActividad(nombreActividad)) {
+            throw new Exception("Actividad no encontrada");
+        }
+
+        if (actividadDAO.insertActividadMonitor(nombreActividad, idMonitor)) {
+            return true;
+        }
+        throw new Exception("Error al asociar monitor a actividad");
+    }
+
+    /**
+     * Asocia un monitor a una actividad de un campamento.
+     * 
+     * @param idMonitor       el ID del monitor
+     * @param nombreActividad el nombre de la actividad
      * @param idCampamento    el ID del campamento
      * @return true si el monitor se ha asociado correctamente, false en caso
      *         contrario
      */
-    public Boolean asociarMonitorActividad(int idMonitor, String nombreActividad, int idCampamento) throws Exception {
+    public Boolean asociarMonitorActividadCampamento(int idMonitor, String nombreActividad, int idCampamento)
+            throws Exception {
         MonitorDTO monitor = monitorDAO.get(idMonitor);
 
         if (monitor.getEsEducador()) {

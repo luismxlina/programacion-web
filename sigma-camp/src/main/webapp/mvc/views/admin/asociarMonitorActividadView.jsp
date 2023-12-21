@@ -27,7 +27,7 @@
                         
                     
                     for (Monitor monitor : monitores) { %>
-                        <option value="<%=monitor.getIdentificador()%>"><%=monitor.getNombre()%></option>
+                        <option value="<%=monitor.getIdentificador()%>"><%=monitor.getIdentificador() + " - " + monitor.getNombre() + " " + monitor.getApellidos() + " " + (monitor.getEsEducador() ? "(Educador)" : "(No Educador)")%></option>
                     <% }
                     } %>
                 </select>
@@ -49,16 +49,14 @@
             <input type="reset" id="reset">
         </form>
     <%
-            if(request.getAttribute("response") != null){
-                if(request.getAttribute("response") == "success"){
-            %>
-                    <p class="cajaBlanca"><%=request.getAttribute("response")%></p>
-                <%}else{%>
-                    <p class="cajaRoja"><%=request.getAttribute("response")%></p>
-            <% 
-                }
-            } 
-            %>
+        String response = (String) request.getAttribute("response");
+        if (response != null) {
+            String cssClass = response.equals("success") ? "cajaBlanca" : "cajaRoja";
+    %>
+        <p class="<%=cssClass%>"><%=response%></p>
+    <%
+        }
+    %>
     </div>
 </body>
 <script src="${pageContext.request.contextPath}/js/script.js"></script> 

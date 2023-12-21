@@ -49,6 +49,8 @@ public class asociarMonitorCampamentoServlet extends HttpServlet {
         }
         if (idMonitorStr == null || idCampamentoStr == null) {
             request.setAttribute("response", "fail");
+            request.setAttribute("arrayMonitores", monitores);
+            request.setAttribute("arrayCampamentos", campamentos);
             request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorCampamentoView")).forward(
                     request,
                     response);

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import es.uco.pw.business.campamento.handler.GestorCampamentos;
 import es.uco.pw.business.campamento.models.actividad.Actividad;
-import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.campamento.models.monitor.Monitor;
 import es.uco.pw.display.javabean.CustomerBean;
 
@@ -36,9 +35,9 @@ public class asociarMonitorActividadServlet extends HttpServlet {
         }
 
         String idMonitorStr = request.getParameter("idMonitor");
-        String idCampamentoStr = request.getParameter("idCampamento");
+        String nombreActividad = request.getParameter("nombreActividad");
         ArrayList<Monitor> monitores = GestorCampamentos.getInstance().getMonitores();
-        ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentos();
+        ArrayList<Actividad> actividades = GestorCampamentos.getInstance().getActividades();
 
         Iterator<Monitor> iterator = monitores.iterator();
         while (iterator.hasNext()) {
@@ -48,61 +47,38 @@ public class asociarMonitorActividadServlet extends HttpServlet {
             }
         }
 
-        if (idMonitorStr == null && idCampamentoStr == null) {
+        if (idMonitorStr == null && nombreActividad == null) {
             request.setAttribute("arrayMonitores", monitores);
-            request.setAttribute("arrayCampamentos", campamentos);
-            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorCampamentoView")).forward(
+            request.setAttribute("arrayActividades", actividades);
+            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorActividadView")).forward(
                     request,
                     response);
             return;
         }
-        if (idMonitorStr == null || idCampamentoStr == null) {
+        if (idMonitorStr == null || nombreActividad == null) {
             request.setAttribute("response", "fail");
-            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorCampamentoView")).forward(
+            request.setAttribute("arrayMonitores", monitores);
+            request.setAttribute("arrayActividades", actividades);
+            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorActividadView")).forward(
                     request,
                     response);
             return;
         }
 
         int idMonitor = Integer.parseInt(idMonitorStr);
-        int idCampamento = Integer.parseInt(idCampamentoStr);
-        ArrayList<Actividad> actividades = GestorCampamentos.getInstance().getActividadesCampamento(idCampamento);
-        Boolean puedeAsociarse = GestorCampamentos.getInstance().getMonitor(idMonitor).getEsEducador();
 
-        if (!puedeAsociarse) {
-            for (Actividad actividad : actividades) {
-                if (GestorCampamentos.getInstance().buscarMonitorActividad(actividad.getNombreActividad(), idMonitor)) {
-                    puedeAsociarse = true;
-                    break;
-                }
-            }
-        }
-
-        if (puedeAsociarse && GestorCampamentos.getInstance().asociarMonitorCampamento(idMonitor, idCampamento)) {
-            request.setAttribute("arrayMonitores", monitores);
-            request.setAttribute("arrayCampamentos", campamentos);
+        try {
+            GestorCampamentos.getInstance().asociarMonitorActividad(idMonitor, nombreActividad);
             request.setAttribute("response", "success");
-            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorCampamentoView")).forward(
-                    request,
-                    response);
-            return;
-        } else if (!puedeAsociarse) {
-
-            request.setAttribute("response",
-                    "El monitor seleccionado debe estar en alguna actividad del campamento seleccionado");
+        } catch (Exception e) {
+            request.setAttribute("response", "fail");
+        } finally {
+            request.setAttribute("arrayMonitores", monitores);
+            request.setAttribute("arrayActividades", actividades);
             request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorActividadView")).forward(
                     request,
                     response);
-            return;
-        } else {
-            request.setAttribute("arrayMonitores", monitores);
-            request.setAttribute("arrayCampamentos", campamentos);
-            request.setAttribute("response", "fail");
-            request.getRequestDispatcher(getServletContext().getInitParameter("asociarMonitorCampamentoView")).forward(
-                    request,
-                    response);
-            return;
         }
-
+        return;
     }
 }

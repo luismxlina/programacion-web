@@ -28,7 +28,7 @@
 	     		<label>password</label>
 	    	</div>
 			<div class="user-box">
-			<div class="submit">
+				<div class="submitr">
 		      <span></span>
 		      <span></span>
 		      <span></span>
@@ -40,7 +40,7 @@
 	  </form>
 	  <div class="user-box">
 		<div class="submit">
-		<a href="${pageContext.request.contextPath}<%= application.getInitParameter("registerController")%>">Registrarse</a>
+			<a href="${pageContext.request.contextPath}<%= application.getInitParameter("registerController")%>">Registrarse</a>
 	  </div>
 		</div>
 	  	<%if(request.getParameter("Errorlogin") != null) {%>
