@@ -25,10 +25,10 @@
 									<% }else if (request.getAttribute("ACL")!=null){ %>
 										<p class="cajaRoja">Acceso denegado</p>
 										<% } if(User.getEmail()==null || User.getRol()==null){ %>
-											<h2> <img src="/p3/images/super-mario-admin.svg"
+											<h2> Campamento de verano</h2>
+											<h3 style="text-align:center;"> <img src="/sigma-camp/images/sun-color-icon.svg"
 													class="bi d-block mx-auto mb-1" width="24"
-													height="24">Sigma-Camp<img src="/p3/images/super-mario-admin.svg"
-													class="bi d-block mx-auto mb-1" width="24" height="24"></h2>
+													height="24"></h3>
 											<div class="user-box">
 												<div class="submit">
 													<span></span>

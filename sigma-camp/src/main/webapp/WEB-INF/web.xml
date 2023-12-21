@@ -66,8 +66,8 @@
    </context-param>
    
    <context-param>
-      <param-name>addKartView</param-name>
-      <param-value>/mvc/views/admin/addKartView.jsp</param-value>
+      <param-name>addActividadView</param-name>
+      <param-value>/mvc/views/admin/addActividadView.jsp</param-value>
    </context-param>
  
     <context-param>
