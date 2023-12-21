@@ -19,14 +19,14 @@
         <h1>Asociar Monitor a Campamento</h1>
 
         <form action="<%=request.getContextPath()%>/asociarMonitorCampamento" method="GET">
-            <div>
+            <div class="formulario__grupo" id="grupoAsociacion">
                 <label for="idMonitor">Monitor:</label>
                 <select id="idMonitor" name="idMonitor">
                     <% ArrayList<Monitor> monitores = (ArrayList<Monitor>) request.getAttribute("arrayMonitores");
                     if (monitores != null) {
                         
                     for (Monitor monitor : monitores) { %>
-                        <option value="<%=monitor.getIdentificador()%>"><%=monitor.getNombre() + "-" + (monitor.getEsEducador() ? "Educador" : "No Educador")%></option>
+                        <option value="<%=monitor.getIdentificador()%>"><%=monitor.getIdentificador() + " - " + monitor.getNombre() + " " + monitor.getApellidos() + " " + (monitor.getEsEducador() ? "(Educador)" : "(No Educador)")%></option>
                     <% }
                     } %>
                 </select>

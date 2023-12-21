@@ -44,20 +44,20 @@
 			<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
 			<label for="requiereAtencion">¿Requiere atención especial?</label>
 		</div>
-		<div class="user-box">
+		<div class="user-box1">
 		<div class="submit">
 	      <span></span>
 	      <span></span>
 	      <span></span>
 	      <span></span>
-	      <input type="submit" id="submit" value="Registrarse">
+	      <input class="sub" type="submit" id="submit" value="Registrarse">
 		</div>
 		</div>
 	
 	  </form>
-	  	<div class="user-box">
+	  	<div class="user-box1">
 		<div class="submit">
-	  		<a href="${pageContext.request.contextPath}<%= application.getInitParameter("loginController")%>">Iniciar Sesión</a>
+	  		<a class="sub" href="${pageContext.request.contextPath}<%= application.getInitParameter("loginController")%>">Iniciar Sesión</a>
 		</div>
 		</div>
 		    <%

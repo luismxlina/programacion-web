@@ -1,20 +1,12 @@
 html {
   height: 100%;
-  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dgrey%2Bbackground&psig=AOvVaw1qxB2-JPVL6UI23_ZgTaDS&ust=1703255390135000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCICM3vPeoIMDFQAAAAAdAAAAABAJ');
 }
-
 body {
-  margin: 0;
-  padding: 0;
+  margin:0;
+  padding:0;
   font-family: sans-serif;
-
-  background-size: cover;
-  background-position: center;
-}
-
-a {
-  color: #DBDEDF;
-  text-decoration: none;
+  background-size: cover; 
+  background-position: center; 
 }
 
 .login-box {
@@ -26,7 +18,7 @@ a {
   transform: translate(-50%, -50%);
   background: #32373B;
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
 }
 
@@ -54,10 +46,22 @@ a {
   outline: none;
   background: transparent;
 }
-
+.login-box .user-box1 input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  background: transparent;
+}
 .login-box .user-box label {
   position: absolute;
-  top: 0;
+  top:0;
   left: 0;
   padding: 10px 0;
   font-size: 16px;
@@ -66,8 +70,8 @@ a {
   transition: .5s;
 }
 
-.login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
   color: #00ffea;
@@ -75,30 +79,14 @@ a {
 }
 
 .login-box .submit {
-  max-width: 50%;
-  position: relative;
-  padding: 10px 20px;
-  color: #00ffea;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: .5s;
-  margin-top: 40px;
-  letter-spacing: 4px;
-  text-align: center;
+  border-bottom: none;
+  max-width:40%;
+  padding: 5px 20px;
   margin: auto;
 }
 
 .sub {
-  color: #00ffea;
-  font-size: 16px;
-  text-decoration: none;
   text-transform: uppercase;
-  overflow: hidden;
-  transition: .5s;
-  letter-spacing: 4px;
-  background-color: transparent;
   color: white;
 }
 
@@ -107,12 +95,17 @@ a {
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #00ffea,
-    0 0 25px #00ffea,
-    0 0 50px #00ffea,
-    0 0 100px #00ffea;
+              0 0 25px #00ffea,
+              0 0 50px #00ffea,
+              0 0 100px #00ffea;
 }
-
 .login-box .submit span {
   position: absolute;
   display: block;
 }
+
+
+
+
+
+
