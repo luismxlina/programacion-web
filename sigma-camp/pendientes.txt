@@ -44,7 +44,7 @@ Registro    |} 👍
 
 
 - Funcionalidades para Usuarios Administradores(Considerando restricciones y tipos de datos):
-    - Alta de actividades
+    - Alta de actividades 👍
     - Alta monitores
     - Alta campamentos
     - Asociación de actividades a campamentos, respetando restricciones de nivel educativo.
