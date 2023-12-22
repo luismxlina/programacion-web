@@ -7,36 +7,36 @@
   <body><div class="area"></div><nav class="main-menu">
             <ul>
                 <li>
-                    <a href="${pageContext.request.contextPath}/addReserve">
-                        <i class="fa fa-calendar"></i>
+                    <a href="${pageContext.request.contextPath}/searchCampamentosFecha">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                         <span class="nav-text">
-                           Nueva reserva
+                           Consultar campamento por fecha
                         </span>
                     </a>
                   
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/addBono">
-                        <i class="fa fa-ticket"></i>
+                    <a href="${pageContext.request.contextPath}/searchCampamentos">
+                        <i class="fa-brands fa-searchengin"></i>
                         <span class="nav-text">
-                            Nuevo Bono
+                            Consultar campamentos por nivel educativo o plazas disponibles
                         </span>
                     </a>
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/modifyReserve">
-                       <i class="fa fa-pencil-square-o"></i>
+                    <a href="${pageContext.request.contextPath}/inscribeCampamentosView">
+                        <i class="fa-solid fa-person-circle-plus"></i>
                         <span class="nav-text">
-                            Modificar reserva
+                            Inscribirse a un campamento
                         </span>
                     </a>
                 </li>
                 <li class="has-subnav">
                     <a href="${pageContext.request.contextPath}/viewReserve">
-                       <i class="fa fa-eye"></i>
+                        <i class="fa-solid fa-ban"></i>
                         <span class="nav-text">
-                            Ver reservas
+                            cancelar inscripci&oacute;n
                         </span>
                     </a>
                    

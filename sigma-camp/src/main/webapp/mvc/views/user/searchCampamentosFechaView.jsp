@@ -23,7 +23,7 @@
     String respuesta = (String) request.getAttribute("respuesta");
     if (respuesta != null && respuesta.equals("false")) { %>
         <h1>Introducir fechas</h1>
-        <form action="/sigma-camp/searchCampamentosFecha" method="GET">
+        <form class="search-form"action="/sigma-camp/searchCampamentosFecha" method="GET">
             <label for="fechaInicio">Fecha de inicio:</label>
             <input type="date" id="fechaInicio" name="fechaInicio">
             <label for="fechaFin">Fecha de fin:</label>
@@ -68,7 +68,7 @@
             <% } %>
         <% } %>
     <% } %>
-    <form action="/sigma-camp/calendarView" method="GET">
+    <form class="search-form" action="/sigma-camp/calendarView" method="GET">
         <input type="submit" value="Volver al Calendario">
     </form>
     </div>

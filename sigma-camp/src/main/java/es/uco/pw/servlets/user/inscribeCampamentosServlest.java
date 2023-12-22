@@ -25,7 +25,7 @@ public class inscribeCampamentosServlest extends HttpServlet {
         super();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         CustomerBean User = (CustomerBean) session.getAttribute("User");

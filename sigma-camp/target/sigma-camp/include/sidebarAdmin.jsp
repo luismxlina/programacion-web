@@ -49,31 +49,6 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/">
-                        <i class="fa fa-pencil-square"></i>
-                        <span class="nav-text">
-                           Modificar Pista
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="${pageContext.request.contextPath}/">
-                       <i class="fa fa-cog"></i>
-                        <span class="nav-text">
-                            Modificar estado de Pista
-                        </span>
-                    </a>
-                </li>
-                <li>
-                <li>
-                   <a href="${pageContext.request.contextPath}/">
-                        <i class="fa fa-trash-o"></i>
-                        <span class="nav-text">
-                            Borrar Reserva
-                        </span>
-                    </a>
-                </li>
             </ul>
 
             <ul class="logout">

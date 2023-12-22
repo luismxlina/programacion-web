@@ -18,7 +18,7 @@
     </aside>
     <div class="form-style-6">
         <h1>Añadir monitor</h1>
-        <form id="formulario" action="/sigma-camp/addMonitor" method="GET">
+        <form  id="formulario" action="/sigma-camp/addMonitor" method="GET">
             <div class="formulario__grupo" id="grupoMonitor">
                 <label for="nombre">Nombre:</label><br>
                 <input type="text" id="nombre" name="nombre" class="cajaBlanca"><br>

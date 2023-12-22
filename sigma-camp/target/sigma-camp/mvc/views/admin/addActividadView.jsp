@@ -22,7 +22,7 @@
         <jsp:include page="/include/sidebarAdmin.jsp"></jsp:include>
     </aside>
     <div class="form-style-6">
-        <form id="formulario" action="/sigma-camp/addActividad" method="GET">
+        <form class="search-form" id="formulario" action="/sigma-camp/addActividad" method="GET">
             <div class="formulario__grupo" id="grupoActividad">
                 <label for="nombre">Nombre:</label><br>
                 <input type="text" id="nombre" name="nombre" class="cajaBlanca"><br>

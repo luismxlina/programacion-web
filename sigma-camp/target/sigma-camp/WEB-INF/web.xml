@@ -132,6 +132,10 @@
       <param-name>searchCampamentosFechaView</param-name>
       <param-value>/mvc/views/user/searchCampamentosFechaView.jsp</param-value>
    </context-param>
+   <context-param>
+      <param-name>addInscripcionView</param-name>
+      <param-value>/mvc/views/user/addInscripcionView.jsp</param-value>
+   </context-param>
 
 
    

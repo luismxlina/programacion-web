@@ -21,7 +21,7 @@
     </aside>
     <div class="form-style-6">
         <h1>Crear Campamento</h1>
-        <form id="formulario" action="/sigma-camp/addCampamento" method="GET">
+        <form class="search-form" id="formulario" action="/sigma-camp/addCampamento" method="GET">
             <div class="formulario__grupo" id="grupoCampamento">
                 <label for="fechaInicio">Fecha de Inicio:</label><br>
                 <input type="date" id="fechaInicio" name="fechaInicio" class="cajaBlanca"><br>
