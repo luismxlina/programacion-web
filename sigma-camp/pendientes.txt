@@ -52,6 +52,6 @@ Registro    |} 👍
 
 - Funcionalidades para Usuarios Asistentes:
     - Consulta de campamentos disponibles según fechas y niveles educativos. 👍
-    - Búsqueda de campamentos por nivel educativo o número mínimo de plazas disponibles. 
-    - Registro en campamentos, eligiendo modalidad (completa o parcial), considerando restricciones de tiempo y plazas disponibles. Mostrar información sobre modalidades, precios y confirmación.
-    - Cancelación de registro en campamentos antes de su inicio, según las restricciones de modalidad y fecha.
+    - Búsqueda de campamentos por nivel educativo o número mínimo de plazas disponibles. 👍
+    - Registro en campamentos, eligiendo modalidad (completa o parcial), considerando restricciones de tiempo y plazas disponibles. Mostrar información sobre modalidades, precios y confirmación. 
+    - Cancelación de registro en campamentos antes de su inicio, según las restricciones de modalidad y fecha. 👍

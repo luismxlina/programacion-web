@@ -8,7 +8,7 @@
             <ul>
                 <li>
                     <a href="${pageContext.request.contextPath}/addActividad">
-                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star fa"></i>
                         <span class="nav-text">
                            A&ntilde;adir Actividades
                         </span>
@@ -17,7 +17,7 @@
                 </li>
                 <li class="has-subnav">
                     <a href="${pageContext.request.contextPath}/addCampamento">
-                        <i class="fa-solid fa-campground"></i>
+                        <i class="fa-solid fa-campground fa"></i>
                         <span class="nav-text">
                             A&ntilde;adir Campamentos
                         </span>
@@ -26,7 +26,7 @@
                 </li>
                 <li class="has-subnav">
                     <a href="${pageContext.request.contextPath}/addMonitor">
-                        <i class="fa-solid fa-user-plus"></i>
+                        <i class="fa-solid fa-user-plus fa"></i>
                         <span class="nav-text">
                             Dar de alta Monitor
                         </span>
@@ -34,7 +34,7 @@
                 </li>
                 <li class="has-subnav">
                     <a href="${pageContext.request.contextPath}/asociarActividad">
-                        <i class="fa-regular fa-clipboard"></i>
+                        <i class="fa-regular fa-clipboard fa"></i>
                         <span class="nav-text">
                             Asociar Actividades a Campamentos
                         </span>
@@ -43,7 +43,7 @@
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/asociarMonitorActividad">
-                        <i class="fa-regular fa-address-card"></i>
+                        <i class="fa-regular fa-address-card fa"></i>
                         <span class="nav-text">
                             Asociar Monitores a Actividades de Campamentos
                         </span>

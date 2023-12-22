@@ -235,14 +235,20 @@ public class GestorInscripciones {
      * @return true si la inscripción se ha eliminado correctamente, false en caso
      *         contrario
      */
-    public Boolean deleteInscripcion(int idParticipante, int idCampamento) {
+    public void deleteInscripcion(int idParticipante, int idCampamento) throws Exception {
         if (!buscarInscripcion(idParticipante, idCampamento)) {
-            return false;
+            throw new Exception("La inscripción no existe");
         }
-        if (inscripcionDAO.delete(idParticipante, idCampamento)) {
-            return true;
+
+        Inscripcion inscripcion = getInscripcion(idParticipante, idCampamento);
+
+        if (!inscripcion.getCancelable()) {
+            throw new Exception("La inscripción no es cancelable");
         }
-        return false;
+
+        if (!inscripcionDAO.delete(idParticipante, idCampamento)) {
+            throw new Exception("Error en la cancelación de la inscripción");
+        }
     }
 
 }

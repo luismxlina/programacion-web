@@ -77,7 +77,7 @@
    .form-style-6 input[type="submit"]:hover,
    .form-style-6 input[type="reset"]:hover,
    .form-style-6 input[type="button"]:hover{
-       background: #32373B;
+       background: #145556;
    }
    
 .miTabla {
@@ -141,6 +141,38 @@
     color: white;
     padding: 10px 20px;
     margin-bottom: -30px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form1 {
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+ 
+.search-form1 label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.search-form1 input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.search-form1 input[type="submit"] {
+    background-color: #25b8a2;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: -30px;
+    margin-top: 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;

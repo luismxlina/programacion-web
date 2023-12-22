@@ -22,7 +22,7 @@ overflow:visible;
 .main-menu {
 /*border-right:1px solid #e5e5e5;*/
 background:#212121;
-border-right:1px solid #ffc600;
+border-right:1px solid #fff;
 position: fixed;
 top:0;
 bottom:0;
@@ -111,11 +111,10 @@ outline:0;
 margin:0;
 padding:0;
 }
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-display: flex; 
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a { 
 align-items: center;
 color:#fff;
-background-color:#ffc600;
+background-color: #00ffea;
 }
 .area {
 float: left;

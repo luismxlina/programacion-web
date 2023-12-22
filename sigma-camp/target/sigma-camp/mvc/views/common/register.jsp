@@ -40,9 +40,9 @@
 	      <label>Fecha de Nacimiento</label>
 	    </div>
 
-		<div class="user-box">
-			<label for="requiereAtencion">¿Requiere atención especial?
-				<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
+		<div class="user-box" onclick="marcarCheckBox()">
+			<label for="requiereAtencion" id="labelAtencion">¿Requiere atención especial?
+				<input type="checkbox" id="requiereAtencion" name="requiereAtencion" checked="checked">
 			</label>
 		</div>
 		<div class="user-box1">
@@ -57,8 +57,8 @@
 	
 	  </form>
 	  	<div class="user-box1">
-		<div class="submit">
-	  		<a class="sub" href="${pageContext.request.contextPath}<%= application.getInitParameter("loginController")%>">Iniciar Sesión</a>
+		<div class="submit" id="boxLinkSubmit">
+	  		<a class="sub" id="linkSubmit" href="${pageContext.request.contextPath}<%= application.getInitParameter("loginController")%>">Iniciar Sesión</a>
 		</div>
 		</div>
 		    <%
@@ -71,5 +71,16 @@
 	</div>
     
   </body>
+  <script>
+	function marcarCheckBox(){
+		var checkBox = document.getElementById("requiereAtencion");
+		var label = document.getElementById("labelAtencion");
+		if (checkBox.checked == true){
+			checkBox.checked = ""
+		} else {
+			checkBox.checked = "checked"
+		}
+	}
+  </script>
  <script src="${pageContext.request.contextPath}/js/script.js"></script> 
 </html>

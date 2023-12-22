@@ -7,7 +7,7 @@
 <title>Iniciar Sesión</title>
 </head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
   <body>
   
 <!-- ACL -->
@@ -47,8 +47,6 @@
 			<p class="cajaRoja"> Email o contraseña incorrectas. </p>
 	<%}	%>
 	</div>
-
-
 
    </body>
   <script src="${pageContext.request.contextPath}/js/script.js"></script>

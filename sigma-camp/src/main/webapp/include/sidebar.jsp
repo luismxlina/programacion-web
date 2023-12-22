@@ -8,7 +8,7 @@
             <ul>
                 <li>
                     <a href="${pageContext.request.contextPath}/searchCampamentosFecha">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-magnifying-glass fa"></i>
                         <span class="nav-text">
                            Consultar campamento por fecha
                         </span>
@@ -16,8 +16,8 @@
                   
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/searchCampamentos">
-                        <i class="fa-brands fa-searchengin"></i>
+                    <a href="${pageContext.request.contextPath}/searchCampamentosMix">
+                        <i class="fa-brands fa-searchengin fa"></i>
                         <span class="nav-text">
                             Consultar campamentos por nivel educativo o plazas disponibles
                         </span>
@@ -25,18 +25,18 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/inscribeCampamentos">
-                        <i class="fa-solid fa-person-circle-plus"></i>
+                    <a href="${pageContext.request.contextPath}/addInscripcion">
+                        <i class="fa-solid fa-person-circle-plus fa"></i>
                         <span class="nav-text">
                             Inscribirse a un campamento
                         </span>
                     </a>
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/viewReserve">
-                        <i class="fa-solid fa-ban"></i>
+                    <a href="${pageContext.request.contextPath}/manageInscriptions">
+                        <i class="fa-solid fa-ban fa"></i>
                         <span class="nav-text">
-                            cancelar inscripci&oacute;n
+                            Cancelar inscripci&oacute;n
                         </span>
                     </a>
                    

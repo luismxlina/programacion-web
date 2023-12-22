@@ -34,38 +34,29 @@ public class inscribeCampamentosServlest extends HttpServlet {
             request.getRequestDispatcher(getServletContext().getInitParameter("index")).forward(request, response);
             return;
         }
-        String asistenteIdStr = request.getParameter("id_Participante");
-        String campamentoIdStr = request.getParameter("id_Campamento");
+        String idAsistenteStr = request.getParameter("idParticipante");
+        String idCampamentoStr = request.getParameter("idCampamento");
         String fechaInscripcionStr = request.getParameter("fechaInscripcion");
-        String precioStr = request.getParameter("precio");
-        String esCanceladaStr = request.getParameter("cancelable");
         String tipoInscripcionStr = request.getParameter("tipoInscripcion");
-
-        if (asistenteIdStr == null && campamentoIdStr == null && fechaInscripcionStr == null && precioStr == null && tipoInscripcionStr == null) {
+    
+        if (idAsistenteStr == null && idCampamentoStr == null && fechaInscripcionStr == null && tipoInscripcionStr == null) {
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
                     response);
             return;
         }
 
-        if (asistenteIdStr == null || campamentoIdStr == null || fechaInscripcionStr == null || precioStr == null || tipoInscripcionStr == null) {
+        if (idAsistenteStr == null || idCampamentoStr == null || fechaInscripcionStr == null|| tipoInscripcionStr == null) {
             request.setAttribute("response", "fail");
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
                     response);
             return;
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaInscripcion = null;
-        try {
-            fechaInscripcion = formatter.parse(fechaInscripcionStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        int asistenteId = Integer.parseInt(request.getParameter("id_Participante"));
-        int campamentoId = Integer.parseInt(request.getParameter("id_Campamento"));
+        int idAsistente = Integer.parseInt(idAsistenteStr);
+        int idCampamento = Integer.parseInt(idCampamentoStr);
         double precio = Double.parseDouble(request.getParameter("precio"));
         TipoInscripcion tipoInscripcion = TipoInscripcion.valueOf(request.getParameter("tipoInscripcion"));
-        boolean esCancelada = Boolean.parseBoolean(request.getParameter("cancelable"));
+        boolean esCancelable = Boolean.parseBoolean(request.getParameter("cancelable"));
 
         // Inscripcion inscripcion = new Inscripcion(asistenteId, campamentoId, fechaInscripcion, esCancelada);
 
