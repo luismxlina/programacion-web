@@ -16,7 +16,7 @@
     <!-- ACL -->
     <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
     <div class="form-style-6">
-        <%-- <h1>Asociar Monitor a Campamento</h1> --%>
+        <h1>Asociar Monitor a Campamento</h1>
 
         <form action="<%=request.getContextPath()%>/asociarMonitorActividad" method="GET">
             <div class="formulario__grupo" id="grupoAsociacion">

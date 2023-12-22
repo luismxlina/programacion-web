@@ -48,10 +48,10 @@ Registro    |} 👍
     - Alta monitores 👍
     - Alta campamentos 👍👍
     - Asociación de actividades a campamentos, respetando restricciones de nivel educativo. 👍
-    - Asociación de monitores a actividades y campamentos, con consideraciones específicas para los monitores responsables del campamento y el monitor de atención especial.
+    - Asociación de monitores a actividades y campamentos, con consideraciones específicas para los monitores responsables del campamento y el monitor de atención especial. 👍
 
 - Funcionalidades para Usuarios Asistentes:
-    - Consulta de campamentos disponibles según fechas y niveles educativos.
-    - Búsqueda de campamentos por nivel educativo o número mínimo de plazas disponibles.
+    - Consulta de campamentos disponibles según fechas y niveles educativos. 
+    - Búsqueda de campamentos por nivel educativo o número mínimo de plazas disponibles. 
     - Registro en campamentos, eligiendo modalidad (completa o parcial), considerando restricciones de tiempo y plazas disponibles. Mostrar información sobre modalidades, precios y confirmación.
     - Cancelación de registro en campamentos antes de su inicio, según las restricciones de modalidad y fecha.

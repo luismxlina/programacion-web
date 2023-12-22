@@ -71,7 +71,7 @@ public class asociarMonitorActividadServlet extends HttpServlet {
             GestorCampamentos.getInstance().asociarMonitorActividad(idMonitor, nombreActividad);
             request.setAttribute("response", "success");
         } catch (Exception e) {
-            request.setAttribute("response", "fail");
+            request.setAttribute("response", e.getMessage());
         } finally {
             request.setAttribute("arrayMonitores", monitores);
             request.setAttribute("arrayActividades", actividades);
