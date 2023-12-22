@@ -78,6 +78,14 @@ public class GestorCampamentos {
         return campamentos;
     }
 
+    public ArrayList<Campamento> getCampamentosByPlazas(Integer plazas) {
+        ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+        for (CampamentoDTO campamento : campamentoDAO.getCampamentosByPlazas(plazas)) {
+            campamentos.add(new Campamento(campamento));
+        }
+        return campamentos;
+    }
+
     /**
      * Da de alta un nuevo campamento.
      * 

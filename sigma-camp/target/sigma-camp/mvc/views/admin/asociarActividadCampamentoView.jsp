@@ -18,7 +18,7 @@
     </aside>
     <div class="form-style-6">
         <h1>Asociar Actividad</h1>
-        <form class="search-form" id="formulario" action="/sigma-camp/asociarActividadData" method="POST">
+        <form  id="formulario" action="/sigma-camp/asociarActividadData" method="POST">
             <div class="formulario__grupo" id="grupoAsociacion">
                 <label for="nivelEducativo">Nivel Educativo:</label><br>
                 <select id="nivelEducativo" name="nivelEducativo" class="cajaBlanca">

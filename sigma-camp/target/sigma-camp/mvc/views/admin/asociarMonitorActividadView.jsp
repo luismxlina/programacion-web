@@ -21,7 +21,7 @@
     <div class="form-style-6">
         <h1>Asociar Monitor a Campamento</h1>
 
-        <form class="search-form" action="<%=request.getContextPath()%>/asociarMonitorActividad" method="GET">
+        <form action="<%=request.getContextPath()%>/asociarMonitorActividad" method="GET">
             <div class="formulario__grupo" id="grupoAsociacion">
                 <label for="idMonitor">Monitor:</label>
                 <select id="idMonitor" name="idMonitor">

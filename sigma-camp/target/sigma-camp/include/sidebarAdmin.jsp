@@ -42,7 +42,7 @@
                    
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/AsociarMonitorActividadCampamento">
+                    <a href="${pageContext.request.contextPath}/asociarMonitorActividad">
                         <i class="fa-regular fa-address-card"></i>
                         <span class="nav-text">
                             Asociar Monitores a Actividades de Campamentos

@@ -29,6 +29,7 @@
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/admin/asociarMonitorActividadServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/DAOInscripcion.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/DAOIncremental.java
+/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/user/cancelaCampamentosServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/users/dto/user/UserDTO.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/user/searchCampamentosMixServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/InscripcionDAO.java

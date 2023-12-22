@@ -25,7 +25,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="${pageContext.request.contextPath}/inscribeCampamentosView">
+                    <a href="${pageContext.request.contextPath}/inscribeCampamentos">
                         <i class="fa-solid fa-person-circle-plus"></i>
                         <span class="nav-text">
                             Inscribirse a un campamento

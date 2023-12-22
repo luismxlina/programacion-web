@@ -41,8 +41,9 @@
 	    </div>
 
 		<div class="user-box">
-			<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
-			<label for="requiereAtencion">¿Requiere atención especial?</label>
+			<label for="requiereAtencion">¿Requiere atención especial?
+				<input type="checkbox" id="requiereAtencion" name="requiereAtencion" value="true">
+			</label>
 		</div>
 		<div class="user-box1">
 		<div class="submit">

@@ -207,4 +207,25 @@ public class CampamentoDAO implements DAOIncremental<CampamentoDTO, Integer> {
         }
         return campamentos;
     }
+
+    public ArrayList<CampamentoDTO> getCampamentosByPlazas(Integer plazas) {
+        ArrayList<CampamentoDTO> campamentos = new ArrayList<CampamentoDTO>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_CAMPAMENTOS_BY_PLAZAS");
+
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setInt(1, plazas);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                campamentos.add(
+                        new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
+                                rs.getString("NivelEducativo"), rs.getInt("NumeroMaximoAsistentes")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return campamentos;
+    }
 }
