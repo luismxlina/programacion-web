@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList, es.uco.pw.business.campamento.models.campamento.Campamento" %>
+<jsp:useBean id="User" scope="session" class="es.uco.pw.display.javabean.CustomerBean"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/buscarCampamentos.css">
 <body>
     <!-- ACL -->
-    <div%String aclUser=application.getInitParameter("aclUser"); %>
+    <%String aclUser=application.getInitParameter("aclUser"); %>
     <jsp:include page="<%=aclUser%>"></jsp:include>
     <!-- ACL -->
     <aside>
@@ -30,29 +31,34 @@
             </select>
         </div>
         </span>
-        <div id="nivelDiv">
-            <label for="nivel">Nivel Educativo:</label>
-            <span class="iSelect">
-            <select id="nivel" name="nivel">
-                <option value="">--Selecciona un nivel--</option>
-                <option value="INFANTIL">Infantil</option>
-                <option value="JUVENIL">Juvenil</option>
-                <option value="ADOLESCENTE">Adolescente</option>
-            </select>
-            </span>
+        <div class="centeredDiv">
+            <div id="nivelDiv">
+                <label for="nivel">Nivel Educativo:</label>
+                <span class="iSelect">
+                    <select id="nivel" name="nivel">
+                        <option value="">--Selecciona un nivel--</option>
+                        <option value="INFANTIL">Infantil</option>
+                        <option value="JUVENIL">Juvenil</option>
+                        <option value="ADOLESCENTE">Adolescente</option>
+                    </select>
+                </span>
+            </div>
+            <div id="plazasDiv" style="display: none;">
+                <label for="plazas">Número mínimo de plazas:</label>
+                <input type="number" id="plazas" name="plazas" min="1">
+            </div>
         </div>
-        <div id="plazasDiv" style="display: none;">
-            <label for="plazas">Número mínimo de plazas:</label>
-            <input type="number" id="plazas" name="plazas" min="1">
+        <div class="centeredDiv">
+            <input id="submitBuscaCamp" type="submit" value="Buscar">
         </div>
-        <input id="submitBuscaCamp" type="submit" value="Buscar">
     </form>
     <script>
         function toggleInput(value) {
-            document.getElementById('nivelDiv').style.display = value === 'nivel' ? 'block' : 'none';
-            document.getElementById('plazasDiv').style.display = value === 'plazas' ? 'block' : 'none';
+            document.getElementById('nivelDiv').style.display = value === 'nivel' ? 'flex' : 'none';
+            document.getElementById('plazasDiv').style.display = value === 'plazas' ? 'flex' : 'none';
         }
     </script>
+
     <h2>Resultados de la búsqueda:</h2>
     <ul>
         <%

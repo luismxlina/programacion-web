@@ -3,6 +3,7 @@ package es.uco.pw.servlets.user;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -12,16 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.uco.pw.business.campamento.handler.GestorCampamentos;
+import es.uco.pw.business.campamento.models.campamento.Campamento;
 import es.uco.pw.business.inscripcion.handler.GestorInscripciones;
 import es.uco.pw.business.inscripcion.models.inscripcion.TipoInscripcion;
+import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionCreator;
+import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTardia;
+import es.uco.pw.business.inscripcion.models.inscripcion.factory.InscripcionTemprana;
 import es.uco.pw.business.inscripcion.models.inscripcion.Inscripcion;
 import es.uco.pw.display.javabean.CustomerBean;
 
 @WebServlet(name = "addInscripcion", urlPatterns = "/addInscripcion")
-public class inscribeCampamentosServlest extends HttpServlet {
+public class addInscripcion extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public inscribeCampamentosServlest() {
+    public addInscripcion() {
         super();
     }
 
@@ -34,42 +40,68 @@ public class inscribeCampamentosServlest extends HttpServlet {
             request.getRequestDispatcher(getServletContext().getInitParameter("index")).forward(request, response);
             return;
         }
-        String idAsistenteStr = request.getParameter("idParticipante");
         String idCampamentoStr = request.getParameter("idCampamento");
-        String fechaInscripcionStr = request.getParameter("fechaInscripcion");
         String tipoInscripcionStr = request.getParameter("tipoInscripcion");
-    
-        if (idAsistenteStr == null && idCampamentoStr == null && fechaInscripcionStr == null && tipoInscripcionStr == null) {
+        String quiereInscribir = request.getParameter("quiereInscribir");
+
+        if (idCampamentoStr == null && tipoInscripcionStr == null) {
+            ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentosByPlazas(1);
+            request.setAttribute("campamentos", campamentos);
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
                     response);
             return;
         }
 
-        if (idAsistenteStr == null || idCampamentoStr == null || fechaInscripcionStr == null|| tipoInscripcionStr == null) {
+        if (idCampamentoStr == null || tipoInscripcionStr == null) {
             request.setAttribute("response", "fail");
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
                     response);
             return;
         }
 
-        int idAsistente = Integer.parseInt(idAsistenteStr);
-        int idCampamento = Integer.parseInt(idCampamentoStr);
-        double precio = Double.parseDouble(request.getParameter("precio"));
-        TipoInscripcion tipoInscripcion = TipoInscripcion.valueOf(request.getParameter("tipoInscripcion"));
-        boolean esCancelable = Boolean.parseBoolean(request.getParameter("cancelable"));
+        Integer idAsistente = User.getId();
+        Integer idCampamento = Integer.parseInt(idCampamentoStr);
+        TipoInscripcion tipoInscripcion = TipoInscripcion.valueOf(tipoInscripcionStr);
+        Date fechaInscripcion = new Date();
+        Boolean temprana = GestorInscripciones.getInstance().getEsTemprana(new Date(),
+                GestorCampamentos.getInstance().getCampamento(idCampamento).getFechaInicio());
+        InscripcionCreator creator;
 
-        // Inscripcion inscripcion = new Inscripcion(asistenteId, campamentoId, fechaInscripcion, esCancelada);
+        if (temprana) {
+            creator = new InscripcionTemprana();
+        } else {
+            creator = new InscripcionTardia();
+        }
 
-        // if (!GestorInscripciones.getInstance().addInscripcion(inscripcion)) {
-        //     request.setAttribute("response", "fail");
-        //     request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
-        //             response);
-        //     return;
-        // }
-        // request.setAttribute("response", "success");
+        Inscripcion inscripcion;
+        if (tipoInscripcion.equals("Completa")) {
+            inscripcion = creator.registrarInscripcionCompleta(idAsistente, idCampamento, new Date());
+            inscripcion.setTipoInscripcion(TipoInscripcion.COMPLETA);
+        } else {
+            inscripcion = creator.registrarInscripcionParcial(idAsistente, idCampamento, new Date());
+            inscripcion.setTipoInscripcion(TipoInscripcion.PARCIAL);
+        }
+        try {
+            if (quiereInscribir.equals("true")) {
+                GestorInscripciones.getInstance().addInscripcion(inscripcion);
+                request.setAttribute("response", "success");
+                request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(
+                        request,
+                        response);
+                return;
+            }
+            request.setAttribute("response", inscripcion);
+            request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(
+                    request,
+                    response);
+            return;
 
-        request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
-                response);
-        return;
+        } catch (Exception e) {
+            request.setAttribute("response", "fail");
+            request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
+                    response);
+            return;
+        }
+
     }
 }

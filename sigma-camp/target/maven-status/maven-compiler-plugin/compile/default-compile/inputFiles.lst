@@ -33,7 +33,7 @@
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/users/dto/user/UserDTO.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/user/searchCampamentosMixServlet.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/data/dao/InscripcionDAO.java
-/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/user/inscribeCampamentosServlest.java
+/home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/user/addInscripcion.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/inscripcion/dto/inscripcion/InscripcionDTO.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/business/inscripcion/models/inscripcion/Inscripcion.java
 /home/lviz/Documents/uco/3o_inf/1er_cuatri/PW/practs/programacion-web/sigma-camp/src/main/java/es/uco/pw/servlets/admin/asociarActividadCampamentoServlet.java

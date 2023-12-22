@@ -86,7 +86,36 @@
 }
 
 .centeredDiv{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#plazas{
+    text-indent: .01px;
+    text-overflow: "";
+    color: #333;
+	width: 10em;
+        cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+	padding: 5px 15px 5px 5px;
+	background: #fdfdfd;
+	background: -webkit-linear-gradient(top, #fff, #eee);
+	background: -o-linear-gradient(top, #fff, #eee);
+	background: linear-gradient(to bottom, #fff, #eee);
+	box-shadow: inset 0 -1px 0 #fff, 1px 1px 0 rgba(0,0,0,0.05);
+}
+
+#nivelDiv, #plazasDiv{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.centeredDiv, #nivelDiv, #plazasDiv{
+    margin: 10px;
 }
