@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="/sigma-camp/css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   </head>
   <body><div class="area"></div><nav class="main-menu">
             <ul>
@@ -47,7 +48,7 @@
                    <a href="${pageContext.request.contextPath}<%=application.getInitParameter("logoutController")%>">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
-                            Cerrar Sesi�n
+                            Cerrar Sesi&oacute;n
                         </span>
                     </a>
                 </li>  

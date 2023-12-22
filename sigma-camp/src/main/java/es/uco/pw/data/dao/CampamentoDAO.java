@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.sql.Statement;
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
 import es.uco.pw.business.campamento.models.actividad.NivelEducativo;
@@ -173,6 +174,28 @@ public class CampamentoDAO implements DAOIncremental<CampamentoDTO, Integer> {
         try {
             PreparedStatement st = conex.prepareStatement(query);
             st.setString(1, nivel.toString());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                campamentos.add(
+                        new CampamentoDTO(rs.getInt("Identificador"), rs.getDate("FechaInicio"), rs.getDate("FechaFin"),
+                                rs.getString("NivelEducativo"), rs.getInt("NumeroMaximoAsistentes")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return campamentos;
+    }
+
+    public ArrayList<CampamentoDTO> getCampamentosByFechas(Date fechaInicio, Date fechaFin) {
+        ArrayList<CampamentoDTO> campamentos = new ArrayList<CampamentoDTO>();
+        Conexion conexController = Conexion.getInstance();
+        Connection conex = conexController.getConnection();
+        String query = conexController.getSql().getProperty("SELECT_CAMPAMENTOS_BY_FECHAS");
+
+        try {
+            PreparedStatement st = conex.prepareStatement(query);
+            st.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+            st.setDate(2, new java.sql.Date(fechaFin.getTime()));
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 campamentos.add(

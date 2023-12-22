@@ -13,6 +13,9 @@
     <jsp:include page="<%=aclAdmin%>"></jsp:include>
     <!-- ACL -->
     <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
+    <aside>
+        <jsp:include page="/include/sidebarAdmin.jsp"></jsp:include>
+    </aside>
     <div class="form-style-6">
         <h1>Añadir monitor</h1>
         <form id="formulario" action="/sigma-camp/addMonitor" method="GET">

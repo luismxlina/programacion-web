@@ -18,6 +18,9 @@
     <jsp:include page="<%=aclAdmin%>"></jsp:include>
     <!-- ACL -->
     <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
+    <aside>
+        <jsp:include page="/include/sidebarAdmin.jsp"></jsp:include>
+    </aside>
     <div class="form-style-6">
         <form id="formulario" action="/sigma-camp/addActividad" method="GET">
             <div class="formulario__grupo" id="grupoActividad">
@@ -52,6 +55,7 @@
                 }
             } 
             %>
+            
     </div>
 </body>
 <script src="${pageContext.request.contextPath}/js/script.js"></script> 

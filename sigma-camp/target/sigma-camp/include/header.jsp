@@ -7,6 +7,7 @@
     
 <!--SYMBOLS-->
 <link href="/sigma-camp/css/header.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
   
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -29,8 +30,8 @@
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <div class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
          <a href="/sigma-camp/index.jsp" class="nav-link text-grey" style="color:#FFC600;">
-                <img src="/sigma-camp/images/super-mario.svg" class="bi d-block mx-auto mb-1"  width="24" height="24">
-                </a>
+            <img src="/sigma-camp/images/frog.svg" class="bi d-block mx-auto mb-1"  width="55" height="55">
+          </a>
         </div>
             <a href="${pageContext.request.contextPath}<%=application.getInitParameter("modifyUserController")%>" class="nav-link text-grey" style="color:#DBDEDF;">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle" style="color:#DBDEDF ;"/></svg>

@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
   <body>
   
-  <aside>
-    	<jsp:include page="/include/sidebarAdmin.jsp"></jsp:include>
-  	</aside>
+  
 <main>
   <jsp:include page="/include/headerAdmin.jsp"></jsp:include>
-  
+  <aside>
+    <jsp:include page="/include/sidebarAdmin.jsp"></jsp:include>
+</aside>
   	<div class="form-style">
 	<%	if(request.getParameter("ACL")!= null){ %>
 				<p class="cajaRoja">Acceso denegado</p>	

@@ -1,6 +1,7 @@
 package es.uco.pw.business.campamento.handler;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import es.uco.pw.business.campamento.dto.actividad.ActividadDTO;
 import es.uco.pw.business.campamento.dto.campamento.CampamentoDTO;
@@ -64,6 +65,14 @@ public class GestorCampamentos {
     public ArrayList<Campamento> getCampamentosByNivelEducativo(NivelEducativo nivel) {
         ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
         for (CampamentoDTO campamento : campamentoDAO.getCampamentosByNivelEducativo(nivel)) {
+            campamentos.add(new Campamento(campamento));
+        }
+        return campamentos;
+    }
+
+    public ArrayList<Campamento> getCampamentosByFechas(Date fechaInicio, Date fechaFin) {
+        ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+        for (CampamentoDTO campamento : campamentoDAO.getCampamentosByFechas(fechaInicio, fechaFin)) {
             campamentos.add(new Campamento(campamento));
         }
         return campamentos;

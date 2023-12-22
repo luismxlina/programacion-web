@@ -33,9 +33,7 @@ public class addMonitorServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         String esEducadorStr = request.getParameter("esEducador");
-        if (nombre == null || nombre.isEmpty() || apellidos == null || apellidos.isEmpty() || esEducadorStr == null
-                || esEducadorStr.isEmpty()) {
-            request.setAttribute("response", "fail");
+        if (nombre == null && apellidos == null && esEducadorStr == null) {
             request.getRequestDispatcher(getServletContext().getInitParameter("addMonitorView")).forward(request,
                     response);
             return;

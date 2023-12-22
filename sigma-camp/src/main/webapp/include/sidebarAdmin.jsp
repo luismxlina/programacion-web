@@ -81,7 +81,7 @@
                    <a href="${pageContext.request.contextPath}<%=application.getInitParameter("logoutController")%>">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
-                            Cerrar Sesi&otilde;n
+                            Cerrar Sesi&oacute;n
                         </span>
                     </a>
                 </li>  

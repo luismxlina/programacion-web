@@ -6,6 +6,7 @@
     <title>header_admin</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+    
 
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -13,6 +14,7 @@
     
 <!--SYMBOLS-->
 <link href="../css/header.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
   
@@ -33,7 +35,7 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/sigma-camp/index.jsp" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-          <img src="/sigma-camp/images/super-mario-admin.svg" width="50" height="50"/>
+          <img src="/sigma-camp/images/frog.svg" class="bi d-block mx-auto mb-1"  width="48" height="48">
         </a>
             <a href="${pageContext.request.contextPath}<%=application.getInitParameter("modifyUserController")%>" class="nav-link text-grey" style="color:#FFC600;">
               <img src="/sigma-camp/images/admin.svg" class="bi d-block mx-auto mb-1"  width="24" height="24">
