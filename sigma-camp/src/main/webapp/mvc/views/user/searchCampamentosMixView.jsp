@@ -8,7 +8,7 @@
     <title>Buscar Campamentos</title>
 </head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/marco.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">ç
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/buscarCampamentos.css">
 <body>
     <!-- ACL -->

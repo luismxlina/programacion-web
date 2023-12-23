@@ -20,7 +20,7 @@
 	   <form id="formulario"  method="post" action= "${pageContext.request.contextPath}<%=application.getInitParameter("registerController")%>">
 	       <div class="user-box">
 	     	<input type="text" 	placeholder="Nombre" id="nombre" name="nombre">
-	      	<label>Nombre Completo</label>
+	      	<label>Nombre</label>
 	    </div>
 		<div class="user-box">
 	     	<input type="text" 	placeholder="Apellidos" id="apellidos" name="apellidos">

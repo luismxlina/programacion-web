@@ -8,7 +8,7 @@
     <title>Buscar Campamentos</title>
 </head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/marco.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">ç
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/buscarCampamentos.css">
 <body>
     <!-- ACL -->
@@ -48,7 +48,9 @@
                 <input type="number" id="plazas" name="plazas" min="1">
             </div>
         </div>
-        <input id="submitBuscaCamp" type="submit" value="Buscar">
+        <div class="centeredDiv">
+            <input id="submitBuscaCamp" type="submit" value="Buscar">
+        </div>
     </form>
     <script>
         function toggleInput(value) {

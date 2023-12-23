@@ -137,6 +137,11 @@
       <param-name>manageInscriptionsView</param-name>
       <param-value>/mvc/views/user/manageInscriptionsView.jsp</param-value>
    </context-param>
+   
+   <context-param>
+      <param-name>addInscripcionView</param-name>
+      <param-value>/mvc/views/user/addInscripcionView.jsp</param-value>
+   </context-param>
 
 
    

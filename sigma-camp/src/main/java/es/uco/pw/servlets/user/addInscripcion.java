@@ -44,7 +44,7 @@ public class addInscripcion extends HttpServlet {
         String tipoInscripcionStr = request.getParameter("tipoInscripcion");
         String quiereInscribir = request.getParameter("quiereInscribir");
 
-        if (idCampamentoStr == null && tipoInscripcionStr == null) {
+        if (idCampamentoStr == null && tipoInscripcionStr == null && quiereInscribir == null) {
             ArrayList<Campamento> campamentos = GestorCampamentos.getInstance().getCampamentosByPlazas(1);
             request.setAttribute("campamentos", campamentos);
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
@@ -52,17 +52,10 @@ public class addInscripcion extends HttpServlet {
             return;
         }
 
-        if (idCampamentoStr == null || tipoInscripcionStr == null) {
-            request.setAttribute("response", "fail");
-            request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
-                    response);
-            return;
-        }
-
         Integer idAsistente = User.getId();
         Integer idCampamento = Integer.parseInt(idCampamentoStr);
-        TipoInscripcion tipoInscripcion = TipoInscripcion.valueOf(tipoInscripcionStr);
-        Date fechaInscripcion = new Date();
+        TipoInscripcion tipoInscripcion = tipoInscripcionStr != null ? TipoInscripcion.valueOf(tipoInscripcionStr)
+                : null;
         Boolean temprana = GestorInscripciones.getInstance().getEsTemprana(new Date(),
                 GestorCampamentos.getInstance().getCampamento(idCampamento).getFechaInicio());
         InscripcionCreator creator;
@@ -74,7 +67,7 @@ public class addInscripcion extends HttpServlet {
         }
 
         Inscripcion inscripcion;
-        if (tipoInscripcion.equals("Completa")) {
+        if (tipoInscripcion != null && tipoInscripcion.equals(TipoInscripcion.COMPLETA)) {
             inscripcion = creator.registrarInscripcionCompleta(idAsistente, idCampamento, new Date());
             inscripcion.setTipoInscripcion(TipoInscripcion.COMPLETA);
         } else {
@@ -82,7 +75,7 @@ public class addInscripcion extends HttpServlet {
             inscripcion.setTipoInscripcion(TipoInscripcion.PARCIAL);
         }
         try {
-            if (quiereInscribir.equals("true")) {
+            if (quiereInscribir != null && quiereInscribir.equals("quiereInscribir")) {
                 GestorInscripciones.getInstance().addInscripcion(inscripcion);
                 request.setAttribute("response", "success");
                 request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(
@@ -90,7 +83,7 @@ public class addInscripcion extends HttpServlet {
                         response);
                 return;
             }
-            request.setAttribute("response", inscripcion);
+            request.setAttribute("inscripcion", inscripcion);
             request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(
                     request,
                     response);
@@ -98,10 +91,10 @@ public class addInscripcion extends HttpServlet {
 
         } catch (Exception e) {
             request.setAttribute("response", "fail");
-            request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(request,
+            request.getRequestDispatcher(getServletContext().getInitParameter("addInscripcionView")).forward(
+                    request,
                     response);
             return;
         }
-
     }
 }

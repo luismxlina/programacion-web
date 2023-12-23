@@ -1,0 +1,1 @@
+El archivo WAR del proyecto se encuentra en la carpeta `/target`.
