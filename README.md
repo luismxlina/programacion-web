@@ -16,14 +16,14 @@ Tecnologías Utilizadas
 
 Herramientas Utilizadas
 
-    Visual Studio Code con la extensión RedHat para Java
+    Visual Studio Code con las extensiones de RedHat para Java
 
 Estructura del Proyecto
 
 El proyecto está organizado en tres prácticas, cada una con su correspondiente documentación en formato PDF y el código fuente en Java y JSP:
 
     Práctica 1: Iniciación a Java
-    Práctica 2: Desarrollo de una aplicación web
+    Práctica 2: INTRODUCCIÓN A JDBC, DAO Y DTO
     Práctica 3: Desarrollo de una aplicación web
 
 Ejecución del Proyecto
@@ -37,19 +37,18 @@ Para ejecutar el proyecto, se requiere tener instalado:
 
 Pasos para ejecutar el proyecto:
 
-    Clonar el repositorio:
+Clonar el repositorio:
 
-bash
-
-git clone https://github.com/tuusuario/proyecto-practicas-web.git
+```git clone https://github.com/tuusuario/proyecto-practicas-web.git```
 
     Importar el proyecto en Visual Studio Code o cualquier IDE de tu preferencia.
-    Configurar la conexión a la base de datos en el archivo web.xml.
+    Iniciar y generar la base de datos MySQL con el archivo /script/script.sql
+    Configurar la conexión a la base de datos en el archivo config.properties.
     Ejecutar el comando Maven para compilar y empaquetar el proyecto:
 
-bash
 
-mvn clean package
+
+```mvn clean package```
 
     Desplegar el archivo WAR generado en el directorio target en un servidor Apache Tomcat.
 
