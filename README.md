@@ -25,7 +25,7 @@ El proyecto consta de tres prácticas en las que se ha desarrollado una aplicaci
 El proyecto está organizado en tres prácticas, cada una con su correspondiente documentación en formato PDF y el código fuente en Java y JSP:
 
 - Práctica 1: Iniciación a Java
-- Práctica 2: INTRODUCCIÓN A JDBC, DAO Y DTO
+- Práctica 2: Introducción a JDBC, DAO Y DTO
 - Práctica 3: Desarrollo de una aplicación web
 
 ## Ejecución del Proyecto
